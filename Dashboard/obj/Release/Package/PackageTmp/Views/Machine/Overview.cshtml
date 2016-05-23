@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "Overview";
+}
+<div class="row">
+    <div class="col-md-3">
+        <select id="plant-select" class="form-control">
+            <option value="BEST">Best</option>
+            <option value="PMM">PMM</option>
+        </select>
+    </div>
+    @*<div class="col-md-2">
+            <button class="btn btn-primary btn-sm" id="rolling-four-week-view">Four Week View</button>
+        </div>*@
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <h2 id="head-title">Overview - <small>Select a machine...</small></h2>
+    </div>
+</div>
+
+<div class="row" id="machine-select">
+    <div class="row">
+        <div class="col-md-1">
+            <i class="fa fa-2x fa-square" style="color: #27ae60"></i> - In Cycle
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-2x fa-square" style="color: #c0392b"></i> - Unavailable
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <h2><strong>Mills</strong></h2>
+        <div data-bind="foreach: MillStates" class="no-select">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <div data-bind="attr: { machineName: $data.Machine }, css: {'ms-production': $data.Mode == 'IN CYCLE', 'ms-unavailable': $data.Mode != 'IN CYCLE', }" class="ms ms-select">
+                    <span style="display: table; margin: 0 auto;" data-bind="text: $data.Machine"></span><br />
+                    <span style="font-size: 16px; display: table; margin: 0 auto; margin-top: -173px;" data-bind="text: $data.Description"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <h2><strong>Lathes</strong></h2>
+        <div data-bind="foreach: LatheStates" class="no-select">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <div data-bind="attr: { machineName: $data.Machine }, css: {'ms-production': $data.Mode == 'IN CYCLE', 'ms-unavailable': $data.Mode != 'IN CYCLE', }" class="ms ms-select">
+                    <span style="display: table; margin: 0 auto;" data-bind="text: $data.Machine"></span><br />
+                    <span style="font-size: 16px; display: table; margin: 0 auto; margin-top: -173px;" data-bind="text: $data.Description"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="detail-slide">
+    <button id="bt-machine-select" class="btn btn-primary">Back</button>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="ms" data-bind="css: {'ms-unavailable': CurrentState() == 'UNAVAILABLE' || CurrentState() == 'SETUP', 'ms-production': CurrentState() == 'IN CYCLE'}"><span id="machine-name"></span> - <small data-bind="text: MachineDetails()[0] != undefined ? MachineDetails()[0].Description : ''"></small></div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-2">
+            <div class="spindle-utilization" data-bind="text: SUPercent, css: {'su-below': SpindleUtilization() >= 0, 'su-approaching': SpindleUtilization() >= 30, 'su-target': SpindleUtilization() >= 36}"></div>
+        </div>
+        <div class="col-md-6 col-lg-5" id="four-week-view-0" style="height: 300px;"></div>
+    </div>
+</div>
+@*<div id="machine-four-week" style="display: none;">
+        <div data-bind="foreach: MachineDetails">
+            <div class="col-lg-6">
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="wrapper wrapper-content  animated fadeInRight">
+                                <div data-bind="attr: {id: 'four-week-view-0'}" style="height: 250px width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@section Scripts {
+
+    <script src="~/Scripts/KO-Models/ko-model-machine-overview.js"></script>
+
+
+    <script>
+
+        var incr = -1;
+        var vm;
+        var toggle = 0;
+        var machine = "";
+        vm = new MachineOverviewViewModel();
+        $(function () {
+
+            ko.applyBindings(vm);
+            vm.loadMachineStates();
+            setInterval(function () {
+                if (toggle == 0) {
+                    vm.loadMachineStates();
+                }
+                else {
+                    vm.loadMachineDetail(machine);
+                }
+
+            }, 2000);
+
+        });
+
+        $(document).on('click', '.ms-select', function () {
+            machine = $(this).attr('machineName');
+            $('#machine-name').html(machine);
+            var load = vm.loadMachineDetail(machine);
+            $('#machine-select').toggle('slide', { direction: 'left' }, '750', function () {
+                $('#detail-slide').toggle('slide', { direction: 'right' }, '750');
+
+                toggle = 1;
+                $('#head-title').html("Detail for " + machine);
+            });
+            
+        });
+        function backToOverview() {
+
+            vm.loadMachineStates();
+            $('#detail-slide').toggle('slide', { direction: 'right' }, '750', function () {
+                $('#machine-select').toggle('slide', { direction: 'left' }, '750');
+                toggle = 0;
+                $('#head-title').html("Overview - <small>Select a machine...</small>");
+            });
+
+            
+        }
+
+        $(document).on('click', '#bt-machine-select', function () {
+            backToOverview();
+        });
+
+        $('#plant-select').change(function () {
+            vm.loadMachineState();
+        });
+
+        $(document).on("keydown", function (e) {
+            if (e.keyCode === 8 && toggle === 1) {
+                e.preventDefault();
+                backToOverview();
+            }
+        });
+
+        $('#rolling-four-week-view').click(function () {
+            console.log('test');
+            if ($(this).html() == 'Four Week View') {
+                $('#machine-select').fadeOut(250, function () {
+                    vm.loadMachineDetail('All');
+                    $('#machine-four-week').fadeIn(500);
+                });
+                $(this).html('Overview');
+            }
+            else {
+                $('#machine-four-week').fadeOut(250, function () {
+                    vm.loadMachineStates();
+                    $('#machine-select').fadeIn(500);
+                });
+                $(this).html('Four Week View');
+            }
+        });
+
+
+        $(function () {
+            incr += 1;
+            $('#four-week-view-0').highcharts({
+                chart: {
+                    type: 'column',
+                    minPadding: 0,
+                    maxPadding: 0
+                },
+                title: {
+                    text: 'HM01'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    },
+                    min: 1,
+                    max: 4
+                },
+                yAxis: {
+                    min: 0,
+                    max: 60,
+                    title: {
+                        text: 'Spindle Utilization'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Spindle Utilization: <b>{point.y:.2f}%</b>'
+                },
+                plotOptions: {
+                    series: {
+                        states: {
+                            hover: {
+                                enabled: false
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Target',
+                    type: 'spline',
+                    data: [36, 36, 36, 36, 36, 36],
+                    color: 'rgba(39, 174, 96, 1)',
+                    marker: {
+                        enabled: false,
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    lineWidth: 5
+
+                },
+                {
+                    name: 'Near',
+                    type: 'spline',
+                    data: [30, 30, 30, 30, 30, 30],
+                    color: 'rgba(192, 57, 43, 1)',
+                    marker: {
+                        enabled: false,
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    lineWidth: 5
+                },
+                {
+                    name: 'Spindle Utilization',
+                    data: [
+                        ['', 0],
+                        ['Wk1', 0],
+                        ['Wk2', 0],
+                        ['Wk3', 0],
+                        ['Wk4', 0]
+                    ],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        align: 'right',
+                        useHtml: true,
+                        format: '<center>{point.y:.2f}%</center>', // one decimal
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }
+                ]
+            });
+        });
+
+        vm.TrailWeeks.subscribe(function (val) {
+            trailWeeksChart = $('#four-week-view-0').highcharts();
+            trailWeeksChart.series[2].setData(val, true);
+            trailWeeksChart.setTitle({ text: machine });
+            $.each(trailWeeksChart.series[2].data, function (i, data) {
+                try {
+                    if (data.y >= 36) {
+                        data.graphic.attr({
+                            fill: '#27ae60'
+                        });
+                    }
+
+                    else if (data.y >= 30) {
+                        data.graphic.attr({
+                            fill: '#f1c40f'
+                        });
+                    }
+                    else if (data.y >= 0) {
+                        data.graphic.attr({
+                            fill: '#c0392b'
+                        });
+                    }
+                }
+                catch (Exception) {
+
+                }
+            });
+            trailWeeksChart.reflow();
+        });
+        vm.TrendChartCats.subscribe(function (val) {
+            trailWeeksChart = $('#four-week-view-0').highcharts();
+            trailWeeksChart.xAxis[0].setCategories(val, true);
+            trailWeeksChart.yAxis[0].setExtremes(0, 60);
+        });
+    </script>
+}

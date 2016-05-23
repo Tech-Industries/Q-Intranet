@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8afd3c441a5447bfa2dc54f9f5f43b51" Name="Diagram1">
+        <EntityTypeShape EntityType="DashboardModel.Company" Width="1.5" PointX="13" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Plant" Width="1.5" PointX="13" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Update" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Goal" Width="1.5" PointX="13" PointY="0.625" />
+        <EntityTypeShape EntityType="DashboardModel.OTMonthlyByCompany" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.SalesMonthlyByCompany" Width="1.5" PointX="8.875" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.SalesDailyByCompany" Width="2.125" PointX="6.375" PointY="0.5" />
+        <EntityTypeShape EntityType="DashboardModel.SalesStage" Width="1.5" PointX="0.5" PointY="2.125" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapMonthlyByPlant" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.CWODailyByPlant" Width="1.5" PointX="8.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapDailyByPlant" Width="1.5" PointX="4.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapStage" Width="1.5" PointX="2" PointY="2.125" />
+        <EntityTypeShape EntityType="DashboardModel.Group" Width="1.5" PointX="5.375" PointY="5.375" />
+        <EntityTypeShape EntityType="DashboardModel.UserGroup" Width="1.5" PointX="4.625" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.User" Width="1.5" PointX="3.875" PointY="5.375" />
+        <EntityTypeShape EntityType="DashboardModel.Deliverable" Width="1.5" PointX="6.5" PointY="7.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableReviewer" Width="1.875" PointX="9.5" PointY="7.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableReview" Width="1.5" PointX="11.375" PointY="7.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" Width="1.5" PointX="9" PointY="9.75" />
+        <AssociationConnector Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableComment" Width="1.5" PointX="7.5" PointY="9.75" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" Width="1.5" PointX="8" PointY="7.5" />
+        <EntityTypeShape EntityType="DashboardModel.ReviewablesByUser" Width="1.5" PointX="6" PointY="9.75" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectTask" Width="1.5" PointX="2" PointY="10" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectAssignee" Width="1.5" PointX="2" PointY="8.375" />
+        <EntityTypeShape EntityType="DashboardModel.Project" Width="1.5" PointX="0.5" PointY="8.375" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableStatusByUserID" Width="2.875" PointX="11.375" PointY="10.125" />
+        <EntityTypeShape EntityType="DashboardModel.PastDueDeliverable" Width="2.375" PointX="8.875" PointY="13" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" Width="2.625" PointX="6" PointY="13" />
+        <EntityTypeShape EntityType="DashboardModel.BugTag" Width="1.5" PointX="2.125" PointY="13.375" />
+        <EntityTypeShape EntityType="DashboardModel.Comment" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFCategory" Width="1.5" PointX="0.625" PointY="16.875" />
+        <EntityTypeShape EntityType="DashboardModel.UCFChallenge" Width="1.5" PointX="2.125" PointY="16.875" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAudit" Width="1.5" PointX="2.125" PointY="19.5" />
+        <EntityTypeShape EntityType="DashboardModel.UCFArea" Width="1.5" PointX="3.625" PointY="19.5" />
+        <EntityTypeShape EntityType="DashboardModel.UCFCriteria" Width="1.5" PointX="3.625" PointY="16.875" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAuditDetail" Width="1.5" PointX="0.625" PointY="19.5" />
+        <EntityTypeShape EntityType="DashboardModel.UCFPlantRollupByMonthHalf" Width="1.5" PointX="0.625" PointY="21.625" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAreaTrendByMonthHalf" Width="1.5" PointX="2.125" PointY="21.625" />
+        <EntityTypeShape EntityType="DashboardModel.UCFGoal" Width="1.5" PointX="5.25" PointY="20.5" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAction" Width="1.5" PointX="5.25" PointY="16.875" />
+        <EntityTypeShape EntityType="DashboardModel.UCFPreviousScoresByChallenge" Width="1.5" PointX="3.625" PointY="21.625" />
+        <EntityTypeShape EntityType="DashboardModel.Price" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DashboardModel.IncentiveRollupByPlant" Width="1.5" PointX="14.375" PointY="9.875" />
+        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="1.5" PointX="15.875" PointY="9.875" />
+        <EntityTypeShape EntityType="DashboardModel.Bug" Width="1.5" PointX="0.625" PointY="13.375" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectsTopLevel" Width="1.5" PointX="3.5" PointY="8.375" />
+        <EntityTypeShape EntityType="DashboardModel.BugsTopLevel" Width="1.5" PointX="3.625" PointY="13.375" />
+        <EntityTypeShape EntityType="DashboardModel.PrevMaint" Width="1.5" PointX="15.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

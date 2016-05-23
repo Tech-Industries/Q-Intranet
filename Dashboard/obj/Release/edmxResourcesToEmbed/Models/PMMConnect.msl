@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PMMCONNECTModelStoreContainer" CdmEntityContainer="PMMCONNECTEntities">
+    <EntitySetMapping Name="CURRENT_MACHINE_INFORMATION">
+      <EntityTypeMapping TypeName="PMMCONNECTModel.CURRENT_MACHINE_INFORMATION">
+        <MappingFragment StoreEntitySet="CURRENT_MACHINE_INFORMATION">
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+          <ScalarProperty Name="SHIFT" ColumnName="SHIFT" />
+          <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+          <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+          <ScalarProperty Name="PROGRAM_NUMBER" ColumnName="PROGRAM_NUMBER" />
+          <ScalarProperty Name="CYCLE_TIME" ColumnName="CYCLE_TIME" />
+          <ScalarProperty Name="SPINDLE_LOAD" ColumnName="SPINDLE_LOAD" />
+          <ScalarProperty Name="TIME_ON_SHIFT" ColumnName="TIME_ON_SHIFT" />
+          <ScalarProperty Name="LABOR_TICKET_TRANS_ID" ColumnName="LABOR_TICKET_TRANS_ID" />
+          <ScalarProperty Name="RUN_TIME" ColumnName="RUN_TIME" />
+          <ScalarProperty Name="FEED_HOLD_TIME" ColumnName="FEED_HOLD_TIME" />
+          <ScalarProperty Name="OP_STOP_TIME" ColumnName="OP_STOP_TIME" />
+          <ScalarProperty Name="UNAVAILABLE_TIME" ColumnName="UNAVAILABLE_TIME" />
+          <ScalarProperty Name="PERCENT_RUNNING" ColumnName="PERCENT_RUNNING" />
+          <ScalarProperty Name="PERCENT_IDLE" ColumnName="PERCENT_IDLE" />
+          <ScalarProperty Name="FEED_OVERRIDE_PERCENT" ColumnName="FEED_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="RAPID_OVERRIDE_PERCENT" ColumnName="RAPID_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="SPINDLE_OVERRIDE_PERCENT" ColumnName="SPINDLE_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="FEED_OVERRIDE_PERCENT_TIME" ColumnName="FEED_OVERRIDE_PERCENT_TIME" />
+          <ScalarProperty Name="RAPID_OVERRIDE_PERCENT_TIME" ColumnName="RAPID_OVERRIDE_PERCENT_TIME" />
+          <ScalarProperty Name="SPINDLE_OVERRIDE_PERCENT_TIME" ColumnName="SPINDLE_OVERRIDE_PERCENT_TIME" />
+          <ScalarProperty Name="M_NUMBER" ColumnName="M_NUMBER" />
+          <ScalarProperty Name="N_NUMBER" ColumnName="N_NUMBER" />
+          <ScalarProperty Name="MACHINE_TYPE" ColumnName="MACHINE_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JP_TimeInStateByMachine">
+      <EntityTypeMapping TypeName="PMMCONNECTModel.JP_TimeInStateByMachine">
+        <MappingFragment StoreEntitySet="JP_TimeInStateByMachine">
+          <ScalarProperty Name="Perc4" ColumnName="Perc4" />
+          <ScalarProperty Name="Perc3" ColumnName="Perc3" />
+          <ScalarProperty Name="Perc2" ColumnName="Perc2" />
+          <ScalarProperty Name="Perc1" ColumnName="Perc1" />
+          <ScalarProperty Name="MinutesCaptured" ColumnName="MinutesCaptured" />
+          <ScalarProperty Name="StatePercentage" ColumnName="StatePercentage" />
+          <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
+          <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JP_CurrentMachineState">
+      <EntityTypeMapping TypeName="PMMCONNECTModel.JP_CurrentMachineState">
+        <MappingFragment StoreEntitySet="JP_CurrentMachineState">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+          <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

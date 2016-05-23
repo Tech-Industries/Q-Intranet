@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NKCCONNECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CURRENT_MACHINE_INFORMATION">
+          <Key>
+            <PropertyRef Name="RESOURCE_ID" />
+          </Key>
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="RESOURCE_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RESOURCE_STATE" Type="varchar" MaxLength="50" />
+          <Property Name="PROGRAM_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="CYCLE_TIME" Type="varchar" MaxLength="50" />
+          <Property Name="SPINDLE_LOAD" Type="varchar" MaxLength="50" />
+          <Property Name="PERCENT_RUNNING" Type="int" />
+          <Property Name="PERCENT_IDLE" Type="int" />
+          <Property Name="FEED_OVERRIDE_PERCENT" Type="int" />
+          <Property Name="RAPID_OVERRIDE_PERCENT" Type="int" />
+          <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="int" />
+          <Property Name="M_NUMBER" Type="varchar" MaxLength="10" />
+          <Property Name="N_NUMBER" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NKCCONNECT.dbo.CurrentMachineState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CurrentMachineState">
+          <Key>
+            <PropertyRef Name="RESOURCE_ID" />
+          </Key>
+          <Property Name="RESOURCE_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RESOURCE_STATE" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TimeInStateByMachine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Mode" Type="varchar" MaxLength="50" />
+          <Property Name="Machine" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="CurrentMode" Type="varchar" MaxLength="50" />
+          <Property Name="TotalTimeInMode" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="StatePercentage" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="MinutesCaptured" Type="int" />
+          <Property Name="Perc1" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Perc2" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Perc3" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Perc4" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Date1" Type="date" />
+          <Property Name="Date2" Type="date" />
+          <Property Name="Date3" Type="date" />
+          <Property Name="Date4" Type="date" />
+        </EntityType>
+        <EntityContainer Name="NKCCONNECTModelStoreContainer">
+          <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrentMachineState" EntityType="Self.CurrentMachineState" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CurrentMachineState].[RESOURCE_ID] AS [RESOURCE_ID], 
+    [CurrentMachineState].[RESOURCE_STATE] AS [RESOURCE_STATE], 
+    [CurrentMachineState].[Description] AS [Description], 
+    [CurrentMachineState].[Type] AS [Type]
+    FROM [dbo].[CurrentMachineState] AS [CurrentMachineState]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TimeInStateByMachine" EntityType="Self.TimeInStateByMachine" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TimeInStateByMachine].[ID] AS [ID], 
+    [TimeInStateByMachine].[Mode] AS [Mode], 
+    [TimeInStateByMachine].[Machine] AS [Machine], 
+    [TimeInStateByMachine].[Description] AS [Description], 
+    [TimeInStateByMachine].[CurrentMode] AS [CurrentMode], 
+    [TimeInStateByMachine].[TotalTimeInMode] AS [TotalTimeInMode], 
+    [TimeInStateByMachine].[StatePercentage] AS [StatePercentage], 
+    [TimeInStateByMachine].[MinutesCaptured] AS [MinutesCaptured], 
+    [TimeInStateByMachine].[Perc1] AS [Perc1], 
+    [TimeInStateByMachine].[Perc2] AS [Perc2], 
+    [TimeInStateByMachine].[Perc3] AS [Perc3], 
+    [TimeInStateByMachine].[Perc4] AS [Perc4], 
+    [TimeInStateByMachine].[Date1] AS [Date1], 
+    [TimeInStateByMachine].[Date2] AS [Date2], 
+    [TimeInStateByMachine].[Date3] AS [Date3], 
+    [TimeInStateByMachine].[Date4] AS [Date4]
+    FROM [dbo].[TimeInStateByMachine] AS [TimeInStateByMachine]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NKCCONNECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CURRENT_MACHINE_INFORMATION">
+          <Key>
+            <PropertyRef Name="RESOURCE_ID" />
+          </Key>
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="RESOURCE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRAM_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CYCLE_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SPINDLE_LOAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PERCENT_RUNNING" Type="Int32" />
+          <Property Name="PERCENT_IDLE" Type="Int32" />
+          <Property Name="FEED_OVERRIDE_PERCENT" Type="Int32" />
+          <Property Name="RAPID_OVERRIDE_PERCENT" Type="Int32" />
+          <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="Int32" />
+          <Property Name="M_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="N_NUMBER" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="NKCCONNECTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" />
+          <EntitySet Name="TimeInStateByMachines" EntityType="NKCCONNECTModel.TimeInStateByMachine" />
+          <EntitySet Name="CurrentMachineStates" EntityType="NKCCONNECTModel.CurrentMachineState" />
+        </EntityContainer>
+        <EntityType Name="TimeInStateByMachine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Machine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalTimeInMode" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="StatePercentage" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="MinutesCaptured" Type="Int32" />
+          <Property Name="Perc1" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Perc2" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Perc3" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Perc4" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Date1" Type="DateTime" Precision="0" />
+          <Property Name="Date2" Type="DateTime" Precision="0" />
+          <Property Name="Date3" Type="DateTime" Precision="0" />
+          <Property Name="Date4" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CurrentMachineState">
+          <Key>
+            <PropertyRef Name="RESOURCE_ID" />
+          </Key>
+          <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NKCCONNECTModelStoreContainer" CdmEntityContainer="NKCCONNECTEntities">
+          <EntitySetMapping Name="CURRENT_MACHINE_INFORMATION">
+            <EntityTypeMapping TypeName="NKCCONNECTModel.CURRENT_MACHINE_INFORMATION">
+              <MappingFragment StoreEntitySet="CURRENT_MACHINE_INFORMATION">
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+                <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+                <ScalarProperty Name="PROGRAM_NUMBER" ColumnName="PROGRAM_NUMBER" />
+                <ScalarProperty Name="CYCLE_TIME" ColumnName="CYCLE_TIME" />
+                <ScalarProperty Name="SPINDLE_LOAD" ColumnName="SPINDLE_LOAD" />
+                <ScalarProperty Name="PERCENT_RUNNING" ColumnName="PERCENT_RUNNING" />
+                <ScalarProperty Name="PERCENT_IDLE" ColumnName="PERCENT_IDLE" />
+                <ScalarProperty Name="FEED_OVERRIDE_PERCENT" ColumnName="FEED_OVERRIDE_PERCENT" />
+                <ScalarProperty Name="RAPID_OVERRIDE_PERCENT" ColumnName="RAPID_OVERRIDE_PERCENT" />
+                <ScalarProperty Name="SPINDLE_OVERRIDE_PERCENT" ColumnName="SPINDLE_OVERRIDE_PERCENT" />
+                <ScalarProperty Name="M_NUMBER" ColumnName="M_NUMBER" />
+                <ScalarProperty Name="N_NUMBER" ColumnName="N_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeInStateByMachines">
+            <EntityTypeMapping TypeName="NKCCONNECTModel.TimeInStateByMachine">
+              <MappingFragment StoreEntitySet="TimeInStateByMachine">
+                <ScalarProperty Name="Date4" ColumnName="Date4" />
+                <ScalarProperty Name="Date3" ColumnName="Date3" />
+                <ScalarProperty Name="Date2" ColumnName="Date2" />
+                <ScalarProperty Name="Date1" ColumnName="Date1" />
+                <ScalarProperty Name="Perc4" ColumnName="Perc4" />
+                <ScalarProperty Name="Perc3" ColumnName="Perc3" />
+                <ScalarProperty Name="Perc2" ColumnName="Perc2" />
+                <ScalarProperty Name="Perc1" ColumnName="Perc1" />
+                <ScalarProperty Name="MinutesCaptured" ColumnName="MinutesCaptured" />
+                <ScalarProperty Name="StatePercentage" ColumnName="StatePercentage" />
+                <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
+                <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrentMachineStates">
+            <EntityTypeMapping TypeName="NKCCONNECTModel.CurrentMachineState">
+              <MappingFragment StoreEntitySet="CurrentMachineState">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+                <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

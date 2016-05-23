@@ -1,0 +1,558 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-4 pull-left">
+        <img alt="image" height="50" src="~/Content/img/transparentLogo.gif" />
+    </div>
+    <div class="col-md-2 pull-right">
+        <button class="btn btn-primary" id="report-metrics">Direct Reports Metrics</button>
+    </div>
+    <div class="col-md-4 pull-right">
+        <h1>
+            Deliverables <small>
+                for <select style="border: 0; background: rgba(1, 1, 1, .00); color: #19aa8d; font-weight:bold;" id="Assignee" name="Assignee" data-bind="event: {change: $root.loadUserDeliverables()}">
+                    <option value="@{if (Request.Cookies["authToken"] != null) { Write(Request.Cookies["authToken"].Value); } else { Write("0"); } }">@{if (Request.Cookies["FullName"] != null) { Write(Request.Cookies["FullName"].Value); } else { Write("Select a user..."); } }</option>
+
+                    <optgroup label="Users" data-bind="foreach: Users">
+                        <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                    </optgroup>
+
+                </select>
+            </small>
+        </h1>
+    </div>
+</div>
+<div class="row toggleDelay">
+    <div class="col-md-4">
+        <div class="row" id="del-status-section">
+            <div class="col-md-12">
+                <div class="ibox ibox-bordered">
+                    <div class="ibox-content" style="height: 190px;">
+                        <div id="del-status-chart" style="height: 170px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="del-select-section">
+            <div class="col-md-12">
+                <div class="ibox ibox-borderd">
+                    <div class="ibox-title">
+                        <h5>Deliverables</h5>
+                        <div class="ibox-tools" data-bind="if: @ViewBag.RelPer == 3">
+                            <i class="fa fa-plus hover-add" data-toggle="modal" data-target="#modal-new-del"></i>
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="height: 635px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1">By Frequency</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2">Upcoming</a></li>
+                            <li class=""><a data-bind="css: {'blink': DelsPastDue().length > 0} " data-toggle="tab" href="#tab-3">Past Due</a></li>
+                            <li class=""><a data-bind="css: {'blink-orange': Reviewables().length > 0} " data-toggle="tab" href="#tab-4">Reviewables</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active" style="height: 540px;">
+                                <div class="full-height-scroll">
+                                    <div class="deliverable-group" data-bind="if: WeeklyDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Weekly</h2></div></div>
+                                        <div data-bind="foreach: WeeklyDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="deliverable-group" data-bind="if: MonthlyDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Monthly</h2></div></div>
+                                        <div data-bind="foreach: MonthlyDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="deliverable-group" data-bind="if: QuarterlyDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Quarterly</h2></div></div>
+                                        <div data-bind="foreach: QuarterlyDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="deliverable-group" data-bind="if: SemiAnnualDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Semi-Annual</h2></div></div>
+                                        <div data-bind="foreach: SemiAnnualDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="deliverable-group" data-bind="if: AnnualDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Annual</h2></div></div>
+                                        <div data-bind="foreach: AnnualDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Date Due</th>
+                                            <th>Days Left</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: DelsUpcoming()">
+                                        <tr class="deliverable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID, frequency: $data.Frequency, datedue: $data.DateDue}">
+                                            <td data-bind="text: $data.Name"></td>
+                                            <td data-bind="text: $data.DateDue"></td>
+                                            <td data-bind="text: $data.DaysPast"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div id="tab-3" class="tab-pane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 100px">Status</th>
+                                            <th>Name</th>
+                                            <th>Date Due</th>
+                                            <th>Days Past Due</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: DelsPastDue()">
+                                        <tr class="deliverable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID, frequency: $data.Frequency, datedue: $data.DateDue}">
+                                            <td style="background-color: red;"></td>
+                                            <td data-bind="text: $data.Name"></td>
+                                            <td data-bind="text: $data.DateDue"></td>
+                                            <td data-bind="text: $data.DaysPast"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="tab-4" class="tab-pane">
+                                <div data-bind="if: Reviewables().length == 0">
+                                    <h2>You are up to date on your reviewables...</h2>
+                                </div>
+                                <div data-bind="if: Reviewables().length > 0">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <!--<th>Description</th>-->
+                                                        <th>Owner</th>
+                                                        <th>Date Due</th>
+                                                        <th>Date Complete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: Reviewables()">
+                                                    <tr class="reviewable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID}">
+                                                        <td data-bind="text: $data.Name"></td>
+                                                        <!--<td data-bind="text: $data.Description"></td>-->
+                                                        <td data-bind="text: $data.Owner"></td>
+                                                        <td data-bind="text: $data.DateDue"></td>
+                                                        <td data-bind="text: $data.DateCompleted"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="ibox ibox-borderd" id="del-detail-section">
+            <div class="ibox-title">
+                <h5>Details</h5>
+
+            </div>
+            <div class="ibox-content" style="height: 850px;">
+                @Html.Partial("_DeliverableDetail")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="direct-report-section">
+    <div class="col-md-12">
+        <div class="ibox ibox-borderd">
+            <div class="ibox-title">
+                <h5>Direct Report Metrics</h5>
+
+            </div>
+            <div class="ibox-content">
+                <div class="row" id="report-metrics-body">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="modal-new-del" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Add a New Deliverable</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div style="margin: 20px 40px;">
+                            <center><h4>Criteria</h4></center>
+                            <form id="frm-new-del">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Deliverable Name:</span>
+                                            <input type="text" class="form-control" id="Name" name="Name" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Description:</span>
+                                            <textarea class="form-control" id="Description" name="Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Frequency:</span>
+                                            <select class="form-control" id="Frequency" name="Frequency">
+                                                <option value="">Select a Frequency</option>
+                                                <option value="Weekly">Weekly</option>
+                                                <option value="Monthly">Monthly</option>
+                                                <option value="Quarterly">Quarterly</option>
+                                                <option value="Semi-Annual">Semi-Annual</option>
+                                                <option value="Annual">Annual</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Assign To:</span>
+                                            <select class="form-control" id="SelUserID" name="UserID">
+                                                <option value="">Select A User..</option>
+                                                <optgroup label="Users" data-bind="foreach: Users">
+                                                    <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <span class="input-group-addon">First Due Date:</span>
+                                            <input type="text" class="form-control" id="FirstDueDate" name="FirstDueDate" placeholder="First Due Date" readonly>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <select class="users-select2 form-control" style="width: 100%;" multiple="multiple" data-placeholder="Reviewers..." data-bind="foreach: Users" id="Reviewers" name="Reviewers">
+                                        <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <center>
+                                        <button type="button" class="btn btn-primary" id="submit-new-deliverable" data-bind="click: $root.addDeliverable">Submit</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hidden-inputs" class="hidden">
+    <input type="text" id="freq" name="freq" />
+    <input type="text" id="DelID" name="DelID" />
+    <input type="text" id="DelDetID" name="DelDetID" data-bind="value: DelDetID()" />
+    <input type="text" id="UserID" name="UserID" value="@{if (Request.Cookies["authToken"] != null) { Write(Request.Cookies["authToken"].Value); } else { Write("0"); } }" />
+    <input type="text" id="RelPer" name="RelPer" value="@ViewBag.RelPer" />
+
+</div>
+
+@section Scripts {
+
+    <script src="~/Scripts/KO-Models/ko-model-deliverables.js"></script>
+
+
+    <script>
+
+
+        var vm = null;
+        //Set and split current date
+        var curDate = new Date;
+        var curYear = curDate.getFullYear();
+        var curMonth = curDate.getMonth() + 1; curMonth = curMonth < 10 ? "0" + curMonth : curMonth;
+        var curDay = curDate.getDate(); curDay = curDay < 10 ? "0" + curDay : curDay;
+        var thisMondayDay = curDate.getDate() - (curDate.getDay() - 1);
+        var toggle = 0;
+        var trashDate = new Date(curDate);
+
+        //Set and split current week's first Monday date
+        var thisMonday = new Date(trashDate.setDate(thisMondayDay));
+        var monYear = thisMonday.getFullYear();
+        var monMonth = thisMonday.getMonth() + 1; monMonth = monMonth < 10 ? "0" + monMonth : monMonth;
+        var monDay = thisMonday.getDate(); monDay = monDay < 10 ? "0" + monDay : monDay;
+
+        $(function () {
+            var deliverablesAPI = $("#deliverablesLink").attr('href');
+
+            var ftpAPI = $("#FTPLink").attr('href');
+
+            vm = new DeliverablesViewModel();
+            ko.applyBindings(vm);
+            vm.loadUsers();
+            $(".users-select2").select2();
+
+            //vm.uploadFile();
+
+            loadWeeks();
+            vm.loadDelStatusChart();
+            //$("#fileUpload").dropzone({ url: ftpAPI });
+            $('#direct-report-section').toggle('slide', { direction: 'up' }, '0');
+
+
+        });
+
+        $(document).on('click', '#report-metrics', function () {
+            if (toggle == 0) {
+                $('#del-detail-section').toggle('slide', { direction: 'right' }, '250');
+                $('#del-select-section').toggle('slide', { direction: 'down' }, '250');
+                $('#del-status-section').toggle('slide', { direction: 'left' }, '250', function () {
+                    //$('.toggleDealy').toggle('slide', { direction: 'up' }, 0);
+
+
+                    vm.loadDirectReportMetrics();
+                    $('#direct-report-section').toggle('slide', { direction: 'up' }, '750');
+                    $("#report-metrics").html("Overview");
+                    toggle = 1;
+                });
+
+
+
+
+            }
+            else {
+
+                $('#direct-report-section').toggle('slide', { direction: 'up' }, '750', function () {
+                    $('#del-status-section').toggle('slide', { direction: 'left' }, '750');
+                    $('#del-select-section').toggle('slide', { direction: 'down' }, '750');
+                    $('#del-detail-section').toggle('slide', { direction: 'right' }, '750');
+                    $("#report-metrics").html("Direct Reports Metrics");
+                    toggle = 0;
+                });
+                //$('.toggleDealy').toggle('slide', { direction: 'up' }, 0);
+
+            }
+
+
+        });
+
+        $(document).on("click", ".deliverable-item", function () {
+            var ID = $(this).attr("deldetid");
+            var Frequency = $(this).attr("frequency");
+            var DateDue = $(this).attr("datedue");
+            var val = findPeriodVal(Frequency, DateDue);
+            console.log(Frequency);
+            console.log(val);
+            $('#DelDetID').val(ID);
+            vm.loadDeliverableByID(ID);
+            $('#freq').val(Frequency).change();
+            $("#period").val(val);
+        });
+
+        //$(function () {
+        //    $('#del-status-chart').highcharts({
+        //        chart: {
+        //            type: 'column'
+        //        },
+        //        title: {
+        //            text: 'Column chart with negative values'
+        //        },
+        //        credits: {
+        //            enabled: false
+        //        },
+        //        series: [{
+        //            name: 'John',
+        //            data: [{
+        //                name: 'Jan',
+        //                y: '6',
+
+        //            },
+        //            {
+        //                name: 'Feb',
+        //                y: '5'
+        //            },
+        //            {
+        //                name: 'March',
+        //                y: '0'
+        //            }]
+        //        }]
+        //    });
+        //});
+
+        var DelStatusChart;
+        $(function () {
+            // Create the chart
+            DelStatusChart = $('#del-status-chart').highcharts({
+                chart: {
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 7,
+                        beta: 20,
+                        depth: 70
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: 'Deliverables Status'
+                },
+                xAxis: {
+                    type: 'category',
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    stackLabels: {
+                        enabled: false,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    },
+
+                    title: {
+                        text: ''
+                    }
+
+                },
+                legend: {
+                    enabled: true,
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: false,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                            style: {
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    },
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px"># of Complete Deliverables</span><br>',
+                    pointFormat: '{series.name}: {point.y}<br />',
+                    shared: true
+                },
+
+                series: [
+                     {
+                         name: 'Incomplete',
+                         data: [],
+                         color: 'rgba(149, 165, 166, 0.3)'
+                     },
+                     {
+                         name: 'Late&Incompl',
+                         data: [],
+                         color: 'rgba(192, 57, 43, 0.3)',
+                         minPointLength: 0,
+                     },
+                     {
+                         name: 'Late&Compl',
+                         data: [],
+                         color: '#c0392b',
+                         minPointLength: 0,
+                     },
+                     {
+                         name: 'Complete',
+                         data: [],
+                         color: '#344983'
+                     }]
+            }).highcharts();
+
+
+            vm.IncompleteDels.subscribe(function (val) {
+                DelStatusChart.series[0].setData(val, true);
+            });
+            vm.PassedDueIncomplete.subscribe(function (val) {
+                DelStatusChart.series[1].setData(val, true);
+            });
+            vm.PassedDueComplete.subscribe(function (val) {
+                DelStatusChart.series[2].setData(val, true);
+            });
+            vm.CompleteDels.subscribe(function (val) {
+                DelStatusChart.series[3].setData(val, true);
+            });
+            vm.DelStatusChartCats.subscribe(function (val) {
+                DelStatusChart.xAxis[0].setCategories(val, true);
+            });
+
+        });
+
+        $(document).on("click", ".reviewable-item", function () {
+            var ID = $(this).attr("deldetid");
+            $('#DelDetID').val(ID);
+            vm.loadDeliverableByID(ID);
+            $("#del-modal").modal("show");
+        });
+
+
+        $(document).on("change", "#Assignee", function () {
+            if (toggle == 1) {
+                vm.loadDirectReportMetrics();
+            }
+        });
+    </script>
+    <script src="~/Scripts/KO-Models/deliverablesform.js"></script>
+
+}

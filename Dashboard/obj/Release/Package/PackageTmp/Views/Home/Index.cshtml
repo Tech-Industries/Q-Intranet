@@ -1,0 +1,591 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+@Html.Partial("_Filters")
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @*<span class="label label-success pull-right">Monthly</span>*@
+                    <h5>Margins</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><span data-bind="text: RollupValues().Margins"></span> <span class="pull-right" data-bind="text: RollupValues().MarginPct"></span></h1>
+                    @*<div class="stat-percent font-bold text-info">N/A% <i class="fa fa-level-up"></i></div>*@
+                    <small class="pull-right">of Sales</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @*<span class="label label-danger pull-right">Low value</span>*@
+                    <h5>Past Due Sales</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><span data-bind="text: RollupValues().PDSales"></span> </h1>
+                    @*<div class="stat-percent font-bold text-danger">N/A% <i class="fa fa-level-down"></i></div>
+                        <small>In first month</small>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @*<span class="label label-primary pull-right">Today</span>*@
+                    <h5>Overtime</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" data-bind="text: OTMTD"></h1>
+                    @*<div class="stat-percent font-bold text-navy">N/A% <i class="fa fa-level-up"></i></div>
+                        <small>New visits</small>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @*<span class="label label-info pull-right">Annual</span>*@
+                    <h5>Scrap</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><span data-bind="text: RollupValues().Scrap"></span> <span class="pull-right" data-bind="text: RollupValues().ScrapAsPercent"></span></h1>
+                    @*<div class="stat-percent font-bold text-info">N/A% <i class="fa fa-level-up"></i></div>*@
+                    <small class="pull-right">of Sales</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Sales</h5>
+                    @*<div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                <button type="button" class="btn btn-xs btn-white">Annual</button>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="">
+                                <div class="" id="home-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul class="stat-list">
+                                <li>
+                                    <h2 class="no-margins" data-bind="text: RollupValues().CWOGoal">0.00</h2>
+                                    <small>Goal</small>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins" data-bind="text: RollupValues().Sales">0.00</h2>
+                                    <small>Sales Month-to-Date</small>
+                                    @*<div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                        </div>*@
+                                </li>
+                                <li>
+                                    <h2 class="no-margins" data-bind="text: RollupValues().Margins">0.00</h2>
+                                    <small>Margins Month-to-Date</small>
+                                    @*<div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                        </div>*@
+                                </li>
+                                <li>
+                                    <h2 class="no-margins" data-bind="text: RollupValues().Cwo">0.00</h2>
+                                    <small>CWO Month-to-Date</small>
+                                    @*<div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                        </div>*@
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Scrap</h5>
+                    @*<div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                <button type="button" class="btn btn-xs btn-white">Annual</button>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="">
+                                <div class="" id="home-scrap-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            @*<ul class="stat-list">
+                                    <li>
+                                        <h2 class="no-margins" data-bind="text: SalesGoalM">0.00</h2>
+                                        <small>Goal</small>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins" data-bind="text: SalesMTD">0.00</h2>
+                                        <small>Sales Month-to-Date</small>
+                                        @*<div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                            </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins" data-bind="text: MarginsMTD">0.00</h2>
+                                        <small>Margins Month-to-Date</small>
+                                        <div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                            </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins" data-bind="text: CWOMTD">0.00</h2>
+                                        <small>CWO Month-to-Date</small>
+                                        <div class="stat-percent"><span data-bind="text:SalesMTDPerc"></span>% <i class="fa fa-level-down text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div data-bind="style: {width: SalesMTDPerc + '%'}" class="progress-bar"></div>
+                                            </div>
+                                    </li>
+
+                                </ul>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="salesDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="fa fa-chevron-left incr-sales-det" norp="prev" type="sales"></i> Sales for <span data-bind="text: SelectedDay"></span> <i class="fa fa-chevron-right incr-sales-det" norp="next" type="sales"></i></h4>
+                    <small class="font-bold">Total Sales: <span data-bind="text: SelectedDaySalesAccum"></span></small><br />
+                    <small class="font-bold">Total Margins: <span data-bind="text: SelectedDayMargAccum"></span></small><br />
+                    <small class="font-bold">Margin Percent: <span data-bind="text: SelectedDayMargPerc"></span></small>
+
+                    <div class="row">
+                        <div class="col-md-2 pull-right">
+                            <div class="btn-group">
+                                <button class="btn btn-primary range-detail-filter" ftype="scrap" type="button">Day</button>
+                                <button class="btn btn-success range-detail-filter" ftype="scrap" type="button">Month</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive  visible-lg hiddem-md">
+                        <table class="table table-striped table-bordered table-hover dtSalesDetail">
+                            <thead>
+                                <tr>
+                                    <th>OnTime</th>
+                                    <th class="hidden">OnTimeH</th>
+                                    <th>Plant</th>
+                                    <th>Customer</th>
+                                    <th>Part</th>
+                                    <th>Description</th>
+                                    <th>DateDue</th>
+                                    <th>QtyShipped</th>
+                                    <th class="dtRightAlign">Sales</th>
+                                    <th class="dtRightAlign">Cost</th>
+                                    <th class="dtRightAlign">MargAmt</th>
+                                    <th class="dtRightAlign">MargPerct</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive visible-xs visible-sm visible-md hiddem-lg">
+                        <table class="table table-striped table-bordered table-hover dtSalesDetailSmall">
+                            <thead>
+                                <tr>
+                                    <th>OnTime</th>
+                                    <th class="hidden">OnTimeH</th>
+                                    <th>Customer</th>
+                                    <th>Description</th>
+                                    <th>Part</th>
+                                    <th class="dtRightAlign">Sales</th>
+                                    <th class="dtRightAlign">MargPerct</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="scrapDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="fa fa-chevron-left incr-scrap-det" norp="prev" type="scrap"></i> Scrap for <span data-bind="text: SelectedDay"></span> <i class="fa fa-chevron-right incr-scrap-det" norp="next" type="scrap"></i></h4> <small class="font-bold">Total Scrap: <span data-bind="text: SelectedDayScrapAccum"></span></small><br />
+
+                    <div class="row">
+                        <div class="col-md-2 pull-right">
+                            <div class="btn-group">
+                                <button class="btn btn-primary range-detail-filter" ftype="scrap" type="button">Day</button>
+                                <button class="btn btn-success range-detail-filter" ftype="scrap" type="button">Month</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dtScrapDetail">
+                            <thead>
+                                <tr>
+                                    <th>Plant</th>
+                                    <th>ControlNum</th>
+                                    <th>Job</th>
+                                    <th>Suffix</th>
+                                    <th>Part</th>
+                                    <th>Description</th>
+                                    <th>QtyDisposed</th>
+                                    <th class="dtRightAlign">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/KO-Models/ko-model-home.js"></script>
+
+    <script>
+        
+        $(function () {
+
+            var vm = new HomeViewModel();
+            ko.applyBindings(vm);
+
+            var savedDay;
+
+            $(document).on('click', '.incr-sales-det', function () {
+                norp = $(this).attr('norp');
+                vm.incrDayDetail(norp, 'sales');
+            });
+            $(document).on('click', '.incr-scrap-det', function () {
+                norp = $(this).attr('norp');
+                vm.incrDayDetail(norp, 'scrap');
+            });
+
+            $(document).on('click', '.range-detail-filter', function () {
+                var month = $("#monthSelect").val();
+                var year = $("#yearSelect").val();
+                var day = '';
+                var range = $(this).html();
+                var ftype = $(this).attr('ftype');
+                console.log(savedDay);
+                if (range == 'Day') {
+                    day = savedDay;
+                }
+                if (ftype == "sales") {
+                    vm.loadSelectDaySales(year, month, day);
+                }
+                else {
+                    vm.loadSelectDayScrap(year, month, day);
+                }
+            });
+
+            (function (H) {
+                H.wrap(H.Tooltip.prototype, "refresh", function (c, p, e) {
+                    if (this.options.reversed && this.options.shared) {
+                        p.reverse();
+                    }
+                    c.call(this, p, e);
+                });
+            })(Highcharts);
+            var table = $('.dtSalesDetail').DataTable({
+                "createdRow": function (row, data, index) {
+                    $('td', row).eq(1).addClass("hidden");
+                    $('td', row).eq(7).addClass("dtRightAlign");
+                    $('td', row).eq(8).addClass("dtRightAlign");
+                    $('td', row).eq(9).addClass("dtRightAlign");
+                    $('td', row).eq(10).addClass("dtRightAlign");
+                    $('td', row).eq(11).addClass("dtRightAlign");
+                    if (data[1] == true) {
+                        if (data[7] <= 0) {
+                            $('td', row).eq(0).append('<center><i class="negQtyTd fa fa-close fa-2x"></i></center>');
+                        }
+                        else {
+                            $('td', row).eq(0).append('<center><i class="onTimeTd fa fa-check fa-2x"></i></center>');
+                        }
+
+                    }
+                    else {
+                        if (data[7] <= 0) {
+                            $('td', row).eq(0).append('<center><i class="negQtyTd fa fa-close fa-2x"></i></center>');
+                        }
+                        else {
+                            $('td', row).eq(0).append('<center><i class="notonTimeTd fa fa-check fa-2x"></i></center>');
+                        }
+                    }
+                    if (data[11].replace('%', '') * 1 >= 20) {
+                        $('td', row).eq(11).css('background-color', 'rgba(63, 191, 63, 0.6)');
+                    }
+                }
+            });
+
+            var table1 = $('.dtSalesDetailSmall').DataTable({
+
+                "createdRow": function (row, data, index) {
+                    $('td', row).eq(1).addClass("hidden");
+                    if (data[1] == true) {
+                        if (data[7] <= 0) {
+                            $('td', row).eq(0).append('<center><i class="negQtyTd fa fa-close fa-2x"></i></center>');
+                        }
+                        else {
+                            $('td', row).eq(0).append('<center><i class="onTimeTd fa fa-check fa-2x"></i></center>');
+                        }
+
+                    }
+                    else {
+                        if (data[6] <= 0) {
+                            $('td', row).eq(0).append('<center><i class="negQtyTd fa fa-close fa-2x"></i></center>');
+                        }
+                        else {
+                            $('td', row).eq(0).append('<center><i class="notonTimeTd fa fa-check fa-2x"></i></center>');
+                        }
+                    }
+                    if (data[6].replace('%', '') * 1 >= 20) {
+                        $('td', row).eq(6).css('background-color', 'rgba(63, 191, 63, 0.6)');
+                    }
+                }
+            });
+
+            var table2 = $('.dtScrapDetail').DataTable({
+                "createdRow": function (row, data, index) {
+                    $('td', row).eq(7).addClass("dtRightAlign");
+                }
+            });
+
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+
+
+
+            var homeChart = $('#home-chart').highcharts({
+                title: {
+                    text: 'Sales - Month to Date',
+                    x: -20 //center
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45,
+                        step: 4
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            if (this.value.toFixed(0) >= 1000000) {
+                                return '$' + this.value.toFixed(0) / 1000000 + 'M';
+                            } else {
+                                return '$' + this.value.toFixed(0) / 1000 + 'K';
+                            }
+                        }
+                    },
+                    title: {
+                        text: ''
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    valuePrefix: '$',
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
+
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 4,
+                        point: {
+                            events: {
+                                click: function (e) {
+
+                                    var month = $("#monthSelect").val();
+                                    var year = $("#yearSelect").val();
+                                    var day = this.x + 1;
+
+                                    savedDay = day;
+                                    vm.loadSelectDaySales(year, month, day);
+                                    console.log(year, month, day);
+
+
+
+
+
+
+
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Goal',
+                    data: [],
+                    color: '#27ae60'
+                }, {
+                    name: 'Closed WO',
+                    data: [],
+                    dashStyle: 'shortDash',
+                    color: 'rgba(52, 73, 94, 0.80)'
+                }, {
+                    name: 'Sales',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
+
+            var homeScrapChart = $('#home-scrap-chart').highcharts({
+                title: {
+                    text: 'Scrap - Month to Date',
+                    x: -20 //center
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45,
+                        step: 4
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            if (this.value.toFixed(0) >= 1000000) {
+                                return '$' + this.value.toFixed(0) / 1000000 + 'M';
+                            } else {
+                                return '$' + this.value.toFixed(0) / 1000 + 'K';
+                            }
+                        }
+                    },
+                    title: {
+                        text: ''
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    valuePrefix: '$',
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
+
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 4,
+                        point: {
+                            events: {
+                                click: function (e) {
+                                    var month = $("#monthSelect").val();
+                                    var year = $("#yearSelect").val();
+                                    var day = this.x + 1;
+                                    savedDay = day;
+                                    vm.loadSelectDayScrap(year, month, day);
+                                    console.log(year, month, day);
+
+
+
+
+
+
+
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Goal',
+                    data: [],
+                    color: '#27ae60'
+                }, {
+                    name: 'Scrap',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
+
+
+            vm.ChartSalesMTD.subscribe(function (val) {
+                homeChart.series[2].setData(val, true);
+            });
+            vm.ChartScrapMTD.subscribe(function (val) {
+                homeScrapChart.series[1].setData(val, true);
+            });
+            vm.ChartCategories.subscribe(function (val) {
+                homeChart.xAxis[0].setCategories(val, true);
+                homeScrapChart.xAxis[0].setCategories(val, true);
+            });
+            vm.SalesGoals.subscribe(function (val) {
+                homeChart.series[0].setData(val, true);
+            });
+            vm.ScrapGoals.subscribe(function (val) {
+                homeScrapChart.series[0].setData(val, true);
+            });
+            vm.ChartCWOMTD.subscribe(function (val) {
+                homeChart.series[1].setData(val, true);
+            });
+
+
+
+
+        });
+    </script>
+
+}

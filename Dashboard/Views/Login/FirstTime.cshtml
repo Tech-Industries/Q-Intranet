@@ -1,0 +1,86 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Q - First Time Setup</title>
+    @Styles.Render("~/Content/css")
+</head>
+
+<body class="gray-bg" style="height: 100vh">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown" style="margin: 20vh auto">
+        <div>
+            <div>
+                <h2>It looks like it is your first time logging in...</h2>
+                <h3>We just need to gather a bit of info.</h3>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        First Name
+                    </div>
+                    <input type="text" class="form-control" id="NewFirstName" name="NewFirstName" />
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        Last Name
+                    </div>
+                    <input type="text" class="form-control" id="NewLastName" name="NewLastName" />
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        Username
+                    </div>
+                    <input type="text" class="form-control" id="NewUserName" name="NewUserName" value="@ViewBag.UserName" readonly />
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        &nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <input type="text" class="form-control" id="NewEmail" name="NewEmail" />
+                </div>
+                <br />
+                <button class="btn btn-success" id="SubmitNewUser">Submit</button>
+                <br />
+                <br />
+                <h3>If you have problems, contact Jeffrey Powell.</h3>
+                <h3>816-788-7804</h3>
+                @Html.ActionLink("Back to Login", "Index", "Login", null, new { @class = "btn btn-primary" })
+
+
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+
+        $(function () {
+        });
+
+        $('#SubmitNewUser').click(function () {
+            FirstName = $('#NewFirstName').val();
+            LastName = $('#NewLastName').val();
+            UserName = $('#NewUserName').val();
+            Email = $('#NewEmail').val();
+            console.log(FirstName);
+            console.log(LastName);
+            console.log(UserName);
+            console.log(Email);
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tech Industries | @ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <!-- Add local styles, mostly for plugins css file -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    @Styles.Render("~/Content/css")
+
+
+
+
+</head>
+<body class="gray-bg">
+
+    <!-- Skin configuration box -->
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <!-- Page wraper -->
+        <div>
+
+            <!-- Top Navbar -->
+            <!-- Filters -->
+            <div>
+
+                <!-- Main view  -->
+                @RenderBody()
+
+
+            </div>
+            <div style="visibility:hidden">
+                @Html.ActionLink("click me", "home", "api", null, new { id = "homeLink" })
+                @Html.ActionLink("click me", "plants", "api", null, new { id = "plantsLink" })
+                @Html.ActionLink("click me", "Finance", "api", null, new { id = "financeLink" })
+                @Html.ActionLink("click me", "Quality", "api", null, new { id = "qualityLink" })
+                @Html.ActionLink("click me", "goals", "api", null, new { id = "goalsLink" })
+                @Html.ActionLink("click me", "users", "api", null, new { id = "usersLink" })
+                @Html.ActionLink("click me", "groups", "api", null, new { id = "groupsLink" })
+                @Html.ActionLink("click me", "usergroups", "api", null, new { id = "userGroupsLink" })
+                @Html.ActionLink("click me", "deliverables", "api", null, new { id = "deliverablesLink" })
+                @Html.ActionLink("click me", "DeliverableReviewers", "api", null, new { id = "deliverableReviewersLink" })
+                @Html.ActionLink("click me", "DeliverableReviews", "api", null, new { id = "deliverableReviewsLink" })
+                @Html.ActionLink("click me", "DeliverableDetail", "api", null, new { id = "deliverableDetailLink" })
+                @Html.ActionLink("click me", "DeliverableDocuments", "api", null, new { id = "deliverableDocumentsLink" })
+                @Html.ActionLink("click me", "MachineState", "api", null, new { id = "machineStateLink" })
+                @Html.ActionLink("click me", "Bugs", "api", null, new { id = "bugsLink" })
+                @Html.ActionLink("click me", "BugTags", "api", null, new { id = "bugTagsLink" })
+                @Html.ActionLink("click me", "Projects", "api", null, new { id = "projectsLink" })
+                @Html.ActionLink("click me", "ProjectAssignees", "api", null, new { id = "projectAssigneesLink" })
+                @Html.ActionLink("click me", "ProjectTasks", "api", null, new { id = "projectTasksLink" })
+                @Html.ActionLink("click me", "FTP", "api", null, new { id = "FTPLink" })
+                @Html.ActionLink("click me", "UploadFile", "Deliverables", null, new { id = "UploadFileLink" })
+                @Html.ActionLink("click me", "SetCookies", "Cookies", null, new { id = "setCookiesLink" })
+                @Html.ActionLink("click me", "Comments", "api", null, new { id = "CommentsLink" })
+                @Html.ActionLink("click me", "UCFCategories", "api", null, new { id = "UCFCategoriesLink" })
+                @Html.ActionLink("click me", "UCFChallenges", "api", null, new { id = "UCFChallengesLink" })
+                @Html.ActionLink("click me", "UCFCriteria", "api", null, new { id = "UCFCriteriaLink" })
+                @Html.ActionLink("click me", "UCFAreas", "api", null, new { id = "UCFAreasLink" })
+                @Html.ActionLink("click me", "UCFAudits", "api", null, new { id = "UCFAuditsLink" })
+                @Html.ActionLink("click me", "UCFAuditDetail", "api", null, new { id = "UCFAuditDetailLink" })
+                @Html.ActionLink("click me", "UCFActions", "api", null, new { id = "UCFActionsLink" })
+                @Html.ActionLink("click me", "UCFGoals", "api", null, new { id = "UCFGoalsLink" })
+                @Html.ActionLink("click me", "Plants", "api", null, new { id = "PlantsLink" })
+                @Html.ActionLink("click me", "Slide", "api", null, new { id = "SlideLink" })
+
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $(function () {
+            @*$("#user-full-name").html("@{if (Request.Cookies["FullName"] != null) { Write(Request.Cookies["FullName"].Value); } else { Write(""); } }");
+            $("#plantSelect").val("@{if (Request.Cookies["PlantCookie"] != null) { Write(Request.Cookies["PlantCookie"].Value); } else { Write("All"); } }");
+            $("#monthSelect").val("@{ if (Request.Cookies["MonthCookie"] != null) { Write(Request.Cookies["MonthCookie"].Value); } else { if (DateTime.Now.Month < 10) { Write("0"+DateTime.Now.Month.ToString()); } else { Write(DateTime.Now.Month); } } }");
+            $("#yearSelect").val("@{ if (Request.Cookies["YearCookie"] != null) { Write(Request.Cookies["YearCookie"].Value); } else { Write(DateTime.Now.Year); } }");*@
+
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

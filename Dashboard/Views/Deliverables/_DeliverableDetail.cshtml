@@ -1,0 +1,194 @@
+﻿@*<div class="row">
+        <div class="col-md-1 date-selectable" mnum="1"><h4>Jan.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="2"><h4>Feb.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="3"><h4>March</h4></div>
+        <div class="col-md-1 date-selectable" mnum="4"><h4>April</h4></div>
+        <div class="col-md-1 date-selectable" mnum="5"><h4>May</h4></div>
+        <div class="col-md-1 date-selectable" mnum="6"><h4>June</h4></div>
+        <div class="col-md-1 date-selectable" mnum="7"><h4>July</h4></div>
+        <div class="col-md-1 date-selectable" mnum="8"><h4>Aug.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="9"><h4>Sept.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="10"><h4>Oct.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="11"><h4>Nov.</h4></div>
+        <div class="col-md-1 date-selectable" mnum="12"><h4>Dec.</h4></div>
+    </div>
+    <br />*@
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    <span id="del-title"></span> <span data-bind="if: DDComplete()"><i class="fa fa-check" style="color: #1ab394"></i></span>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5><span id="del-desc"></span></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Date Due - <span id="del-due-date" data-bind="text: DDDateDue()"></span></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Date Completed - <span data-bind="if: DDComplete()"><span data-bind="text: DDDateCompleted()"></span></span><span data-bind="if: !DDComplete() && (DelUserID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()"><button type="button" class="btn btn-xs btn-success btn-complete-del">Complete</button></span></h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group">
+            <label class="input-group-addon">Year</label>
+            <select class="form-control" id="year" name="year">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3 pull-right">
+        <div class="input-group">
+            <label class="input-group-addon">Period</label>
+            <select class="form-control" id="period" name="period">
+                <option value="0">Select a period...</option>
+                <optgroup label="Weeks" id="weekOptgroup" class="pOptgroup hidden"></optgroup>
+                <optgroup label="Months" id="monthOptgroup" class="pOptgroup hidden">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </optgroup>
+                <optgroup label="Quarters" id="quarterOptgroup" class="pOptgroup hidden">
+                    <option value="Q1">Q1</option>
+                    <option value="Q2">Q2</option>
+                    <option value="Q3">Q3</option>
+                    <option value="Q4">Q4</option>
+                </optgroup>
+                <optgroup label="Semi-Annual" id="semiOptgroup" class="pOptgroup hidden">
+                    <option value="S1">Jan - June</option>
+                    <option value="S2">Jul - Dec</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+</div>
+<div>
+    <center><h5 id="del-description" style="width: 50%"></h5></center>
+    <div class="row">
+        <div class="col-md-4" data-bind="if: UserAccess">
+            <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
+                <input type="file" class="form-control" id="doc-upload" name="doc-upload" multiple="multiple" />
+            </form>
+            @*<form action="" id="frm-doc-up" method="post" enctype="multipart/form-data" style="height: 100px; border:1px dashed #808080">
+                    <input type="file" name="file" />
+                </form>*@
+        </div>
+        <div class="row">
+            <div class="col-md-8" style="height: 200px;">
+                <div class="full-height-scroll" data-bind="if: UserAccess">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Doc. Name</th>
+                                <th>Uploaded By</th>
+                                <th>Time Uploaded</th>
+                                <th style="width: 30px"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: DDDocuments()">
+                            <tr>
+                                <td><a data-bind="text: $data.Title, attr: {href: 'ftp://q.ti-kc.com'+$data.Path, download: $data.Title}">TestingUpload.docx</a></td>
+                                <td><span data-bind="text: $data.FirstName+' '+$data.LastName"></span></td>
+                                <td data-bind="text: $data.TimeSubmitted"></td>
+                                <td data-bind="if: ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3)"><i data-bind="attr:{DocID: $data.ID, path: $data.path}" class="fa fa-close remove-document hover-rem"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4 reviewers-section no-select" style="height: 200px" data-bind="if: @ViewBag.RelPer == 3">
+                <h2>Required Reviewers <small><i class="fa fa-plus hover-add" id="toggle-add-reviewer" ></i></small></h2>
+                <div id="add-rev-slide" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control" id="sel-add-reviewer">
+                                <option value="0">Select a user...</option>
+                                <optgroup label="Users" data-bind="foreach: Users">
+                                    <option data-bind="text: $data.FirstName+' '+$data.LastName, value: $data.ID"></option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" id="add-reviewer">Add</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn tbn-success" id="slideup-add-reviewer">Done</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 150px;">
+                    <div class="full-height-scroll" data-bind="if: UserAccess">
+                        <div class="col-md-12" data-bind="foreach: DDReviewers()">
+                            <h3 data-bind="attr: {UserID: $data.UserID}, css: $data.TimeReviewed != '' ? 'rev' : 'un-rev'"><span data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small data-bind="text: $data.TimeReviewed"></small> <span data-bind="if: $data.TimeReviewed == '' && ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3) && $root.DDComplete()"><button type="button" class="btn btn-xs btn-primary btn-sign-review pull-right" data-bind="attr: {UserID: $data.UserID}">Sign-Off</button></span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row comment-section">
+                    <div class="col-md-8">
+                        <div id="del-comments-section" class="" style="height: 300px">
+                            <div class="full-height-scroll" data-bind="if: UserAccess">
+                                <div data-bind="if: Comments().length < 1"><h3>No Comments Yet.</h3></div>
+                                <div data-bind="foreach: Comments">
+                                    <div class="row comment-item" data-bind="attr: {commentid: $data.ID, userid: $data.UserID}">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6"><span id="commenter-name" data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small><span data-bind="text: $data.TimeSubmitted" class="comment-time"></span> <span data-bind="if: ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3)"><i data-bind="attr :{commentID: $data.ID}" class="fa fa-pencil hover-add edit-comment"></i><i data-bind="attr :{commentID: $data.ID}" class="fa fa-save hover-add save-comment hidden"></i> <i data-bind="attr: {commentid: $data.ID}" class="fa fa-close hover-rem remove-comment"></i></span></small></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1 comment-text" data-bind="text: $data.CommentText"></div>
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <textarea class="form-control txt-comment-edit hidden" data-bind="text: $data.CommentText"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="border-left: 1px dashed #a9a9a9;">
+                        <form id="frm-new-comment">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea id="txt-new-comment" style="height:250px" name="Comment" class="form-control" placeholder="Enter Comment Here..."></textarea>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3 pull-right">
+                                    <button type="button" id="btn-submit-comment" class="btn btn-primary pull-right">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

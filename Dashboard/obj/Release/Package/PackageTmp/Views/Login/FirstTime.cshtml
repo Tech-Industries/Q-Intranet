@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Q - First Time Setup</title>
+    @Styles.Render("~/Content/css")
+</head>
+
+<body class="gray-bg" style="height: 100vh">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown" style="margin: 35vh auto">
+        <div>
+            <div>
+
+                <h3>Please Contact Jeffrey Powell.</h3>
+                <h3>816-788-7804</h3>
+                @Html.ActionLink("Back to Login", "Index", "Login", null, new { @class = "btn btn-primary" })
+                
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

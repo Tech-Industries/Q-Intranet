@@ -1,0 +1,58 @@
+﻿@using Dashboard.Models
+@using Dashboard.ViewModels
+@model LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TI-KC | Login</title>
+    @Styles.Render("~/Content/css")
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">Q</h1>
+
+            </div>
+
+
+            @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "m-t", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username" })
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary block full-width m-b" value="Login" />
+                </div>
+            }
+
+            <p class="m-t"> <small><strong>Tech Industries</strong> &copy; 2015</small> </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+

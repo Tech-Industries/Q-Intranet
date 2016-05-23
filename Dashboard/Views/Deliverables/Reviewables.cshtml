@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Reviewables";
+}
+
+<center>
+    <h1>
+        Reviewables <small>
+            for <select style="border: 0; background: rgba(1, 1, 1, .00); color: #19aa8d; font-weight:bold;" id="Assignee" name="Assignee" data-bind="event: {change: $root.loadReviewables()}">
+                <option value="@{if (Request.Cookies["authToken"] != null) { Write(Request.Cookies["authToken"].Value); } else { Write("0"); } }">@{if (Request.Cookies["FullName"] != null) { Write(Request.Cookies["FullName"].Value); } else { Write("Select a user..."); } }</option>
+
+                <optgroup label="Users" data-bind="foreach: Users">
+                    <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                </optgroup>
+
+            </select>
+        </small>
+    </h1>
+</center>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Reviewables</h5>
+            </div>
+            <div class="ibox-content" style="height: 600px;">
+                <div data-bind="if: Reviewables().length == 0">
+                    <h2>You are up to date on your reviewables...</h2>
+                </div>
+                <div data-bind="if: Reviewables().length > 0">
+                    <div class="full-height-scroll">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Owner</th>
+                                        <th>Date Due</th>
+                                        <th>Date Complete</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: Reviewables()">
+                                    <tr class="reviewable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID}">
+                                        <td data-bind="text: $data.Name"></td>
+                                        <td data-bind="text: $data.Description"></td>
+                                        <td data-bind="text: $data.Owner"></td>
+                                        <td data-bind="text: $data.DateDue"></td>
+                                        <td data-bind="text: $data.DateCompleted"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-md-8">*@
+<div class="modal" id="del-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title">Detail</h3>
+            </div>
+            <div class="modal-body">
+
+                @Html.Partial("_DeliverableDetail")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*</div>
+    </div>*@
+<div id="hidden-inputs" class="hidden">
+    <input type="text" id="DelDetID" />
+    <input type="text" id="DelID" />
+    <input type="text" id="UserID" name="UserID" value="@{if (Request.Cookies["authToken"] != null) { Write(Request.Cookies["authToken"].Value); } else { Write("0"); } }" />
+    <input type="text" id="RelPer" name="RelPer" value="@ViewBag.RelPer" />
+</div>
+
+@section Scripts {
+
+    <script src="~/Scripts/KO-Models/ko-model-deliverables.js"></script>
+
+
+
+    <script>
+
+
+        var vm = null;
+        //Set and split current date
+        var curDate = new Date;
+        var curYear = curDate.getFullYear();
+        var curMonth = curDate.getMonth() + 1; curMonth = curMonth < 10 ? "0" + curMonth : curMonth;
+        var curDay = curDate.getDate(); curDay = curDay < 10 ? "0" + curDay : curDay;
+        var thisMondayDay = curDate.getDate() - (curDate.getDay() - 1);
+
+        var trashDate = new Date(curDate);
+
+        //Set and split current week's first Monday date
+        var thisMonday = new Date(trashDate.setDate(thisMondayDay));
+        var monYear = thisMonday.getFullYear();
+        var monMonth = thisMonday.getMonth() + 1; monMonth = monMonth < 10 ? "0" + monMonth : monMonth;
+        var monDay = thisMonday.getDate(); monDay = monDay < 10 ? "0" + monDay : monDay;
+
+        $(function () {
+            var deliverablesAPI = $("#deliverablesLink").attr('href');
+
+            vm = new DeliverablesViewModel();
+            ko.applyBindings(vm);
+            vm.loadUsers();
+            $(".users-select2").select2();
+            vm.loadReviewables();
+
+
+
+        });
+
+        $(document).on("click", ".reviewable-item", function () {
+            var ID = $(this).attr("deldetid");
+            $('#DelDetID').val(ID);
+            $('#year').parent().addClass('hidden');
+            $('#period').parent().addClass('hidden');
+            vm.loadDeliverableByID(ID);
+            $("#del-modal").modal("show");
+        });
+
+        $(document).on("click", "#close-modal", function () {
+            vm.loadReviewables();
+        });
+    </script>
+    <script src="~/Scripts/KO-Models/deliverablesform.js"></script>
+}

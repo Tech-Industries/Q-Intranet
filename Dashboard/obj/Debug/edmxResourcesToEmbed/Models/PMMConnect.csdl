@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMMCONNECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CURRENT_MACHINE_INFORMATION">
+    <Key>
+      <PropertyRef Name="RESOURCE_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SHIFT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RESOURCE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PROGRAM_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CYCLE_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SPINDLE_LOAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TIME_ON_SHIFT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LABOR_TICKET_TRANS_ID" Type="Int32" />
+    <Property Name="RUN_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FEED_HOLD_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OP_STOP_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UNAVAILABLE_TIME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PERCENT_RUNNING" Type="Int32" />
+    <Property Name="PERCENT_IDLE" Type="Int32" />
+    <Property Name="FEED_OVERRIDE_PERCENT" Type="Int32" />
+    <Property Name="RAPID_OVERRIDE_PERCENT" Type="Int32" />
+    <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="Int32" />
+    <Property Name="FEED_OVERRIDE_PERCENT_TIME" Type="Int32" />
+    <Property Name="RAPID_OVERRIDE_PERCENT_TIME" Type="Int32" />
+    <Property Name="SPINDLE_OVERRIDE_PERCENT_TIME" Type="Int32" />
+    <Property Name="M_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="N_NUMBER" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="MACHINE_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="PMMCONNECTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" />
+    <EntitySet Name="JP_TimeInStateByMachine" EntityType="PMMCONNECTModel.JP_TimeInStateByMachine" />
+    <EntitySet Name="JP_CurrentMachineState" EntityType="PMMCONNECTModel.JP_CurrentMachineState" />
+  </EntityContainer>
+  <EntityType Name="JP_TimeInStateByMachine">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Machine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CurrentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TotalTimeInMode" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="StatePercentage" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="MinutesCaptured" Type="Int32" />
+    <Property Name="Perc1" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Perc2" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Perc3" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Perc4" Type="Decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="JP_CurrentMachineState">
+    <Key>
+      <PropertyRef Name="RESOURCE_ID" />
+      <PropertyRef Name="Description" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

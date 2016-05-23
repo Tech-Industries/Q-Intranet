@@ -1,0 +1,853 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bugs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Project" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="BugTags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BugID" Type="int" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+    <Property Name="CommentText" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CWODailyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliverableComments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DeliverableDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DeliverableDocuments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="Path" Type="nvarchar" MaxLength="200" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DeliverableReviewers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliverableReviews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="TimeReviewed" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Deliverables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstDueDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Amount" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="20" />
+    <Property Name="Access" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OTMonthlyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PrevMaint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="MachineID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="40" />
+    <Property Name="MonthlyLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="MonthlyNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="QuarterlyLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="QuarterlyNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="AnnualLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="AnnualNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="TotalCost" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="SumDowntime" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Prices">
+    <Key>
+      <PropertyRef Name="FlagOpen" />
+    </Key>
+    <Property Name="PartNum" Type="char" MaxLength="20" />
+    <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectAssignees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ProjectTasks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="EstTime" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <EntityType Name="SalesDailyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Date" Type="char" MaxLength="8" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesMonthlyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesStage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="PlantName" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="InvoiceNum" Type="char" MaxLength="7" />
+    <Property Name="OrderNum" Type="char" MaxLength="7" />
+    <Property Name="OrderSuffix" Type="char" MaxLength="4" />
+    <Property Name="OrderLine" Type="char" MaxLength="4" />
+    <Property Name="DateOrder" Type="char" MaxLength="8" />
+    <Property Name="DateDue" Type="char" MaxLength="8" />
+    <Property Name="DateShipped" Type="char" MaxLength="8" />
+    <Property Name="DateInvoiced" Type="char" MaxLength="8" />
+    <Property Name="ShipVia" Type="char" MaxLength="20" />
+    <Property Name="PartNum" Type="varchar" MaxLength="30" />
+    <Property Name="QtyOrderd" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyShipped" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyBo" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyOriginal" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Customer" Type="varchar" MaxLength="50" />
+    <Property Name="Extension" Type="numeric" Precision="16" Scale="2" />
+    <Property Name="MarginPercent" Type="numeric" Precision="14" Scale="6" />
+    <Property Name="MarginAmt" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
+    <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
+    <Property Name="OnTime" Type="bit" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapDailyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapMonthlyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapStage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="ControlNumber" Type="char" MaxLength="7" />
+    <Property Name="DisposedValue" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="DateDisposed" Type="char" MaxLength="8" />
+    <Property Name="PartNum" Type="varchar" MaxLength="30" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="QtyDisposed" Type="numeric" Precision="14" Scale="6" />
+    <Property Name="DispositionAction" Type="char" MaxLength="30" />
+    <Property Name="Name" Type="char" MaxLength="20" />
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="ScrapCode" Type="varchar" MaxLength="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UCFActions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="date" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateComplete" Type="date" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="OwnerID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAreas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnerID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAuditDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="CriteriaID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Selected" Type="bit" />
+  </EntityType>
+  <EntityType Name="UCFCategories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Area" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UCFChallenges">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UCFCriteria">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChallengeID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Weight" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+    <Property Name="Min" Type="decimal" Precision="2" Scale="1" />
+    <Property Name="Max" Type="decimal" Precision="2" Scale="1" />
+  </EntityType>
+  <EntityType Name="UCFGoals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+  </EntityType>
+  <EntityType Name="Updates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataType" Type="nvarchar" MaxLength="20" />
+    <Property Name="Updated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserGroups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="GroupID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="SupervisorID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BugsTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Project" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Creator" Type="nvarchar" MaxLength="61" />
+    <Property Name="Assignee" Type="nvarchar" MaxLength="61" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="Tags" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.DeliverablesDueInNextThirtyDays' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DeliverablesDueInNextThirtyDays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DaysPast" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.DeliverableStatusByUserID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DeliverableStatusByUserID">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Incomplete" Type="int" />
+    <Property Name="CompleteOnTime" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="PassedDueComplete" Type="int" />
+    <Property Name="PassedDueIncomplete" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FlashReportRollUp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="DaysInMonth" Type="int" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="UCFScore" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="PDSales" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IncentiveRollupByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Year" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="UCFScore" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="PDSales" Type="numeric" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.PastDueDeliverables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PastDueDeliverables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DaysPast" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ProjectsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProjectsTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="varchar" MaxLength="9" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="30" />
+    <Property Name="TasksComplete" Type="int" />
+    <Property Name="TotalTasks" Type="int" />
+    <Property Name="PercComplete" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="EstTimeRemaining" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="Assignees" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ReviewablesByUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReviewablesByUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelID" />
+      <PropertyRef Name="DelDetID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="61" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="TimeReviewed" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAreaTrendByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFAreaTrendByMonthHalf">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Half" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFPlantRollupByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFPlantRollupByMonthHalf">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="PlantsScored" Type="int" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Half" Type="int" Nullable="false" />
+    <Property Name="Goal" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFPreviousScoresByChallenge">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="ChallengeID" Type="int" />
+  </EntityType>
+  <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
+    <End Role="DeliverableDocuments" Type="Self.DeliverableDocuments" Multiplicity="1" />
+    <End Role="DeliverableDocuments1" Type="Self.DeliverableDocuments" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableDocuments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeliverableDocuments1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CWODailyByPlant" EntityType="Self.CWODailyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableComments" EntityType="Self.DeliverableComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableDetail" EntityType="Self.DeliverableDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableDocuments" EntityType="Self.DeliverableDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableReviewers" EntityType="Self.DeliverableReviewers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableReviews" EntityType="Self.DeliverableReviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deliverables" EntityType="Self.Deliverables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OTMonthlyByCompany" EntityType="Self.OTMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plants" EntityType="Self.Plants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrevMaint" EntityType="Self.PrevMaint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectAssignees" EntityType="Self.ProjectAssignees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesDailyByCompany" EntityType="Self.SalesDailyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesMonthlyByCompany" EntityType="Self.SalesMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesStage" EntityType="Self.SalesStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapDailyByPlant" EntityType="Self.ScrapDailyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapMonthlyByPlant" EntityType="Self.ScrapMonthlyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapStage" EntityType="Self.ScrapStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFActions" EntityType="Self.UCFActions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAreas" EntityType="Self.UCFAreas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAudit" EntityType="Self.UCFAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAuditDetail" EntityType="Self.UCFAuditDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFCategories" EntityType="Self.UCFCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFChallenges" EntityType="Self.UCFChallenges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFCriteria" EntityType="Self.UCFCriteria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFGoals" EntityType="Self.UCFGoals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prices" EntityType="Self.Prices" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Prices].[PartNum] AS [PartNum], 
+    [Prices].[Price] AS [Price], 
+    [Prices].[FlagOpen] AS [FlagOpen]
+    FROM [dbo].[Prices] AS [Prices]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BugsTopLevel" EntityType="Self.BugsTopLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BugsTopLevel].[ID] AS [ID], 
+    [BugsTopLevel].[Project] AS [Project], 
+    [BugsTopLevel].[Description] AS [Description], 
+    [BugsTopLevel].[Creator] AS [Creator], 
+    [BugsTopLevel].[Assignee] AS [Assignee], 
+    [BugsTopLevel].[Type] AS [Type], 
+    [BugsTopLevel].[Status] AS [Status], 
+    [BugsTopLevel].[Notes] AS [Notes], 
+    [BugsTopLevel].[DateCreated] AS [DateCreated], 
+    [BugsTopLevel].[DateClosed] AS [DateClosed], 
+    [BugsTopLevel].[Tags] AS [Tags]
+    FROM [dbo].[BugsTopLevel] AS [BugsTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="Self.DeliverablesDueInNextThirtyDays" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DeliverablesDueInNextThirtyDays].[ID] AS [ID], 
+    [DeliverablesDueInNextThirtyDays].[DelID] AS [DelID], 
+    [DeliverablesDueInNextThirtyDays].[DelDetID] AS [DelDetID], 
+    [DeliverablesDueInNextThirtyDays].[Name] AS [Name], 
+    [DeliverablesDueInNextThirtyDays].[Description] AS [Description], 
+    [DeliverablesDueInNextThirtyDays].[Frequency] AS [Frequency], 
+    [DeliverablesDueInNextThirtyDays].[DateDue] AS [DateDue], 
+    [DeliverablesDueInNextThirtyDays].[DaysPast] AS [DaysPast], 
+    [DeliverablesDueInNextThirtyDays].[DateCompleted] AS [DateCompleted], 
+    [DeliverablesDueInNextThirtyDays].[UserID] AS [UserID], 
+    [DeliverablesDueInNextThirtyDays].[FirstName] AS [FirstName], 
+    [DeliverablesDueInNextThirtyDays].[LastName] AS [LastName], 
+    [DeliverablesDueInNextThirtyDays].[Email] AS [Email]
+    FROM [dbo].[DeliverablesDueInNextThirtyDays] AS [DeliverablesDueInNextThirtyDays]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DeliverableStatusByUserID" EntityType="Self.DeliverableStatusByUserID" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DeliverableStatusByUserID].[ID] AS [ID], 
+    [DeliverableStatusByUserID].[Total] AS [Total], 
+    [DeliverableStatusByUserID].[Incomplete] AS [Incomplete], 
+    [DeliverableStatusByUserID].[CompleteOnTime] AS [CompleteOnTime], 
+    [DeliverableStatusByUserID].[Month] AS [Month], 
+    [DeliverableStatusByUserID].[UserID] AS [UserID], 
+    [DeliverableStatusByUserID].[PassedDueComplete] AS [PassedDueComplete], 
+    [DeliverableStatusByUserID].[PassedDueIncomplete] AS [PassedDueIncomplete]
+    FROM [dbo].[DeliverableStatusByUserID] AS [DeliverableStatusByUserID]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FlashReportRollUp" EntityType="Self.FlashReportRollUp" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FlashReportRollUp].[ID] AS [ID], 
+    [FlashReportRollUp].[Year] AS [Year], 
+    [FlashReportRollUp].[Month] AS [Month], 
+    [FlashReportRollUp].[DaysInMonth] AS [DaysInMonth], 
+    [FlashReportRollUp].[Cwo] AS [Cwo], 
+    [FlashReportRollUp].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUp].[Scrap] AS [Scrap], 
+    [FlashReportRollUp].[ScrapGoal] AS [ScrapGoal], 
+    [FlashReportRollUp].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [FlashReportRollUp].[PlantCode] AS [PlantCode], 
+    [FlashReportRollUp].[UCFScore] AS [UCFScore], 
+    [FlashReportRollUp].[UCFGoal] AS [UCFGoal], 
+    [FlashReportRollUp].[PlantID] AS [PlantID], 
+    [FlashReportRollUp].[PDSales] AS [PDSales], 
+    [FlashReportRollUp].[Sales] AS [Sales], 
+    [FlashReportRollUp].[Margins] AS [Margins], 
+    [FlashReportRollUp].[MarginPct] AS [MarginPct]
+    FROM [dbo].[FlashReportRollUp] AS [FlashReportRollUp]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IncentiveRollupByPlant" EntityType="Self.IncentiveRollupByPlant" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IncentiveRollupByPlant].[ID] AS [ID], 
+    [IncentiveRollupByPlant].[Year] AS [Year], 
+    [IncentiveRollupByPlant].[Month] AS [Month], 
+    [IncentiveRollupByPlant].[Cwo] AS [Cwo], 
+    [IncentiveRollupByPlant].[CWOGoal] AS [CWOGoal], 
+    [IncentiveRollupByPlant].[Scrap] AS [Scrap], 
+    [IncentiveRollupByPlant].[ScrapGoal] AS [ScrapGoal], 
+    [IncentiveRollupByPlant].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [IncentiveRollupByPlant].[PlantCode] AS [PlantCode], 
+    [IncentiveRollupByPlant].[UCFScore] AS [UCFScore], 
+    [IncentiveRollupByPlant].[UCFGoal] AS [UCFGoal], 
+    [IncentiveRollupByPlant].[PlantID] AS [PlantID], 
+    [IncentiveRollupByPlant].[PDSales] AS [PDSales]
+    FROM [dbo].[IncentiveRollupByPlant] AS [IncentiveRollupByPlant]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PastDueDeliverables" EntityType="Self.PastDueDeliverables" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PastDueDeliverables].[ID] AS [ID], 
+    [PastDueDeliverables].[DelID] AS [DelID], 
+    [PastDueDeliverables].[DelDetID] AS [DelDetID], 
+    [PastDueDeliverables].[Name] AS [Name], 
+    [PastDueDeliverables].[Description] AS [Description], 
+    [PastDueDeliverables].[Frequency] AS [Frequency], 
+    [PastDueDeliverables].[DateDue] AS [DateDue], 
+    [PastDueDeliverables].[DaysPast] AS [DaysPast], 
+    [PastDueDeliverables].[DateCompleted] AS [DateCompleted], 
+    [PastDueDeliverables].[UserID] AS [UserID], 
+    [PastDueDeliverables].[FirstName] AS [FirstName], 
+    [PastDueDeliverables].[LastName] AS [LastName], 
+    [PastDueDeliverables].[Email] AS [Email]
+    FROM [dbo].[PastDueDeliverables] AS [PastDueDeliverables]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProjectsTopLevel" EntityType="Self.ProjectsTopLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProjectsTopLevel].[ID] AS [ID], 
+    [ProjectsTopLevel].[Name] AS [Name], 
+    [ProjectsTopLevel].[Description] AS [Description], 
+    [ProjectsTopLevel].[Status] AS [Status], 
+    [ProjectsTopLevel].[DateCreated] AS [DateCreated], 
+    [ProjectsTopLevel].[Priority] AS [Priority], 
+    [ProjectsTopLevel].[TasksComplete] AS [TasksComplete], 
+    [ProjectsTopLevel].[TotalTasks] AS [TotalTasks], 
+    [ProjectsTopLevel].[PercComplete] AS [PercComplete], 
+    [ProjectsTopLevel].[EstTimeRemaining] AS [EstTimeRemaining], 
+    [ProjectsTopLevel].[Assignees] AS [Assignees]
+    FROM [dbo].[ProjectsTopLevel] AS [ProjectsTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReviewablesByUser" EntityType="Self.ReviewablesByUser" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReviewablesByUser].[ID] AS [ID], 
+    [ReviewablesByUser].[DelID] AS [DelID], 
+    [ReviewablesByUser].[DelDetID] AS [DelDetID], 
+    [ReviewablesByUser].[Name] AS [Name], 
+    [ReviewablesByUser].[Description] AS [Description], 
+    [ReviewablesByUser].[Owner] AS [Owner], 
+    [ReviewablesByUser].[DateDue] AS [DateDue], 
+    [ReviewablesByUser].[DateCompleted] AS [DateCompleted], 
+    [ReviewablesByUser].[TimeReviewed] AS [TimeReviewed], 
+    [ReviewablesByUser].[UserID] AS [UserID]
+    FROM [dbo].[ReviewablesByUser] AS [ReviewablesByUser]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFAreaTrendByMonthHalf" EntityType="Self.UCFAreaTrendByMonthHalf" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFAreaTrendByMonthHalf].[ID] AS [ID], 
+    [UCFAreaTrendByMonthHalf].[PlantID] AS [PlantID], 
+    [UCFAreaTrendByMonthHalf].[Area] AS [Area], 
+    [UCFAreaTrendByMonthHalf].[AreaID] AS [AreaID], 
+    [UCFAreaTrendByMonthHalf].[Score] AS [Score], 
+    [UCFAreaTrendByMonthHalf].[Year] AS [Year], 
+    [UCFAreaTrendByMonthHalf].[Month] AS [Month], 
+    [UCFAreaTrendByMonthHalf].[Half] AS [Half]
+    FROM [dbo].[UCFAreaTrendByMonthHalf] AS [UCFAreaTrendByMonthHalf]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFPlantRollupByMonthHalf" EntityType="Self.UCFPlantRollupByMonthHalf" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFPlantRollupByMonthHalf].[ID] AS [ID], 
+    [UCFPlantRollupByMonthHalf].[PlantID] AS [PlantID], 
+    [UCFPlantRollupByMonthHalf].[Score] AS [Score], 
+    [UCFPlantRollupByMonthHalf].[PlantsScored] AS [PlantsScored], 
+    [UCFPlantRollupByMonthHalf].[Year] AS [Year], 
+    [UCFPlantRollupByMonthHalf].[Month] AS [Month], 
+    [UCFPlantRollupByMonthHalf].[Half] AS [Half], 
+    [UCFPlantRollupByMonthHalf].[Goal] AS [Goal]
+    FROM [dbo].[UCFPlantRollupByMonthHalf] AS [UCFPlantRollupByMonthHalf]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFPreviousScoresByChallenge" EntityType="Self.UCFPreviousScoresByChallenge" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFPreviousScoresByChallenge].[ID] AS [ID], 
+    [UCFPreviousScoresByChallenge].[AuditID] AS [AuditID], 
+    [UCFPreviousScoresByChallenge].[Score] AS [Score], 
+    [UCFPreviousScoresByChallenge].[ChallengeID] AS [ChallengeID]
+    FROM [dbo].[UCFPreviousScoresByChallenge] AS [UCFPreviousScoresByChallenge]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="Self.FK_DeliverableDocuments_DeliverableDocuments">
+      <End Role="DeliverableDocuments" EntitySet="DeliverableDocuments" />
+      <End Role="DeliverableDocuments1" EntitySet="DeliverableDocuments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

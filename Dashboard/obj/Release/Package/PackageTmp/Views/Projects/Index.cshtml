@@ -1,0 +1,490 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row" id="project-overivew">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Projects</h5>
+                    <div class="ibox-tools">
+                        <button class="btn btn-primary btn-xs" id="create-project" data-toggle="modal" data-target="#proj-modal">Create new project</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="refresh-projects" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <button class="btn btn-primary status-select active" type="button">All</button>
+                                <button class="btn btn-info status-select" type="button">New</button>
+                                <button class="btn btn-default status-select" type="button">Innactive</button>
+                                <button class="btn btn-primary status-select" type="button">Active</button>
+                                <button class="btn btn-success status-select" type="button">Complete</button>
+
+                            </div>
+                        </div>
+                        @*<div class="col-md-11">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                                    </span>
+                                </div>
+                            </div>*@
+                    </div>
+
+                    <div class="project-list">
+
+                        <table class="table table-hover">
+                            <tbody data-bind="foreach: Projects">
+                                <tr class="project-item" data-bind="attr:{ 'p-id': $data.ID }">
+                                    <td class="project-status">
+                                        <span class="label" data-bind="text: $data.Status, css: { 'label-info': $data.Status == 'New', 'label-primary': $data.Status == 'Active', 'label-success': $data.Status == 'Complete'} "></span>
+                                    </td>
+                                    <td class="project-title">
+                                        <span data-bind="text:$data.Name"></span>
+                                        <br />
+                                        <small>Created: <span data-bind="text:$data.DateCreated"></span></small>
+                                    </td>
+                                    <td class="project-completion">
+                                        <small><span data-bind="text:$data.PercComplete"></span>%</small>
+                                        <div class="progress progress-mini">
+                                            <div data-bind="style: {width: PercComplete + '%'}" class="progress-bar"></div>
+                                        </div>
+                                    </td>
+                                    <td class="project-tasks">
+                                        <span data-bind="text: $data.TasksComplete+'/'+$data.TotalTasks"></span>
+                                    </td>
+
+                                    <td class="project-esttimeremaining">
+                                        <span data-bind="text: $data.EstTimeRemaining"></span> <small>Hours Rem.</small>
+                                    </td>
+                                    <td class="project-assigness">
+                                        <span data-bind="text:$data.Assignees"></span>
+                                    </td>
+
+                                    <td class="project-priority">
+                                        <span class="label" data-bind="text: $data.Priority, css: { 'label-danger': $data.Priority == 'High', 'label-warning': $data.Priority == 'Medium', 'label-default': $data.Priority == 'Low'} "></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="project-detail" style="display: none">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom: 0;">
+
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Detail</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="col-md-1">
+                            <button class="btn btn-primary" id="back-to-overview">Back</button>
+                        </div>
+                        <div data-bind="foreach: SelectedProject">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h2 data-bind="text: $data.Name"></h2>
+                                </div>
+                                @*<div class="col-md-7">
+                                    <div class="progress progress-striped active">
+                                        <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-primary">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Tasks</h5>
+                        <div class="ibox-tools">
+                            <i class="fa fa-plus fa-2x hover-add" id="create-task" data-toggle="modal" data-target="#task-modal"></i>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="wrapper wrapper-content  animated fadeInRight">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="ibox">
+                                        <div class="ibox-content">
+                                            <h3>To-Do</h3>
+                                            <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
+
+                                            <ul id="To-DoList" class="sortable-list connectList agile-list" data-bind="foreach: Todo">
+                                                <li class="warning-element" data-bind="attr: { 'TaskID': $data.ID }">
+                                                    <span data-bind="text: $data.Name"></span> <span class="pull-right" data-bind="text: $data.AssigneeID"></span>
+                                                    <div class="agile-detail">
+                                                        @*<a href="#" class="pull-right btn btn-xs btn-white">Tag</a>*@
+                                                        <i class="fa fa-clock-o"></i> <span data-bind="text: $data.DateCreated"></span>
+
+                                                        <span class="pull-right" data-bind="text: $data.EstTime"></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="ibox">
+                                        <div class="ibox-content">
+                                            <h3>Active</h3>
+                                            <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
+                                            <ul id="ActiveList" class="sortable-list connectList agile-list" data-bind="foreach: Active">
+                                                <li class="info-element" data-bind="attr: { 'TaskID': $data.ID }">
+                                                    <span data-bind="text: $data.Name" class="task-name"></span> 
+                                                    <textarea class="form-control task-name-edit hidden" style="width: 60%" data-bind="text: $data.Name"></textarea>
+                                                    <span class="pull-right" data-bind="text: $data.AssigneeID"></span>
+                                                    <div class="agile-detail">
+                                                        @*<a href="#" class="pull-right btn btn-xs btn-white">Tag</a>*@
+                                                        <i class="fa fa-clock-o"></i> <span data-bind="text: $data.DateCreated"></span>
+
+                                                        <span class="pull-right task-est-time" data-bind="text: $data.EstTime"></span>
+                                                        @*<select style="width: 20px" class="pull-right form-control">
+                                                        </select>*@
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="ibox">
+                                        <div class="ibox-content">
+                                            <h3>Completed</h3>
+                                            <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
+                                            <ul id="CompleteList" class="sortable-list connectList agile-list" data-bind="foreach: Complete">
+                                                <li class="success-element" data-bind="attr: { 'TaskID': $data.ID }">
+                                                    <span data-bind="text: $data.Name"></span> <span class="pull-right" data-bind="text: $data.AssigneeID"></span>
+                                                    <div class="agile-detail">
+                                                        @*<a href="#" class="pull-right btn btn-xs btn-white">Tag</a>*@
+                                                        <i class="fa fa-clock-o"></i> <span data-bind="text: $data.DateCreated"></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="proj-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title">New Project</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Name</span>
+                            <input type="text" class="form-control" id="proj-name" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Description</span>
+                            <input type="text" class="form-control" id="proj-description" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Priority</span>
+                            <select class="form-control" id="proj-priority">
+                                <option value="0">Select one...</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <select class="users-select2 form-control" style="width: 100%;" multiple="multiple" data-placeholder="Assignees..." data-bind="foreach: Users" id="proj-assignees" name="proj-assignees">
+                            <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-1 col-md-offset-8">
+                        <button class="btn btn-primary" id="add-new-project">Add</button>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="task-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title">New Task</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Name</span>
+                            <input type="text" class="form-control" id="task-name" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Description</span>
+                            <input type="text" class="form-control" id="task-description" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Etimated Time</span>
+                            <input type="text" class="form-control" id="task-esttime" onKeyPress="return isNumberKey(event)" placeholder="NNN.NN"/>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Assignee</span>
+                            <select class="form-control" data-bind="foreach: Users" id="task-assignee" name="task-assignee">
+                                <option data-bind="value: $data.ID, text: $data.FirstName+' '+ $data.LastName"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-1 col-md-offset-8">
+                        <button class="btn btn-primary" id="add-new-task">Add</button>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hidden-inputs hidden">
+    <input id="UID" value="@ViewBag.UID" />
+    <input id="status" value="All" />
+    <input id="ProjID" value="0" />
+</div>
+
+
+@section Scripts{
+
+    <script src="~/Scripts/KO-Models/ko-model-projects.js"></script>
+
+
+    <script>
+
+
+        var vm = null;
+
+        $(function () {
+
+
+            vm = new ProjectsViewModel();
+            ko.applyBindings(vm);
+            vm.LoadProjects();
+            $(".users-select2").select2();
+            vm.loadUsers();
+
+            $(".sortable-list").sortable({
+                connectWith: ".connectList",
+                start: function (event, ui) {
+
+                    ui.item.data('start_pos', ui.item.index());
+                },
+                stop: function (event, ui) {
+                    var start_pos = ui.item.data('start_pos');
+                    if (start_pos != ui.item.index()) {
+                    } else {
+                    }
+                },
+                receive: function (event, ui) {
+                    var taskid = $(this).find(ui.item[0]).attr('taskid');
+                    var oldStatus = $(ui.sender[0]).attr('id').split('List')[0];
+                    var newStatus = this.id.split('List')[0];
+
+                    vm.updateTaskStatus(taskid, oldStatus, newStatus);
+                }
+            }).disableSelection();
+            $('#task-assignee').append("<option value='0'>Select assignee....</option>");
+
+
+        });
+
+        $(document).on('dblclick', '.task-name', function () {
+            var span = $(this);
+            var area = $(this).next();
+            console.log(area);
+            span.addClass('hidden');
+            area.removeClass('hidden');
+            area.focus();
+
+            area.unbind().on("focusout", function () {
+
+                area.addClass('hidden');
+                span.html(area.val());
+                span.removeClass('hidden');
+                
+            })
+        });
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        //$(document).on('click', '.task-est-time', function () {
+        //    console.log($(this).html());
+        //    var self = $(this);
+        //    var sel = $(this).next();
+        //    sel.html("");
+        //    var time = self.html();
+        //    while (time > 0) {
+        //        sel.append("<option value='" + time + "'>" + time + "</option");
+        //        if (time > 10) {
+        //            time -= 5;
+        //            if (time % 1 != 0) {
+        //                time -= .5;
+        //            }
+        //        }
+        //        else if(time > 5){
+        //            time -= 1;
+        //        }
+        //        else {
+        //            time -= .5;
+        //        }
+                
+        //    }
+        //    //self.css("display: none;");
+        //    //sel.css("display: block;");
+        //    console.log(sel);
+            
+        //});
+
+        $('#add-new-project').click(function () {
+            $(this).prop("disabled", true);
+            vm.addProject();
+            $(this).prop("disabled", false);
+        });
+
+        $('#add-new-task').click(function () {
+            $(this).prop("disabled", true);
+            vm.addTask();
+            $(this).prop("disabled", false);
+            vm.LoadTasks();
+        });
+
+        $('#refresh-projects').click(function () {
+            vm.LoadProjects();
+        });
+
+        $(document).on('click', '.project-item', function (e) {
+            $('#To-DoList').html('');
+            $('#ActiveList').html('');
+            $('#CompleteList').html('');
+            var ID = $(this).attr('p-id');
+            $('#ProjID').val(ID);
+
+            $('#project-overivew').fadeOut(250, function () {
+                vm.LoadTasks();
+                $('#project-detail').fadeIn(500);
+            });
+
+        })
+
+        $('#back-to-overview').click(function () {
+            $('#project-detail').fadeOut(250, function () {
+                vm.LoadProjects();
+                $('#project-overivew').fadeIn(500);
+            });
+        });
+
+        $('.status-select').click(function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+            var status = $(this).text();
+            $('#status').val(status);
+            vm.LoadProjects();
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Ultra C-Lean Admin";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Ultra C-Lean Admin</h5>
+                </div>
+                <div class="ibox-content" style="min-height:600px">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-th-list"></i> Categories</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-th-large"></i> Areas</a></li>
+
+
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active" style="height: 600px;">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row ucf-list-header"><div class="col-md-10 col-md-offset-1"><center><h2>Categories</h2></center></div><div class="col-md-1"><i class="fa fa-plus hover-add"></i></div></div>
+                                    <div class="ucf-list categories">
+                                        <div data-bind="if: !UCFCategories().length"><h2>No Categories Found</h2></div>
+                                        <div data-bind="foreach: UCFCategories()">
+                                            <center><div data-bind="attr: {categoryID: $data.ID}" class="category-item ucf-list-item"><h3 data-bind="text: $data.Description"></h3></div></center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="row ucf-list-header"><div class="col-md-10 col-md-offset-1"><center><h2>Challenges</h2></center></div><div class="col-md-1"><i class="fa fa-plus hover-add"></i></div></div>
+                                    <div class="ucf-list challenges">
+                                        <div data-bind="if: !UCFChallenges().length"><h3>Please Select a Category</h3></div>
+                                        <div data-bind="foreach: UCFChallenges()">
+                                            <center><div data-bind="text: $data.Description, attr: {challengeid: $data.ID}" class="challenge-item ucf-list-item"></div></center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="row ucf-list-header"><div class="col-md-10 col-md-offset-1"><center><h2>Criteria</h2></center></div><div class="col-md-1"><i class="fa fa-plus hover-add"></i></div></div>
+                                    <div class="ucf-list criteria">
+                                        <div data-bind="if: !UCFCriteria().length"><h4>Please Select a Challenge</h4></div>
+                                        <div data-bind="foreach: UCFCriteria()">
+                                            <center><div data-bind="text: $data.Description, attr: {criteriaID: $data.ID}" class="criteria-item ucf-list-item"></div></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*
+                                            <div class="panel-body">
+                                <div class="panel-group" id="accordion" data-bind="foreach: UCFCategories()">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" data-bind="text: $data.Description, attr: {href: '#collapse'+$data.ID}"></a>
+                                            </h3>
+                                        </div><div data-bind="attr: { id: 'collapse'+$data.ID }" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div data-bind="foreach: $root.UCFChallenges()[$index()]">
+                                                        <div>
+                                                            <h4 data-bind="text: $data.Description">
+
+                                                            </h4>
+                                                            <ul data-bind="foreach: $root.UCFCriteria()[$index()]">
+                                                                <li data-bind="text: $data.Description"></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
+                        </div>
+                        <div id="tab-2" class="tab-pane" style="height: 600px;">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Plant:</span>
+                                        <select class="form-control" id="SelPlants">
+                                            <option value="0">Select a Plant</option>
+                                            <optgroup data-bind="foreach: Plants()">
+                                                <option data-bind="text: $data.Description, value: $data.ID"></option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="well">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" id="new-area" placeholder="Add a new Area" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fa fa-plus hover-add" id="add-new-area"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-2">
+                                        <select class="form-control">
+                                            <option value="0">Select an Area</option>
+                                        </select>
+                                    </div>*@
+                            </div>
+                            <div class="row">
+                                <div data-bind="foreach: Areas()" class="unstyled">
+                                    <h3 data-bind="text: $data.Name"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/KO-Models/ko-model-ultra.js"></script>
+
+    <script>
+        var vm;
+        $(function () {
+
+            $('.full-height-scroll').slimscroll({
+                height: '100%'
+            })
+
+
+
+            vm = new UltraViewModel();
+            ko.applyBindings(vm);
+            vm.LoadCategories();
+            vm.loadPlants();
+
+        });
+
+        $(document).on('click', '.category-item', function () {
+            $('.category-item').removeClass('active');
+            $(this).addClass('active');
+            vm.UCFCriteria([]);
+            vm.LoadChallenges($(this).attr('categoryid'));
+        });
+
+        $(document).on('click', '.challenge-item', function () {
+            $('.challenge-item').removeClass('active');
+            $(this).addClass('active');
+            vm.LoadCriteria($(this).attr('challengeid'));
+        });
+
+        $(document).on('change', '#SelPlants', function () {
+            vm.loadAreas($(this).val());
+        });
+
+        $(document).on('click', '#add-new-area', function(){
+            PlantID = $('#SelPlants').val();
+            Area = $('#new-area').val();
+            console.log(PlantID + " - " + Area);
+
+            $('#new-area').val("");
+            vm.addArea(PlantID, Area);
+        })
+    </script>
+}

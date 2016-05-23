@@ -1,0 +1,453 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Issue list</h5>
+                    <div class="ibox-tools">
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-new-bug">Add new issue</button>
+                    </div>
+                </div>
+                <div class="ibox-content" style="height: 700px;">
+
+                    <div class="full-height-scroll">
+                        <div class="m-b-lg">
+
+                            @*<div class="input-group">
+                                    <input type="text" placeholder="Search issue by name..." class=" form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white"> Search</button>
+                                    </span>
+                                </div>*@
+                            <div class="m-t-md">
+
+                                @*<div class="pull-right">
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-comments"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-list"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
+                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <strong>Found <span data-bind="text: Bugs().length"></span> issue.</strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <strong>Filters:</strong>
+                                            </div>
+                                            <div class="col-md-12">&nbsp;&nbsp; Status: <span id="status-display">All</span></div>
+                                            <div class="col-md-12">&nbsp;&nbsp; Type: <span id="type-display">All</span></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary status-filter active" type="button">All</button>
+                                            <button class="btn btn-info status-filter" type="button">New</button>
+                                            <button class="btn btn-primary status-filter" type="button">Active</button>
+                                            <button class="btn btn-default status-filter" type="button">Hold</button>
+                                            <button class="btn btn-success status-filter" type="button">Closed</button>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary type-filter active" type="button">All</button>
+                                            <button class="btn btn-danger type-filter" type="button">Bug</button>
+                                            <button class="btn btn-primary type-filter" type="button">Feature</button>
+                                            <button class="btn btn-success type-filter" type="button">Service Call</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <div data-bind="if: Bugs().length < 1">
+                                <div class="col-md-12">
+                                    <center><h1>No entries found...</h1></center>
+                                </div>
+                            </div>
+                            <table class="table table-hover issue-tracker">
+                                <tbody data-bind="foreach: Bugs()">
+                                    <tr data-bind="attr:{bugid: $data.ID}" class="bug-item">
+                                        <td>
+                                            <span class="label label-danger" data-bind="text: $data.Type, css: { 'label-danger': $data.Type == 'Bug', 'label-primary': $data.Type == 'Feature', 'label-success': $data.Type == 'Service Call'} "></span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <span data-bind="text: $data.ID+' - '+$data.Project">
+                                            </span>
+
+                                            <small data-bind="text: $data.Description"> </small>
+                                        </td>
+                                        <td data-bind="text: $data.Assignee"> </td>
+                                        <td data-bind="text: $data.DateCreated"> </td>
+                                        <td class="text-right" data-bind="foreach: $data.Tags">
+                                            <button class="btn btn-white btn-xs" data-bind="text: $data"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Detail</h5>
+                    <div class="ibox-tools"></div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12" style="height: 365px;">
+                            <h2 data-bind="if: !SelectedBugRaw().length">Select a bug.</h2>
+                            <!-- ko if: SelectedBugRaw().length -->
+                            <div class="full-height-scroll">
+                                <center><h2><span data-bind="text: SelectedBug().ID"></span> - <span data-bind="text: SelectedBug().Project"></span></h2></center>
+                                <center><h3 data-bind="text: SelectedBug().Description"></h3></center>
+                                <div class="row">
+                                    <div class="col-md-6">Date Created: <span id="SelectedDateCreated" data-bind="text: SelectedBug().DateCreated"></span></div>
+                                    <div class="col-md-6">Date Closed: <span id="SelectedDateClosed" data-bind="text: SelectedBug().DateClosed"></span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Assignee</span>
+                                            <select class="form-control UpdateOnChange" id="Assignee">
+                                                <option value="0">Select Assignee...</option>
+                                                <option value="3">Mark Bailey</option>
+                                                <option value="1">Jeffrey Powell</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Status</span>
+                                            <select class="form-control UpdateOnChange" id="Status">
+                                                <option value="New">New</option>
+                                                <option value="Open">Open</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Hold">Hold</option>
+                                                <option value="Closed">Closed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <div class="col-md-12" style="height: 250px; border-top: 1px solid black;">
+                            <div class="full-height-scroll">
+                                <div data-bind="if: Comments().length < 1"><h3>No comments to display...</h3></div>
+                                <div data-bind="foreach: Comments">
+                                    <div class="row comment-item" data-bind="attr: {commentid: $data.ID, userid: $data.UserID}">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12"><span id="commenter-name" data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small><span data-bind="text: $data.TimeSubmitted" class="comment-time"></span> <span data-bind="if: ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3)"><i data-bind="attr :{commentID: $data.ID}" class="fa fa-pencil hover-add edit-comment"></i><i data-bind="attr :{commentID: $data.ID}" class="fa fa-save hover-add save-comment hidden"></i> <i data-bind="attr: {commentid: $data.ID}" class="fa fa-close hover-rem remove-comment"></i></span></small></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1 comment-text" data-bind="text: $data.CommentText"></div>
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <textarea class="form-control txt-comment-edit hidden" data-bind="text: $data.CommentText"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="height: 50px">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="txt-new-comment" placeholder="New Comment..." />
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-primary" id="submit-new-comment">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="modal inmodal fade" id="modal-new-bug" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Submit a Bug or Feature Request</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div style="margin: 20px 40px;">
+                                <form id="frm-new-del">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <center>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger type-select active">Bug</button>
+                                                    <button type="button" class="btn btn-primary type-select">Feature</button>
+                                                    <button type="button" class="btn btn-success type-select">Service Call</button>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <br /><div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Project</span>
+                                                <select class="form-control" id="Project" name="Project">
+                                                    <option value="99999">Select a Project</option>
+                                                    <option value="0">Other...</option>
+                                                    <optgroup label="Projects" data-bind="foreach: Projects()">
+                                                        <option data-bind="text: $data.Name, value: $data.ID"></option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Description</span>
+                                                <textarea class="form-control" id="Description" name="Description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    @*<div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="input-group date" data-provide="datepicker">
+                                                    <span class="input-group-addon">First Due Date:</span>
+                                                    <input type="text" class="form-control" id="FirstDueDate" name="FirstDueDate" placeholder="First Due Date" readonly>
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select class="tags-select2 form-control" style="width: 100%;" multiple="multiple" data-placeholder="Tags..." id="Tags" name="Tags">
+                                            <option value="Blocking">Blocking</option>
+                                            <option value="Nuisance">Nuisance</option>
+                                            <option value="Critical Error">Critical Error</option>
+                                            <option value="User Interface">User Interface</option>
+                                            <option value="Report">Report</option>
+                                            <option value="Mobile">Mobile</option>
+                                            <option value="Desktop">Desktop</option>
+                                            <option value="Hardware">Hardware</option>
+                                            <option value="Software">Software</option>
+                                            <option value="Networking">Networking</option>
+                                            <option value="New User">New User</option>
+                                            <option value="New User">New Email</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <button type="button" class="btn btn-primary" id="submit-new-bug" data-bind="click: $root.addBug">Submit</button>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div id="hidden-inputs" class="hidden">
+    <input type="text" id="UserID" name="UserID" value="@ViewBag.UID" />
+    <input type="text" id="RelPer" name="RelPer" value="@ViewBag.RelPer" />
+    <input type="text" id="BugID" name="BugID" value="" />
+    <input id="status" value="All" />
+    <input id="type" value="All" />
+
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/KO-Models/ko-model-bugs.js"></script>
+    <script>
+
+        var vm = null;
+
+        $(function () {
+            $(".tags-select2").select2();
+
+            vm = new BugsViewModel();
+            ko.applyBindings(vm);
+
+            vm.LoadBugs();
+            vm.LoadProjects();
+
+
+
+
+            $("span.pie").peity("pie", {
+                fill: ['#1ab394', '#d7d7d7', '#ffffff']
+            })
+
+            $(".line").peity("line", {
+                fill: '#1ab394',
+                stroke: '#169c81',
+            })
+
+            $(".bar").peity("bar", {
+                fill: ["#1ab394", "#d7d7d7"]
+            })
+
+            $(".bar_dashboard").peity("bar", {
+                fill: ["#1ab394", "#d7d7d7"],
+                width: 100
+            })
+
+            var updatingChart = $(".updating-chart").peity("line", { fill: '#1ab394', stroke: '#169c81', width: 64 })
+
+            setInterval(function () {
+                var random = Math.round(Math.random() * 10)
+                var values = updatingChart.text().split(",")
+                values.shift()
+                values.push(random)
+
+                updatingChart
+                    .text(values.join(","))
+                    .change()
+            }, 1000);
+
+        });
+
+        $(document).on('click', '.type-select', function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+        });
+
+        $(document).on('click', '.bug-item', function (e) {
+            var ID = $(this).attr('bugid');
+            console.log('test');
+            //$('#ProjID').val(ID);
+            $('#BugID').val(ID);
+            vm.LoadBugByID(ID);
+            vm.LoadComments(ID);
+
+
+        })
+
+        $(document).on('click', '.UpdateOnChange', function () {
+            vm.UpdateBug();
+        });
+
+        $(document).on('click', '#submit-new-comment', function () {
+            vm.addComment();
+        });
+        $(document).on('click', '.edit-comment', function () {
+            var e = $(this);//.parent().parent().parent();
+            id = e.attr('commentid');
+            userid = e.attr('userid');
+
+            comLabel = $(".comment-item[commentID='" + id + "']").find('.comment-text');
+            txtBox = $(".comment-item[commentID='" + id + "']").find('.txt-comment-edit');
+            comTime = $(".comment-item[commentID='" + id + "']").find('.comment-time');
+            edit = $(".comment-item[commentID='" + id + "']").find('.edit-comment');
+            save = $(".comment-item[commentID='" + id + "']").find('.save-comment');
+            save.removeClass("hidden");
+            edit.addClass("hidden");
+            comLabel.addClass("hidden");
+            txtBox.removeClass("hidden");
+            txtBox.focus();
+
+            txtBox.unbind().on("focusout", function () {
+                edit.removeClass("hidden");
+                save.addClass("hidden");
+                updatedText = txtBox.val();
+                comLabel.html(updatedText);
+                txtBox.addClass("hidden");
+                comLabel.removeClass("hidden");
+                updatedTime = DateNowFormatted();
+                comTime.html(updatedTime.split(" ")[0] + " @@ " + updatedTime.split(" ")[1]);
+
+                vm.updateComment(id, updatedTime, updatedText);
+
+            });
+
+
+
+        });
+
+
+
+        $(document).on('click', '.remove-comment', function () {
+            var id = $(this).attr('commentid');
+            swal({
+                title: "Delete?",
+                text: "Are you sure you want to delete this comment?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+                vm.removeComment(id);
+                swal({
+                    title: "Deleted!",
+                    type: "success",
+                    timer: 1000
+                });
+            });
+        });
+
+        $('#modal-new-bug').on('hidden.bs.modal', function (e) {
+            vm.LoadBugs();
+        })
+
+        $('.status-filter').click(function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+            var status = $(this).text();
+            $('#status').val(status);
+            $('#status-display').html(status);
+            vm.LoadBugs();
+        });
+        $('.type-filter').click(function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+            var type = $(this).text();
+            $('#type').val(type);
+            $('#type-display').html(type);
+            vm.LoadBugs();
+        });
+    </script>
+
+}

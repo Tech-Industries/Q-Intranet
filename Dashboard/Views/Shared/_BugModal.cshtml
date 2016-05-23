@@ -1,0 +1,108 @@
+﻿<div class="modal inmodal fade" id="modal-new-bug" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Submit a Bug or Feature Request</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div style="margin: 20px 40px;">
+                            <form id="frm-new-del">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger bug-type-select active">Bug</button>
+                                                <button type="button" class="btn btn-primary bug-type-select">Feature</button>
+                                                <button type="button" class="btn btn-success bug-type-select">Service Call</button>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                                <br /><div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Project</span>
+                                            <select class="form-control" id="bug-Project" name="Project">
+                                                <option value="99999">Select a Project</option>
+                                                <option value="Other">Other</option>
+                                                <option value="New">New</option>
+                                                <option value="Daily Flash Report">Daily Flash Report</option>
+                                                <option value="Deliverables">Deliverables</option>
+                                                <option value="Machine Monitoring">Machine Monitoring</option>
+                                                <option value="Ultra C-Lean">Ultra C-Lean</option>
+                                                <option value="Projects">Projects</option>
+                                                <option value="Bugs">Bugs</option>
+                                                <option value="Slide Show">Slide Show</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Description</span>
+                                            <textarea class="form-control" id="bug-Description" name="bug-Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                @*<div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="input-group date" data-provide="datepicker">
+                                                <span class="input-group-addon">First Due Date:</span>
+                                                <input type="text" class="form-control" id="FirstDueDate" name="FirstDueDate" placeholder="First Due Date" readonly>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />*@
+
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <select class="tags-select2 form-control" style="width: 100%;" multiple="multiple" data-placeholder="Tags..." id="bug-Tags" name="bug-Tags">
+                                        <option value="Blocking">Blocking</option>
+                                        <option value="Convenience">Convenience</option>
+                                        <option value="Nuisance">Nuisance</option>
+                                        <option value="Critical Error">Critical Error</option>
+                                        <option value="User Interface">User Interface</option>
+                                        <option value="Report">Report</option>
+                                        <option value="Mobile">Mobile</option>
+                                        <option value="Desktop">Desktop</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Software">Software</option>
+                                        <option value="Networking">Networking</option>
+                                        @*<option value="New User">New User</option>
+                                        <option value="New User">New Email</option>
+                                        <option value=""></option>*@
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <center>
+                                        <button type="button" class="btn btn-primary" id="submit-new-bug" data-bind="click: $root.addBug">Submit</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

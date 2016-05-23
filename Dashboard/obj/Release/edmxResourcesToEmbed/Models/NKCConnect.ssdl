@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NKCCONNECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CURRENT_MACHINE_INFORMATION">
+    <Key>
+      <PropertyRef Name="RESOURCE_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="datetime" />
+    <Property Name="RESOURCE_ID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RESOURCE_STATE" Type="varchar" MaxLength="50" />
+    <Property Name="PROGRAM_NUMBER" Type="varchar" MaxLength="50" />
+    <Property Name="CYCLE_TIME" Type="varchar" MaxLength="50" />
+    <Property Name="SPINDLE_LOAD" Type="varchar" MaxLength="50" />
+    <Property Name="PERCENT_RUNNING" Type="int" />
+    <Property Name="PERCENT_IDLE" Type="int" />
+    <Property Name="FEED_OVERRIDE_PERCENT" Type="int" />
+    <Property Name="RAPID_OVERRIDE_PERCENT" Type="int" />
+    <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="int" />
+    <Property Name="M_NUMBER" Type="varchar" MaxLength="10" />
+    <Property Name="N_NUMBER" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NKCCONNECT.dbo.CurrentMachineState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CurrentMachineState">
+    <Key>
+      <PropertyRef Name="RESOURCE_ID" />
+    </Key>
+    <Property Name="RESOURCE_ID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RESOURCE_STATE" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TimeInStateByMachine">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Mode" Type="varchar" MaxLength="50" />
+    <Property Name="Machine" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+    <Property Name="CurrentMode" Type="varchar" MaxLength="50" />
+    <Property Name="TotalTimeInMode" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="StatePercentage" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="MinutesCaptured" Type="int" />
+    <Property Name="Perc1" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Perc2" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Perc3" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Perc4" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Date1" Type="date" />
+    <Property Name="Date2" Type="date" />
+    <Property Name="Date3" Type="date" />
+    <Property Name="Date4" Type="date" />
+  </EntityType>
+  <EntityContainer Name="NKCCONNECTModelStoreContainer">
+    <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrentMachineState" EntityType="Self.CurrentMachineState" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CurrentMachineState].[RESOURCE_ID] AS [RESOURCE_ID], 
+    [CurrentMachineState].[RESOURCE_STATE] AS [RESOURCE_STATE], 
+    [CurrentMachineState].[Description] AS [Description], 
+    [CurrentMachineState].[Type] AS [Type]
+    FROM [dbo].[CurrentMachineState] AS [CurrentMachineState]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TimeInStateByMachine" EntityType="Self.TimeInStateByMachine" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TimeInStateByMachine].[ID] AS [ID], 
+    [TimeInStateByMachine].[Mode] AS [Mode], 
+    [TimeInStateByMachine].[Machine] AS [Machine], 
+    [TimeInStateByMachine].[Description] AS [Description], 
+    [TimeInStateByMachine].[CurrentMode] AS [CurrentMode], 
+    [TimeInStateByMachine].[TotalTimeInMode] AS [TotalTimeInMode], 
+    [TimeInStateByMachine].[StatePercentage] AS [StatePercentage], 
+    [TimeInStateByMachine].[MinutesCaptured] AS [MinutesCaptured], 
+    [TimeInStateByMachine].[Perc1] AS [Perc1], 
+    [TimeInStateByMachine].[Perc2] AS [Perc2], 
+    [TimeInStateByMachine].[Perc3] AS [Perc3], 
+    [TimeInStateByMachine].[Perc4] AS [Perc4], 
+    [TimeInStateByMachine].[Date1] AS [Date1], 
+    [TimeInStateByMachine].[Date2] AS [Date2], 
+    [TimeInStateByMachine].[Date3] AS [Date3], 
+    [TimeInStateByMachine].[Date4] AS [Date4]
+    FROM [dbo].[TimeInStateByMachine] AS [TimeInStateByMachine]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

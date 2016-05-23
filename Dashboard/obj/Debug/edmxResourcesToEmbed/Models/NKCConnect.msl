@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NKCCONNECTModelStoreContainer" CdmEntityContainer="NKCCONNECTEntities">
+    <EntitySetMapping Name="CURRENT_MACHINE_INFORMATION">
+      <EntityTypeMapping TypeName="NKCCONNECTModel.CURRENT_MACHINE_INFORMATION">
+        <MappingFragment StoreEntitySet="CURRENT_MACHINE_INFORMATION">
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+          <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+          <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+          <ScalarProperty Name="PROGRAM_NUMBER" ColumnName="PROGRAM_NUMBER" />
+          <ScalarProperty Name="CYCLE_TIME" ColumnName="CYCLE_TIME" />
+          <ScalarProperty Name="SPINDLE_LOAD" ColumnName="SPINDLE_LOAD" />
+          <ScalarProperty Name="PERCENT_RUNNING" ColumnName="PERCENT_RUNNING" />
+          <ScalarProperty Name="PERCENT_IDLE" ColumnName="PERCENT_IDLE" />
+          <ScalarProperty Name="FEED_OVERRIDE_PERCENT" ColumnName="FEED_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="RAPID_OVERRIDE_PERCENT" ColumnName="RAPID_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="SPINDLE_OVERRIDE_PERCENT" ColumnName="SPINDLE_OVERRIDE_PERCENT" />
+          <ScalarProperty Name="M_NUMBER" ColumnName="M_NUMBER" />
+          <ScalarProperty Name="N_NUMBER" ColumnName="N_NUMBER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeInStateByMachines">
+      <EntityTypeMapping TypeName="NKCCONNECTModel.TimeInStateByMachine">
+        <MappingFragment StoreEntitySet="TimeInStateByMachine">
+          <ScalarProperty Name="Date4" ColumnName="Date4" />
+          <ScalarProperty Name="Date3" ColumnName="Date3" />
+          <ScalarProperty Name="Date2" ColumnName="Date2" />
+          <ScalarProperty Name="Date1" ColumnName="Date1" />
+          <ScalarProperty Name="Perc4" ColumnName="Perc4" />
+          <ScalarProperty Name="Perc3" ColumnName="Perc3" />
+          <ScalarProperty Name="Perc2" ColumnName="Perc2" />
+          <ScalarProperty Name="Perc1" ColumnName="Perc1" />
+          <ScalarProperty Name="MinutesCaptured" ColumnName="MinutesCaptured" />
+          <ScalarProperty Name="StatePercentage" ColumnName="StatePercentage" />
+          <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
+          <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentMachineStates">
+      <EntityTypeMapping TypeName="NKCCONNECTModel.CurrentMachineState">
+        <MappingFragment StoreEntitySet="CurrentMachineState">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+          <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

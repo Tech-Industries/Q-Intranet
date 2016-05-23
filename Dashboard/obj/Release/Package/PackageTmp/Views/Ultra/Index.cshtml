@@ -1,0 +1,656 @@
+﻿
+@{
+    ViewBag.Title = "Ultra C-Lean Audit";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+
+                <h5>Filters</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select class="form-control  change-bind" id="plantSelect" data-bind="event: {change: $root.loadData()}">
+                            <option class="parent-option" plantid="0" value="All">Consolidated</option>
+                            <option class="child-option" plantid="1" value="BEST">North KC</option>
+                            <option class="child-option" plantid="2" value="GRO">Grove</option>
+                            <option class="child-option" plantid="3" value="OWA">Owasso</option>
+
+                        </select>
+                    </div>
+                    <div class='col-md-3'>
+                        <select class='form-control' id='areaSelect' data-bind='foreach: Areas()'>
+                            <option data-bind='text: $data.Name, value:$data.ID, attr: { ownerid: $data.OwnerID }'></option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control  change-bind" id="yearSelect" data-bind="event: {change: $root.loadData()}">
+
+                            @{
+                                int currentYear = DateTime.Now.Year;
+                                int incr = 0;
+
+                                while (incr <= 2)
+                                {
+
+                                    <option value="@(currentYear - incr)">@(currentYear - incr)</option>
+                                    @(incr += 1)
+                                }
+
+                            }
+
+
+                        </select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control change-bind" id="monthSelect" data-bind="event: {change: $root.loadData()}">
+                            <option value="0">Select a month...</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+
+                        </select>
+                    </div>
+                    @*<div class="col-md-3">
+                            <center>
+                                <button class="btn btn-outline btn-success dim no-highlight" data-bind="event: {click: $root.loadData()}"><i class="fa fa-refresh "></i></button>
+                            </center>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-8">
+        <div class="wrapper wrapper-content">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Ultra C-Lean Trend</h5>
+                    <div class="ibox-tools">
+                        <button class="btn btn-primary btn-xs" id="start-audit" data-toggle="modal" data-target="#ucf-modal">Start New Audit</button>
+                    </div>
+                </div>
+                <div class="ibox-content" style="min-height:600px">
+                    <ul class="nav nav-tabs">
+
+                        <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-th-large"></i> Facility Trend</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2" onmousemove="AreaTrendChart.reflow();" onclick="vm.loadAreaTrend();"><i class="fa fa-th-list"></i> Area Trend</a></li>
+
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active" style="height: 600px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="ucf-chart" style="height: 580px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane" style="height: 600px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="ucf-area-chart" style="height: 580px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="wrapper wrapper-content">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Action Items</h5>
+                    <div class="ibox-tools" data-bind="if: @ViewBag.UID == OwnerID() || @ViewBag.RelPer == 9">
+                        <button class="btn btn-primary btn-xs" id="new-action" data-toggle="modal" data-target="#ucf-action">New Action Item</button>
+                    </div>
+                </div>
+                <div class="ibox-content" style="min-height:680px">
+                    <div>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Description</th>
+                                                    <th>Date Due</th>
+                                                    <th>Owner</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: Actions">
+                                                <tr data-bind="attr: {'actionid': $data.ID}">
+                                                    <td><center><div class='status-toggle no-select circle-sm' data-bind="css:  {  'circle-red': $data.Status == 'Open',  'circle-yellow': $data.Status == 'Off-Target', 'circle-green': $data.Status == 'On-Target','fa fa-check fa-4x': $data.Status == 'Complete'} "></div></center></td>
+                                                    <td><span data-bind="text: $data.Description"></span></td>
+                                                    <td><span data-bind="text: $data.DateDue"></span></td>
+                                                    <td><span data-bind="text: $data.Owner"></span></td>
+                                                    <td data-bind="if: @ViewBag.UID == $root.OwnerID() || @ViewBag.RelPer == 9"><i class="fa fa-close hover-rem rem-action"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="ucf-action">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                Create a new action item
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div style="margin: 20px 40px;">
+                            <center><h4>Criteria</h4></center>
+                            <form id="frm-new-del">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Description:</span>
+                                            <textarea class="form-control" id="Description" name="Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Owner:</span>
+                                            <input type="text" class="form-control" name="Owner" id="Owner" placeholder="Owner" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <span class="input-group-addon">Date Start:</span>
+                                            <input type="text" class="form-control" id="DateStart" name="DateStart" placeholder="Date Start" readonly>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <span class="input-group-addon">Date Due:</span>
+                                            <input type="text" class="form-control" id="DateDue" name="DateDue" placeholder="Date Due" readonly>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <center>
+                                        <button type="button" class="btn btn-primary" id="submit-new-action" data-bind="click: $root.addAction">Submit</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-fixed-height" id="ucf-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <h3>
+                            Plant: <small>
+                                <select style="border: 0; background: rgba(1, 1, 1, .00); color: #19aa8d; font-weight:bold;" id="Plant" name="Plant">
+                                    <option value="0">Select a Plant</option>
+
+                                    <optgroup label="Plants" data-bind="foreach: Plants()">
+                                        <option data-bind="value: $data.ID, text: $data.Description"></option>
+                                    </optgroup>
+
+                                </select>
+                            </small>
+                        </h3>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <h3>
+                            Area: <small>
+                                <select style="border: 0; background: rgba(1, 1, 1, .00); color: #19aa8d; font-weight:bold;" id="Area" name="Area">
+                                    <option value="0">Select an Area</option>
+
+                                    <optgroup label="Areas" data-bind="foreach: Areas()">
+                                        <option data-bind="value: $data.ID, text: $data.Name"></option>
+                                    </optgroup>
+
+                                </select>
+                            </small>
+                        </h3>
+                    </div>
+                    <div class="col-xs-2 col-md-2">
+                        <h3>Score: <span id="dis-score">0</span></h3>
+                    </div>
+                    <div class="col-xs-1 col-md-2">
+                        <h3>
+                            <button class="btn btn-sm btn-primary" id="submit-ucf">Submit</button>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                
+                <div class="row">
+                    <div data-bind="if: UCFCategories().length < 1">
+                        <div class="col-md-12">
+                            <center><h1>Please select a Plant and an Area to begin...</h1></center>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <div data-bind="foreach: UCFCategories()">
+                            <div class="ucf-category-wrapper">
+                                <h2 data-bind="text: $data.Description" class="ucf-category"></h2>
+                                <div data-bind="foreach: $root.UCFChallenges()">
+                                    <div data-bind="if: $data.CategoryID == $parent.ID">
+                                        <h4> <span data-bind="text: $data.Description" class="ucf-challenge"></span> <span data-bind="text: $data.Type == 'Incremental' ? '(Select One)' : '(Select All That Apply)', css: 'text-info'"></span></h4>
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div data-bind="foreach: $root.UCFCriteria()">
+                                                    <h5 data-bind="if: $data.ChallengeID == $parent.ID">
+                                                        <span class="row" style="margin: 1px, 0;">
+
+                                                            <span class="col-xs-8 col-md-8" data-bind="text: $data.Description"></span>
+                                                            <span class="col-xs-2 col-md-2">
+                                                                <span data-bind="@*if: $data.Type == 'Whole'*@">
+                                                                    <span class="input-group" data-bind="attr: {min: $data.Min, max: $data.Max}">
+                                                                        <span class="input-group-addon hover-rem partial-inc sub-partial"><i class="fa fa-minus"></i></span>
+                                                                        <button data-bind="text: $data.Weight, attr: { class: $parent.Type+'-'+$data.ChallengeID+' scoring btn btn-default', weight: $data.Weight, criteriaid: $data.ID}"></button>
+                                                                        <span class="input-group-addon hover-add partial-inc add-partial"><i class="fa fa-plus"></i></span>
+                                                                    </span>
+                                                                </span>
+                                                                @*<span data-bind="if: $data.Type == 'Partial'">
+                                                                        <span class="input-group" data-bind="attr: {max: $data.Weight}">
+                                                                            <span class="input-group-addon hover-rem partial-inc sub-partial"><i class="fa fa-minus"></i></span>
+                                                                            <input type="text" class="form-control scoring-partial" data-bind="value: 0, attr:{ criteriaid: $data.ID}" style="width: 50px" readonly />
+                                                                            <span class="input-group-addon hover-add partial-inc add-partial"><i class="fa fa-plus"></i></span>
+                                                                        </span>
+                                                                    </span>*@
+                                                            </span>
+                                                            <span class="col-xs-1 col-cs-offset-1 col-md-1 col-md-offset-1">
+                                                                <span class='prev-score' data-bind="attr:{ id: 'prev-score-'+$data.ID}"></span>
+                                                            </span>
+                                                        </span>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-2" style="top: 50%;">
+                                                    <h1>0</h1>
+                                                </div>*@
+                                        </div>
+
+                                        @*<div class="row">
+                                                <div class="col-md-3 col-md-offset-6">
+                                                    <h3>Challenge Score</h3>
+
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span class="input-group">
+                                                        <span class="input-group-addon hover-rem partial-inc sub-5">-5</span>
+                                                        <span class="input-group-addon hover-rem partial-inc sub-1">-1</span>
+                                                        <span class="input-group-addon hover-rem partial-inc sub-half">-.5</span>
+                                                        <input type="text" class="form-control scoring-partial" data-bind="value: 0, attr:{ challenge: $data.ID}" style="width: 50px" readonly />
+                                                        <span class="input-group-addon hover-add partial-inc add-half">+.5</span>
+                                                        <span class="input-group-addon hover-add partial-inc add-1">+1</span>
+                                                        <span class="input-group-addon hover-add partial-inc add-5">+5</span>
+                                                    </span>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden-inputs hidden">
+    <input id="UID" value="@ViewBag.UID" />
+    <input id="RelPer" value="@ViewBag.RelPer" />
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/KO-Models/ko-model-ultra.js"></script>
+           var vm;
+    <script>
+        var vm;
+        var score = 0;
+        $(function () {
+            console.log('UID: '+ @ViewBag.UID)
+            $('.full-height-scroll').slimscroll({
+                height: '100%'
+            })
+
+
+
+
+            vm = new UltraViewModel();
+            ko.applyBindings(vm);
+            vm.loadPlants();
+            vm.loadAreas($('#plantSelect option:selected').attr('plantid'));
+            vm.loadData();
+
+        });
+
+        $(document).on('change', '#Area', function () {
+            score = 0;
+            $('#dis-score').html(score);
+            vm.LoadAuditForm();
+        });
+
+        $(document).on('change', '#Plant', function () {
+            score = 0;
+            $('#dis-score').html(score);
+            vm.UCFCategories([]);
+            vm.UCFChallenges([]);
+            vm.UCFCriteria([]);
+            PlantID = $(this).val();
+            vm.loadAreas(PlantID);
+        });
+
+
+        $(document).on('click', '.status-toggle', function () {
+            var status;
+            var DateComplete = null;
+            var ActionID = $(this).parent().parent().parent().attr('actionid');
+            if (parseInt($('#UID').val()) == vm.OwnerID() || $('#RelPer').val() == "9") {
+                if ($(this).hasClass('circle-red')) {
+                    $(this).removeClass('circle-red');
+                    $(this).addClass('circle-yellow');
+                    status = 'Off-Target';
+                }
+                else if ($(this).hasClass('circle-yellow')) {
+                    $(this).removeClass('circle-yellow');
+                    $(this).addClass('circle-green');
+                    status = 'On-Target';
+                }
+                else if ($(this).hasClass('circle-green')) {
+                    $(this).removeClass('circle-green');
+                    $(this).addClass('fa fa-check fa-4x');
+                    status = 'Complete';
+                    DateComplete = GetDate();
+                }
+                else if ($(this).hasClass('fa fa-check fa-4x')) {
+                    $(this).removeClass('fa fa-check fa-4x');
+                    $(this).addClass('circle-red');
+                    status = 'Open';
+                }
+                vm.updateActionStatus(ActionID, status, DateComplete);
+            }
+        });
+
+        $(document).on('click', '.rem-action', function () {
+            var ID = $(this).parent().parent().attr('actionid');
+            
+            swal({ title: "Are you sure?", text: "", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes", closeOnConfirm: false }, function () { vm.removeAction(ID); swal("Deleted!", "This Action has been deleted.", "success"); });
+        });
+
+        $('#plantSelect').change(function () {
+            var ID = $('#plantSelect option:selected').attr('plantid');
+            console.log(ID);
+            vm.loadAreas(ID);
+            $('#areaSelect').trigger("change");
+        });
+
+        $(document).on('change', '#areaSelect', function () {
+            vm.loadAreaTrend();
+            vm.LoadActions();
+        });
+
+        var PlantRollupChart;
+        var AreaTrendChart; //ucf-area-chart
+        $(function () {
+            PlantRollupChart = $('#ucf-chart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Ultra C-Lean Facility Trend'
+                },
+                xAxis: {
+                    categories: ['January', 'February', 'March', 'April']
+                },
+                yAxis: {
+                    tickInterval: 2,
+                    max: 50,
+                    min: 0
+
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
+                                fontSize: '15px'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Composite',
+                    data: [],
+                    color: '#FF4D00'
+                }, {
+                    name: 'Goal',
+                    type: 'line',
+                    data: [],
+                    color: '#37A544'
+                }
+                ]
+            }).highcharts();
+
+            AreaTrendChart = $('#ucf-area-chart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Ultra C-Lean Area Trend'
+                },
+                xAxis: {
+                    categories: ['January', 'February', 'March', 'April']
+                },
+                yAxis: {
+                    tickInterval: 2,
+                    max: 50,
+                    min: 0
+
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
+                                fontSize: '15px'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Average',
+                    data: [],
+                    color: '#FF4D00'
+                }, {
+                    name: 'Goal',
+                    type: 'line',
+                    data: [],
+                    color: '#37A544'
+                }]
+            }).highcharts();
+
+            vm.PlantScores.subscribe(function (val) {
+                PlantRollupChart.series[0].setData(val, true);
+            });
+
+            vm.AreaScores.subscribe(function (val) {
+                AreaTrendChart.series[0].setData(val, true);
+            });
+
+            vm.Goals.subscribe(function (val) {
+                PlantRollupChart.series[1].setData(val, true);
+
+            });
+            vm.AreaGoals.subscribe(function (val) {
+                AreaTrendChart.series[1].setData(val, true);
+            });
+
+            vm.PlantTrendCats.subscribe(function (val) {
+                PlantRollupChart.xAxis[0].setCategories(val, true);
+                AreaTrendChart.xAxis[0].setCategories(val, true);
+
+            });
+        });
+
+        $('#ucf-modal').on('hidden.bs.modal', function (e) {
+            vm.loadPlantRollup();
+        })
+
+        $(document).on('change', '#areaSelect', function () {
+            vm.checkOwnerID();
+        });
+
+        $(document).on('click', '.scoring', function () {
+            var siblings = $(this).attr('class').split(' ')[0];
+            var type = siblings.split('-')[0];
+            currentVal = parseFloat($(this).text());
+            weight = parseFloat($(this).attr('weight'));
+            if (type == 'Incremental') {
+                if ($(this).hasClass('selected')) {
+                }
+                else {
+                    var sel = $.find('.' + siblings + '.selected');
+                    oldWeight = parseFloat($(sel).text());
+                    if (oldWeight > 0) {
+                        score -= oldWeight;
+                    }
+                    $('.' + siblings).each(function () {
+                        $(this).removeClass('selected');
+                        $(this).text($(this).attr('weight'));
+                    });
+
+                    $(this).addClass('selected');
+
+                    score += parseFloat(currentVal);
+                }
+
+            }
+            else if (type == 'Additive') {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    $(this).val($(this).attr('weight'));
+                    $(this).text($(this).attr('weight'));
+                    score -= parseFloat(currentVal);
+                }
+                else {
+                    $(this).addClass('selected');
+                    score += parseFloat(currentVal);
+                }
+
+            }
+
+            $('#dis-score').html(score);
+        });
+
+        //function sticky_relocate() {
+        //    var window_top = $(window).scrollTop();
+        //    var div_top = $('#sticky-anchor').offset().top;
+        //    if (window_top > div_top) {
+        //        $('#sticky').addClass('stick');
+        //        $('#sticky-anchor').height($('#sticky').outerHeight());
+        //    } else {
+        //        $('#sticky').removeClass('stick');
+        //        $('#sticky-anchor').height(0);
+        //    }
+        //}
+
+        //$(function () {
+        //    $(window).scroll(sticky_relocate);
+        //    sticky_relocate();
+        //});
+
+        
+
+        $(document).on('click', '.partial-inc', function () {
+            max = parseFloat($(this).parent().attr('max'));
+            min = parseFloat($(this).parent().attr('min'));
+            current = 0
+            if ($(this).hasClass('sub-partial') && $(this).next().hasClass('selected')) {
+                current = parseFloat($(this).next().text());
+                score -= current;
+                if (current > min && current <= max) {
+                    current -= .5
+                }
+                $(this).next().text(current);
+                score += current;
+            }
+            else if ($(this).hasClass('add-partial') && $(this).prev().hasClass('selected')) {
+                current = parseFloat($(this).prev().text());
+                score -= current;
+                if (current >= min && current < max) {
+                    current += .5
+                }
+                $(this).prev().text(current);
+                score += current;
+            }
+            $('#dis-score').html(score);
+        });
+
+        $(document).on('click', '#submit-ucf', function () {
+            vm.SubmitAudit();
+
+        });
+
+    </script>
+}

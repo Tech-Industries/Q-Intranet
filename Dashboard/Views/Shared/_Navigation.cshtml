@@ -1,0 +1,113 @@
+﻿@using Dashboard.Helpers
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <!--<span>
+                        <img alt="image" class="img-container" src="~/Content/img/WhiteLogoFull.png" />
+                    </span>-->
+                        <center><div class="logo-name" style="font-size: 120px; line-height:100px; margin-top:-35px;">Q</div></center>
+                    
+
+                    <span class="clear">
+                        <span class="block m-t-xs">
+                            <center>Welcome, <strong class="font-bold" id="user-full-name"></strong></center>
+                        </span>
+                    </span>
+                    @*<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">{Logged In User}</strong>
+                                </span> <span class="text-muted text-xs block">{Role} <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
+                            <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Index", "Login")">Login</a></li>
+                        </ul>*@
+                </div>
+                <div class="logo-element">
+                    <span>
+                        <img alt="image" height="35" width="35" src="~/Content/img/WhiteLogoSmall.png" />
+                    </span>
+                </div>
+            </li>
+            <li class="@Html.IsSelected(controller: "Home")">
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-bolt"></i> <span class="nav-label">Daily Flash Report </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Deliverables") @Html.IsAuth(groupID: 2)">
+                <a href="@Url.Action("Index", "Deliverables")"><i class="fa fa-check"></i> <span class="nav-label">Deliverables </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Machine") @Html.IsAuth(groupID: 4)">
+                <a href="@Url.Action("Overview", "Machine")"><i class="fa fa-search"></i> <span class="nav-label">Machine Monitoring </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Ultra") @Html.IsAuth(groupID: 10)">
+                <a href="@Url.Action("Index", "Ultra")"><i class="fa fa-star"></i> <span class="nav-label">Ultra C-Lean</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="@Html.IsSelected(action: "Admin")">@Html.ActionLink("Admin", "Admin", "Ultra").IfAuth(groupID: 9)</li>
+                    <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Detail", "Index", "Ultra").IfAuth(groupID: 10)</li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Projects") @Html.IsAuth(groupID: 5)">
+                <a href="@Url.Action("Index", "Projects")"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Projects </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Admin") @Html.IsAuth(groupID: 1)">
+                <a href="@Url.Action("Index", "Admin")"><i class="fa fa-cogs"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Index", "Index", "Admin").IfAuth(groupID: 1)</li>
+                    <li class="@Html.IsSelected(action: "Users")">@Html.ActionLink("Users", "Users", "Admin").IfAuth(groupID: 1)</li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Slide")">
+                <a href="@Url.Action("Index", "Slide")"><i class="fa fa-film"></i> <span class="nav-label">Slide Show </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "PrevMaint") @Html.IsAuth(groupID: 12)">
+                <a href="@Url.Action("Index", "PrevMaint")"><i class="fa fa-wrench"></i> <span class="nav-label">Preventative Maint. </span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Bugs") @Html.IsAuth(groupID: 8)">
+                <a href="@Url.Action("Index", "Bugs")"><i class="fa fa-bug"></i> <span class="nav-label">Bugs </span></a>
+            </li>
+            <li>
+                <a data-toggle="modal" data-target="#modal-new-bug"><i class="fa fa-bug"></i> <span class="nav-label">Bug Report </span></a>
+            </li>
+            
+            @*
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Menu Levels </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Third Level <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#">Second Level Item</a></li>
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="@Html.IsSelected(controller: "CSSAnimations")">
+                    <a href="@Url.Action("Index", "CSSAnimations")"><i class="fa fa-magic"></i> <span class="nav-label">CSS Animations </span><span class="label label-info pull-right">62</span></a>
+                </li>
+                
+                *@
+        </ul>
+    </div>
+</nav>

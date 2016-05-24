@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 10:17:46</publishTime>
     </File>
     <File Include="bin/Dashboard.dll">
-      <publishTime>05/19/2016 12:11:26</publishTime>
+      <publishTime>05/20/2016 16:01:16</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>12/14/2015 10:17:59</publishTime>
@@ -805,7 +805,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 10:17:31</publishTime>
     </File>
     <File Include="Models/DashDB.edmx.diagram">
-      <publishTime>05/19/2016 12:06:43</publishTime>
+      <publishTime>05/20/2016 08:44:44</publishTime>
     </File>
     <File Include="Models/NKCConnect.edmx.diagram">
       <publishTime>02/23/2016 09:42:07</publishTime>
@@ -913,7 +913,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2016 14:37:33</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-helpers.js">
-      <publishTime>05/18/2016 13:24:43</publishTime>
+      <publishTime>05/23/2016 15:57:07</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-bugs.js">
       <publishTime>05/19/2016 12:08:59</publishTime>
@@ -922,7 +922,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/11/2016 09:51:13</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-home.js">
-      <publishTime>05/18/2016 13:57:10</publishTime>
+      <publishTime>05/20/2016 15:58:45</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-machine-overview.js">
       <publishTime>04/08/2016 12:11:27</publishTime>
@@ -2203,7 +2203,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2016 16:15:19</publishTime>
     </File>
     <File Include="Views/Bugs/Index.cshtml">
-      <publishTime>05/19/2016 12:10:10</publishTime>
+      <publishTime>05/19/2016 14:44:22</publishTime>
     </File>
     <File Include="Views/Deliverables/Index.cshtml">
       <publishTime>04/27/2016 16:42:29</publishTime>
@@ -2221,7 +2221,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/20/2016 16:05:39</publishTime>
     </File>
     <File Include="Views/Login/FirstTime.cshtml">
-      <publishTime>02/24/2016 10:01:49</publishTime>
+      <publishTime>05/23/2016 16:49:56</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>01/29/2016 15:19:35</publishTime>
@@ -2254,7 +2254,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/15/2016 11:57:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/19/2016 12:02:50</publishTime>
+      <publishTime>05/20/2016 09:46:52</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>12/09/2015 09:47:25</publishTime>
@@ -2290,7 +2290,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 10:17:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/02/2016 14:51:01</publishTime>
+      <publishTime>05/23/2016 16:45:44</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -23,33 +23,36 @@
             <div>
                 <h2>It looks like it is your first time logging in...</h2>
                 <h3>We just need to gather a bit of info.</h3>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        First Name
-                    </div>
-                    <input type="text" class="form-control" id="NewFirstName" name="NewFirstName" />
-                </div>
-                <br />
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        Last Name
-                    </div>
-                    <input type="text" class="form-control" id="NewLastName" name="NewLastName" />
-                </div>
-                <br />
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        Username
-                    </div>
-                    <input type="text" class="form-control" id="NewUserName" name="NewUserName" value="@ViewBag.UserName" readonly />
-                </div>
-                <br />
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        &nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <input type="text" class="form-control" id="NewEmail" name="NewEmail" />
-                </div>
+
+                <form id="frmAddUser" action="/api/users" method="post">
+                    <span class="input-group">
+                        <span class="input-group-addon">
+                            Username
+                        </span>
+                        <input type="text" class="form-control" id="UserName" name="UserName" value="@ViewBag.UserName" readonly />
+                    </span>
+                    <br />
+                    <span class="input-group">
+                        <span class="input-group-addon">
+                            First Name
+                        </span>
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" />
+                    </span>
+                    <br />
+                    <span class="input-group">
+                        <span class="input-group-addon">
+                            Last Name
+                        </span>
+                        <input type="text" class="form-control" id="LastName" name="LastName" />
+                    </span>
+                    <br />
+                    <span class="input-group">
+                        <span class="input-group-addon">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <input type="text" class="form-control" id="Email" name="Email" />
+                    </span>
+                </form>
                 <br />
                 <button class="btn btn-success" id="SubmitNewUser">Submit</button>
                 <br />
@@ -62,23 +65,42 @@
             </div>
         </div>
     </div>
+
+    <div class="hidden">
+        @Html.ActionLink("click me", "users", "api", null, new { id = "usersLink" })
+        @Html.ActionLink("click me", "Index", "Home", null, new { id = "HomeLink" })
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     <script>
 
         $(function () {
+            var usersAPI = $("#usersLink").attr('href');
+            var HomeLink = $("#HomeLink").attr('href');
+
+            $('#SubmitNewUser').click(function () {
+                FirstName = firstLetterCap($('#FirstName').val());
+                LastName = firstLetterCap($('#LastName').val());
+                UserName = $('#UserName').val().toLowerCase();
+                Email = $('#Email').val();
+                console.log(Email);
+
+                if (FirstName.length > 0 && LastName.length > 0 && UserName.length > 0 && Email.length > 0) {
+                    var form = $('#frmAddUser');
+                    var sendData = 'UserName='+UserName+'&FirstName='+FirstName+'&LastName='+LastName+'&Email='+Email+'&SupervisorID=0';
+                    console.log(sendData);
+                    var add = $.ajax({ type: 'POST', url: usersAPI, data: sendData });
+
+                    add.done(function (data) {
+                        swal({ title: "You have been added to Q!", text: "Please sign in to verify.", type: "success", showCancelButton: false, closeOnConfirm: true, showLoaderOnConfirm: true, }, function () { setTimeout(function () { window.location.replace(HomeLink); }, 2000); });
+                        console.log(data);
+
+                    });
+                }
+
+            });
         });
 
-        $('#SubmitNewUser').click(function () {
-            FirstName = $('#NewFirstName').val();
-            LastName = $('#NewLastName').val();
-            UserName = $('#NewUserName').val();
-            Email = $('#NewEmail').val();
-            console.log(FirstName);
-            console.log(LastName);
-            console.log(UserName);
-            console.log(Email);
-
-        });
     </script>
 
 </body>

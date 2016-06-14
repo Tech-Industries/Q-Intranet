@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
 using Newtonsoft.Json.Linq;
+using System.Web;
 
 namespace Dashboard.APIControllers
 {
@@ -32,6 +33,10 @@ namespace Dashboard.APIControllers
 
             db.Comments.Add(com);
             await db.SaveChangesAsync();
+
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, com.Type, com.TypeID, "Add-Comment", "added a comment: '"+com.CommentText+"'");
 
             return Ok(CommentsViewModel.MapFrom(com));
         }
@@ -56,15 +61,29 @@ namespace Dashboard.APIControllers
 
             Comment upCom = (Comment)db.Comments.Where(x => x.ID == ID).First();
             upCom.TimeSubmitted = com.TimeSubmitted;
+            var lodDescription = "updated a comment's text from '" + upCom.CommentText + "' to '" + com.CommentText + "'";
+            var update = false;
+            if (upCom.CommentText != com.CommentText) {
+                update = true;
+            }
+
             upCom.CommentText = com.CommentText;
+            if (update == true)
+            {
+                db.Comments.Attach(upCom);
+                var entry = db.Entry(upCom);
+                entry.Property(e => e.TimeSubmitted).IsModified = true;
+                entry.Property(e => e.CommentText).IsModified = true;
+                // other changed properties
+                db.SaveChanges();
+
+                var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+                var h = new Helpers.Helpers();
+                h.NewLogEntry(UID, upCom.Type, upCom.TypeID, "Update-Comment", lodDescription);
+            }
 
 
-            db.Comments.Attach(upCom);
-            var entry = db.Entry(upCom);
-            entry.Property(e => e.TimeSubmitted).IsModified = true;
-            entry.Property(e => e.CommentText).IsModified = true;
-            // other changed properties
-            db.SaveChanges();
+            
 
             //db.Entry(deldet).State = EntityState.Modified;
             //System.Diagnostics.Debug.WriteLine("Modified");
@@ -106,6 +125,10 @@ namespace Dashboard.APIControllers
             {
                 db.Comments.Remove(c);
                 await db.SaveChangesAsync();
+
+                var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+                var h = new Helpers.Helpers();
+                h.NewLogEntry(UID, c.Type, c.TypeID, "Delete-Comment", "deleted comment: "+c.CommentText +".");
                 return Ok(CommentsViewModel.MapFrom(c));
             }
 

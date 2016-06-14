@@ -10,6 +10,7 @@
             if (data.length > 0) {
 
                 $('.dtPrevMaint').DataTable().clear();
+                $('.dtPrevMaintSamll').DataTable().clear();
                 //insert data 
                 $.each(data, function (i, item) {
                     $('.dtPrevMaint').DataTable().row.add([
@@ -28,11 +29,25 @@
                       formatDecimal(item.SumDowntime, 1)
                     ]).draw();
                 });
+                $.each(data, function (i, item) {
+                    $('.dtPrevMaintSamll').DataTable().row.add([
+
+                      item.Status,
+                      item.Status,
+                      item.MachineID,
+                      item.Description,
+                      item.AnnualLastPmDate,
+                      item.AnnualNextPmDue,
+                      formatMoney(item.TotalCost),
+                      formatDecimal(item.SumDowntime, 1)
+                    ]).draw();
+                });
 
             }
             else {
 
                 $('.dtPrevMaint').dataTable().fnClearTable();
+                $('.dtPrevMaintSamll').dataTable().fnClearTable();
             }
 
         });

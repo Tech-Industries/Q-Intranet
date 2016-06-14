@@ -86,12 +86,18 @@
     <center><h5 id="del-description" style="width: 50%"></h5></center>
     <div class="row">
         <div class="col-md-4" data-bind="if: UserAccess">
+            @*<div id="dropzone">
+                <form action="" class="dropzone dz-clickable" id="demo-upload">
+                    <div class="dz-message">
+                        Drop files here or click to upload.
+                        <br> <span class="note">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+
+                    </div>
+                </form>
+            </div>*@
             <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
-                <input type="file" class="form-control" id="doc-upload" name="doc-upload" multiple="multiple" />
+                <input type="file" class="form-control" id="doc-upload" name="doc-upload"  />
             </form>
-            @*<form action="" id="frm-doc-up" method="post" enctype="multipart/form-data" style="height: 100px; border:1px dashed #808080">
-                    <input type="file" name="file" />
-                </form>*@
         </div>
         <div class="row">
             <div class="col-md-8" style="height: 200px;">

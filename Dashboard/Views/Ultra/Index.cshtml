@@ -14,7 +14,7 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-3">
-                        <select class="form-control  change-bind" id="plantSelect" data-bind="event: {change: $root.loadData()}">
+                        <select class="form-control  change-bind" id="plantSelect">
                             <option class="parent-option" plantid="0" value="All">Consolidated</option>
                             <option class="child-option" plantid="1" value="BEST">North KC</option>
                             <option class="child-option" plantid="2" value="GRO">Grove</option>
@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control  change-bind" id="yearSelect" data-bind="event: {change: $root.loadData()}">
+                        <select class="form-control  change-bind" id="yearSelect" ">
 
                             @{
                                 int currentYear = DateTime.Now.Year;
@@ -83,6 +83,8 @@
                 <div class="ibox-title">
                     <h5>Ultra C-Lean Trend</h5>
                     <div class="ibox-tools">
+                        <span>Previous Audit - <span data-bind="text: LastAudit"></span> -</span>
+                        <button class="btn btn-success btn-xs" id="ucf-history" data-toggle="modal" data-target="#ucf-history-modal">History</button>
                         <button class="btn btn-primary btn-xs" id="start-audit" data-toggle="modal" data-target="#ucf-modal">Start New Audit</button>
                     </div>
                 </div>
@@ -120,8 +122,11 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Action Items</h5>
-                    <div class="ibox-tools" data-bind="if: @ViewBag.UID == OwnerID() || @ViewBag.RelPer == 9">
-                        <button class="btn btn-primary btn-xs" id="new-action" data-toggle="modal" data-target="#ucf-action">New Action Item</button>
+                    <div class="ibox-tools">
+                        <button class="btn btn-success btn-xs" id="ucf-action-history" data-toggle="modal" data-target="#ucf-action-history-modal">History</button>
+                        <span data-bind="if: @ViewBag.UID == OwnerID  || '@ViewBag.RelPer' == 'Admin'">
+                            <button class="btn btn-primary btn-xs" id="new-action" data-toggle="modal" data-target="#ucf-action">New Action Item</button>
+                        </span>
                     </div>
                 </div>
                 <div class="ibox-content" style="min-height:680px">
@@ -145,7 +150,7 @@
                                                     <td><span data-bind="text: $data.Description"></span></td>
                                                     <td><span data-bind="text: $data.DateDue"></span></td>
                                                     <td><span data-bind="text: $data.Owner"></span></td>
-                                                    <td data-bind="if: @ViewBag.UID == $root.OwnerID() || @ViewBag.RelPer == 9"><i class="fa fa-close hover-rem rem-action"></i></td>
+                                                    <td data-bind="if: @ViewBag.UID == OwnerID  || '@ViewBag.RelPer' == 'Admin'"><i class="fa fa-close hover-rem rem-action"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -231,6 +236,101 @@
         </div>
     </div>
 </div>
+
+<div class="modal modal-fixed-height" id="ucf-action-history-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Ultra C-Lean Actions History
+                </div>
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover dtUcfActionHistory">
+                    <thead>
+                        <tr>
+                            <th class="hidden">ID</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Date Due</th>
+                            <th>Date Completed</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: ActionsHistory">
+                        <tr>
+                            <td class='hidden' data-bind="text: $data.ID"></td>
+                            <td data-bind="text: $data.Status"></td>
+                            <td data-bind="text: $data.Description"></td>
+                            <td data-bind="text: $data.DateDue"></td>
+                            <td data-bind="text: $data.DateComplete"></td>
+                            <td data-bind="text: $data.Owner"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-fixed-height" id="ucf-history-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Ultra C-Lean History
+                </div>
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover dtUcfHistory">
+                    <thead>
+                        <tr>
+                            <th class="hidden">ID</th>
+                            <th>Plant</th>
+                            <th>Area</th>
+                            <th>Auditor</th>
+                            <th>Date Completed</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-fixed-height" id="ucf-detail-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Ultra C-Lean Detail
+                </div>
+                <button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                @*<table class="table table-striped table-bordered table-hover dtUcfDetail">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Challenge</th>
+                                <th>Criteria</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+
+                    </table>*@
+
+                <div id="ucf-detai-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal modal-fixed-height" id="ucf-modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -276,7 +376,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                
+
                 <div class="row">
                     <div data-bind="if: UCFCategories().length < 1">
                         <div class="col-md-12">
@@ -358,27 +458,41 @@
     <input id="RelPer" value="@ViewBag.RelPer" />
 </div>
 
+
 @section Scripts {
     <script src="~/Scripts/KO-Models/ko-model-ultra.js"></script>
-           var vm;
     <script>
         var vm;
         var score = 0;
         $(function () {
-            console.log('UID: '+ @ViewBag.UID)
+            console.log("@ViewBag.RelPer");
             $('.full-height-scroll').slimscroll({
                 height: '100%'
             })
 
 
-
+            var table = $('.dtUcfHistory').DataTable({
+                "order": [[4, "desc"]],
+                "createdRow": function (row, data, index) {
+                    $('td', row).eq(0).addClass("hidden");
+                }
+            });
 
             vm = new UltraViewModel();
             ko.applyBindings(vm);
-            vm.loadPlants();
+            //vm.loadPlants();
             vm.loadAreas($('#plantSelect option:selected').attr('plantid'));
-            vm.loadData();
+            //vm.loadData();
 
+        });
+
+        $(document).on('click', '#ucf-action-history', function () {
+            vm.LoadActionsHistory();
+        });
+
+        $(document).on('click', '.audit-selectable', function () {
+            vm.loadSelectedAudit($(this).children().first().html());
+            $('#ucf-detail-modal').modal('show');
         });
 
         $(document).on('change', '#Area', function () {
@@ -402,7 +516,7 @@
             var status;
             var DateComplete = null;
             var ActionID = $(this).parent().parent().parent().attr('actionid');
-            if (parseInt($('#UID').val()) == vm.OwnerID() || $('#RelPer').val() == "9") {
+            if ($('#UID').val() == vm.OwnerID() || $('#RelPer').val() == "Admin") {
                 if ($(this).hasClass('circle-red')) {
                     $(this).removeClass('circle-red');
                     $(this).addClass('circle-yellow');
@@ -430,7 +544,7 @@
 
         $(document).on('click', '.rem-action', function () {
             var ID = $(this).parent().parent().attr('actionid');
-            
+
             swal({ title: "Are you sure?", text: "", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes", closeOnConfirm: false }, function () { vm.removeAction(ID); swal("Deleted!", "This Action has been deleted.", "success"); });
         });
 
@@ -444,6 +558,7 @@
         $(document).on('change', '#areaSelect', function () {
             vm.loadAreaTrend();
             vm.LoadActions();
+            vm.loadTopLevelHistory();
         });
 
         var PlantRollupChart;
@@ -473,6 +588,16 @@
                                 fontWeight: 'bold',
                                 color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
                                 fontSize: '15px'
+                            }
+                        }
+                    },
+                    series: {
+                        point: {
+                            events: {
+                                click: function (e) {
+
+                                    vm.loadSelectedAudits(this.category);
+                                }
                             }
                         }
                     }
@@ -620,7 +745,7 @@
         //    sticky_relocate();
         //});
 
-        
+
 
         $(document).on('click', '.partial-inc', function () {
             max = parseFloat($(this).parent().attr('max'));

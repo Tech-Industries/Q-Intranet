@@ -74,11 +74,31 @@ namespace Dashboard.APIControllers
         }
 
         [ResponseType(typeof(List<object>))]
+        public List<object> Get(int PlantID, string Year, string Month)
+        {
+            int y = Int32.Parse(Year);
+            int m = Int32.Parse(Month);
+
+            return db.UCFAveragesByMonths.Where(x => x.PlantID == PlantID && x.Year == y && x.Month == m).ToList<object>();
+        }
+
+        [ResponseType(typeof(List<object>))]
         public List<object> Get(int ID, string Type)
         {
-            if (Type == "PreviousScores") {
+            if (Type == "PreviousScores")
+            {
                 UCFAudit audit = db.UCFAudits.Where(x => x.AreaID == ID).OrderByDescending(o => o.DateCompleted).ToList<UCFAudit>()[0];
                 return db.UCFPreviousScoresByChallenges.Where(x => x.AuditID == audit.ID).OrderBy(o => o.ChallengeID).ToList<object>();
+            }
+            else if (Type == "TopLevelHistory")
+            {
+
+                return db.UCFAuditHIstoryTopLevels.Where(x => x.AreaID == ID).OrderByDescending(o => o.DateCompleted).ToList<object>();
+            }
+            else if (Type == "Detail")
+            {
+
+                return db.UCFAuditDetailLevels.Where(x => x.AuditID == ID).OrderBy(o => o.CategoryID).ThenBy(o => o.ChallengeID).ThenBy(o => o.CriteriaID).ToList<object>();
             }
             else
             {

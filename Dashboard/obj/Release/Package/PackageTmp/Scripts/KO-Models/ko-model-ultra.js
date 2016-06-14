@@ -35,11 +35,16 @@
     self.AreaScores = ko.observableArray([]);
 
     self.Actions = ko.observableArray([]);
+    self.ActionsHistory = ko.observableArray([]);
 
     self.PreviousScores = ko.observableArray([]);
 
+    self.AuditHistory = ko.observableArray([]);
+    self.LastAudit = ko.observable();
+    var test = 0;
+
     self.checkOwnerID = function () {
-        self.OwnerID(parseInt($('#areaSelect option:selected').attr('ownerid')));
+        self.OwnerID($('#areaSelect option:selected').attr('ownerid'));
     }
 
     self.addAction = function () {
@@ -72,7 +77,7 @@
     }
 
     self.removeAction = function (ID) {
-        if (parseInt($('#UID').val()) == self.OwnerID || $('#RelPer').val() == "9") {
+        if (parseInt($('#UID').val()) == self.OwnerID() || $('#RelPer').val() == "Admin") {
             var del = $.ajax({ type: 'DELETE', url: UCFActionsAPI + '/' + ID, contentType: 'application/json' });
             del.always(function () {
                 var remove = $.grep(self.Actions(), function (e) { return e.ID == ID })[0];
@@ -82,8 +87,8 @@
     }
 
     self.updateActionStatus = function (ID, Status, DateComplete) {
-        console.log(parseInt($('#UID').val() + ' - ' + self.OwnerID));
-        if (parseInt($('#UID').val()) == self.OwnerID || $('#RelPer').val() == "9") {
+        console.log(parseInt($('#UID').val() + ' - ' + self.OwnerID()));
+        if (parseInt($('#UID').val()) == self.OwnerID() || $('#RelPer').val() == "Admin") {
             var t = $.grep(self.Actions(), function (e) { return e.ID == ID })[0];
             t.Status = Status;
             t.DateComplete = DateComplete;
@@ -92,7 +97,153 @@
             });
         }
     }
+
+    self.loadTopLevelHistory = function () {
+        test += 1;
+        console.log(test);
+        var AreaID = $('#areaSelect').val();
+        var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { ID: AreaID, Type: 'TopLevelHistory' } });
+        load.done(function (data) {
+            var array = $.map(data, function (item) {
+                return {
+                    ID: item.ID,
+                    AreaID: item.AreaID,
+                    AreaName: item.AreaName,
+                    AuditID: item.AuditID,
+                    Auditor: item.Auditor,
+                    DateCompleted: formatSqlDateTime(item.DateCompleted),
+                    PlantID: item.PlantID,
+                    PlantName: item.PlantName,
+                    Score: item.Score
+                }
+            });
+            self.AuditHistory(array);
+            if (self.AuditHistory().length > 0) {
+
+                $('.dtUcfHistory').DataTable().clear();
+
+
+                //insert data 
+                $.each(array, function (i, item) {
+                    $('.dtUcfHistory').DataTable().row.add([
+                      item.AuditID,
+                      item.PlantName,
+                      item.AreaName,
+                      item.Auditor,
+                      item.DateCompleted,
+                      item.Score,
+                    ]).draw();
+                });
+                $('.dtUcfHistory tbody tr').addClass('audit-selectable');
+            }
+            else {
+
+                $('.dtUcfHistory').dataTable().fnClearTable();
+                //swal(
+                //{
+                //    title: "No Records Found!",
+                //    text: "It looks like there were no sales recorded on " + self.SelectedDay() + "",
+                //    showCancelButton: false,
+                //    closeOnConfirm: true,
+                //    animation: "slide-from-top"
+                //},
+                //function () { $("#salesDetailModal").modal('hide'); });
+            }
+            self.LastAudit(formatSqlDateTime(data[0].DateCompleted));
+        });
+        load.fail(function (data) {
+        });
+    };
+
+    self.loadSelectedAudit = function (AuditID) {
+        test += 1;
+        console.log(test);
+        var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { ID: AuditID, Type: 'Detail' } });
+        load.done(function (data) {
+            var category = '';
+            var categories = [];
+            var catSpan = [];
+            var catCount = 0;
+
+            var challenge = '';
+            var challenges = [];
+            var challSpan = [];
+            var challCount = 0;
+
+            var score = 0;
+
+            for (i = 0; i < data.length; i++) {
+                if (data[i].Category != category) {
+                    console.log(data[i].Category);
+                    categories.push(data[i].Category);
+                    category = data[i].Category;
+                    if (catCount > 0) {
+                        catSpan.push(catCount);
+                    }
+                    catCount = 0;
+
+                }
+                if (data[i].Challenge != challenge) {
+                    challenges.push(data[i].Challenge);
+                    challenge = data[i].Challenge;
+
+                    if (challCount > 0) {
+
+                        challSpan.push(challCount);
+                    }
+                    challCount = 0;
+                }
+
+
+                catCount += 1;
+                challCount += 1;
+                if (data[i].Selected == true) {
+                    score += data[i].Score;
+                }
+            }
+            catSpan.push(catCount);
+            challSpan.push(challCount);
+
+            $('#ucf-detai-body').html('');
+            var challs = 0;
+            var prevChalls = 0;
+            var n = 0;
+
+            var ii = 0;
+            var iii = 0;
+            var old = 0;
+
+            $('#ucf-detai-body').append("<div class='row'><div class='col-md-4'><h3>Date Completed: " + formatSqlDateTime(data[0].DateCompleted) + "</h3></div><div class='col-md-4'><h3>Plant: " + data[0].PlantName + ' - ' + data[0].AreaName + "</h3></div><div class='col-md-2'><h3>Auditor: " + data[0].Auditor + "</h3></div><div class='col-md-2'><h3>Score: " + score + "</h3></div></div>")
+
+            for (i = 0; i < categories.length; i++) {
+                $('#ucf-detai-body').append('<div class="row"><div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" id="category-' + i + '"><h1 class="">' + categories[i] + '</h1></div></div>')
+                challs += catSpan[i];
+                console.log('-------Start---------');
+                while (prevChalls != challs) {
+                    prevChalls += challSpan[ii];
+                    $('#category-' + i).append('<table class="table table-condensed table-striped table-bordered table-hover dtUcfDetail"><tbody id="challenge-' + ii + '"> <tr><td  class="" rowspan="' + (challSpan[ii] + 1) + '" style="width:50%"><h3>' + challenges[ii] + '</h3></td></tr></tbody></table>');
+                    n = prevChalls;
+                    for (old; old < prevChalls; old++) {
+                        console.log(old + ' / ' + prevChalls + ' - ' + ii);
+                        var fa = '';
+                        if (data[old].Selected == true) {
+                            fa = 'fa-check';
+                        }
+                        $('#challenge-' + ii).append('<tr><td style="width:40%">' + data[old].Criteria + '</td><td style="width:5%">' + data[old].Score + '</td><td style="width:5%"><i class="fa ' + fa + '"></i></td></tr>');
+                        iii++;
+                    }
+
+                    ii++
+                }
+                console.log('-------End---------');
+                $('#ucf-detai-body').append('');
+            }
+        });
+    };
+
     self.loadPreviousScores = function () {
+        test += 1;
+        console.log(test);
 
         var AreaID = $('#Area').val();
         var load = $.ajax({ type: "GET", url: UCFAuditDetailAPI, cache: false, data: { ID: AreaID, Type: 'PreviousScores' } });
@@ -108,7 +259,17 @@
             $('.prev-score').html('');
         });
     };
+
+    self.loadSelectedAudits = function (month) {
+        test += 1;
+        console.log(test);
+        var m = getMonthNum(month);
+        console.log(m);
+    };
+
     self.loadUsers = function () {
+        test += 1;
+        console.log(test);
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
         load.done(function (data) {
             var array = $.map(data, function (item) {
@@ -125,6 +286,8 @@
     }
 
     self.loadPlants = function () {
+        test += 1;
+        console.log(test);
         var load = $.ajax({ type: "GET", cache: false, url: PlantsAPI });
         load.success(function (data) {
             self.Plants(data);
@@ -133,6 +296,8 @@
     }
 
     self.loadAreas = function (ID) {
+        test += 1;
+        console.log(test);
         self.Areas([]);
 
         var load = $.ajax({ type: "GET", cache: false, url: UCFAreasAPI, data: { ID: ID } });
@@ -152,6 +317,8 @@
     }
 
     self.LoadCategories = function () {
+        test += 1;
+        console.log(test);
         var Area = $('#Area option:selected').text();
         var load = $.ajax({ type: "GET", cache: false, url: UCFCategoriesAPI, data: { Area: Area } });
         load.success(function (data) {
@@ -159,6 +326,8 @@
         });
     }
     self.LoadChallenges = function (ID) {
+        test += 1;
+        console.log(test);
         var load = $.ajax({ type: "GET", url: UCFChallengesAPI, cache: false, data: { ID: ID } })
         load.success(function (data2) {
             self.UCFChallenges(data2);
@@ -166,6 +335,8 @@
     }
 
     self.LoadCriteria = function (ID) {
+        test += 1;
+        console.log(test);
         var load = $.ajax({ type: "GET", url: UCFCriteriaAPI, cache: false, data: { ID: ID } })
         load.success(function (data2) {
             self.UCFCriteria(data2);
@@ -183,6 +354,8 @@
     }
 
     self.LoadActions = function () {
+        test += 1;
+        console.log(test);
 
         var ID = $('#areaSelect').val();
         console.log(ID);
@@ -199,7 +372,29 @@
         }
     }
 
+    self.LoadActionsHistory = function () {
+
+        var ID = $('#areaSelect').val();
+        console.log(ID);
+        if (ID != null && ID != '') {
+            var load = $.ajax({ type: "GET", url: UCFActionsAPI, cache: false, data: { ID: ID, All: true } });
+            load.done(function (data) {
+                for (i = 0; i < data.length; i++) {
+                    data[i].DateDue = data[i].DateDue.split('T')[0];
+                    if (data[i].DateComplete != null) {
+                        data[i].DateComplete = data[i].DateComplete.split('T')[0];
+                    }
+                }
+                self.ActionsHistory(data);
+
+                vm.checkOwnerID();
+            });
+        }
+    }
+
     self.loadPlantRollup = function () {
+        test += 1;
+        console.log(test);
 
         var ID = $('#plantSelect option:selected').attr('plantid');
         var Year = parseInt($('#yearSelect').val());
@@ -259,6 +454,8 @@
     }
 
     self.loadAreaTrend = function () {
+        test += 1;
+        console.log(test);
         var ID = $('#plantSelect option:selected').attr('plantid');
         var Year = parseInt($('#yearSelect').val());
         var Month = parseInt($('#monthSelect').val());
@@ -355,6 +552,8 @@
     }
 
     self.LoadAuditForm = function () {
+        test += 1;
+        console.log(test);
         self.UCFChallenges([]);
         self.UCFCriteria([]);
 

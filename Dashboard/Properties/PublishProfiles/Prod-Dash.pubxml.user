@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 10:17:46</publishTime>
     </File>
     <File Include="bin/Dashboard.dll">
-      <publishTime>05/20/2016 16:01:16</publishTime>
+      <publishTime>06/14/2016 15:39:33</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>12/14/2015 10:17:59</publishTime>
@@ -676,7 +676,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/14/2015 21:47:36</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>05/20/2016 10:44:21</publishTime>
+      <publishTime>06/09/2016 09:11:01</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>09/28/2015 14:52:38</publishTime>
@@ -805,7 +805,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 10:17:31</publishTime>
     </File>
     <File Include="Models/DashDB.edmx.diagram">
-      <publishTime>05/20/2016 08:44:44</publishTime>
+      <publishTime>06/14/2016 15:31:38</publishTime>
     </File>
     <File Include="Models/NKCConnect.edmx.diagram">
       <publishTime>02/23/2016 09:42:07</publishTime>
@@ -910,34 +910,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/29/2015 10:34:34</publishTime>
     </File>
     <File Include="Scripts/KO-Models/deliverablesform.js">
-      <publishTime>03/31/2016 14:37:33</publishTime>
+      <publishTime>05/31/2016 09:41:35</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-helpers.js">
-      <publishTime>05/23/2016 15:57:07</publishTime>
+      <publishTime>06/09/2016 13:46:29</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-bugs.js">
-      <publishTime>05/19/2016 12:08:59</publishTime>
+      <publishTime>06/09/2016 15:24:26</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-deliverables.js">
-      <publishTime>04/11/2016 09:51:13</publishTime>
+      <publishTime>06/09/2016 16:35:08</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-home.js">
-      <publishTime>05/20/2016 15:58:45</publishTime>
+      <publishTime>06/14/2016 15:33:13</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-machine-overview.js">
       <publishTime>04/08/2016 12:11:27</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-prevmaint.js">
-      <publishTime>05/20/2016 10:29:13</publishTime>
+      <publishTime>05/25/2016 15:27:16</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-projects.js">
       <publishTime>02/17/2016 10:54:00</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-slide.js">
-      <publishTime>05/13/2016 08:55:13</publishTime>
+      <publishTime>06/02/2016 16:36:45</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-ultra.js">
-      <publishTime>05/16/2016 11:16:05</publishTime>
+      <publishTime>06/14/2016 09:23:00</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-users.js">
       <publishTime>03/29/2016 09:26:36</publishTime>
@@ -2203,10 +2203,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2016 16:15:19</publishTime>
     </File>
     <File Include="Views/Bugs/Index.cshtml">
-      <publishTime>05/19/2016 14:44:22</publishTime>
+      <publishTime>06/09/2016 15:31:10</publishTime>
     </File>
     <File Include="Views/Deliverables/Index.cshtml">
-      <publishTime>04/27/2016 16:42:29</publishTime>
+      <publishTime>06/08/2016 16:11:05</publishTime>
     </File>
     <File Include="Views/Deliverables/ReportMetrics.cshtml">
       <publishTime>04/07/2016 11:12:05</publishTime>
@@ -2215,10 +2215,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/24/2016 11:22:17</publishTime>
     </File>
     <File Include="Views/Deliverables/_DeliverableDetail.cshtml">
-      <publishTime>04/05/2016 14:46:25</publishTime>
+      <publishTime>06/08/2016 10:45:46</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/20/2016 16:05:39</publishTime>
+      <publishTime>06/14/2016 14:44:23</publishTime>
     </File>
     <File Include="Views/Login/FirstTime.cshtml">
       <publishTime>05/23/2016 16:49:56</publishTime>
@@ -2227,13 +2227,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2016 15:19:35</publishTime>
     </File>
     <File Include="Views/Machine/Overview.cshtml">
-      <publishTime>04/25/2016 09:58:20</publishTime>
+      <publishTime>06/10/2016 09:57:20</publishTime>
     </File>
     <File Include="Views/PrevMaint.cshtml">
       <publishTime>05/20/2016 08:51:08</publishTime>
     </File>
     <File Include="Views/PrevMaint/Index.cshtml">
-      <publishTime>05/20/2016 13:38:57</publishTime>
+      <publishTime>06/07/2016 09:10:47</publishTime>
     </File>
     <File Include="Views/Projects/Index.cshtml">
       <publishTime>02/18/2016 09:44:55</publishTime>
@@ -2248,13 +2248,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2016 12:29:19</publishTime>
     </File>
     <File Include="Views/Shared/_Filters.cshtml">
-      <publishTime>04/29/2016 10:13:54</publishTime>
+      <publishTime>06/02/2016 08:18:27</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
       <publishTime>03/15/2016 11:57:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/20/2016 09:46:52</publishTime>
+      <publishTime>06/13/2016 16:21:22</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>12/09/2015 09:47:25</publishTime>
@@ -2269,19 +2269,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2014 08:33:38</publishTime>
     </File>
     <File Include="Views/Shared/_SlideLayout.cshtml">
-      <publishTime>05/06/2016 14:56:54</publishTime>
+      <publishTime>06/02/2016 09:38:09</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavbar.cshtml">
-      <publishTime>12/10/2015 14:14:16</publishTime>
+      <publishTime>06/03/2016 12:41:37</publishTime>
     </File>
     <File Include="Views/Slide/Index.cshtml">
-      <publishTime>05/16/2016 16:16:47</publishTime>
+      <publishTime>06/13/2016 09:34:29</publishTime>
     </File>
     <File Include="Views/Ultra/Admin.cshtml">
       <publishTime>05/16/2016 09:22:13</publishTime>
     </File>
     <File Include="Views/Ultra/Index.cshtml">
-      <publishTime>05/19/2016 08:47:05</publishTime>
+      <publishTime>06/14/2016 09:37:14</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/14/2015 10:17:31</publishTime>

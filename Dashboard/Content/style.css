@@ -2813,7 +2813,7 @@ label.error {
         margin: auto 0.5em auto -1.5em;
     }
 
-#toast-container > .toast-warning:before {
+/*#toast-container > .toast-warning:before {
     content: "\f0e7";
 }
 
@@ -2827,7 +2827,7 @@ label.error {
 
 #toast-container > .toast-success:before {
     content: "\f00C";
-}
+}*/
 
 #toast-container > div {
     -moz-box-shadow: 0 0 3px #999;
@@ -9887,15 +9887,27 @@ body.md-skin {
         border: 1px inset #a43024;
     }
 
-.spindle-utilization {
+.spindle-utilization-wrapper {
     height: 300px;
-    text-align: center;
-    vertical-align: middle;
     border-radius: 3px;
-    line-height: 300px;
-    font-size: 5em;
     color: #f3f3f4;
     margin-bottom: 20px;
+}
+
+.spindle-utiliation-act{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 115px;
+    font-size: 5em;
+    border-bottom: 5px solid white;
+    width: 90%;
+}
+
+.spindle-utilization-goal{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 115px;
+    font-size: 5em;
 }
 
 .su-below {
@@ -10027,11 +10039,7 @@ body.md-skin {
         background-color: rgba(155, 89, 182, 0.2);
     }
 
-.ucf-list, .status-toggle {
-    cursor: pointer;
-}
-
-.partial-inc {
+.ucf-list, .status-toggle, .audit-selectable, .partial-inc {
     cursor: pointer;
 }
 
@@ -10152,4 +10160,8 @@ body.md-skin {
     background-color: #bdc3c7;
     padding: 10px;
     border: 3px solid #e67e22;
+}
+
+.justify{
+    text-align: justify;
 }

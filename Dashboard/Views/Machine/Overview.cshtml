@@ -5,8 +5,8 @@
 <div class="row">
     <div class="col-md-3">
         <select id="plant-select" class="form-control">
-            <option value="BEST">Best</option>
-            <option value="PMM">PMM</option>
+            <option value="BEST">North KC</option>
+            <option value="PMM">Grove</option>
         </select>
     </div>
     @*<div class="col-md-2">
@@ -56,14 +56,18 @@
     <button id="bt-machine-select" class="btn btn-primary">Back</button>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-            <div class="ms" data-bind="css: {'ms-unavailable': CurrentState() == 'UNAVAILABLE' || CurrentState() == 'SETUP', 'ms-production': CurrentState() == 'IN CYCLE'}"><span id="machine-name"></span> - <small data-bind="text: MachineDetails()[0] != undefined ? MachineDetails()[0].Description : ''"></small></div>
+            <div class="ms" data-bind="css: {'ms-unavailable': CurrentState() != 'IN CYCLE', 'ms-production': CurrentState() == 'IN CYCLE'}"><span id="machine-name"></span> - <small data-bind="text: MachineDetails()[0] != undefined ? MachineDetails()[0].Description : ''"></small></div>
 
         </div>
 
     </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-2">
-            <div class="spindle-utilization" data-bind="text: SUPercent, css: {'su-below': SpindleUtilization() >= 0, 'su-approaching': SpindleUtilization() >= 30, 'su-target': SpindleUtilization() >= 36}"></div>
+            <div class="spindle-utilization-wrapper" data-bind="css: {'su-below': SpindleUtilization() >= 0, 'su-approaching': SpindleUtilization() >= 30, 'su-target': SpindleUtilization() >= 36}">
+                <div class="row"><div class="col-md-12 col-sm-12"><center><h2>Rolling 30 Days</h2></center></div></div>
+                <div class="row"><div class="col-md-12 col-sm-12"><center><span class="spindle-utiliation-act" data-bind="text: SUPercent"></span></center> </div></div>
+                <div class="row"><div class="col-md-12 col-sm-12 spindle-utilization-goal">36%</div></div>
+            </div>
         </div>
         <div class="col-md-6 col-lg-5" id="four-week-view-0" style="height: 300px;"></div>
     </div>
@@ -123,7 +127,7 @@
                 toggle = 1;
                 $('#head-title').html("Detail for " + machine);
             });
-            
+
         });
         function backToOverview() {
 
@@ -134,7 +138,7 @@
                 $('#head-title').html("Overview - <small>Select a machine...</small>");
             });
 
-            
+
         }
 
         $(document).on('click', '#bt-machine-select', function () {
@@ -230,19 +234,19 @@
                     lineWidth: 5
 
                 },
-                {
-                    name: 'Near',
-                    type: 'spline',
-                    data: [30, 30, 30, 30, 30, 30],
-                    color: 'rgba(192, 57, 43, 1)',
-                    marker: {
-                        enabled: false,
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    lineWidth: 5
-                },
+                //{
+                //    name: 'Near',
+                //    type: 'spline',
+                //    data: [30, 30, 30, 30, 30, 30],
+                //    color: 'rgba(192, 57, 43, 1)',
+                //    marker: {
+                //        enabled: false,
+                //    },
+                //    tooltip: {
+                //        enabled: false
+                //    },
+                //    lineWidth: 5
+                //},
                 {
                     name: 'Spindle Utilization',
                     data: [
@@ -270,9 +274,9 @@
 
         vm.TrailWeeks.subscribe(function (val) {
             trailWeeksChart = $('#four-week-view-0').highcharts();
-            trailWeeksChart.series[2].setData(val, true);
+            trailWeeksChart.series[1].setData(val, true);
             trailWeeksChart.setTitle({ text: machine });
-            $.each(trailWeeksChart.series[2].data, function (i, data) {
+            $.each(trailWeeksChart.series[1].data, function (i, data) {
                 try {
                     if (data.y >= 36) {
                         data.graphic.attr({

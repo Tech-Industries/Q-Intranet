@@ -8,59 +8,67 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-3">
-                        <select class="form-control  change-bind" id="plantSelect" data-bind="event: {change: $root.loadData()}">
-                            <option class="parent-option" plantid ="0" value="All">Consolidated</option>
-                            <option class="child-option" plantid ="1" value="BEST">North KC</option>
-                            <option class="child-option" plantid ="2" value="GRO">Grove</option>
-                            <option class="child-option" plantid ="3" value="OWA">Owasso</option>
+                        <div class="input-group">
+                            <span class="input-group-addon">Plant</span>
+                            <select class="form-control  change-bind" id="plantSelect" data-bind="event: {change: $root.loadData()}">
+                                <option class="parent-option" plantid="0" value="All">Consolidated</option>
+                                <option class="child-option" plantid="1" value="BEST">North KC</option>
+                                <option class="child-option" plantid="2" value="GRO">Grove</option>
+                                <option class="child-option" plantid="3" value="OWA">Owasso</option>
 
-                        </select>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control  change-bind" id="yearSelect" data-bind="event: {change: $root.loadData()}">
+                        <div class="input-group">
+                            <span class="input-group-addon">Year</span>
+                            <select class="form-control  change-bind" id="yearSelect" data-bind="event: {change: $root.loadData()}">
 
-                            @{
-                                int currentYear = DateTime.Now.Year;
-                                int incr = 0;
+                                @{
+                                    int currentYear = DateTime.Now.Year;
+                                    int incr = 0;
 
-                                while (incr <= 2)
-                                {
+                                    while (incr <= 2)
+                                    {
 
-                                    <option value="@(currentYear - incr)">@(currentYear - incr)</option>
-                                                    @(incr += 1)
+                                        <option value="@(currentYear - incr)">@(currentYear - incr)</option>
+                                        @(incr += 1)
+                                    }
+
                                 }
 
-                            }
 
+                            </select>
 
-                        </select>
-
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control change-bind" id="monthSelect" data-bind="event: {change: $root.loadData()}">
-                            <option value="0">Select a month...</option>
-                            <option value="01">January</option>
-                            <option value="02">February</option>
-                            <option value="03">March</option>
-                            <option value="04">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
+                        <div class="input-group">
+                            <span class="input-group-addon">Month</span>
+                            <select class="form-control change-bind" id="monthSelect" data-bind="event: {change: $root.loadData()}">
+                                <option value="0">Select a month...</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
 
-                        </select>
+                            </select>
+                        </div>
+                        @*<div class="col-md-3">
+                                <center>
+                                    <button class="btn btn-outline btn-success dim no-highlight" data-bind="event: {click: $root.loadData()}"><i class="fa fa-refresh "></i></button>
+                                </center>
+                            </div>*@
                     </div>
-                    @*<div class="col-md-3">
-                        <center>
-                            <button class="btn btn-outline btn-success dim no-highlight" data-bind="event: {click: $root.loadData()}"><i class="fa fa-refresh "></i></button>
-                        </center>
-                    </div>*@
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -176,7 +176,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIControllers\NotificationsController.cs" />
     <Compile Include="APIControllers\FlashController.cs" />
+    <Compile Include="APIControllers\PageController.cs" />
     <Compile Include="APIControllers\PrevMaintController.cs" />
     <Compile Include="APIControllers\SlideController.cs" />
     <Compile Include="APIControllers\CommentsController.cs" />
@@ -194,6 +196,7 @@
     <Compile Include="APIControllers\LoginController.cs" />
     <Compile Include="APIControllers\GroupsController.cs" />
     <Compile Include="APIControllers\PlantsController.cs" />
+    <Compile Include="APIControllers\LogController.cs" />
     <Compile Include="APIControllers\UCFActionsController.cs" />
     <Compile Include="APIControllers\UCFAuditDetailController.cs" />
     <Compile Include="APIControllers\UCFGoalsController.cs" />
@@ -258,6 +261,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -283,6 +287,9 @@
       <DependentUpon>PMMConnect.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CWODailyByPlant.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CWOStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DashDB.Context.cs">
@@ -343,6 +350,12 @@
     <Compile Include="Models\JP_TimeInStateByMachine.cs">
       <DependentUpon>PMMConnect.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Meetings.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NKCConnect.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -358,7 +371,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NKCConnect.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OTMonthlyByCompany.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Page.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PastDueDeliverable.cs">
@@ -437,6 +456,15 @@
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFAuditDetail.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UCFAuditDetailLevel.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UCFAuditHIstoryTopLevel.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UCFAveragesByMonth.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFCategory.cs">

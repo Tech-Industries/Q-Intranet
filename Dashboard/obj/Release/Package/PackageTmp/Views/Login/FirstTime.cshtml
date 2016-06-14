@@ -81,7 +81,7 @@
             $('#SubmitNewUser').click(function () {
                 FirstName = firstLetterCap($('#FirstName').val());
                 LastName = firstLetterCap($('#LastName').val());
-                UserName = $('#UserName').val();
+                UserName = $('#UserName').val().toLowerCase();
                 Email = $('#Email').val();
                 console.log(Email);
 

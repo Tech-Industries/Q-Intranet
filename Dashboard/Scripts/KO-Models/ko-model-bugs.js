@@ -123,7 +123,11 @@
         }
         else {
             c.AssigneeID = null;
+            
         }
+
+        var UID = $('#UID').val()
+        c.UID = UID;
         $('#SelectedDateClosed').html(c.DateClosed);
         var update = $.ajax({ type: "PUT", url: bugsAPI + "/" + ID, cache: false, data: c });
         update.done(function (data) {

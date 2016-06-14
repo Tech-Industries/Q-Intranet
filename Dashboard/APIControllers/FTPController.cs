@@ -24,34 +24,59 @@ namespace Dashboard.APIControllers
     {
         private DashboardEntities db = new DashboardEntities();
 
-        
 
-        public string Post(FileDataViewModel data)
+
+        //public string Post(FileDataViewModel data)
+        //{
+        //    //var remoteFile = "newTest/testing.txt";
+
+        //    ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "Anonymous", "");
+        //    //ftp.createDirectory("test");
+        //    //ftp.createDirectory(data.remoteFile.Substring(0, index));
+        //    List<string> folders = data.remoteFile.Split('/').ToList();
+        //    int removeIndex = folders.Count() - 1;
+        //    folders.RemoveAt(removeIndex);
+        //    string checkPath = "";
+        //    foreach (string f in folders)
+        //    {
+        //        checkPath += f + '/';
+        //        ftp.createDirectory(checkPath);
+        //    }
+
+        //    ftp.upload(data.remoteFile, @"" + data.localFile);
+
+        //    return checkPath;
+
+        //}
+
+        public List<string> Post(FileDataViewModel d)
         {
             //var remoteFile = "newTest/testing.txt";
-            
-            ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "Anonymous", "");
-            //ftp.createDirectory("test");
-            //ftp.createDirectory(data.remoteFile.Substring(0, index));
-            List<string> folders = data.remoteFile.Split('/').ToList();
-            int removeIndex = folders.Count() - 1;
-            folders.RemoveAt(removeIndex);
-            string checkPath = "";
-            foreach (string f in folders)
-            {
-                checkPath += f + '/';
-                ftp.createDirectory(checkPath);
-            }
+            var check = new List<string>();
 
-            ftp.upload(data.remoteFile, @""+data.localFile);
-            
-            return checkPath;
+            Console.WriteLine("test" + d);
+                ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "Anonymous", "");
+                //ftp.createDirectory("test");
+                //ftp.createDirectory(data.remoteFile.Substring(0, index));
+                List<string> folders = d.remoteFile.Split('/').ToList();
+                int removeIndex = folders.Count() - 1;
+                folders.RemoveAt(removeIndex);
+                string checkPath = "";
+                foreach (string f in folders)
+                {
+                    checkPath += f + '/';
+                    check.Add(f + '/');
+                    ftp.createDirectory(checkPath);
+                }
+
+                ftp.upload(d.remoteFile, @"" + d.localFile);
+            return check;
 
         }
 
-        
 
-        
+
+
 
     }
 

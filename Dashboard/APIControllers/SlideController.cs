@@ -22,5 +22,19 @@ namespace Dashboard.APIControllers
         {
             return db.IncentiveRollupByPlants.Where(x => x.PlantID == ID && x.Year == Year && x.Month == Month);
         }
+
+        public object Get(int PlantID, string Type)
+        {
+            if(Type == "Meeting")
+            {
+                return db.Meetings1.Where(x => x.PlantID == PlantID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
     }
 }

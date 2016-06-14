@@ -10,7 +10,43 @@
     <i class="fa fa-pause fa-2x" id="pause-play"></i>
 </div>
 
-
+@*<div class="row slide" id="slide-1">
+    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+        <center><h1 style="font-weight: bold; color: #000">Ultra C-Lean</h1></center>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <center><h1>Facility</h1></center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <center><h1>35</h1></center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <center><h1>Assembly</h1></center>
+        </div>
+        <div class="col-md-4">
+            <center><h1>Production</h1></center>
+        </div>
+        <div class="col-md-4">
+            <center><h1>Quality</h1></center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <center><h1>35</h1></center>
+        </div>
+        <div class="col-md-4">
+            <center><h1>36</h1></center>
+        </div>
+        <div class="col-md-4">
+            <center><h1>37</h1></center>
+        </div>
+    </div>
+</div>*@
 <div class="row slide" id="slide-1">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
         <center><h1 style="font-weight: bold; color: #000">Monthly Incentive Dashboard</h1></center>
@@ -21,13 +57,13 @@
                 <center><h1 style="font-size: 30px; font-weight: bold; color: #2c3e50;">Closed WO's</h1></center>
                 <center><h2 style="font-weight: bold;">Goal: 750k</h2></center>
                 <center><h2 style="font-weight: bold;">Actual: <span data-bind="text: Incentives().Cwo"></span></h2></center>
-                <center><div class="circle-md" data-bind="css: 'circle-'+Incentives().CwoStatus"></div></center> <br />
+                <center><div class="circle-lg" data-bind="css: 'circle-'+Incentives().CwoStatus"></div></center> <br />
             </div>
             <div class="col-md-6">
                 <center><h1 style="font-size: 30px; font-weight: bold; color: #2c3e50;">Scrap</h1></center>
                 <center><h2 style="font-weight: bold;">Goal: 1.5%</h2></center>
                 <center><h2 style="font-weight: bold;">Actual: <span data-bind="text: Incentives().ScrapAsPercent"></span></h2></center>
-                <center><div class="circle-md" data-bind="css: 'circle-'+Incentives().ScrapStatus"></div></center> <br />
+                <center><div class="circle-lg" data-bind="css: 'circle-'+Incentives().ScrapStatus"></div></center> <br />
             </div>
         </div>
         <div class="row">
@@ -35,13 +71,13 @@
                 <center><h1 style="font-size: 30px; font-weight: bold; color: #2c3e50;">Past Due</h1></center>
                 <center><h2 style="font-weight: bold;">Goal: 0</h2></center>
                 <center><h2 style="font-weight: bold;">Actual: <span data-bind="text: Incentives().PDSales"></span></h2></center>
-                <center><div class="circle-md" data-bind="css: 'circle-'+Incentives().PDStatus"></div></center> <br />
+                <center><div class="circle-lg" data-bind="css: 'circle-'+Incentives().PDStatus"></div></center> <br />
             </div>
             <div class="col-md-6">
                 <center><h1 style="font-size: 30px; font-weight: bold; color: #2c3e50;">Ultra Clean</h1></center>
                 <center><h2 style="font-weight: bold;">Goal: 36</h2></center>
                 <center><h2 style="font-weight: bold;">Actual: <span data-bind="text: Incentives().UCFScore"></span></h2></center>
-                <center><div class="circle-md" data-bind="css: 'circle-'+Incentives().UCFStatus"></div></center> <br />
+                <center><div class="circle-lg" data-bind="css: 'circle-'+Incentives().UCFStatus"></div></center> <br />
             </div>
         </div>
     </div>
@@ -58,6 +94,35 @@
         <div class="slide-chart-label">Current: <span data-bind="text: ScrapMTD"></span></div>
     </div>
 </div>
+
+<div class="row slide" id="slide-4">
+        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+            <center><h1 style="font-weight: bold; color: #000"><i class="fa fa-star"></i> Branding Reveal <i class="fa fa-star"></i></h1></center>
+        </div>
+        <div class="col-md-12" style="height: 100vh;">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #c0392b;"><span>Branding Reveal, Monday June 20th at 12:00pm</span></span></h1></center>
+            <center><h1 style="font-size: 50px; font-weight: bold;"><span style="color: #34495e;"><span>(Lunch Will Be Served)</span></span></h1></center>
+            <br />
+            @*<br />
+            <center><h1 style="font-size: 60px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>*@
+        </div>
+    </div>
+
+@*<div class="row slide" id="slide-4">
+        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+            <center><h1 style="font-weight: bold; color: #000">All-Employee Meeting!</h1></center>
+        </div>
+        <div class="col-md-12" style="height: 100vh;">
+            <center><h1 style="font-size: 60px; font-weight: bold;"><span style="color: #c0392b;"><span data-bind="text: MeetingInfo().shortDate"></span></span></h1></center>
+            <br />
+            <center><h1 style="font-size: 60px; font-weight: bold;"><span style="color: #c0392b;">What:</span> <span data-bind="text: MeetingInfo().What"></span></h1></center>
+            <br />
+            <center><h1 style="font-size: 60px; font-weight: bold;"><span style="color: #c0392b;">When:</span> <span data-bind="text: MeetingInfo().When"></span></h1></center>
+            <br />
+            <center><h1 style="font-size: 60px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>
+        </div>
+    </div>*@
 
 <div class="modal" id="setting-modal">
     <div class="modal-dialog modal-md">
@@ -101,7 +166,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Month:</span>
                                     <select class="form-control" id="monthSelect">
-                                        <option value="05">05</option>
+                                        <option value="06">06</option>
                                     </select>
                                 </div>
                             </div>
@@ -126,19 +191,41 @@
             var loadDataInterval = setInterval(function () {
                 vm.loadData();
             }, 300000);
+            var paused = false;
+
+            refInterval = setInterval(function () {
+                vm.CheckRefreshFlag();
+            }, 5000);
+
 
             $(document).on("idle.idleTimer", function (even, elem, obj) {
-
-                interval = setInterval(function () {
+                if (paused == false) {
+                    interval = setInterval(function () {
+                        nextSlide();
+                    }, 15000);
+                    $('#controls').toggle('slide', { direction: 'up' }, '500');
                     nextSlide();
-                }, 10000);
-                $('#controls').toggle('slide', { direction: 'up' }, '500');
-                nextSlide();
+                }
             });
 
             $(document).on("active.idleTimer", function (even, elem, obj) {
-                clearInterval(interval);
-                $('#controls').toggle('slide', { direction: 'up' }, '500');
+                if (paused == false) {
+                    clearInterval(interval);
+                    $('#controls').toggle('slide', { direction: 'up' }, '500');
+                }
+            });
+
+            $(document).on('click', "#pause-play", function () {
+                if (paused == true) {
+                    $('#pause-play').removeClass('fa-play');
+                    $('#pause-play').addClass('fa-pause');
+                    paused = false;
+                }
+                else {
+                    $('#pause-play').removeClass('fa-pause');
+                    $('#pause-play').addClass('fa-play');
+                    paused = true;
+                }
             });
             $('html, body').css('overflow', 'hidden');
 
@@ -211,7 +298,6 @@
                                     var year = $("#yearSelect").val();
                                     var day = this.x + 1;
                                     vm.loadSelectDaySales(year, month, day);
-                                    console.log(year, month, day);
                                 }
                             }
                         }
@@ -297,7 +383,6 @@
                                     var year = $("#yearSelect").val();
                                     var day = this.x + 1;
                                     vm.loadSelectDayScrap(year, month, day);
-                                    console.log(year, month, day);
 
 
 
@@ -349,7 +434,7 @@
 
 
         var current = 1;
-        var slides = 3;
+        var slides = 4;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

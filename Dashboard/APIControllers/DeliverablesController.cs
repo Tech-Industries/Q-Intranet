@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
+using System.Web;
 
 namespace Dashboard.APIControllers
 {
@@ -217,8 +218,11 @@ namespace Dashboard.APIControllers
             }
         }
 
-
-        return Ok(DeliverablesViewModel.MapFrom(del));
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var logDescription = "added a new Deliverable.";
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, "Deliverables", del.ID, "Added", logDescription);
+            return Ok(DeliverablesViewModel.MapFrom(del));
     }
 
 

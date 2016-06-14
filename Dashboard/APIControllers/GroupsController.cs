@@ -65,7 +65,10 @@ namespace Dashboard.APIControllers
 
             db.Groups.Add(Group);
             await db.SaveChangesAsync();
-
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var logDescription = "added a new Group.";
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, "UserGroups", Group.ID, "Added", logDescription);
             return Ok(GroupsViewModel.MapFrom(Group));
         }
         

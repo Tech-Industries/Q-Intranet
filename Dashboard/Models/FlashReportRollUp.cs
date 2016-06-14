@@ -31,5 +31,6 @@ namespace Dashboard.Models
         public Nullable<decimal> Sales { get; set; }
         public Nullable<decimal> Margins { get; set; }
         public Nullable<decimal> MarginPct { get; set; }
+        public Nullable<decimal> OnTimePercent { get; set; }
     }
 }

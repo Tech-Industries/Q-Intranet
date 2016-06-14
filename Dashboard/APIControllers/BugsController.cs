@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
+using Dashboard.Helpers;
+using System.Web;
 
 namespace Dashboard.APIControllers
 {
@@ -78,9 +80,23 @@ namespace Dashboard.APIControllers
             }
 
             Bug upBug = (Bug)db.Bugs.Where(x => x.ID == ID).First();
-            upBug.Status = bug.Status;
-            upBug.DateClosed = bug.DateClosed;
-            upBug.AssigneeID = bug.AssigneeID;
+            var logDescription = "";
+            if (upBug.Status != bug.Status)
+            {
+                logDescription = "updated Status from " + upBug.Status + " to " + bug.Status + ".";
+                upBug.Status = bug.Status;
+            }
+            if (upBug.DateClosed != bug.DateClosed)
+            {
+                upBug.DateClosed = bug.DateClosed;
+            }
+            if (upBug.AssigneeID != bug.AssigneeID)
+            {
+                logDescription = "updated AssigneeID from " + upBug.AssigneeID + " to " + bug.AssigneeID + ".";
+                upBug.AssigneeID = bug.AssigneeID;
+            }
+
+
 
 
             db.Bugs.Attach(upBug);
@@ -91,6 +107,10 @@ namespace Dashboard.APIControllers
             // other changed properties
             db.SaveChanges();
 
+
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, "Bug", bug.ID, "Update", logDescription);
             //db.Entry(deldet).State = EntityState.Modified;
             //System.Diagnostics.Debug.WriteLine("Modified");
             try
@@ -125,8 +145,9 @@ namespace Dashboard.APIControllers
 
             db.Bugs.Add(bug);
             await db.SaveChangesAsync();
-
-
+            
+            var h = new Helpers.Helpers();
+            h.NewLogEntry((int)bug.UserID, "Bug", 0, "Create", "added a new " + bug.Type + ".");
             return Ok(await BugsTopLevelViewModel.MapFromAsync(db.BugsTopLevels.Where(x => x.ID == bug.ID).ToList()));
         }
 

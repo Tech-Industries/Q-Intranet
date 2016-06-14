@@ -8,6 +8,7 @@
 //                                                                                                    |___/ 
 var monthShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var monthLong = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var daysInWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 //            _____ _____     _    _      _                     
 //      /\   |  __ \_   _|   | |  | |    | |                    
@@ -36,57 +37,6 @@ function setCookies() {
 $(".change-bind").change(function () {
     setCookies();
 });
-
-
-//   _____ _                           _     __  __             _             _       _                 
-//  / ____| |                         | |   |  \/  |           (_)           | |     | |                
-// | |    | |__  _ __ ___  _ __   __ _| |   | \  / | __ _ _ __  _ _ __  _   _| | __ _| |_ ___  _ __ ___ 
-// | |    | '_ \| '__/ _ \| '_ \ / _` | |   | |\/| |/ _` | '_ \| | '_ \| | | | |/ _` | __/ _ \| '__/ __|
-// | |____| | | | | | (_) | | | | (_| | |   | |  | | (_| | | | | | |_) | |_| | | (_| | || (_) | |  \__ \
-//  \_____|_| |_|_|  \___/|_| |_|\__,_|_|   |_|  |_|\__,_|_| |_|_| .__/ \__,_|_|\__,_|\__\___/|_|  |___/
-//                                                              | |                                    
-//                                                              |_|            
-
-function incrDay(year, month, day, norp) {
-    year = parseInt(year);
-    month = parseInt(month);
-    day = parseInt(day);
-    if (norp == 'next') {
-        var dim = getDaysInMonth(month, year);
-        
-        day += 1;
-        if (day > dim) {
-            day -= dim;
-            month += 1;
-            if (month > 12) {
-                month -= 12;
-                year += 1;
-            }
-
-        }
-        day = checkZero(day);
-        month = checkZero(month);
-        return year + ' ' + month + ' ' + day;
-    }
-    else if (norp == 'prev') {
-
-        day -= 1;
-        if (day < 1) {
-            month -= 1;
-            if (month < 1) {
-                month += 12;
-                year -= 1;
-            }
-
-            var dim = getDaysInMonth(month, year);
-            day = dim;
-
-        }
-        day = checkZero(day);
-        month = checkZero(month);
-        return year + ' ' + month + ' ' + day;
-    }
-}
 
 //  _   _                 _                   ______                         _   _   _             
 // | \ | |               | |                 |  ____|                       | | | | (_)            
@@ -132,7 +82,7 @@ function formatMoneyNoDec(amount) {
 }
 
 function formatPercent(amount) {
-    
+
     if (amount == null) {
         return '0.00%';
     }
@@ -150,6 +100,7 @@ function formatPercent(amount) {
 // |_____/ \__,_|\__\___|   |_|  \___/|_|  |_| |_| |_|\__,_|\__|\__|_|_| |_|\__, |
 //                                                                           __/ |
 //                                                                          |___/ 
+
 function formatShortDate(date) {
     var y = date.substring(0, 4);
     var m = date.substring(4, 6);
@@ -242,12 +193,85 @@ function MonthString(month, length) {
     }
 }
 
+function getLongDate(date) {
+    time = date.split('T')[1];
+    date = date.split('T')[0];
+    dateParts = date.split('-');
+    day = dateParts[2];
+    month = dateParts[1];
+    year = dateParts[0];
+    newTime = AMPMConversion(time);
+    var d = new Date(date);
+
+    shortMonth = getMonthName(month);
+
+    dayOfWeek = d.getDay();
+    dayName = getDayName(dayOfWeek);
+    return newTime + ' ' + dayName +' ' + shortMonth + ' ' + day + ', ' + year;
+    
+
+}
+
+//   _____ _                           _     __  __             _             _       _                 
+//  / ____| |                         | |   |  \/  |           (_)           | |     | |                
+// | |    | |__  _ __ ___  _ __   __ _| |   | \  / | __ _ _ __  _ _ __  _   _| | __ _| |_ ___  _ __ ___ 
+// | |    | '_ \| '__/ _ \| '_ \ / _` | |   | |\/| |/ _` | '_ \| | '_ \| | | | |/ _` | __/ _ \| '__/ __|
+// | |____| | | | | | (_) | | | | (_| | |   | |  | | (_| | | | | | |_) | |_| | | (_| | || (_) | |  \__ \
+//  \_____|_| |_|_|  \___/|_| |_|\__,_|_|   |_|  |_|\__,_|_| |_|_| .__/ \__,_|_|\__,_|\__\___/|_|  |___/
+//                                                              | |                                    
+//                                                              |_|            
+
+function incrDay(year, month, day, norp) {
+    year = parseInt(year);
+    month = parseInt(month);
+    day = parseInt(day);
+    if (norp == 'next') {
+        var dim = getDaysInMonth(month, year);
+
+        day += 1;
+        if (day > dim) {
+            day -= dim;
+            month += 1;
+            if (month > 12) {
+                month -= 12;
+                year += 1;
+            }
+
+        }
+        day = checkZero(day);
+        month = checkZero(month);
+        return year + ' ' + month + ' ' + day;
+    }
+    else if (norp == 'prev') {
+
+        day -= 1;
+        if (day < 1) {
+            month -= 1;
+            if (month < 1) {
+                month += 12;
+                year -= 1;
+            }
+
+            var dim = getDaysInMonth(month, year);
+            day = dim;
+
+        }
+        day = checkZero(day);
+        month = checkZero(month);
+        return year + ' ' + month + ' ' + day;
+    }
+}
+
 //  _____        _           _____      _        _                 _ 
 // |  __ \      | |         |  __ \    | |      (_)               | |
 // | |  | | __ _| |_ ___    | |__) |___| |_ _ __ _  _____   ____ _| |
 // | |  | |/ _` | __/ _ \   |  _  // _ \ __| '__| |/ _ \ \ / / _` | |
 // | |__| | (_| | ||  __/   | | \ \  __/ |_| |  | |  __/\ V / (_| | |
 // |_____/ \__,_|\__\___|   |_|  \_\___|\__|_|  |_|\___| \_/ \__,_|_|
+
+function getDayName(day) {
+    return daysInWeek[day];
+}
 
 function getWeekNumber(datedue) {
     // Copy date so don't modify original
@@ -268,17 +292,17 @@ function getWeekNumber(datedue) {
 function getMonday(datedue) {
     dateParts = datedue.split('-');
     var curr = new Date(datedue); // get current date
-    var first = curr.getDate() - (curr.getDay()-1); // First day is the day of the month - the day of the week
+    var first = curr.getDate() - (curr.getDay() - 1); // First day is the day of the month - the day of the week
     var last = first + 6; // last day is the first day + 6
 
     var firstday = new Date(curr.setDate(first));
     var lastday = new Date(curr.setDate(last)).toUTCString();
     year = firstday.getFullYear();
-    month = firstday.getMonth()+1;
+    month = firstday.getMonth() + 1;
     if (month < 10) { month = "0" + month.toString() }
     day = firstday.getDate();
     if (day < 10) { day = "0" + day.toString() }
-    return year.toString()+"-"+month.toString()+"-"+day.toString();
+    return year.toString() + "-" + month.toString() + "-" + day.toString();
 }
 
 function findPeriodVal(Frequency, DateDue) {
@@ -290,7 +314,7 @@ function findPeriodVal(Frequency, DateDue) {
     }
     else if (Frequency == 'Monthly') {
         value = DateDue.split('-')[1].toString();
-       
+
 
     }
     else if (Frequency == 'Quarterly') {
@@ -338,6 +362,40 @@ function getMonthNamesInRange(Month, Range) {
     return toReturn.reverse();
 }
 
+function getMonthNum(Month) {
+    var int;
+    Month = firstLetterCap(Month);
+    int = monthLong.indexOf(Month) + 1;
+    if (int != 0) {
+        return int;
+    }
+    else {
+        return monthShort.indexOf(Month) + 1;
+    }
+}
+
+function getMonthName(Month, Length) {
+    if (Length == 'short') {
+        return monthShort[Month - 1];
+    }
+    else {
+        return monthLong[Month - 1];
+    }
+}
+
+function AMPMConversion(time) {
+    timeParts = time.split(':');
+    hour = parseInt(timeParts[0]);
+    minute = timeParts[1];
+    ap = 'A.M.'
+    if (hour > 11) {
+        ap = 'P.M.';
+        if (hour > 12) {
+            hour -= 12;
+        }
+    }
+    return hour.toString() + ':' + minute+' '+ap;
+}
 //   _____                                     _       
 //  / ____|                                   | |      
 // | |     ___  _ __ ___  _ __ ___   ___ _ __ | |_ ___ 
@@ -358,16 +416,19 @@ function loadComments(TypeID, Type, API, self) {
 
 function addComment(TypeID, UserID, Comment, Type, API, self) {
     var TimeSubmitted = DateNowFormatted();
-    var DDComment = "TypeID: " + TypeID + ", UserID: " + UserID + ", TimeSubmitted: " + TimeSubmitted + ", CommentText: " + Comment + ", Type: "+ Type;
-    var sendData = "TypeID=" + TypeID + "&UserID=" + UserID + "&TimeSubmitted=" + TimeSubmitted + "&CommentText=" + Comment + "&Type=" + Type;    
-    var addComment = $.ajax({type: 'POST', url: API, data: sendData });
+    var DDComment = "TypeID: " + TypeID + ", UserID: " + UserID + ", TimeSubmitted: " + TimeSubmitted + ", CommentText: " + Comment + ", Type: " + Type;
+    var sendData = "TypeID=" + TypeID + "&UserID=" + UserID + "&TimeSubmitted=" + TimeSubmitted + "&CommentText=" + Comment + "&Type=" + Type;
+    console.log(sendData);
+    var addComment = $.ajax({ type: 'POST', url: API, data: sendData });
     addComment.done(function (item) {
         item.FirstName = $("#user-full-name").html().split(" ")[0];
         item.LastName = $("#user-full-name").html().split(" ")[1];
         item.TimeSubmitted = formatSqlDateTime(item.TimeSubmitted);
         self.Comments.push(item);
+        addNotification(TypeID, Type, UserID);
+
     });
-    
+
 
 }
 function updateComment(ID, TimeSubmitted, Comment, AllComments, API) {
@@ -382,13 +443,55 @@ function updateComment(ID, TimeSubmitted, Comment, AllComments, API) {
 function removeComment(ID, API, self) {
     var del = $.ajax({ type: 'DELETE', url: API + '/' + ID, contentType: 'application/json' });
     del.done(function (data) {
-        
+
     });
     var remove = $.grep(self.Comments(), function (e) { return e.ID == ID })[0];
     self.Comments.remove(remove);
 }
 
 
+//    _   _       _   _  __ _           _   _                 
+//   | \ | |     | | (_)/ _(_)         | | (_)                
+//   |  \| | ___ | |_ _| |_ _  ___ __ _| |_ _  ___  _ __  ___ 
+//   | . ` |/ _ \| __| |  _| |/ __/ _` | __| |/ _ \| '_ \/ __|
+//   | |\  | (_) | |_| | | | | (_| (_| | |_| | (_) | | | \__ \
+//   |_| \_|\___/ \__|_|_| |_|\___\__,_|\__|_|\___/|_| |_|___/
+
+function addNotification(TypeID, Type, UserID) {
+    var notificationsApi = $("#NotificationsLink").attr('href');
+    var message = '';
+    if (Type == 'Deliverables') {
+        message = "has commented on one of your " + Type
+    }
+    else if (Type == 'Bug') {
+        message = "has submitted a Bug";
+    }
+    var sendDataNot = "UserID=1&CreatorID=" + UserID + "&Message=" + message + "&Reference=" + Type + "&ReferenceID=" + TypeID + "&Viewed=False&DateCreated=&DateViewed=";
+    console.log(sendDataNot);
+    var addNotification = $.ajax({ type: 'POST', url: notificationsApi, data: sendDataNot });
+    addNotification.done(function (data) {
+        console.log(data)
+    });
+};
+
+//    _                     
+//   | |                    
+//   | |     ___   __ _ ___ 
+//   | |    / _ \ / _` / __|
+//   | |___| (_) | (_| \__ \
+//   |______\___/ \__, |___/
+//                 __/ |    
+//                |___/  
+
+function addLogEntry(UserID, Reference, ReferenceID, Action, Description) {
+    var logAPI = $("#LogsLink").attr('href');
+    var sendDataNot = "UserID=" + UserID + "&Reference=" + Reference + "&ReferenceID=" + ReferenceID + "&Action=" + Action + "&Description="+ Description +"&DateCreated=";
+    console.log(sendDataNot);
+    var submit = $.ajax({ type: 'POST', url: logAPI, data: sendDataNot });
+    submit.done(function (data) {
+        console.log(data)
+    });
+};
 
 //  _______        _       ______                         _   _   _             
 // |__   __|      | |     |  ____|                       | | | | (_)            

@@ -1,4 +1,5 @@
-﻿$(document).on('change', '#frm-doc-up', function () {
+﻿
+$(document).on('change', '#frm-doc-up', function () {
     vm.addDelDetDocument();
     vm.loadDelDetDocuments();
 });

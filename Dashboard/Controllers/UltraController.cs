@@ -19,7 +19,8 @@ namespace Dashboard.Controllers
                 bool eval = anon.CheckForGroup(groupID: 10);
                 if (eval)
                 {
-                    ViewBag.RelPer = anon.CheckForGroup(groupID: 9) ? 9 : 0;
+                    ViewBag.RelPer = anon.CheckForGroup(groupID: 10) ? "Read" : "null";
+                    ViewBag.RelPer = anon.CheckForGroup(groupID: 9) ? "Admin" : ViewBag.RelPer;
                     ViewBag.UID = Response.Cookies["authToken"].Value;
                     return View();
                 }

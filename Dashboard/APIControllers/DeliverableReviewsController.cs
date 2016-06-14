@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
+using System.Web;
 
 namespace Dashboard.APIControllers
 {
@@ -31,6 +32,20 @@ namespace Dashboard.APIControllers
 
             db.DeliverableReviews.Add(delr);
             await db.SaveChangesAsync();
+
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var logDescription = "";
+            if (delr.UserID != UID)
+            {
+                var behalf = db.Users.Where(x => x.ID == delr.UserID).First();
+                logDescription = "reviewed a deliverable on behalf of " + behalf.FirstName + " " + behalf.LastName + ".";
+            }
+            else
+            {
+                logDescription = "reviewed a deliverable.";
+            }
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, "DeliverableDetail", (int)delr.DelDetID, "Reviewed", logDescription);
 
             return Ok(DeliverableReviewsViewModel.MapFrom(delr));
         }

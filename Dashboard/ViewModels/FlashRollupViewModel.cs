@@ -27,6 +27,7 @@ namespace Dashboard.ViewModels
         public decimal? Sales { get; set; }
         public decimal? Margins { get; set; }
         public decimal? MarginPct { get; set; }
+        public decimal? OnTimePercent { get; set; }
 
 
 
@@ -60,7 +61,8 @@ namespace Dashboard.ViewModels
                 PDSales = f.PDSales,
                 Sales = f.Sales,
                 Margins = f.Margins,
-                MarginPct = f.MarginPct
+                MarginPct = f.MarginPct,
+                OnTimePercent = f.OnTimePercent
 
             };
         }

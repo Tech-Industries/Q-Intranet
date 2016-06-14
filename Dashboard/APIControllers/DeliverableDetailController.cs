@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
+using System.Web;
 
 namespace Dashboard.APIControllers
 {
@@ -57,7 +58,21 @@ namespace Dashboard.APIControllers
             DeliverableDetail upDel = (DeliverableDetail)db.DeliverableDetails.Where(x => x.ID == ID).First();
             
             upDel.DateCompleted = DateTime.Now;
+            var logDescription = "";
+            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+            var UserID = db.Deliverables.Where(x => x.ID == upDel.DelID).First().UserID;
+            if (UserID != UID)
+            {
 
+                var behalf = db.Users.Where(x => x.ID == UserID).First();
+                logDescription = "completed a deliverable on behalf of " + behalf.FirstName + " " + behalf.LastName + ".";
+            }
+            else
+            {
+                logDescription = "completed a deliverable.";
+            }
+            var h = new Helpers.Helpers();
+            h.NewLogEntry(UID, "DeliverableDetail", deldet.ID, "Completed", logDescription);
 
             db.DeliverableDetails.Attach(upDel);
             var entry = db.Entry(upDel);

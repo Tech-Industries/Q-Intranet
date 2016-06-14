@@ -25,6 +25,7 @@ namespace Dashboard
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/datepicker.css",
                 "~/Content/font-awesome/css/font-awesome.min.css",
                 "~/Content/animate.css",
                 "~/Content/style.css",
@@ -34,7 +35,7 @@ namespace Dashboard
                 "~/Content/plugins/dataTables/dataTables.responsive.css",
                 "~/Content/plugins/dataTables/dataTables.tableTools.min.css",
                 "~/Content/plugins/dropzone/dropzone.css",
-                "~/Content/datepicker.css"
+                "~/Content/plugins/toastr/toastr.min.css"
                 ));
 
 
@@ -66,7 +67,8 @@ namespace Dashboard
                 "~/Scripts/knockout-3.3.0.js",
                 "~/Scripts/knockout.mapping-latest.js",
                 "~/Scripts/KO-Models/ko-helpers.js",
-                "~/Scripts/plugins/idle-timer/idle-timer.min.js"
+                "~/Scripts/plugins/idle-timer/idle-timer.min.js",
+                "~/Scripts/plugins/toastr/toastr.min.js"
 
 
                 ));

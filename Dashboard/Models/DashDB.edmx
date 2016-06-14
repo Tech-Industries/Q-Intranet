@@ -59,6 +59,36 @@
           <Property Name="Day" Type="varchar" MaxLength="2" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CWOStage">
+          <Key>
+            <PropertyRef Name="CompanyCode" />
+            <PropertyRef Name="PlantCode" />
+            <PropertyRef Name="DATE_CLOSED" />
+            <PropertyRef Name="PERIOD" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="CompanyCode" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="PlantCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="CODE_SORT" Type="char" MaxLength="10" />
+          <Property Name="PROGRAM" Type="char" MaxLength="20" />
+          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+          <Property Name="JOB" Type="char" MaxLength="6" />
+          <Property Name="SUFFIX" Type="char" MaxLength="3" />
+          <Property Name="PART" Type="nvarchar" MaxLength="30" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_SALES" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="AMT_PRICE" Type="numeric" Precision="13" Scale="5" />
+          <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_COST" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_CLOSED" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="PERIOD" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="2" />
+          <Property Name="Day" Type="varchar" MaxLength="2" />
+        </EntityType>
         <EntityType Name="DeliverableComments">
           <Key>
             <PropertyRef Name="ID" />
@@ -141,6 +171,42 @@
           <Property Name="Access" Type="nvarchar" MaxLength="20" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="40" />
+          <Property Name="ReferenceID" Type="int" />
+          <Property Name="Action" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Meetings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="Meeting" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Location" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CreatorID" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="200" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferenceID" Type="int" />
+          <Property Name="Viewed" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateViewed" Type="datetime" />
+        </EntityType>
         <EntityType Name="OTMonthlyByCompany">
           <Key>
             <PropertyRef Name="ID" />
@@ -150,6 +216,14 @@
           <Property Name="Year" Type="varchar" MaxLength="4" />
           <Property Name="Month" Type="varchar" MaxLength="2" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Refresh" Type="bit" />
         </EntityType>
         <EntityType Name="Plants">
           <Key>
@@ -512,6 +586,7 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a p
           <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
           <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
           <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -609,6 +684,59 @@ warning 6002: The table/view 'Dashboard.dbo.UCFAreaTrendByMonthHalf' does not ha
           <Property Name="Half" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAuditDetailLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UCFAuditDetailLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="AuditID" Type="int" />
+          <Property Name="Auditor" Type="nvarchar" MaxLength="61" />
+          <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCompleted" Type="datetime" />
+          <Property Name="Score" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Weight" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Selected" Type="bit" />
+          <Property Name="CriteriaID" Type="int" />
+          <Property Name="Criteria" Type="nvarchar" MaxLength="300" />
+          <Property Name="ChallengeID" Type="int" />
+          <Property Name="Challenge" Type="nvarchar" MaxLength="500" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Category" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAuditHIstoryTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UCFAuditHIstoryTopLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="AuditID" Type="int" />
+          <Property Name="Auditor" Type="nvarchar" MaxLength="61" />
+          <Property Name="DateCompleted" Type="datetime" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaID" Type="int" />
+          <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="Score" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAveragesByMonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UCFAveragesByMonth">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaID" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Average" Type="decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.UCFPlantRollupByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UCFPlantRollupByMonthHalf">
           <Key>
@@ -662,7 +790,11 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="Deliverables" EntityType="Self.Deliverables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meetings" EntityType="Self.Meetings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OTMonthlyByCompany" EntityType="Self.OTMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plants" EntityType="Self.Plants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrevMaint" EntityType="Self.PrevMaint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectAssignees" EntityType="Self.ProjectAssignees" Schema="dbo" store:Type="Tables" />
@@ -685,6 +817,29 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CWOStage].[CompanyCode] AS [CompanyCode], 
+    [CWOStage].[PlantCode] AS [PlantCode], 
+    [CWOStage].[CODE_SORT] AS [CODE_SORT], 
+    [CWOStage].[PROGRAM] AS [PROGRAM], 
+    [CWOStage].[PRODUCT_LINE_NAME] AS [PRODUCT_LINE_NAME], 
+    [CWOStage].[JOB] AS [JOB], 
+    [CWOStage].[SUFFIX] AS [SUFFIX], 
+    [CWOStage].[PART] AS [PART], 
+    [CWOStage].[DESCRIPTION] AS [DESCRIPTION], 
+    [CWOStage].[QTY_COMPLETED] AS [QTY_COMPLETED], 
+    [CWOStage].[AMT_SALES] AS [AMT_SALES], 
+    [CWOStage].[AMT_PRICE] AS [AMT_PRICE], 
+    [CWOStage].[AMT_PRICE_PER_UNIT] AS [AMT_PRICE_PER_UNIT], 
+    [CWOStage].[AMT_COST] AS [AMT_COST], 
+    [CWOStage].[DATE_CLOSED] AS [DATE_CLOSED], 
+    [CWOStage].[PERIOD] AS [PERIOD], 
+    [CWOStage].[Year] AS [Year], 
+    [CWOStage].[Month] AS [Month], 
+    [CWOStage].[Day] AS [Day]
+    FROM [dbo].[CWOStage] AS [CWOStage]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Prices" EntityType="Self.Prices" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Prices].[PartNum] AS [PartNum], 
@@ -754,7 +909,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [FlashReportRollUp].[PDSales] AS [PDSales], 
     [FlashReportRollUp].[Sales] AS [Sales], 
     [FlashReportRollUp].[Margins] AS [Margins], 
-    [FlashReportRollUp].[MarginPct] AS [MarginPct]
+    [FlashReportRollUp].[MarginPct] AS [MarginPct], 
+    [FlashReportRollUp].[OnTimePercent] AS [OnTimePercent]
     FROM [dbo].[FlashReportRollUp] AS [FlashReportRollUp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IncentiveRollupByPlant" EntityType="Self.IncentiveRollupByPlant" store:Type="Views" store:Schema="dbo">
@@ -831,6 +987,50 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [UCFAreaTrendByMonthHalf].[Month] AS [Month], 
     [UCFAreaTrendByMonthHalf].[Half] AS [Half]
     FROM [dbo].[UCFAreaTrendByMonthHalf] AS [UCFAreaTrendByMonthHalf]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UCFAuditDetailLevel" EntityType="Self.UCFAuditDetailLevel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UCFAuditDetailLevel].[ID] AS [ID], 
+    [UCFAuditDetailLevel].[AuditID] AS [AuditID], 
+    [UCFAuditDetailLevel].[Auditor] AS [Auditor], 
+    [UCFAuditDetailLevel].[PlantName] AS [PlantName], 
+    [UCFAuditDetailLevel].[AreaName] AS [AreaName], 
+    [UCFAuditDetailLevel].[DateCompleted] AS [DateCompleted], 
+    [UCFAuditDetailLevel].[Score] AS [Score], 
+    [UCFAuditDetailLevel].[Weight] AS [Weight], 
+    [UCFAuditDetailLevel].[Selected] AS [Selected], 
+    [UCFAuditDetailLevel].[CriteriaID] AS [CriteriaID], 
+    [UCFAuditDetailLevel].[Criteria] AS [Criteria], 
+    [UCFAuditDetailLevel].[ChallengeID] AS [ChallengeID], 
+    [UCFAuditDetailLevel].[Challenge] AS [Challenge], 
+    [UCFAuditDetailLevel].[CategoryID] AS [CategoryID], 
+    [UCFAuditDetailLevel].[Category] AS [Category]
+    FROM [dbo].[UCFAuditDetailLevel] AS [UCFAuditDetailLevel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UCFAuditHIstoryTopLevel" EntityType="Self.UCFAuditHIstoryTopLevel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UCFAuditHIstoryTopLevel].[ID] AS [ID], 
+    [UCFAuditHIstoryTopLevel].[AuditID] AS [AuditID], 
+    [UCFAuditHIstoryTopLevel].[Auditor] AS [Auditor], 
+    [UCFAuditHIstoryTopLevel].[DateCompleted] AS [DateCompleted], 
+    [UCFAuditHIstoryTopLevel].[AreaName] AS [AreaName], 
+    [UCFAuditHIstoryTopLevel].[AreaID] AS [AreaID], 
+    [UCFAuditHIstoryTopLevel].[PlantName] AS [PlantName], 
+    [UCFAuditHIstoryTopLevel].[PlantID] AS [PlantID], 
+    [UCFAuditHIstoryTopLevel].[Score] AS [Score]
+    FROM [dbo].[UCFAuditHIstoryTopLevel] AS [UCFAuditHIstoryTopLevel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UCFAveragesByMonth" EntityType="Self.UCFAveragesByMonth" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UCFAveragesByMonth].[ID] AS [ID], 
+    [UCFAveragesByMonth].[PlantID] AS [PlantID], 
+    [UCFAveragesByMonth].[PlantName] AS [PlantName], 
+    [UCFAveragesByMonth].[AreaName] AS [AreaName], 
+    [UCFAveragesByMonth].[AreaID] AS [AreaID], 
+    [UCFAveragesByMonth].[Year] AS [Year], 
+    [UCFAveragesByMonth].[Month] AS [Month], 
+    [UCFAveragesByMonth].[Average] AS [Average]
+    FROM [dbo].[UCFAveragesByMonth] AS [UCFAveragesByMonth]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="UCFPlantRollupByMonthHalf" EntityType="Self.UCFPlantRollupByMonthHalf" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -934,11 +1134,19 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="UCFPreviousScoresByChallenges" EntityType="DashboardModel.UCFPreviousScoresByChallenge" />
           <EntitySet Name="Prices" EntityType="DashboardModel.Price" />
           <EntitySet Name="IncentiveRollupByPlants" EntityType="DashboardModel.IncentiveRollupByPlant" />
-          <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
           <EntitySet Name="Bugs" EntityType="DashboardModel.Bug" />
           <EntitySet Name="ProjectsTopLevels" EntityType="DashboardModel.ProjectsTopLevel" />
           <EntitySet Name="BugsTopLevels" EntityType="DashboardModel.BugsTopLevel" />
           <EntitySet Name="PrevMaints" EntityType="DashboardModel.PrevMaint" />
+          <EntitySet Name="Meetings1" EntityType="DashboardModel.Meetings" />
+          <EntitySet Name="UCFAuditHIstoryTopLevels" EntityType="DashboardModel.UCFAuditHIstoryTopLevel" />
+          <EntitySet Name="Pages" EntityType="DashboardModel.Page" />
+          <EntitySet Name="UCFAveragesByMonths" EntityType="DashboardModel.UCFAveragesByMonth" />
+          <EntitySet Name="Notifications" EntityType="DashboardModel.Notification" />
+          <EntitySet Name="CWOStages" EntityType="DashboardModel.CWOStage" />
+          <EntitySet Name="UCFAuditDetailLevels" EntityType="DashboardModel.UCFAuditDetailLevel" />
+          <EntitySet Name="Logs" EntityType="DashboardModel.Log" />
+          <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -1447,28 +1655,6 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="PlantID" Type="Int32" />
           <Property Name="PDSales" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
-        <EntityType Name="FlashReportRollUp">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="DaysInMonth" Type="Int32" />
-          <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="CWOGoal" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="ScrapGoal" Type="Decimal" Precision="16" Scale="5" />
-          <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="PlantCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="UCFScore" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="UCFGoal" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="PlantID" Type="Int32" />
-          <Property Name="PDSales" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
-        </EntityType>
         <EntityType Name="Bug">
           <Key>
             <PropertyRef Name="ID" />
@@ -1533,6 +1719,148 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="TotalCost" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="SumDowntime" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="PlantID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meetings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="Meeting" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UCFAuditHIstoryTopLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="AuditID" Type="Int32" />
+          <Property Name="Auditor" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+          <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="Score" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Refresh" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UCFAveragesByMonth">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Average" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CreatorID" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceID" Type="Int32" />
+          <Property Name="Viewed" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DateViewed" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CWOStage">
+          <Key>
+            <PropertyRef Name="CompanyCode" />
+            <PropertyRef Name="PlantCode" />
+            <PropertyRef Name="DATE_CLOSED" />
+            <PropertyRef Name="PERIOD" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PlantCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_SORT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="PROGRAM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="PRODUCT_LINE_NAME" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="JOB" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="SUFFIX" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="PART" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="QTY_COMPLETED" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="AMT_SALES" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="AMT_PRICE" Type="Decimal" Precision="13" Scale="5" />
+          <Property Name="AMT_PRICE_PER_UNIT" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="AMT_COST" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="DATE_CLOSED" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="PERIOD" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Day" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UCFAuditDetailLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="AuditID" Type="Int32" />
+          <Property Name="Auditor" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+          <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+          <Property Name="Score" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Selected" Type="Boolean" />
+          <Property Name="CriteriaID" Type="Int32" />
+          <Property Name="Criteria" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ChallengeID" Type="Int32" />
+          <Property Name="Challenge" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Reference" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceID" Type="Int32" />
+          <Property Name="Action" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FlashReportRollUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DaysInMonth" Type="Int32" />
+          <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="CWOGoal" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="ScrapGoal" Type="Decimal" Precision="16" Scale="5" />
+          <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PlantCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="UCFScore" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="UCFGoal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="PDSales" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2096,29 +2424,6 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FlashReportRollUps">
-            <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
-              <MappingFragment StoreEntitySet="FlashReportRollUp">
-                <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
-                <ScalarProperty Name="Margins" ColumnName="Margins" />
-                <ScalarProperty Name="Sales" ColumnName="Sales" />
-                <ScalarProperty Name="PDSales" ColumnName="PDSales" />
-                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
-                <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
-                <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
-                <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
-                <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
-                <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
-                <ScalarProperty Name="Scrap" ColumnName="Scrap" />
-                <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
-                <ScalarProperty Name="Cwo" ColumnName="Cwo" />
-                <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Bugs">
             <EntityTypeMapping TypeName="DashboardModel.Bug">
               <MappingFragment StoreEntitySet="Bugs">
@@ -2184,6 +2489,153 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MachineID" ColumnName="MachineID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings1">
+            <EntityTypeMapping TypeName="DashboardModel.Meetings">
+              <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Meeting" ColumnName="Meeting" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UCFAuditHIstoryTopLevels">
+            <EntityTypeMapping TypeName="DashboardModel.UCFAuditHIstoryTopLevel">
+              <MappingFragment StoreEntitySet="UCFAuditHIstoryTopLevel">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="DashboardModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Refresh" ColumnName="Refresh" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UCFAveragesByMonths">
+            <EntityTypeMapping TypeName="DashboardModel.UCFAveragesByMonth">
+              <MappingFragment StoreEntitySet="UCFAveragesByMonth">
+                <ScalarProperty Name="Average" ColumnName="Average" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="DashboardModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="DateViewed" ColumnName="DateViewed" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CWOStages">
+            <EntityTypeMapping TypeName="DashboardModel.CWOStage">
+              <MappingFragment StoreEntitySet="CWOStage">
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="PERIOD" ColumnName="PERIOD" />
+                <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+                <ScalarProperty Name="AMT_COST" ColumnName="AMT_COST" />
+                <ScalarProperty Name="AMT_PRICE_PER_UNIT" ColumnName="AMT_PRICE_PER_UNIT" />
+                <ScalarProperty Name="AMT_PRICE" ColumnName="AMT_PRICE" />
+                <ScalarProperty Name="AMT_SALES" ColumnName="AMT_SALES" />
+                <ScalarProperty Name="QTY_COMPLETED" ColumnName="QTY_COMPLETED" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PART" ColumnName="PART" />
+                <ScalarProperty Name="SUFFIX" ColumnName="SUFFIX" />
+                <ScalarProperty Name="JOB" ColumnName="JOB" />
+                <ScalarProperty Name="PRODUCT_LINE_NAME" ColumnName="PRODUCT_LINE_NAME" />
+                <ScalarProperty Name="PROGRAM" ColumnName="PROGRAM" />
+                <ScalarProperty Name="CODE_SORT" ColumnName="CODE_SORT" />
+                <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UCFAuditDetailLevels">
+            <EntityTypeMapping TypeName="DashboardModel.UCFAuditDetailLevel">
+              <MappingFragment StoreEntitySet="UCFAuditDetailLevel">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Challenge" ColumnName="Challenge" />
+                <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+                <ScalarProperty Name="Criteria" ColumnName="Criteria" />
+                <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="DashboardModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlashReportRollUps">
+            <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
+              <MappingFragment StoreEntitySet="FlashReportRollUp">
+                <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+                <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+                <ScalarProperty Name="Margins" ColumnName="Margins" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+                <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+                <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+                <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+                <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+                <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+                <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+                <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+                <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

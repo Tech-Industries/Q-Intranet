@@ -68,10 +68,18 @@ namespace Dashboard.Models
         public virtual DbSet<UCFPreviousScoresByChallenge> UCFPreviousScoresByChallenges { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<IncentiveRollupByPlant> IncentiveRollupByPlants { get; set; }
-        public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
         public virtual DbSet<Bug> Bugs { get; set; }
         public virtual DbSet<ProjectsTopLevel> ProjectsTopLevels { get; set; }
         public virtual DbSet<BugsTopLevel> BugsTopLevels { get; set; }
         public virtual DbSet<PrevMaint> PrevMaints { get; set; }
+        public virtual DbSet<Meetings> Meetings1 { get; set; }
+        public virtual DbSet<UCFAuditHIstoryTopLevel> UCFAuditHIstoryTopLevels { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<UCFAveragesByMonth> UCFAveragesByMonths { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<CWOStage> CWOStages { get; set; }
+        public virtual DbSet<UCFAuditDetailLevel> UCFAuditDetailLevels { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
     }
 }

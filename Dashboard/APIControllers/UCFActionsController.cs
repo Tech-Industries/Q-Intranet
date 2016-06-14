@@ -25,7 +25,14 @@ namespace Dashboard.APIControllers
             DateTime now = new DateTime();
             now = DateTime.Now;
             return db.UCFActions.Where(x => x.AreaID == ID && x.DateStart <= now && x.DateDue >= now).OrderBy(o => o.DateDue).ToList<object>();
-            
+        }
+
+        [ResponseType(typeof(List<object>))]
+        public List<object> Get(int ID, bool All)
+        {
+            DateTime now = new DateTime();
+            now = DateTime.Now;
+            return db.UCFActions.Where(x => x.AreaID == ID).OrderByDescending(o => o.DateDue).ToList<object>();
         }
 
         [ResponseType(typeof(List<object>))]

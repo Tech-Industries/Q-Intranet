@@ -22,7 +22,7 @@ namespace Dashboard.APIControllers
         [ResponseType(typeof(List<object>))]
         public List<object> Get()
         {
-            return db.ProjectsTopLevels.OrderBy(o => o.ID).ToList<object>();
+            return db.ProjectsTopLevels.Where(x => x.Status != "Complete").OrderBy(o => o.ID).ToList<object>();
         }
 
         public List<object> Get(string Status)

@@ -61,53 +61,101 @@
         Month = $("#monthSelect").val();
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: PlantID, Year: Year, Month: Month } });
         load.done(function (data) {
-            if (data.length > 0) {
+            console.log(data.length);
+            console.log(data);
+            data = data[0];
 
-                data = data[0];
+            var SalesDayGoal = data.CWOGoal / data.DaysInMonth;
+            var SalesGoalIncr = [];
+            var ScrapDayGoal = data.ScrapGoal / data.DaysInMonth;
+            var ScrapGoalIncr = [];
+            for (i = 1; i <= data.DaysInMonth; i++) {
 
-                var SalesDayGoal = data.CWOGoal / data.DaysInMonth;
-                var SalesGoalIncr = [];
-                var ScrapDayGoal = data.ScrapGoal / data.DaysInMonth;
-                var ScrapGoalIncr = [];
-                for (i = 1; i <= data.DaysInMonth; i++) {
+                SalesGoalIncr.push((Math.round(SalesDayGoal * i) * 100) / 100);
+                ScrapGoalIncr.push((Math.round(ScrapDayGoal * i) * 100) / 100);
+            }
+            self.SalesGoals(SalesGoalIncr);
+            self.ScrapGoals(ScrapGoalIncr);
+            var dateNow = new Date();
+            var year = dateNow.getFullYear();
+            var month = dateNow.getMonth() + 1;
+            var day = dateNow.getDate();
 
-                    SalesGoalIncr.push((Math.round(SalesDayGoal * i) * 100) / 100);
-                    ScrapGoalIncr.push((Math.round(ScrapDayGoal * i) * 100) / 100);
+            if (parseInt(Year) == year) {
+                if (parseInt(Month) < month) {
+                    data.SalesShouldBePerc = 100;
                 }
-                self.SalesGoals(SalesGoalIncr);
-                self.ScrapGoals(ScrapGoalIncr);
+                else if (parseInt(Month) == month) {
+                    data.SalesShouldBePerc = ((SalesGoalIncr[day - 1] / data.CWOGoal) * 100).toFixed(0);
+                }
+                else {
+                    data.SalesShouldBePerc = 0;
+                }
+            }
+            else if (parseInt(Year) < year) {
+                data.SalesShouldBePerc = 100;
+            }
+            else {
+                data.SalesShouldBePerc = 0;
+            }
 
+            if (data.Sales > 0) {
 
+                
 
-                data.Margins = formatMoney(data.Margins);
-                data.Sales = formatMoney(data.Sales);
-                data.PDSales = formatMoney(data.PDSales);
-                data.CWOGoal = formatMoney(data.CWOGoal);
-                data.Cwo = formatMoney(data.Cwo);
-                data.Scrap = formatMoney(data.Scrap);
-                data.ScrapGoal = formatMoney(data.ScrapGoal);
+                data.MarginsF = formatMoney(data.Margins);
+                data.SalesF = formatMoney(data.Sales);
+                data.PDSalesF = formatMoney(data.PDSales);
+                data.CWOGoalF = formatMoney(data.CWOGoal);
+                data.CwoF = formatMoney(data.Cwo);
+                data.ScrapF = formatMoney(data.Scrap);
+                data.ScrapGoalF = formatMoney(data.ScrapGoal);
 
-                data.MarginPct = formatPercent(data.MarginPct);
-                data.ScrapAsPercent = formatPercent(data.ScrapAsPercent);
+                data.MarginPctF = formatPercent(data.MarginPct);
+                data.ScrapAsPercentF = formatPercent(data.ScrapAsPercent);
+                data.ScrapAsPercent = data.ScrapAsPercent.toFixed(0);
+                data.MarginPct = data.MarginPct.toFixed(0);
+                data.SalesPct = ((data.Sales / data.CWOGoal) * 100).toFixed(0);
+                data.SalesPctF = formatPercent(data.SalesPct);
+                data.CWOPct = ((data.Cwo / data.CWOGoal) * 100).toFixed(0);
+                data.CWOPctF = formatPercent(data.CWOPct);
+
+                data.OnTimePercentF = formatPercent(data.OnTimePercent);
+
+                if (data.MarginPct <= 0) {
+                    data.MarginPct = 0;
+                }
 
                 self.RollupValues(data);
 
             }
             else {
-                data.Margins = formatMoney(0);
-                data.Sales = formatMoney(0);
-                data.PDSales = formatMoney(0);
-                data.CWOGoal = formatMoney(0);
-                data.Cwo = formatMoney(0);
-                data.Scrap = formatMoney(0);
-                data.ScrapGoal = formatMoney(0);
+                data.MarginsF = formatMoney(0);
+                data.SalesF = formatMoney(0);
+                data.PDSalesF = formatMoney(0);
+                data.CWOGoalF = formatMoney(data.CWOGoal);
+                data.CwoF = formatMoney(0);
+                data.ScrapF = formatMoney(0);
+                data.ScrapGoalF = formatMoney(0);
 
-                data.MarginPct = formatPercent(0);
-                data.ScrapAsPercent = formatPercent(0);
+                data.MarginPctF = formatPercent(0);
+                data.ScrapAsPercentF = formatPercent(0);
+                data.ScrapAsPercent = 0;
+                data.MarginPct = 0;
+                data.SalesPct = 0;
+                data.CWOPct = 0;
+                data.SalesPctF = formatPercent(0);
+                data.CWOPctF = formatPercent(0);
+                data.OnTimePercentF = formatPercent(0);
+
+                if (data.MarginPct <= 0) {
+                    data.MarginPct = 0;
+                }
 
                 self.RollupValues(data);
             }
         });
+        
     }
 
     self.loadSales = function () {

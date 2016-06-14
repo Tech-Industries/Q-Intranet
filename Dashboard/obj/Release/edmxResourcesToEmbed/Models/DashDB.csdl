@@ -73,11 +73,19 @@
     <EntitySet Name="UCFPreviousScoresByChallenges" EntityType="DashboardModel.UCFPreviousScoresByChallenge" />
     <EntitySet Name="Prices" EntityType="DashboardModel.Price" />
     <EntitySet Name="IncentiveRollupByPlants" EntityType="DashboardModel.IncentiveRollupByPlant" />
-    <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
     <EntitySet Name="Bugs" EntityType="DashboardModel.Bug" />
     <EntitySet Name="ProjectsTopLevels" EntityType="DashboardModel.ProjectsTopLevel" />
     <EntitySet Name="BugsTopLevels" EntityType="DashboardModel.BugsTopLevel" />
     <EntitySet Name="PrevMaints" EntityType="DashboardModel.PrevMaint" />
+    <EntitySet Name="Meetings1" EntityType="DashboardModel.Meetings" />
+    <EntitySet Name="UCFAuditHIstoryTopLevels" EntityType="DashboardModel.UCFAuditHIstoryTopLevel" />
+    <EntitySet Name="Pages" EntityType="DashboardModel.Page" />
+    <EntitySet Name="UCFAveragesByMonths" EntityType="DashboardModel.UCFAveragesByMonth" />
+    <EntitySet Name="Notifications" EntityType="DashboardModel.Notification" />
+    <EntitySet Name="CWOStages" EntityType="DashboardModel.CWOStage" />
+    <EntitySet Name="UCFAuditDetailLevels" EntityType="DashboardModel.UCFAuditDetailLevel" />
+    <EntitySet Name="Logs" EntityType="DashboardModel.Log" />
+    <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -586,28 +594,6 @@
     <Property Name="PlantID" Type="Int32" />
     <Property Name="PDSales" Type="Decimal" Precision="38" Scale="6" />
   </EntityType>
-  <EntityType Name="FlashReportRollUp">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="DaysInMonth" Type="Int32" />
-    <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
-    <Property Name="CWOGoal" Type="Decimal" Precision="12" Scale="2" />
-    <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
-    <Property Name="ScrapGoal" Type="Decimal" Precision="16" Scale="5" />
-    <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
-    <Property Name="PlantCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-    <Property Name="UCFScore" Type="Decimal" Precision="4" Scale="2" />
-    <Property Name="UCFGoal" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="PlantID" Type="Int32" />
-    <Property Name="PDSales" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
-    <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
-    <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
-  </EntityType>
   <EntityType Name="Bug">
     <Key>
       <PropertyRef Name="ID" />
@@ -672,5 +658,147 @@
     <Property Name="TotalCost" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="SumDowntime" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="PlantID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meetings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="Meeting" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="Location" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UCFAuditHIstoryTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="AuditID" Type="Int32" />
+    <Property Name="Auditor" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaID" Type="Int32" />
+    <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="Score" Type="Decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityType Name="Page">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Refresh" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="UCFAveragesByMonth">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaID" Type="Int32" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Average" Type="Decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CreatorID" Type="Int32" />
+    <Property Name="Message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="Int32" />
+    <Property Name="Viewed" Type="Boolean" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="DateViewed" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CWOStage">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="DATE_CLOSED" />
+      <PropertyRef Name="PERIOD" />
+      <PropertyRef Name="Year" />
+    </Key>
+    <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="PlantCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CODE_SORT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="PROGRAM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="PRODUCT_LINE_NAME" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="JOB" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="SUFFIX" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="PART" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="QTY_COMPLETED" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="AMT_SALES" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="AMT_PRICE" Type="Decimal" Precision="13" Scale="5" />
+    <Property Name="AMT_PRICE_PER_UNIT" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="AMT_COST" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="DATE_CLOSED" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="PERIOD" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Day" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UCFAuditDetailLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="AuditID" Type="Int32" />
+    <Property Name="Auditor" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+    <Property Name="PlantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+    <Property Name="Score" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="Weight" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="Selected" Type="Boolean" />
+    <Property Name="CriteriaID" Type="Int32" />
+    <Property Name="Criteria" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ChallengeID" Type="Int32" />
+    <Property Name="Challenge" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="Category" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Reference" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="Int32" />
+    <Property Name="Action" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="FlashReportRollUp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="DaysInMonth" Type="Int32" />
+    <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="Decimal" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="UCFScore" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="PDSales" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
   </EntityType>
 </Schema>

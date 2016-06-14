@@ -4,6 +4,8 @@
     var qualityAPI = $("#qualityLink").attr('href');
     var goalsAPI = $("#goalsLink").attr('href');
     var slideAPI = $("#SlideLink").attr('href');
+    var pageAPI = $("#PageLink").attr('href');
+    var UCFAuditsAPI = $("#UCFAuditsLink").attr('href');
 
     self.ChartSalesMTD = ko.observableArray([]);
     self.ChartScrapMTD = ko.observableArray([]);
@@ -45,6 +47,13 @@
     self.Incentives = ko.observableArray([]);
     self.isLoading = ko.observable(false);
 
+    self.MeetingInfo = ko.observableArray([]);
+    self.Test = ko.observableArray([]);
+    
+    self.FacilityScore = ko.observable();
+    self.AreaScores = ko.observableArray([]);
+    
+
     var nameContain = "All";
     var year = "";
     var month = "";
@@ -53,28 +62,76 @@
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
 
-    self.loadIncentives = function(){
+    self.loadUCFSlide = function () {
+        PlantID = $('#plantSelect option:selected').attr('plantid');
+        Year = $('#yearSelect').val();
+        Month = $('#monthSelect').val();
+        console.log(PlantID);
+        console.log(Year);
+        console.log(Month);
+
+        var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { PlantID: 3, Year: Year, Month: '05' } });
+        load.done(function (data) {
+            console.log(data);
+            if (data.length > 0) {
+                var t = $.grep(data, function (e) { return e.AreaName == 'Facility' })[0];
+                console.log(t.Average);
+            }
+        });
+    }
+
+    self.CheckRefreshFlag = function () {
+
+        var load = $.ajax({ type: "GET", url: pageAPI, cache: false, data: { Name: 'SlideShow' }});
+        load.done(function (data) {
+            if (data[0].Refresh == true) {
+                location.reload();
+            }
+            else {
+            }
+
+        });
+    }
+
+    self.loadMeeting = function () {
+        plantid = 1;
+        var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { PlantID: plantid, Type: 'Meeting' } });
+        load.done(function (data) {
+            d = data[0];
+            var array = $.map(data, function (item) {
+                return {
+                    ID: item.ID,
+                    What: item.Meeting,
+                    Where: item.Location,
+                    When: getLongDate(item.Time),
+                    ShortDate: formatSqlDateTimeToShortDate(item.Time)
+
+
+                };
+            });
+            self.MeetingInfo(array[0]);
+            
+        });
+    }
+
+    self.loadIncentives = function () {
         plantid = 1;
         year = $("#yearSelect").val();
         month = $("#monthSelect").val();
         var days = getDaysInMonth(parseInt(month), parseInt(year));
         var currYear = new Date().getFullYear();
-        var currMonth = new Date().getMonth()+1;
+        var currMonth = new Date().getMonth() + 1;
         var currDay = new Date().getDate();
-        console.log(currDay);
         var curr = false;
         if (parseInt(year) == currYear && parseInt(month) == currMonth) {
             curr = true;
         }
-        
+
         var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { ID: plantid, Year: year, Month: month } });
         load.done(function (data) {
-            console.log(data[0]);
             if (curr) {
                 currGoal = (data[0].CWOGoal / days) * currDay;
                 lowerGoal = (data[0].CWOGoal / days) * (currDay - 2);
-                console.log(currGoal);
-                console.log(lowerGoal);
                 if (data[0].Cwo >= currGoal) {
                     data[0].CwoStatus = 'green';
                 }
@@ -84,7 +141,7 @@
                 if (data[0].Cwo < lowerGoal) {
                     data[0].CwoStatus = 'red';
                 }
-                
+
             }
             else {
                 if (data[0].Cwo >= data[0].CWOGoal) {
@@ -98,7 +155,7 @@
             if (data[0].ScrapAsPercent > 1.5) {
                 data[0].ScrapStatus = 'red';
             }
-            else if(data[0].ScrapAsPercent <= 1.5) {
+            else if (data[0].ScrapAsPercent <= 1.5) {
                 data[0].ScrapStatus = 'green';
             }
 
@@ -126,12 +183,11 @@
             else {
                 data[0].PDStatus = 'green';
             }
-            
+
             data[0].ScrapAsPercent = formatPercent(data[0].ScrapAsPercent);
             data[0].Cwo = formatMoney(data[0].Cwo).split('.')[0];
             data[0].PDSales = formatMoney(data[0].PDSales).split('.')[0];
             self.Incentives(data[0]);
-            console.log(data[0]);
         });
     }
 
@@ -628,12 +684,15 @@
     }
 
     self.loadData = function () {
+
         self.loadSales();
         self.loadCWO();
         self.loadSalesGoals();
         self.loadScrap();
         self.loadOTMTD();
         self.loadIncentives();
+        self.loadMeeting();
+        self.loadUCFSlide();
         //$('.dtSalesDetail').dataTable().fnClearTable();
     }
 }

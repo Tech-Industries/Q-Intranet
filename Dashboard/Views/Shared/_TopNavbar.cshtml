@@ -64,34 +64,17 @@
                         </div>
                     </li>
                 </ul>
-            </li>
+            </li>*@
             <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" id="not-dropdown-toggle">
+                    <i class="fa fa-bell"></i>  <span class="label label-primary" id="not-count"></span>
                 </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
+                <ul class="dropdown-menu dropdown-alerts" id="not-short-list">
+
+                    @*<li>
                         <a href="#">
                             <div>
                                 <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
                                 <span class="pull-right text-muted small">4 minutes ago</span>
                             </div>
                         </a>
@@ -104,9 +87,9 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </li>
+                    </li>*@
                 </ul>
-            </li>*@
+            </li>
             <li>
                 <a href="@Url.Action("Logout", "Login")">
                     <i class="fa fa-sign-out"></i> Logout

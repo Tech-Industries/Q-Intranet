@@ -346,7 +346,7 @@
 
     self.uploadFile = function () {
         var formData = new FormData($('#doc-upload')[0]);
-
+        console.log(formData);
         $.ajax({
             url: '/Deliverables/UploadFile',
             type: 'Post',
@@ -430,11 +430,15 @@
     self.addDelDetDocument = function () {
         var formData = new FormData($('#frm-doc-up')[0]);
         var uploadLink = $('#UploadFileLink').attr('href');
+        for (var i = 0, len = document.getElementById('doc-upload').files.length; i < len; i++) {
+            formData.append("doc-upload" + (i + 1), document.getElementById('doc-upload').files[i]);
+        }
         $.ajax({
             url: uploadLink + '/', //Html.Action("Deliverables", "UploadFile"),
             type: 'Post',
             beforeSend: function () { },
             success: function (result) {
+                console.log(result);
                 var ftpAPI = $("#FTPLink").attr('href');
 
                 var user = $('#Assignee option:selected').text();
@@ -443,29 +447,34 @@
                 var dueDate = $('#del-due-date').html();
                 var n = result.lastIndexOf('\\');
                 var fileName = result.substring(n + 1);
-                var remoteFile = "/Deliverables/" + user + "/" + freq + "/" + delNam + "/" + dueDate + "/" + fileName;
-                remoteFile = remoteFile.replace(" ", "%20");
-                var data = "remoteFile=" + remoteFile + "&localFile=" + result;
-                $.ajax({
-                    method: 'POST', url: ftpAPI, data: data, success: function (res) {
-                        var delDetID = $('#DelDetID').val();
-                        var title = fileName;
-                        var type = "temp";
-                        var userID = $('#UserID').val();
-                        var loc = "Temp";
-                        var path = remoteFile;
-                        var time = DateNowFormatted();
-                        var sendData = "DelDetID=" + delDetID + "&Title=" + title + "&Type=" + type + "&UserID=" + userID + "&Location=" + loc + "&Path=" + path + "&TimeSubmitted=" + time;
-                        var deliverableDocumentsAPI = $("#deliverableDocumentsLink").attr('href');
-                        $.ajax({
-                            method: 'POST',
-                            url: deliverableDocumentsAPI,
-                            cache: false,
-                            data: sendData,
-                            success: function () { self.loadDelDetDocuments(); }
-                        });
-                    }
-                });
+                if (fileName == 'DeliverablesController.cs:line 81') {
+                    console.log('test')
+                }
+                else {
+                    var remoteFile = "/Deliverables/" + user + "/" + freq + "/" + delNam + "/" + dueDate + "/" + fileName;
+                    remoteFile = remoteFile.replace(" ", "%20");
+                    var data = "remoteFile=" + remoteFile + "&localFile=" + result;
+                    $.ajax({
+                        method: 'POST', url: ftpAPI, data: data, success: function (res) {
+                            var delDetID = $('#DelDetID').val();
+                            var title = fileName;
+                            var type = "temp";
+                            var userID = $('#UserID').val();
+                            var loc = "Temp";
+                            var path = remoteFile;
+                            var time = DateNowFormatted();
+                            var sendData = "DelDetID=" + delDetID + "&Title=" + title + "&Type=" + type + "&UserID=" + userID + "&Location=" + loc + "&Path=" + path + "&TimeSubmitted=" + time;
+                            var deliverableDocumentsAPI = $("#deliverableDocumentsLink").attr('href');
+                            $.ajax({
+                                method: 'POST',
+                                url: deliverableDocumentsAPI,
+                                cache: false,
+                                data: sendData,
+                                success: function () { self.loadDelDetDocuments(); }
+                            });
+                        }
+                    });
+                }
             },
             error: function (result) { },
             data: formData,
@@ -477,14 +486,15 @@
 
     self.loadComments = function () {
         var TypeID = $("#DelDetID").val();
-        loadComments(TypeID, 'Deliverables', CommentsAPI, self)
+        loadComments(TypeID, 'DeliverableDetail', CommentsAPI, self)
     };
 
     self.addComment = function () {
         var TypeID = $("#DelDetID").val();
         var UserID = $("#UserID").val();
         var Comment = $("#txt-new-comment").val();
-        addComment(TypeID, UserID, Comment, "Deliverables", CommentsAPI, self);
+        addComment(TypeID, UserID, Comment, "DeliverableDetail", CommentsAPI, self);
+        $("#txt-new-comment").val('');
 
     }
     self.updateComment = function (ID, TimeSubmitted, Comment) {
@@ -559,7 +569,8 @@
         function loadMetrics(ID, name) {
             var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { ID: ID, DataPull: "DelStatus" } });
             load.done(function (data2) {
-                if (data2.length > 0) {
+                console.log(data2);
+                if (data2.length > 3) {
                     $('#report-metrics-body').append("<div class='col-sm-12 col-md-6 col-lg-4' style='height: 250px' id='status-" + ID + "'></div>");
                     $("#status-" + ID).highcharts({
                         chart: {

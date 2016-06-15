@@ -605,6 +605,38 @@ warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not hav
     <Property Name="PDSales" Type="numeric" Precision="38" Scale="6" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrendInt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrendInt">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Month" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.PastDueDeliverables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="PastDueDeliverables">
     <Key>
@@ -922,6 +954,28 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [IncentiveRollupByPlant].[PlantID] AS [PlantID], 
     [IncentiveRollupByPlant].[PDSales] AS [PDSales]
     FROM [dbo].[IncentiveRollupByPlant] AS [IncentiveRollupByPlant]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrend" EntityType="Self.OnTimeDeliveryTrend" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrend].[ID] AS [ID], 
+    [OnTimeDeliveryTrend].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrend].[Year] AS [Year], 
+    [OnTimeDeliveryTrend].[Month] AS [Month], 
+    [OnTimeDeliveryTrend].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrend].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrend].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrend] AS [OnTimeDeliveryTrend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrendInt" EntityType="Self.OnTimeDeliveryTrendInt" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrendInt].[ID] AS [ID], 
+    [OnTimeDeliveryTrendInt].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrendInt].[Year] AS [Year], 
+    [OnTimeDeliveryTrendInt].[Month] AS [Month], 
+    [OnTimeDeliveryTrendInt].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrendInt].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrendInt].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrendInt] AS [OnTimeDeliveryTrendInt]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="PastDueDeliverables" EntityType="Self.PastDueDeliverables" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

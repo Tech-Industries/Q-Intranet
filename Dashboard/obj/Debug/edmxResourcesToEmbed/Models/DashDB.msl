@@ -773,5 +773,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrends">
+      <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrend">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrend">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrendInts">
+      <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrendInt">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrendInt">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

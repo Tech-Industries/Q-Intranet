@@ -77,7 +77,8 @@
                             <ul class="nav nav-tabs">
 
                                 <li class="active"><a data-toggle="tab" href="#tab-1">Sales</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-2" onmousemove="homeScrapChart.reflow();" >Scrap</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-2" onmousemove="homeScrapChart.reflow();">Scrap</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3" onmousemove="homeOTDChart.reflow();">On Time Del.</a></li>
 
 
                             </ul>
@@ -97,6 +98,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="tab-3" class="tab-pane" style="height: 500px;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="" id="home-otd-chart" style="height: 480px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -109,26 +117,26 @@
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().SalesF">0.00</h2>
                                     <small>Sales Month-to-Date</small>
-                                    <div class="stat-percent"><span data-bind="text:RollupValues().SalesPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
+                                    <div class="stat-percent"><small>Actual - </small> <span data-bind="text:RollupValues().SalesPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesPct + '%'}" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesShouldBePerc + '%'}" class="progress-bar"></div>
                                     </div>
-                                    <div class="stat-percent">Should Be <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
+                                    <div class="stat-percent"><small>Goal - </small> <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
                                 </li>
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().CwoF">0.00</h2>
                                     <small>CWO Month-to-Date</small>
-                                    <div class="stat-percent"><span data-bind="text:RollupValues().CWOPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
+                                    <div class="stat-percent"><small>Actual - </small> <span data-bind="text:RollupValues().CWOPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().CWOPct + '%'}" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesShouldBePerc + '%'}" class="progress-bar"></div>
                                     </div>
-                                    <div class="stat-percent">Should Be <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
+                                    <div class="stat-percent"><small>Goal - </small> <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
                                 </li>
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().MarginsF">0.00</h2>
@@ -321,6 +329,7 @@
 
     <script>
         var homeScrapChart;
+        var homeOTDChart;
         $(function () {
 
             var vm = new HomeViewModel();
@@ -587,6 +596,57 @@
                     color: 'rgba(217, 104, 0, 0.80)'
                 }]
             }).highcharts();
+            homeOTDChart = $('#home-otd-chart').highcharts({
+                title: {
+                    text: 'On Time Delivery - Rolling Twelve Months',
+                    x: -20 //center
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45,
+                        step: 2
+                    }
+                },
+                yAxis: {
+                    max: 100,
+                    min: 50,
+                    labels: {
+                        formatter: function () {
+                                return this.value.toFixed(0) + '%';
+                        }
+                    },
+                    title: {
+                        text: ''
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    valueSuffix: '%',
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
+
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 4
+                    }
+                },
+                series: [{
+                    name: 'Goal',
+                    data: [98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98],
+                    color: '#27ae60'
+                }, {
+                    name: 'OTD',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
 
 
             vm.ChartSalesMTD.subscribe(function (val) {
@@ -609,6 +669,12 @@
                 homeChart.series[1].setData(val, true);
             });
 
+            vm.DeliveryRates.subscribe(function (val) {
+                homeOTDChart.series[1].setData(val, true);
+            });
+            vm.RollingTwelveLabels.subscribe(function (val) {
+                homeOTDChart.xAxis[0].setCategories(val, true);
+            });
 
 
 

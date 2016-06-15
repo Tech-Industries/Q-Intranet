@@ -19,9 +19,9 @@ namespace Dashboard.APIControllers
         private DashboardEntities db = new DashboardEntities();
 
         [ResponseType(typeof(FlashReportRollUp))]
-        public async Task<IHttpActionResult> Get(int PlantID, string Year, string Month )
+        public async Task<IHttpActionResult> Get(int PlantID, string Year, string Month)
         {
-            if(PlantID == 0)
+            if (PlantID == 0)
             {
                 return Ok(await FlashRollupViewModel.MapFromAsync(db.FlashReportRollUps.Where(x => x.PlantCode == "All" && x.Year == Year && x.Month == Month).ToList()));
             }
@@ -29,6 +29,29 @@ namespace Dashboard.APIControllers
             {
                 return Ok(await FlashRollupViewModel.MapFromAsync(db.FlashReportRollUps.Where(x => x.PlantID == PlantID && x.Year == Year && x.Month == Month).ToList()));
             }
+        }
+
+        [ResponseType(typeof(List<object>))]
+        public List<object> Get(int PlantID, int Year, int Month, int Range)
+        {
+            int lowerMonth = Month - Range;
+            int lowerYear = Year;
+            if (lowerMonth <= 0)
+            {
+                lowerMonth += 12;
+                lowerYear -= 1;
+            }
+            Console.WriteLine(lowerYear + " - " + lowerMonth);
+            Console.WriteLine(Year + " - " + Month);
+            if (Year == lowerYear)
+            {
+                return db.OnTimeDeliveryTrendInts.Where(x => x.PlantID == PlantID && ((x.Year == Year && x.Month <= Month) && (x.Year == lowerYear && x.Month >= lowerMonth))).OrderBy(o => o.Month).ToList<object>();
+            }
+            else
+            {
+                return db.OnTimeDeliveryTrendInts.Where(x => x.PlantID == PlantID && ((x.Year == Year && x.Month <= Month) || (x.Year == lowerYear && x.Month >= lowerMonth))).OrderBy(o => o.Year).ThenBy(o => o.Month).ToList<object>();
+            }
+
         }
     }
 }

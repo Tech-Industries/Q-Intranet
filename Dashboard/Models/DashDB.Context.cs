@@ -81,5 +81,7 @@ namespace Dashboard.Models
         public virtual DbSet<UCFAuditDetailLevel> UCFAuditDetailLevels { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
+        public virtual DbSet<OnTimeDeliveryTrend> OnTimeDeliveryTrends { get; set; }
+        public virtual DbSet<OnTimeDeliveryTrendInt> OnTimeDeliveryTrendInts { get; set; }
     }
 }

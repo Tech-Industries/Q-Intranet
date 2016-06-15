@@ -86,6 +86,8 @@
     <EntitySet Name="UCFAuditDetailLevels" EntityType="DashboardModel.UCFAuditDetailLevel" />
     <EntitySet Name="Logs" EntityType="DashboardModel.Log" />
     <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
+    <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
+    <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -800,5 +802,33 @@
     <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="OnTimeDeliveryTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+    <Property Name="OnTimePercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="OnTimeDeliveryTrendInt">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="Year" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Month" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+    <Property Name="OnTimePercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
   </EntityType>
 </Schema>

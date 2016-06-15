@@ -374,6 +374,12 @@
     <Compile Include="Models\Notification.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OnTimeDeliveryTrend.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnTimeDeliveryTrendInt.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>

@@ -286,8 +286,6 @@
     }
 
     self.loadPlants = function () {
-        test += 1;
-        console.log(test);
         var load = $.ajax({ type: "GET", cache: false, url: PlantsAPI });
         load.success(function (data) {
             self.Plants(data);

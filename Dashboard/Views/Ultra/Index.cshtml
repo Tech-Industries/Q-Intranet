@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control  change-bind" id="yearSelect" ">
+                        <select class="form-control  change-bind" id="yearSelect">
 
                             @{
                                 int currentYear = DateTime.Now.Year;
@@ -343,8 +343,10 @@
                                 <select style="border: 0; background: rgba(1, 1, 1, .00); color: #19aa8d; font-weight:bold;" id="Plant" name="Plant">
                                     <option value="0">Select a Plant</option>
 
-                                    <optgroup label="Plants" data-bind="foreach: Plants()">
-                                        <option data-bind="value: $data.ID, text: $data.Description"></option>
+                                    <optgroup label="Plants">
+                                        <option value="1">North KC</option>
+                                        <option value="2">Grove</option>
+                                        <option value="3">Owasso</option>
                                     </optgroup>
 
                                 </select>

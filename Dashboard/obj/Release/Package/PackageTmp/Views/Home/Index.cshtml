@@ -445,6 +445,14 @@
 
 
             var homeSalesChart = $('#home-sales-chart').highcharts({
+                chart:{
+                    events: {
+                        load: function() {
+                            this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 100, '80%', '50%')
+                                .add();
+                        }
+                    },
+                },
                 title: {
                     text: 'Sales - Month to Date',
                     x: -20 //center
@@ -524,6 +532,14 @@
             }).highcharts();
 
             homeScrapChart = $('#home-scrap-chart').highcharts({
+                chart: {
+                    events: {
+                        load: function () {
+                            this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 100, '80%', '50%')
+                                .add();
+                        }
+                    },
+                },
                 title: {
                     text: 'Scrap - Month to Date',
                     x: -20 //center
@@ -596,6 +612,14 @@
                 }]
             }).highcharts();
             homeOTDChart = $('#home-otd-chart').highcharts({
+                chart: {
+                    events: {
+                        load: function () {
+                            this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 100, '80%', '50%')
+                                .add();
+                        }
+                    },
+                },
                 title: {
                     text: 'On Time Delivery - Monthly',
                     x: -20 //center

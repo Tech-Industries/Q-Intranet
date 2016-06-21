@@ -181,7 +181,13 @@
                 chart: {
                     type: 'column',
                     minPadding: 0,
-                    maxPadding: 0
+                    maxPadding: 0,
+                    events: {
+                        load: function () {
+                            this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 50, '80%', '50%')
+                                .add();
+                        }
+                    }
                 },
                 title: {
                     text: 'HM01'

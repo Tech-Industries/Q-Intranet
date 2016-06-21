@@ -55,6 +55,15 @@
             <li class="@Html.IsSelected(controller: "Projects") @Html.IsAuth(groupID: 5)">
                 <a href="@Url.Action("Index", "Projects")"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Projects </span></a>
             </li>
+            <li>
+                <a ><i class="fa fa-map "></i> <span class="nav-label">Business Dev.</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li>@Html.ActionLink("Accounts", "Accounts", "BusinessDev").IfAuth(groupID: 1)</li>
+                    <li>@Html.ActionLink("Contacts", "Contacts", "BusinessDev").IfAuth(groupID: 1)</li>
+                    <li>@Html.ActionLink("Opportunities", "Opportunities", "BusinessDev").IfAuth(groupID: 1)</li>
+                    <li>@Html.ActionLink("Metrics", "Metrics", "BusinessDev").IfAuth(groupID: 1)</li>
+                </ul>
+            </li>
             <li class="@Html.IsSelected(controller: "Admin") @Html.IsAuth(groupID: 1)">
                 <a href="@Url.Action("Index", "Admin")"><i class="fa fa-cogs"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

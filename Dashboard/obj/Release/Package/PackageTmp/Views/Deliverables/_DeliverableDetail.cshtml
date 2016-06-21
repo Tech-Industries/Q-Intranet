@@ -95,9 +95,11 @@
                     </div>
                 </form>
             </div>*@
-            <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
-                <input type="file" class="form-control" id="doc-upload" name="doc-upload"  />
-            </form>
+            <div data-bind="if: !DDComplete()">
+                <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
+                    <input type="file" class="form-control" id="doc-upload" name="doc-upload" />
+                </form>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-8" style="height: 200px;">

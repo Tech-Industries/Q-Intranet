@@ -21,18 +21,33 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <span class="input-group-addon">Year</span>
-                            <select class="form-control  change-bind" id="yearSelect" data-bind="event: {change: $root.loadData()}">
+                            <span class="input-group-addon">Period</span>
+                            <select class="form-control  change-bind" id="periodSelect" data-bind="event: {change: $root.loadData()}">
 
                                 @{
                                     int currentYear = DateTime.Now.Year;
+                                    int currentMonth = DateTime.Now.Month;
                                     int incr = 0;
-
+                                    string currentMonthStr = "";
                                     while (incr <= 2)
                                     {
+                                        while (currentMonth > 0)
+                                        {
+                                            if (currentMonth < 10)
+                                            {
+                                                currentMonthStr = "0" + currentMonth.ToString();
+                                                <option value="@(currentYear - incr)-@(currentMonthStr)">@(currentYear - incr)-@(currentMonthStr)</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@(currentYear - incr)-@(currentMonth)">@(currentYear - incr)-@(currentMonth)</option>
+                                            }
 
-                                        <option value="@(currentYear - incr)">@(currentYear - incr)</option>
+                                            @(currentMonth -= 1)
+                                        }
+
                                         @(incr += 1)
+                                        @(currentMonth = 12);
                                     }
 
                                 }
@@ -42,32 +57,32 @@
 
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon">Month</span>
-                            <select class="form-control change-bind" id="monthSelect" data-bind="event: {change: $root.loadData()}">
-                                <option value="0">Select a month...</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
+                    @*<div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Month</span>
+                                                <select class="form-control change-bind" id="monthSelect" data-bind="event: {change: $root.loadData()}">
+                                                    <option value="0">Select a month...</option>
+                                                    <option value="01">January</option>
+                                                    <option value="02">February</option>
+                                                    <option value="03">March</option>
+                                                    <option value="04">April</option>
+                                                    <option value="05">May</option>
+                                                    <option value="06">June</option>
+                                                    <option value="07">July</option>
+                                                    <option value="08">August</option>
+                                                    <option value="09">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
 
-                            </select>
-                        </div>
-                        @*<div class="col-md-3">
-                                <center>
-                                    <button class="btn btn-outline btn-success dim no-highlight" data-bind="event: {click: $root.loadData()}"><i class="fa fa-refresh "></i></button>
-                                </center>
-                            </div>*@
-                    </div>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                    <center>
+                                        <button class="btn btn-outline btn-success dim no-highlight" data-bind="event: {click: $root.loadData()}"><i class="fa fa-refresh "></i></button>
+                                    </center>
+                                </div>
+                        </div>*@
                 </div>
             </div>
         </div>

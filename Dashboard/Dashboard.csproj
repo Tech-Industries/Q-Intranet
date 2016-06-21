@@ -334,6 +334,9 @@
     <Compile Include="Models\FlashReportRollUp.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FlashReportRollUpAll.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Goal.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -505,6 +508,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CommentsViewModel.cs" />
+    <Compile Include="ViewModels\FlashRollupAllViewModel.cs" />
     <Compile Include="ViewModels\UCFAuditDetailViewModel.cs" />
     <Compile Include="ViewModels\FlashRollupViewModel.cs" />
     <Compile Include="ViewModels\UCFAuditsViewModel.cs" />
@@ -537,6 +541,10 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\Orizon_logo_black.png" />
+    <Content Include="Content\img\Orizon_logo_fullcolor.png" />
+    <Content Include="Content\img\Orizon_logo_grey.png" />
+    <Content Include="Content\img\Orizon_logo_white.png" />
     <Content Include="Content\img\transparentLogo.gif" />
     <Content Include="Content\img\WhiteLogoFull.png" />
     <Content Include="Content\img\WhiteLogoSmall.png" />

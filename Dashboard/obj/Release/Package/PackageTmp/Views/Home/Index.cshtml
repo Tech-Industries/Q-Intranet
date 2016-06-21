@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "Flash";
 }
 @Html.Partial("_Filters")
 <div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-6">
             @*<div class="ibox float-e-margins">
     <div class="ibox-title">
        <span class="label label-success pull-right">Monthly</span>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @*<span class="label label-danger pull-right">Low value</span>*@
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @*<span class="label label-primary pull-right">Today</span>*@
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @*<span class="label label-info pull-right">Annual</span>*@
@@ -76,8 +76,9 @@
                         <div class="col-lg-9">
                             <ul class="nav nav-tabs">
 
-                                <li class="active"><a data-toggle="tab" href="#tab-1">Sales</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-2" onmousemove="homeScrapChart.reflow();" >Scrap</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab-1" id="sales-chart-tab">Sales</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-2" id="scrap-chart-tab">Scrap</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3" id="otd-chart-tab">On Time Del.</a></li>
 
 
                             </ul>
@@ -86,7 +87,7 @@
                                 <div id="tab-1" class="tab-pane active" style="height: 500px;">
                                     <div class="row">
                                         <div class="col-md-12">
-                                                <div class="" id="home-chart" style="height: 480px;"></div>
+                                                <div class="" id="home-sales-chart" style="height: 480px;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -94,6 +95,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="" id="home-scrap-chart" style="height: 480px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-3" class="tab-pane" style="height: 500px;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="" id="home-otd-chart" style="height: 480px;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -109,26 +117,26 @@
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().SalesF">0.00</h2>
                                     <small>Sales Month-to-Date</small>
-                                    <div class="stat-percent"><span data-bind="text:RollupValues().SalesPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
+                                    <div class="stat-percent"><small>Actual - </small> <span data-bind="text:RollupValues().SalesPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesPct + '%'}" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesShouldBePerc + '%'}" class="progress-bar"></div>
                                     </div>
-                                    <div class="stat-percent">Should Be <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
+                                    <div class="stat-percent"><small>Goal - </small> <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
                                 </li>
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().CwoF">0.00</h2>
                                     <small>CWO Month-to-Date</small>
-                                    <div class="stat-percent"><span data-bind="text:RollupValues().CWOPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
+                                    <div class="stat-percent"><small>Actual - </small> <span data-bind="text:RollupValues().CWOPctF"></span> @*<i class="fa fa-level-down text-navy"></i>*@</div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().CWOPct + '%'}" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                     <div class="progress progress-mini">
                                         <div data-bind="style: {width: RollupValues().SalesShouldBePerc + '%'}" class="progress-bar"></div>
                                     </div>
-                                    <div class="stat-percent">Should Be <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
+                                    <div class="stat-percent"><small>Goal - </small> <span data-bind="text: RollupValues().SalesShouldBePerc+ '%'"></span></div>
                                 </li>
                                 <li>
                                     <h2 class="no-margins" data-bind="text: RollupValues().MarginsF">0.00</h2>
@@ -321,6 +329,7 @@
 
     <script>
         var homeScrapChart;
+        var homeOTDChart;
         $(function () {
 
             var vm = new HomeViewModel();
@@ -338,8 +347,8 @@
             });
 
             $(document).on('click', '.range-detail-filter', function () {
-                var month = $("#monthSelect").val();
-                var year = $("#yearSelect").val();
+                var year = $("#periodSelect").val().split('-')[0];
+                var month = $("#periodSelect").val().split('-')[1];
                 var day = '';
                 var range = $(this).html();
                 var ftype = $(this).attr('ftype');
@@ -435,7 +444,7 @@
 
 
 
-            var homeChart = $('#home-chart').highcharts({
+            var homeSalesChart = $('#home-sales-chart').highcharts({
                 title: {
                     text: 'Sales - Month to Date',
                     x: -20 //center
@@ -479,9 +488,8 @@
                         point: {
                             events: {
                                 click: function (e) {
-
-                                    var month = $("#monthSelect").val();
-                                    var year = $("#yearSelect").val();
+                                    var year = $("#periodSelect").val().split('-')[0];
+                                    var month = $("#periodSelect").val().split('-')[1];
                                     var day = this.x + 1;
 
                                     savedDay = day;
@@ -559,8 +567,8 @@
                         point: {
                             events: {
                                 click: function (e) {
-                                    var month = $("#monthSelect").val();
-                                    var year = $("#yearSelect").val();
+                                    var year = $("#periodSelect").val().split('-')[0];
+                                    var month = $("#periodSelect").val().split('-')[1];
                                     var day = this.x + 1;
                                     savedDay = day;
                                     vm.loadSelectDayScrap(year, month, day);
@@ -587,28 +595,105 @@
                     color: 'rgba(217, 104, 0, 0.80)'
                 }]
             }).highcharts();
+            homeOTDChart = $('#home-otd-chart').highcharts({
+                title: {
+                    text: 'On Time Delivery - Monthly',
+                    x: -20 //center
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45,
+                        step: 2
+                    }
+                },
+                yAxis: {
+                    min: 25,
+                    max: 100,
+                    labels: {
+                        formatter: function () {
+                                return this.value.toFixed(0) + '%';
+                        }
+                    },
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '%',
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
 
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 4
+                    }
+                },
+                series: [{
+                    name: 'Goal',
+                    data: [98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98],
+                    color: '#27ae60'
+                }, {
+                    name: 'OTD',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
+            
+            //<li class="active"><a data-toggle="tab" href="#tab-1">Sales</a></li>
+            //<li class=""><a data-toggle="tab" href="#tab-2" onmousemove="homeScrapChart.reflow();">Scrap</a></li>
+            //<li class=""><a data-toggle="tab" href="#tab-3" onmousemove="homeOTDChart.reflow();">On Time Del.</a></li>
+
+            $('#sales-chart-tab').click(function () {
+                setTimeout(function () {
+                    homeSalesChart.reflow();
+                }, 10);
+            });
+
+            $('#scrap-chart-tab').click(function () {
+                setTimeout(function () {
+                    homeScrapChart.reflow();
+                }, 10);
+            });
+
+            $('#otd-chart-tab').click(function () {
+                setTimeout(function () {
+                    homeOTDChart.reflow();
+                }, 10);
+            });
 
             vm.ChartSalesMTD.subscribe(function (val) {
-                homeChart.series[2].setData(val, true);
+                homeSalesChart.series[2].setData(val, true);
             });
             vm.ChartScrapMTD.subscribe(function (val) {
                 homeScrapChart.series[1].setData(val, true);
             });
             vm.ChartCategories.subscribe(function (val) {
-                homeChart.xAxis[0].setCategories(val, true);
+                homeSalesChart.xAxis[0].setCategories(val, true);
                 homeScrapChart.xAxis[0].setCategories(val, true);
             });
             vm.SalesGoals.subscribe(function (val) {
-                homeChart.series[0].setData(val, true);
+                homeSalesChart.series[0].setData(val, true);
             });
             vm.ScrapGoals.subscribe(function (val) {
                 homeScrapChart.series[0].setData(val, true);
             });
             vm.ChartCWOMTD.subscribe(function (val) {
-                homeChart.series[1].setData(val, true);
+                homeSalesChart.series[1].setData(val, true);
             });
 
+            vm.DeliveryRates.subscribe(function (val) {
+                homeOTDChart.series[1].setData(val, true);
+            });
+            vm.RollingTwelveLabels.subscribe(function (val) {
+                homeOTDChart.xAxis[0].setCategories(val, true);
+            });
 
 
 

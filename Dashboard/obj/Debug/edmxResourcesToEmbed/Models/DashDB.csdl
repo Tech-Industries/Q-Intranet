@@ -88,6 +88,7 @@
     <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
     <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
     <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
+    <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -830,5 +831,30 @@
     <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
     <Property Name="PastDue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
     <Property Name="OnTimePercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="FlashReportRollUpAll">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="DaysInMonth" Type="Int32" />
+    <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="Decimal" Precision="38" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="UCFScore" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="UCFGoal" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PlantID" Type="Int32" Nullable="false" />
+    <Property Name="PDSales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="Decimal" Precision="38" Scale="6" />
   </EntityType>
 </Schema>

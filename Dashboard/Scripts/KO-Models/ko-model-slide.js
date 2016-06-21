@@ -6,6 +6,7 @@
     var slideAPI = $("#SlideLink").attr('href');
     var pageAPI = $("#PageLink").attr('href');
     var UCFAuditsAPI = $("#UCFAuditsLink").attr('href');
+    var flashAPI = $("#FlashLink").attr('href');
 
     self.ChartSalesMTD = ko.observableArray([]);
     self.ChartScrapMTD = ko.observableArray([]);
@@ -52,7 +53,9 @@
     
     self.FacilityScore = ko.observable();
     self.AreaScores = ko.observableArray([]);
-    
+
+    self.DeliveryRates = ko.observableArray([]);
+    self.RollingTwelveLabels = ko.observableArray([]);
 
     var nameContain = "All";
     var year = "";
@@ -61,6 +64,49 @@
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
+
+
+    self.loadOnTimeDeliveryTrend = function () {
+        var ID = $('#plantSelect option:selected').attr('plantid');
+        Year = $("#yearSelect").val();
+        Month = $("#monthSelect").val();
+        Range = 11;
+        console.log(ID + ' - ' + Year + ' - ' + Month);
+        var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: ID, Year: Year, Month: Month, Range: Range } });
+        load.done(function (data) {
+            var deliveryRates = [];
+            check = Month - Range;
+            if (check <= 0) {
+                check += 12;
+            }
+            incr = 0;
+            i = 0;
+            while (incr <= Range) {
+                if (i < data.length) {
+                    if (data[i].Month == check) {
+                        deliveryRates.push(data[i].OnTimePercent);
+                        i++;
+                    }
+                    else {
+                        deliveryRates.push(null);
+                    }
+                }
+                incr += 1;
+                check += 1;
+                if (check > 12) {
+                    check -= 12;
+                }
+
+            }
+            while (deliveryRates.length < Range + 1) {
+                deliveryRates.push(null);
+            }
+            self.DeliveryRates(deliveryRates);
+
+            self.RollingTwelveLabels(getMonthNamesInRange(Month, Range + 1));
+        });
+    }
+
 
     self.loadUCFSlide = function () {
         PlantID = $('#plantSelect option:selected').attr('plantid');
@@ -693,6 +739,7 @@
         self.loadIncentives();
         self.loadMeeting();
         self.loadUCFSlide();
+        self.loadOnTimeDeliveryTrend();
         //$('.dtSalesDetail').dataTable().fnClearTable();
     }
 }

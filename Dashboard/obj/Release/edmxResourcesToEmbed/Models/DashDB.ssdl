@@ -257,6 +257,26 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
     <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ProductLineTemp">
+          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="LINE" Type="char" MaxLength="3" />
+          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
+          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
+          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
+          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
+          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
+          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
+          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
+          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
+        </EntityType>-->
   <EntityType Name="ProjectAssignees">
     <Key>
       <PropertyRef Name="ID" />
@@ -584,6 +604,33 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a p
     <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUpAll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FlashReportRollUpAll">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="DaysInMonth" Type="int" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="38" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="UCFScore" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="PDSales" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="IncentiveRollupByPlant">
     <Key>
@@ -603,6 +650,38 @@ warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not hav
     <Property Name="UCFGoal" Type="decimal" Precision="10" Scale="2" />
     <Property Name="PlantID" Type="int" />
     <Property Name="PDSales" Type="numeric" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrendInt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrendInt">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Month" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.PastDueDeliverables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -906,6 +985,28 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [FlashReportRollUp].[OnTimePercent] AS [OnTimePercent]
     FROM [dbo].[FlashReportRollUp] AS [FlashReportRollUp]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="FlashReportRollUpAll" EntityType="Self.FlashReportRollUpAll" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FlashReportRollUpAll].[ID] AS [ID], 
+    [FlashReportRollUpAll].[Year] AS [Year], 
+    [FlashReportRollUpAll].[Month] AS [Month], 
+    [FlashReportRollUpAll].[DaysInMonth] AS [DaysInMonth], 
+    [FlashReportRollUpAll].[Cwo] AS [Cwo], 
+    [FlashReportRollUpAll].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUpAll].[Scrap] AS [Scrap], 
+    [FlashReportRollUpAll].[ScrapGoal] AS [ScrapGoal], 
+    [FlashReportRollUpAll].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [FlashReportRollUpAll].[PlantCode] AS [PlantCode], 
+    [FlashReportRollUpAll].[UCFScore] AS [UCFScore], 
+    [FlashReportRollUpAll].[UCFGoal] AS [UCFGoal], 
+    [FlashReportRollUpAll].[PlantID] AS [PlantID], 
+    [FlashReportRollUpAll].[PDSales] AS [PDSales], 
+    [FlashReportRollUpAll].[Sales] AS [Sales], 
+    [FlashReportRollUpAll].[Margins] AS [Margins], 
+    [FlashReportRollUpAll].[MarginPct] AS [MarginPct], 
+    [FlashReportRollUpAll].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[FlashReportRollUpAll] AS [FlashReportRollUpAll]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="IncentiveRollupByPlant" EntityType="Self.IncentiveRollupByPlant" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [IncentiveRollupByPlant].[ID] AS [ID], 
@@ -922,6 +1023,28 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [IncentiveRollupByPlant].[PlantID] AS [PlantID], 
     [IncentiveRollupByPlant].[PDSales] AS [PDSales]
     FROM [dbo].[IncentiveRollupByPlant] AS [IncentiveRollupByPlant]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrend" EntityType="Self.OnTimeDeliveryTrend" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrend].[ID] AS [ID], 
+    [OnTimeDeliveryTrend].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrend].[Year] AS [Year], 
+    [OnTimeDeliveryTrend].[Month] AS [Month], 
+    [OnTimeDeliveryTrend].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrend].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrend].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrend] AS [OnTimeDeliveryTrend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrendInt" EntityType="Self.OnTimeDeliveryTrendInt" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrendInt].[ID] AS [ID], 
+    [OnTimeDeliveryTrendInt].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrendInt].[Year] AS [Year], 
+    [OnTimeDeliveryTrendInt].[Month] AS [Month], 
+    [OnTimeDeliveryTrendInt].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrendInt].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrendInt].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrendInt] AS [OnTimeDeliveryTrendInt]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="PastDueDeliverables" EntityType="Self.PastDueDeliverables" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

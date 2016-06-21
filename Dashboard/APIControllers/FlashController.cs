@@ -23,7 +23,7 @@ namespace Dashboard.APIControllers
         {
             if (PlantID == 0)
             {
-                return Ok(await FlashRollupViewModel.MapFromAsync(db.FlashReportRollUps.Where(x => x.PlantCode == "All" && x.Year == Year && x.Month == Month).ToList()));
+                return Ok(await FlashRollupAllViewModel.MapFromAsync(db.FlashReportRollUpAlls.Where(x => x.Year == Year && x.Month == Month).ToList()));
             }
             else
             {

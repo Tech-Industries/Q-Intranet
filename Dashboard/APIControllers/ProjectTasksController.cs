@@ -58,11 +58,20 @@ namespace Dashboard.APIControllers
 
             ProjectTask uptask = (ProjectTask)db.ProjectTasks.Where(x => x.ID == ID).First();
             uptask.Status = ptask.Status;
+            if(uptask.Status == "Complete")
+            {
+                uptask.DateCompleted = DateTime.Now;
+            }
+            else
+            {
+                uptask.DateCompleted = null;
+            }
 
 
             db.ProjectTasks.Attach(uptask);
             var entry = db.Entry(uptask);
             entry.Property(e => e.Status).IsModified = true;
+            entry.Property(e => e.DateCompleted).IsModified = true;
             // other changed properties
             db.SaveChanges();
 

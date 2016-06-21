@@ -43,6 +43,9 @@
     self.SelectedDayScrap = ko.observableArray([]);
     self.SelectedDayScrapAccum = ko.observable();
 
+    self.DeliveryRates = ko.observableArray([]);
+    self.RollingTwelveLabels = ko.observableArray([]);
+
     self.RollupValues = ko.observableArray([]);
 
     self.isLoading = ko.observable(false);
@@ -57,12 +60,10 @@
 
     self.loadRollup = function () {
         PlantID = $('#plantSelect option:selected').attr('plantid');
-        Year = $("#yearSelect").val();
-        Month = $("#monthSelect").val();
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: PlantID, Year: Year, Month: Month } });
         load.done(function (data) {
-            console.log(data.length);
-            console.log(data);
             data = data[0];
 
             var SalesDayGoal = data.CWOGoal / data.DaysInMonth;
@@ -101,7 +102,7 @@
 
             if (data.Sales > 0) {
 
-                
+
 
                 data.MarginsF = formatMoney(data.Margins);
                 data.SalesF = formatMoney(data.Sales);
@@ -155,13 +156,55 @@
                 self.RollupValues(data);
             }
         });
-        
+
+    }
+
+    self.loadOnTimeDeliveryTrend = function () {
+        var ID = $('#plantSelect option:selected').attr('plantid');
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
+
+        console.log(ID + ' - ' + Year + ' - ' + Month);
+        Range = 11;
+        var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: ID, Year: Year, Month: Month, Range: Range } });
+        load.done(function (data) {
+            var deliveryRates = [];
+            check = Month - Range;
+            if (check <= 0) {
+                check += 12;
+            }
+            incr = 0;
+            i = 0;
+            while (incr <= Range) {
+                if (i < data.length) {
+                    if (data[i].Month == check) {
+                        deliveryRates.push(data[i].OnTimePercent);
+                        i++;
+                    }
+                    else {
+                        deliveryRates.push(null);
+                    }
+                }
+                incr += 1;
+                check += 1;
+                if (check > 12) {
+                    check -= 12;
+                }
+
+            }
+            while (deliveryRates.length < Range + 1) {
+                deliveryRates.push(null);
+            }
+            self.DeliveryRates(deliveryRates);
+
+            self.RollingTwelveLabels(getMonthNamesInRange(Month, Range + 1));
+        });
     }
 
     self.loadSales = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -177,8 +220,6 @@
                     Day: item.Day,
                     Sales: item.Sales,
                     MarginAmt: item.MarginAmt
-
-
                 };
             });
 
@@ -240,8 +281,8 @@
 
     self.loadScrap = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -366,9 +407,6 @@
         year = data.split(' ')[0];
         month = data.split(' ')[1];
         day = data.split(' ')[2];
-        console.log(year);
-        console.log(month);
-        console.log(day);
         if (type == 'sales') {
             self.loadSelectDaySales(year, month, day);
         }
@@ -567,8 +605,8 @@
 
     self.loadCWO = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -660,9 +698,9 @@
     //}
 
     self.loadOTMTD = function () {
-
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         nameContain = $("#plantSelect").val();
         var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "Overtime", nameContain: nameContain, year: year, month: month } });
         load.done(function (data) {
@@ -688,6 +726,7 @@
         self.loadRollup();
         self.loadSales();
         self.loadScrap();
+        self.loadOnTimeDeliveryTrend();
         self.loadCWO();
         //self.loadSalesGoals();        
         self.loadOTMTD();

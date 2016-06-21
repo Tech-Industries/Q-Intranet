@@ -60,8 +60,8 @@
 
     self.loadRollup = function () {
         PlantID = $('#plantSelect option:selected').attr('plantid');
-        Year = $("#yearSelect").val();
-        Month = $("#monthSelect").val();
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: PlantID, Year: Year, Month: Month } });
         load.done(function (data) {
             data = data[0];
@@ -161,8 +161,10 @@
 
     self.loadOnTimeDeliveryTrend = function () {
         var ID = $('#plantSelect option:selected').attr('plantid');
-        var Year = parseInt($('#yearSelect').val());
-        var Month = parseInt($('#monthSelect').val());
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
+
+        console.log(ID + ' - ' + Year + ' - ' + Month);
         Range = 11;
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: ID, Year: Year, Month: Month, Range: Range } });
         load.done(function (data) {
@@ -201,8 +203,8 @@
 
     self.loadSales = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -218,8 +220,6 @@
                     Day: item.Day,
                     Sales: item.Sales,
                     MarginAmt: item.MarginAmt
-
-
                 };
             });
 
@@ -281,8 +281,8 @@
 
     self.loadScrap = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -605,8 +605,8 @@
 
     self.loadCWO = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -698,9 +698,9 @@
     //}
 
     self.loadOTMTD = function () {
-
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        
+        var year = $("#periodSelect").val().split('-')[0];
+        var month = $("#periodSelect").val().split('-')[1];
         nameContain = $("#plantSelect").val();
         var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "Overtime", nameContain: nameContain, year: year, month: month } });
         load.done(function (data) {

@@ -58,7 +58,7 @@ namespace Dashboard.APIControllers
         public async Task<IHttpActionResult> Post(User user)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
-
+            user.Email = user.Email.ToLower();
             db.Users.Add(user);
             await db.SaveChangesAsync();
 

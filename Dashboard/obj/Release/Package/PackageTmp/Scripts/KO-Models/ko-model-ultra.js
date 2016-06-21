@@ -286,8 +286,6 @@
     }
 
     self.loadPlants = function () {
-        test += 1;
-        console.log(test);
         var load = $.ajax({ type: "GET", cache: false, url: PlantsAPI });
         load.success(function (data) {
             self.Plants(data);
@@ -397,8 +395,8 @@
         console.log(test);
 
         var ID = $('#plantSelect option:selected').attr('plantid');
-        var Year = parseInt($('#yearSelect').val());
-        var Month = parseInt($('#monthSelect').val());
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
         Range = 5;
 
 
@@ -457,8 +455,8 @@
         test += 1;
         console.log(test);
         var ID = $('#plantSelect option:selected').attr('plantid');
-        var Year = parseInt($('#yearSelect').val());
-        var Month = parseInt($('#monthSelect').val());
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
         Range = 5;
         var AreaID = $('#areaSelect option:selected').val();
         if (AreaID != null && AreaID != '') {

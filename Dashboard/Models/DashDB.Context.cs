@@ -84,5 +84,7 @@ namespace Dashboard.Models
         public virtual DbSet<OnTimeDeliveryTrend> OnTimeDeliveryTrends { get; set; }
         public virtual DbSet<OnTimeDeliveryTrendInt> OnTimeDeliveryTrendInts { get; set; }
         public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
+        public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
+        public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
     }
 }

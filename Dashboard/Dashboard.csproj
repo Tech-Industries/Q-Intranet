@@ -198,6 +198,7 @@
     <Compile Include="APIControllers\PlantsController.cs" />
     <Compile Include="APIControllers\LogController.cs" />
     <Compile Include="APIControllers\UCFActionsController.cs" />
+    <Compile Include="APIControllers\OperationsController.cs" />
     <Compile Include="APIControllers\UCFAuditDetailController.cs" />
     <Compile Include="APIControllers\UCFGoalsController.cs" />
     <Compile Include="APIControllers\UCFAuditsController.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MachineController.cs" />
     <Compile Include="Controllers\PrevMaintController.cs" />
+    <Compile Include="Controllers\OperationsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SlideController.cs" />
     <Compile Include="Controllers\UltraController.cs" />
@@ -449,6 +451,12 @@
     <Compile Include="Models\ScrapStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShipAdjDate.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingPlanAdjShipDate.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TimeInStateByMachine.cs">
       <DependentUpon>NKCConnect.tt</DependentUpon>
     </Compile>
@@ -509,6 +517,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CommentsViewModel.cs" />
     <Compile Include="ViewModels\FlashRollupAllViewModel.cs" />
+    <Compile Include="ViewModels\ShipAdjViewModel.cs" />
     <Compile Include="ViewModels\UCFAuditDetailViewModel.cs" />
     <Compile Include="ViewModels\FlashRollupViewModel.cs" />
     <Compile Include="ViewModels\UCFAuditsViewModel.cs" />
@@ -848,6 +857,7 @@
     <Content Include="Scripts\KO-Models\ko-model-bugs.js" />
     <Content Include="Scripts\KO-Models\ko-model-projects.js" />
     <Content Include="Scripts\KO-Models\ko-model-machine-overview.js" />
+    <Content Include="Scripts\KO-Models\ko-model-operations.js" />
     <Content Include="Scripts\KO-Models\ko-model-users.js" />
     <Content Include="Scripts\KO-Models\ko-helpers.js" />
     <Content Include="Scripts\KO-Models\ko-model-home.js" />
@@ -1309,6 +1319,8 @@
     <Content Include="Views\Shared\_BugModal.cshtml" />
     <Content Include="Views\PrevMaint.cshtml" />
     <Content Include="Views\PrevMaint\Index.cshtml" />
+    <Content Include="Views\Operations\Staging.cshtml" />
+    <Content Include="Views\Operations\ShippingPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

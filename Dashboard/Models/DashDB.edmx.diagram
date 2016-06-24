@@ -55,7 +55,7 @@
         <EntityTypeShape EntityType="DashboardModel.PrevMaint" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="DashboardModel.Meetings" Width="1.5" PointX="15.375" PointY="5.75" />
         <EntityTypeShape EntityType="DashboardModel.UCFAuditHIstoryTopLevel" Width="1.5" PointX="9.5" PointY="20.5" />
-        <EntityTypeShape EntityType="DashboardModel.Page" Width="1.5" PointX="14.375" PointY="18.375" />
+        <EntityTypeShape EntityType="DashboardModel.Page" Width="1.5" PointX="14.375" PointY="18.625" />
         <EntityTypeShape EntityType="DashboardModel.UCFAveragesByMonth" Width="1.5" PointX="7.125" PointY="17.625" />
         <EntityTypeShape EntityType="DashboardModel.Notification" Width="1.5" PointX="17.375" PointY="4.75" />
         <EntityTypeShape EntityType="DashboardModel.CWOStage" Width="1.5" PointX="11.625" PointY="17.75" />
@@ -65,6 +65,8 @@
         <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrend" Width="2.25" PointX="16.375" PointY="8.75" />
         <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrendInt" Width="1.5" PointX="18.375" PointY="12.75" />
         <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="1.5" PointX="16" PointY="13.75" />
+        <EntityTypeShape EntityType="DashboardModel.ShipAdjDate" Width="1.5" PointX="19.875" PointY="16.75" />
+        <EntityTypeShape EntityType="DashboardModel.ShippingPlanAdjShipDate" Width="1.5" PointX="18.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

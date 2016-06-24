@@ -89,6 +89,8 @@
     <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
     <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
     <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
+    <EntitySet Name="ShipAdjDates" EntityType="DashboardModel.ShipAdjDate" />
+    <EntitySet Name="ShippingPlanAdjShipDates" EntityType="DashboardModel.ShippingPlanAdjShipDate" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -109,7 +111,7 @@
     <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
     <Property Name="Amount" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="SalesMonthlyByCompany">
@@ -803,6 +805,8 @@
     <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="Decimal" Precision="38" Scale="4" />
   </EntityType>
   <EntityType Name="OnTimeDeliveryTrend">
     <Key>
@@ -856,5 +860,33 @@
     <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="OnTimePercent" Type="Decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="ShipAdjDate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="OrderNo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="OrderLine" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="DateDue" Type="DateTime" Precision="0" />
+    <Property Name="QtySched" Type="Decimal" Precision="13" Scale="4" />
+    <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="16" Scale="6" />
+    <Property Name="Sales" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="AdjShipDate" Type="DateTime" Precision="0" />
+    <Property Name="DateID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ShippingPlanAdjShipDate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AdjShipDate" Type="DateTime" Precision="0" />
+    <Property Name="OrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DateDue" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>

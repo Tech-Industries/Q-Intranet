@@ -752,6 +752,8 @@
     <EntitySetMapping Name="FlashReportRollUps">
       <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
         <MappingFragment StoreEntitySet="FlashReportRollUp">
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
           <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
           <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
           <ScalarProperty Name="Margins" ColumnName="Margins" />
@@ -819,6 +821,36 @@
           <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
           <ScalarProperty Name="Month" ColumnName="Month" />
           <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipAdjDates">
+      <EntityTypeMapping TypeName="DashboardModel.ShipAdjDate">
+        <MappingFragment StoreEntitySet="ShipAdjDate">
+          <ScalarProperty Name="DateID" ColumnName="DateID" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingPlanAdjShipDates">
+      <EntityTypeMapping TypeName="DashboardModel.ShippingPlanAdjShipDate">
+        <MappingFragment StoreEntitySet="ShippingPlanAdjShipDates">
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

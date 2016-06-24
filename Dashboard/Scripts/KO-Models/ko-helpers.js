@@ -107,6 +107,12 @@ function formatShortDate(date) {
     var d = date.substring(6, 8);
     return m + "/" + d + "/" + y;
 }
+function formatToShortDate(date) {
+    var y = date.split('-')[0];
+    var m = date.split('-')[1];
+    var d = date.split('-')[2];
+    return m + "/" + d + "/" + y;
+}
 
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();

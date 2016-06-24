@@ -214,7 +214,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
           <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
           <Property Name="Year" Type="varchar" MaxLength="4" />
-          <Property Name="Month" Type="varchar" MaxLength="2" />
+          <Property Name="Month" Type="nvarchar" MaxLength="3" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Pages">
@@ -262,26 +262,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
           <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ProductLineTemp">
-          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="LINE" Type="char" MaxLength="3" />
-          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
-          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
-          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
-          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
-          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
-          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
-          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
-          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
-        </EntityType>-->
         <EntityType Name="ProjectAssignees">
           <Key>
             <PropertyRef Name="ID" />
@@ -415,6 +395,16 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Month" Type="varchar" MaxLength="2" />
           <Property Name="Day" Type="varchar" MaxLength="2" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingPlanAdjShipDates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="AdjShipDate" Type="date" />
+          <Property Name="OrderLine" Type="nvarchar" MaxLength="10" />
+          <Property Name="DateDue" Type="date" />
         </EntityType>
         <EntityType Name="UCFActions">
           <Key>
@@ -607,6 +597,8 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a p
           <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
           <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
           <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+          <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUpAll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -633,7 +625,7 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUpAll' does not have 
           <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
           <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
           <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
-          <Property Name="OnTimePercent" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OnTimePercent" Type="numeric" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -744,6 +736,26 @@ warning 6002: The table/view 'Dashboard.dbo.ReviewablesByUser' does not have a p
           <Property Name="DateCompleted" Type="datetime" />
           <Property Name="TimeReviewed" Type="datetime" />
           <Property Name="UserID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ShipAdjDate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ShipAdjDate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="OrderNo" Type="char" MaxLength="7" />
+          <Property Name="OrderLine" Type="char" MaxLength="4" />
+          <Property Name="DateDue" Type="date" />
+          <Property Name="QtySched" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="Customer" Type="char" MaxLength="6" />
+          <Property Name="CustomerName" Type="char" MaxLength="30" />
+          <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
+          <Property Name="Sales" Type="numeric" Precision="30" Scale="10" />
+          <Property Name="Part" Type="char" MaxLength="20" />
+          <Property Name="Description" Type="char" MaxLength="30" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AdjShipDate" Type="date" />
+          <Property Name="DateID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.UCFAreaTrendByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -885,6 +897,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="ScrapDailyByPlant" EntityType="Self.ScrapDailyByPlant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScrapMonthlyByPlant" EntityType="Self.ScrapMonthlyByPlant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScrapStage" EntityType="Self.ScrapStage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingPlanAdjShipDates" EntityType="Self.ShippingPlanAdjShipDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UCFActions" EntityType="Self.UCFActions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UCFAreas" EntityType="Self.UCFAreas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UCFAudit" EntityType="Self.UCFAudit" Schema="dbo" store:Type="Tables" />
@@ -989,7 +1002,9 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [FlashReportRollUp].[Sales] AS [Sales], 
     [FlashReportRollUp].[Margins] AS [Margins], 
     [FlashReportRollUp].[MarginPct] AS [MarginPct], 
-    [FlashReportRollUp].[OnTimePercent] AS [OnTimePercent]
+    [FlashReportRollUp].[OnTimePercent] AS [OnTimePercent], 
+    [FlashReportRollUp].[OnTime] AS [OnTime], 
+    [FlashReportRollUp].[PastDue] AS [PastDue]
     FROM [dbo].[FlashReportRollUp] AS [FlashReportRollUp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="FlashReportRollUpAll" EntityType="Self.FlashReportRollUpAll" store:Type="Views" store:Schema="dbo">
@@ -1098,6 +1113,23 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [ReviewablesByUser].[TimeReviewed] AS [TimeReviewed], 
     [ReviewablesByUser].[UserID] AS [UserID]
     FROM [dbo].[ReviewablesByUser] AS [ReviewablesByUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ShipAdjDate" EntityType="Self.ShipAdjDate" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ShipAdjDate].[OrderNo] AS [OrderNo], 
+    [ShipAdjDate].[OrderLine] AS [OrderLine], 
+    [ShipAdjDate].[DateDue] AS [DateDue], 
+    [ShipAdjDate].[QtySched] AS [QtySched], 
+    [ShipAdjDate].[Customer] AS [Customer], 
+    [ShipAdjDate].[CustomerName] AS [CustomerName], 
+    [ShipAdjDate].[Price] AS [Price], 
+    [ShipAdjDate].[Sales] AS [Sales], 
+    [ShipAdjDate].[Part] AS [Part], 
+    [ShipAdjDate].[Description] AS [Description], 
+    [ShipAdjDate].[ID] AS [ID], 
+    [ShipAdjDate].[AdjShipDate] AS [AdjShipDate], 
+    [ShipAdjDate].[DateID] AS [DateID]
+    FROM [dbo].[ShipAdjDate] AS [ShipAdjDate]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="UCFAreaTrendByMonthHalf" EntityType="Self.UCFAreaTrendByMonthHalf" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1273,6 +1305,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
           <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
           <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
+          <EntitySet Name="ShipAdjDates" EntityType="DashboardModel.ShipAdjDate" />
+          <EntitySet Name="ShippingPlanAdjShipDates" EntityType="DashboardModel.ShippingPlanAdjShipDate" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -1293,7 +1327,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="SalesMonthlyByCompany">
@@ -1987,6 +2021,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="PastDue" Type="Decimal" Precision="38" Scale="4" />
         </EntityType>
         <EntityType Name="OnTimeDeliveryTrend">
           <Key>
@@ -2040,6 +2076,34 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="OnTimePercent" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="ShipAdjDate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="OrderNo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="OrderLine" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="DateDue" Type="DateTime" Precision="0" />
+          <Property Name="QtySched" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="16" Scale="6" />
+          <Property Name="Sales" Type="Decimal" Precision="30" Scale="10" />
+          <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AdjShipDate" Type="DateTime" Precision="0" />
+          <Property Name="DateID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ShippingPlanAdjShipDate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AdjShipDate" Type="DateTime" Precision="0" />
+          <Property Name="OrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DateDue" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2798,6 +2862,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySetMapping Name="FlashReportRollUps">
             <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
               <MappingFragment StoreEntitySet="FlashReportRollUp">
+                <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
                 <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
                 <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
                 <ScalarProperty Name="Margins" ColumnName="Margins" />
@@ -2865,6 +2931,36 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
                 <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShipAdjDates">
+            <EntityTypeMapping TypeName="DashboardModel.ShipAdjDate">
+              <MappingFragment StoreEntitySet="ShipAdjDate">
+                <ScalarProperty Name="DateID" ColumnName="DateID" />
+                <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+                <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingPlanAdjShipDates">
+            <EntityTypeMapping TypeName="DashboardModel.ShippingPlanAdjShipDate">
+              <MappingFragment StoreEntitySet="ShippingPlanAdjShipDates">
+                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+                <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+                <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

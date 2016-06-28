@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b4c8049a55544827ad9baa12ca00fcb3" Name="Diagram1" >
+        <EntityTypeShape EntityType="OrizonModel.Bug" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.BugTag" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.Comment" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="OrizonModel.Company" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="OrizonModel.CWODailyByPlant" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableComment" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableDetail" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableDocument" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableReviewer" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableReview" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.Deliverable" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableView" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.Goal" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.Group" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.Log" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="OrizonModel.Machine" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.MachineStateChange" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="OrizonModel.MachineStateCurrent" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.Meeting" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="OrizonModel.Notification" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.OTMonthlyByCompany" Width="1.5" PointX="8.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.Page" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.PastDueSalesTrend" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.Plant" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.PrevMaint" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="OrizonModel.ProjectAssignee" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.Project" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="OrizonModel.ProjectTask" Width="1.5" PointX="4.75" PointY="13.75" />
+        <EntityTypeShape EntityType="OrizonModel.SalesDailyByCompany" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.SalesMonthlyByCompany" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="OrizonModel.SalesStage" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="OrizonModel.ScrapDailyByPlant" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.ScrapMonthlyByCompany" Width="1.5" PointX="8.75" PointY="14.75" />
+        <EntityTypeShape EntityType="OrizonModel.ScrapMonthlyByPlant" Width="1.5" PointX="10.75" PointY="14.75" />
+        <EntityTypeShape EntityType="OrizonModel.ScrapStage" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.ShippingPlanAdjShipDate" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.ShippingPlanStage" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAction" Width="1.5" PointX="16.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFArea" Width="1.5" PointX="16.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAudit" Width="1.5" PointX="16.75" PointY="14.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAuditDetail" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFCategory" Width="1.5" PointX="2.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFChallenge" Width="1.5" PointX="8.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFCriteria" Width="1.5" PointX="10.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFGoal" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.Update" Width="1.5" PointX="14.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.UserGroup" Width="1.5" PointX="16.75" PointY="17.75" />
+        <EntityTypeShape EntityType="OrizonModel.User" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.BT_SPTransactions" Width="1.5" PointX="18.75" PointY="3.75" />
+        <EntityTypeShape EntityType="OrizonModel.CWOStage" Width="1.5" PointX="18.75" PointY="9.75" />
+        <EntityTypeShape EntityType="OrizonModel.OnTimeDelivery" Width="1.5" PointX="18.75" PointY="15.75" />
+        <EntityTypeShape EntityType="OrizonModel.OrderLinesAll" Width="1.5" PointX="18.75" PointY="18.75" />
+        <EntityTypeShape EntityType="OrizonModel.OTStage" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.OTStageFour" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="OrizonModel.OTStageThree" Width="1.5" PointX="2.75" PointY="20.75" />
+        <EntityTypeShape EntityType="OrizonModel.OTStageTwo" Width="1.5" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="OrizonModel.PrevMaintCost" Width="1.5" PointX="20.75" PointY="8.75" />
+        <EntityTypeShape EntityType="OrizonModel.PrevMaintTemp" Width="1.5" PointX="20.75" PointY="11.75" />
+        <EntityTypeShape EntityType="OrizonModel.Price" Width="1.5" PointX="12.75" PointY="20.75" />
+        <EntityTypeShape EntityType="OrizonModel.ScrapStageTemp" Width="1.5" PointX="14.75" PointY="20.75" />
+        <EntityTypeShape EntityType="OrizonModel.BugsTopLevel" Width="1.5" PointX="20.75" PointY="16.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverablesDueInNextThirtyDay" Width="1.5" PointX="20.75" PointY="20.75" />
+        <EntityTypeShape EntityType="OrizonModel.DeliverableStatusByUserID" Width="1.5" PointX="4.75" PointY="21.75" />
+        <EntityTypeShape EntityType="OrizonModel.FlashReportRollUp" Width="1.5" PointX="6.75" PointY="21.75" />
+        <EntityTypeShape EntityType="OrizonModel.FlashReportRollUpAll" Width="1.5" PointX="8.75" PointY="21.75" />
+        <EntityTypeShape EntityType="OrizonModel.IncentiveRollupByPlant" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.OnTimeDeliveryTrend" Width="1.5" PointX="22.75" PointY="5.75" />
+        <EntityTypeShape EntityType="OrizonModel.OnTimeDeliveryTrendInt" Width="1.5" PointX="22.75" PointY="9.75" />
+        <EntityTypeShape EntityType="OrizonModel.PastDueDeliverable" Width="1.5" PointX="22.75" PointY="13.75" />
+        <EntityTypeShape EntityType="OrizonModel.PastDueDeliverablesByReviewer" Width="1.5" PointX="22.75" PointY="18.75" />
+        <EntityTypeShape EntityType="OrizonModel.ProjectsTopLevel" Width="1.5" PointX="22.75" PointY="22.75" />
+        <EntityTypeShape EntityType="OrizonModel.RevieablesByUserPastDue" Width="1.5" PointX="10.75" PointY="23.75" />
+        <EntityTypeShape EntityType="OrizonModel.ReviewablesByUser" Width="1.5" PointX="16.75" PointY="23.75" />
+        <EntityTypeShape EntityType="OrizonModel.ShipAdjDate" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrizonModel.TimeInStateByMachine" Width="1.5" PointX="0.75" PointY="24.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAreaTrendByMonthHalf" Width="1.5" PointX="24.75" PointY="5.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAuditDetailLevel" Width="1.5" PointX="24.75" PointY="9.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAuditHIstoryTopLevel" Width="1.5" PointX="24.75" PointY="14.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFAveragesByMonth" Width="1.5" PointX="24.75" PointY="18.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFPlantRollupByMonthHalf" Width="1.5" PointX="24.75" PointY="22.75" />
+        <EntityTypeShape EntityType="OrizonModel.UCFPreviousScoresByChallenge" Width="1.5" PointX="2.75" PointY="25.75" />
+        <AssociationConnector Association="OrizonModel.FK_DeliverableDocuments_DeliverableDocuments" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

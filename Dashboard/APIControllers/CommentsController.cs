@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.ViewModels;
-using Orizon.Web.Data;
+//using Dashboard.Models;
 using Newtonsoft.Json.Linq;
 using System.Web;
+using Orizon.Web.Data;
 
 namespace Dashboard.APIControllers
 {
     public class CommentsController : ApiController
     {
-        private DashboardEntities db = new DashboardEntities();
-
+        private OrizonEntities db = new OrizonEntities();
 
         public List<object> Get(int ID, string Type)
         {

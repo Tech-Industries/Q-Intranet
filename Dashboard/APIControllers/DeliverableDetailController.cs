@@ -12,7 +12,6 @@ using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
 using System.Web;
-//using Orizon.Web.Data;
 
 namespace Dashboard.APIControllers
 {

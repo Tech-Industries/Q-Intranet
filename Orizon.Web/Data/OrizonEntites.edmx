@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OrizonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BT_SPTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BT_SPTransactions">
@@ -1561,7 +1561,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DashboardModelStoreContainer">
+        <EntityContainer Name="OrizonModelStoreContainer">
           <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
@@ -2093,113 +2093,90 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="SalesDailyByCompany">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="CompanyCode" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Date" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Day" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="MarginAmt" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="SalesMonthlyByCompany">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="CompanyCode" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="Month" Type="Int32" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityContainer Name="DashboardEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SalesDailyByCompanies" EntityType="Self.SalesDailyByCompany" />
-          <EntitySet Name="SalesMonthlyByCompanies" EntityType="Self.SalesMonthlyByCompany" />
-          <EntitySet Name="Bugs" EntityType="DashboardModel.Bug" />
-          <EntitySet Name="BugTags" EntityType="DashboardModel.BugTag" />
-          <EntitySet Name="Comments" EntityType="DashboardModel.Comment" />
-          <EntitySet Name="Companies" EntityType="DashboardModel.Company" />
-          <EntitySet Name="CWODailyByPlants" EntityType="DashboardModel.CWODailyByPlant" />
-          <EntitySet Name="DeliverableComments" EntityType="DashboardModel.DeliverableComment" />
-          <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
-          <EntitySet Name="DeliverableDocuments" EntityType="DashboardModel.DeliverableDocument" />
-          <EntitySet Name="DeliverableReviewers" EntityType="DashboardModel.DeliverableReviewer" />
-          <EntitySet Name="DeliverableReviews" EntityType="DashboardModel.DeliverableReview" />
-          <EntitySet Name="Deliverables" EntityType="DashboardModel.Deliverable" />
-          <EntitySet Name="DeliverableViews" EntityType="DashboardModel.DeliverableView" />
-          <EntitySet Name="Goals" EntityType="DashboardModel.Goal" />
-          <EntitySet Name="Groups" EntityType="DashboardModel.Group" />
-          <EntitySet Name="Logs" EntityType="DashboardModel.Log" />
-          <EntitySet Name="Machines" EntityType="DashboardModel.Machine" />
-          <EntitySet Name="MachineStateChanges" EntityType="DashboardModel.MachineStateChange" />
-          <EntitySet Name="MachineStateCurrents" EntityType="DashboardModel.MachineStateCurrent" />
-          <EntitySet Name="Meetings" EntityType="DashboardModel.Meeting" />
-          <EntitySet Name="Notifications" EntityType="DashboardModel.Notification" />
-          <EntitySet Name="OTMonthlyByCompanies" EntityType="DashboardModel.OTMonthlyByCompany" />
-          <EntitySet Name="Pages" EntityType="DashboardModel.Page" />
-          <EntitySet Name="PastDueSalesTrends" EntityType="DashboardModel.PastDueSalesTrend" />
-          <EntitySet Name="Plants" EntityType="DashboardModel.Plant" />
-          <EntitySet Name="PrevMaints" EntityType="DashboardModel.PrevMaint" />
-          <EntitySet Name="ProjectAssignees" EntityType="DashboardModel.ProjectAssignee" />
-          <EntitySet Name="Projects" EntityType="DashboardModel.Project" />
-          <EntitySet Name="ProjectTasks" EntityType="DashboardModel.ProjectTask" />
-          <EntitySet Name="SalesStages" EntityType="DashboardModel.SalesStage" />
-          <EntitySet Name="ScrapDailyByPlants" EntityType="DashboardModel.ScrapDailyByPlant" />
-          <EntitySet Name="ScrapMonthlyByCompanies" EntityType="DashboardModel.ScrapMonthlyByCompany" />
-          <EntitySet Name="ScrapMonthlyByPlants" EntityType="DashboardModel.ScrapMonthlyByPlant" />
-          <EntitySet Name="ScrapStages" EntityType="DashboardModel.ScrapStage" />
-          <EntitySet Name="ShippingPlanAdjShipDates" EntityType="DashboardModel.ShippingPlanAdjShipDate" />
-          <EntitySet Name="ShippingPlanStages" EntityType="DashboardModel.ShippingPlanStage" />
-          <EntitySet Name="UCFActions" EntityType="DashboardModel.UCFAction" />
-          <EntitySet Name="UCFAreas" EntityType="DashboardModel.UCFArea" />
-          <EntitySet Name="UCFAudits" EntityType="DashboardModel.UCFAudit" />
-          <EntitySet Name="UCFAuditDetails" EntityType="DashboardModel.UCFAuditDetail" />
-          <EntitySet Name="UCFCategories" EntityType="DashboardModel.UCFCategory" />
-          <EntitySet Name="UCFChallenges" EntityType="DashboardModel.UCFChallenge" />
-          <EntitySet Name="UCFCriterias" EntityType="DashboardModel.UCFCriteria" />
-          <EntitySet Name="UCFGoals" EntityType="DashboardModel.UCFGoal" />
-          <EntitySet Name="Updates" EntityType="DashboardModel.Update" />
-          <EntitySet Name="UserGroups" EntityType="DashboardModel.UserGroup" />
-          <EntitySet Name="Users" EntityType="DashboardModel.User" />
-          <EntitySet Name="BT_SPTransactions" EntityType="DashboardModel.BT_SPTransactions" />
-          <EntitySet Name="CWOStages" EntityType="DashboardModel.CWOStage" />
-          <EntitySet Name="OnTimeDeliveries" EntityType="DashboardModel.OnTimeDelivery" />
-          <EntitySet Name="OrderLinesAlls" EntityType="DashboardModel.OrderLinesAll" />
-          <EntitySet Name="OTStages" EntityType="DashboardModel.OTStage" />
-          <EntitySet Name="OTStageFours" EntityType="DashboardModel.OTStageFour" />
-          <EntitySet Name="OTStageThrees" EntityType="DashboardModel.OTStageThree" />
-          <EntitySet Name="OTStageTwoes" EntityType="DashboardModel.OTStageTwo" />
-          <EntitySet Name="PrevMaintCosts" EntityType="DashboardModel.PrevMaintCost" />
-          <EntitySet Name="PrevMaintTemps" EntityType="DashboardModel.PrevMaintTemp" />
-          <EntitySet Name="Prices" EntityType="DashboardModel.Price" />
-          <EntitySet Name="ScrapStageTemps" EntityType="DashboardModel.ScrapStageTemp" />
-          <EntitySet Name="BugsTopLevels" EntityType="DashboardModel.BugsTopLevel" />
-          <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" />
-          <EntitySet Name="DeliverableStatusByUserIDs" EntityType="DashboardModel.DeliverableStatusByUserID" />
-          <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
-          <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
-          <EntitySet Name="IncentiveRollupByPlants" EntityType="DashboardModel.IncentiveRollupByPlant" />
-          <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
-          <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
-          <EntitySet Name="PastDueDeliverables" EntityType="DashboardModel.PastDueDeliverable" />
-          <EntitySet Name="PastDueDeliverablesByReviewers" EntityType="DashboardModel.PastDueDeliverablesByReviewer" />
-          <EntitySet Name="ProjectsTopLevels" EntityType="DashboardModel.ProjectsTopLevel" />
-          <EntitySet Name="RevieablesByUserPastDues" EntityType="DashboardModel.RevieablesByUserPastDue" />
-          <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
-          <EntitySet Name="ShipAdjDates" EntityType="DashboardModel.ShipAdjDate" />
-          <EntitySet Name="TimeInStateByMachines" EntityType="DashboardModel.TimeInStateByMachine" />
-          <EntitySet Name="UCFAreaTrendByMonthHalves" EntityType="DashboardModel.UCFAreaTrendByMonthHalf" />
-          <EntitySet Name="UCFAuditDetailLevels" EntityType="DashboardModel.UCFAuditDetailLevel" />
-          <EntitySet Name="UCFAuditHIstoryTopLevels" EntityType="DashboardModel.UCFAuditHIstoryTopLevel" />
-          <EntitySet Name="UCFAveragesByMonths" EntityType="DashboardModel.UCFAveragesByMonth" />
-          <EntitySet Name="UCFPlantRollupByMonthHalves" EntityType="DashboardModel.UCFPlantRollupByMonthHalf" />
-          <EntitySet Name="UCFPreviousScoresByChallenges" EntityType="DashboardModel.UCFPreviousScoresByChallenge" />
-          <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments">
+      <Schema Namespace="OrizonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OrizonEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Bugs" EntityType="OrizonModel.Bug" />
+          <EntitySet Name="BugTags" EntityType="OrizonModel.BugTag" />
+          <EntitySet Name="Comments" EntityType="OrizonModel.Comment" />
+          <EntitySet Name="Companies" EntityType="OrizonModel.Company" />
+          <EntitySet Name="CWODailyByPlants" EntityType="OrizonModel.CWODailyByPlant" />
+          <EntitySet Name="DeliverableComments" EntityType="OrizonModel.DeliverableComment" />
+          <EntitySet Name="DeliverableDetails" EntityType="OrizonModel.DeliverableDetail" />
+          <EntitySet Name="DeliverableDocuments" EntityType="OrizonModel.DeliverableDocument" />
+          <EntitySet Name="DeliverableReviewers" EntityType="OrizonModel.DeliverableReviewer" />
+          <EntitySet Name="DeliverableReviews" EntityType="OrizonModel.DeliverableReview" />
+          <EntitySet Name="Deliverables" EntityType="OrizonModel.Deliverable" />
+          <EntitySet Name="DeliverableViews" EntityType="OrizonModel.DeliverableView" />
+          <EntitySet Name="Goals" EntityType="OrizonModel.Goal" />
+          <EntitySet Name="Groups" EntityType="OrizonModel.Group" />
+          <EntitySet Name="Logs" EntityType="OrizonModel.Log" />
+          <EntitySet Name="Machines" EntityType="OrizonModel.Machine" />
+          <EntitySet Name="MachineStateChanges" EntityType="OrizonModel.MachineStateChange" />
+          <EntitySet Name="MachineStateCurrents" EntityType="OrizonModel.MachineStateCurrent" />
+          <EntitySet Name="Meetings" EntityType="OrizonModel.Meeting" />
+          <EntitySet Name="Notifications" EntityType="OrizonModel.Notification" />
+          <EntitySet Name="OTMonthlyByCompanies" EntityType="OrizonModel.OTMonthlyByCompany" />
+          <EntitySet Name="Pages" EntityType="OrizonModel.Page" />
+          <EntitySet Name="PastDueSalesTrends" EntityType="OrizonModel.PastDueSalesTrend" />
+          <EntitySet Name="Plants" EntityType="OrizonModel.Plant" />
+          <EntitySet Name="PrevMaints" EntityType="OrizonModel.PrevMaint" />
+          <EntitySet Name="ProjectAssignees" EntityType="OrizonModel.ProjectAssignee" />
+          <EntitySet Name="Projects" EntityType="OrizonModel.Project" />
+          <EntitySet Name="ProjectTasks" EntityType="OrizonModel.ProjectTask" />
+          <EntitySet Name="SalesDailyByCompanies" EntityType="OrizonModel.SalesDailyByCompany" />
+          <EntitySet Name="SalesMonthlyByCompanies" EntityType="OrizonModel.SalesMonthlyByCompany" />
+          <EntitySet Name="SalesStages" EntityType="OrizonModel.SalesStage" />
+          <EntitySet Name="ScrapDailyByPlants" EntityType="OrizonModel.ScrapDailyByPlant" />
+          <EntitySet Name="ScrapMonthlyByCompanies" EntityType="OrizonModel.ScrapMonthlyByCompany" />
+          <EntitySet Name="ScrapMonthlyByPlants" EntityType="OrizonModel.ScrapMonthlyByPlant" />
+          <EntitySet Name="ScrapStages" EntityType="OrizonModel.ScrapStage" />
+          <EntitySet Name="ShippingPlanAdjShipDates" EntityType="OrizonModel.ShippingPlanAdjShipDate" />
+          <EntitySet Name="ShippingPlanStages" EntityType="OrizonModel.ShippingPlanStage" />
+          <EntitySet Name="UCFActions" EntityType="OrizonModel.UCFAction" />
+          <EntitySet Name="UCFAreas" EntityType="OrizonModel.UCFArea" />
+          <EntitySet Name="UCFAudits" EntityType="OrizonModel.UCFAudit" />
+          <EntitySet Name="UCFAuditDetails" EntityType="OrizonModel.UCFAuditDetail" />
+          <EntitySet Name="UCFCategories" EntityType="OrizonModel.UCFCategory" />
+          <EntitySet Name="UCFChallenges" EntityType="OrizonModel.UCFChallenge" />
+          <EntitySet Name="UCFCriterias" EntityType="OrizonModel.UCFCriteria" />
+          <EntitySet Name="UCFGoals" EntityType="OrizonModel.UCFGoal" />
+          <EntitySet Name="Updates" EntityType="OrizonModel.Update" />
+          <EntitySet Name="UserGroups" EntityType="OrizonModel.UserGroup" />
+          <EntitySet Name="Users" EntityType="OrizonModel.User" />
+          <EntitySet Name="BT_SPTransactions" EntityType="OrizonModel.BT_SPTransactions" />
+          <EntitySet Name="CWOStages" EntityType="OrizonModel.CWOStage" />
+          <EntitySet Name="OnTimeDeliveries" EntityType="OrizonModel.OnTimeDelivery" />
+          <EntitySet Name="OrderLinesAlls" EntityType="OrizonModel.OrderLinesAll" />
+          <EntitySet Name="OTStages" EntityType="OrizonModel.OTStage" />
+          <EntitySet Name="OTStageFours" EntityType="OrizonModel.OTStageFour" />
+          <EntitySet Name="OTStageThrees" EntityType="OrizonModel.OTStageThree" />
+          <EntitySet Name="OTStageTwoes" EntityType="OrizonModel.OTStageTwo" />
+          <EntitySet Name="PrevMaintCosts" EntityType="OrizonModel.PrevMaintCost" />
+          <EntitySet Name="PrevMaintTemps" EntityType="OrizonModel.PrevMaintTemp" />
+          <EntitySet Name="Prices" EntityType="OrizonModel.Price" />
+          <EntitySet Name="ScrapStageTemps" EntityType="OrizonModel.ScrapStageTemp" />
+          <EntitySet Name="BugsTopLevels" EntityType="OrizonModel.BugsTopLevel" />
+          <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="OrizonModel.DeliverablesDueInNextThirtyDay" />
+          <EntitySet Name="DeliverableStatusByUserIDs" EntityType="OrizonModel.DeliverableStatusByUserID" />
+          <EntitySet Name="FlashReportRollUps" EntityType="OrizonModel.FlashReportRollUp" />
+          <EntitySet Name="FlashReportRollUpAlls" EntityType="OrizonModel.FlashReportRollUpAll" />
+          <EntitySet Name="IncentiveRollupByPlants" EntityType="OrizonModel.IncentiveRollupByPlant" />
+          <EntitySet Name="OnTimeDeliveryTrends" EntityType="OrizonModel.OnTimeDeliveryTrend" />
+          <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="OrizonModel.OnTimeDeliveryTrendInt" />
+          <EntitySet Name="PastDueDeliverables" EntityType="OrizonModel.PastDueDeliverable" />
+          <EntitySet Name="PastDueDeliverablesByReviewers" EntityType="OrizonModel.PastDueDeliverablesByReviewer" />
+          <EntitySet Name="ProjectsTopLevels" EntityType="OrizonModel.ProjectsTopLevel" />
+          <EntitySet Name="RevieablesByUserPastDues" EntityType="OrizonModel.RevieablesByUserPastDue" />
+          <EntitySet Name="ReviewablesByUsers" EntityType="OrizonModel.ReviewablesByUser" />
+          <EntitySet Name="ShipAdjDates" EntityType="OrizonModel.ShipAdjDate" />
+          <EntitySet Name="TimeInStateByMachines" EntityType="OrizonModel.TimeInStateByMachine" />
+          <EntitySet Name="UCFAreaTrendByMonthHalves" EntityType="OrizonModel.UCFAreaTrendByMonthHalf" />
+          <EntitySet Name="UCFAuditDetailLevels" EntityType="OrizonModel.UCFAuditDetailLevel" />
+          <EntitySet Name="UCFAuditHIstoryTopLevels" EntityType="OrizonModel.UCFAuditHIstoryTopLevel" />
+          <EntitySet Name="UCFAveragesByMonths" EntityType="OrizonModel.UCFAveragesByMonth" />
+          <EntitySet Name="UCFPlantRollupByMonthHalves" EntityType="OrizonModel.UCFPlantRollupByMonthHalf" />
+          <EntitySet Name="UCFPreviousScoresByChallenges" EntityType="OrizonModel.UCFPreviousScoresByChallenge" />
+          <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="OrizonModel.FK_DeliverableDocuments_DeliverableDocuments">
             <End Role="DeliverableDocument" EntitySet="DeliverableDocuments" />
             <End Role="DeliverableDocument1" EntitySet="DeliverableDocuments" />
           </AssociationSet>
@@ -2290,8 +2267,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TimeSubmitted" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="DeliverableDocuments1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument" ToRole="DeliverableDocument1" />
-          <NavigationProperty Name="DeliverableDocument1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument1" ToRole="DeliverableDocument" />
+          <NavigationProperty Name="DeliverableDocuments1" Relationship="OrizonModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument" ToRole="DeliverableDocument1" />
+          <NavigationProperty Name="DeliverableDocument1" Relationship="OrizonModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument1" ToRole="DeliverableDocument" />
         </EntityType>
         <EntityType Name="DeliverableReviewer">
           <Key>
@@ -2513,6 +2490,29 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="EstTime" Type="Decimal" Precision="6" Scale="2" />
           <Property Name="CreatorID" Type="Int32" />
           <Property Name="AssigneeID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SalesDailyByCompany">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Day" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="MarginAmt" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="SalesMonthlyByCompany">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="SalesStage">
           <Key>
@@ -3278,8 +3278,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="ChallengeID" Type="Int32" />
         </EntityType>
         <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
-          <End Type="DashboardModel.DeliverableDocument" Role="DeliverableDocument" Multiplicity="1" />
-          <End Type="DashboardModel.DeliverableDocument" Role="DeliverableDocument1" Multiplicity="0..1" />
+          <End Type="OrizonModel.DeliverableDocument" Role="DeliverableDocument" Multiplicity="1" />
+          <End Type="OrizonModel.DeliverableDocument" Role="DeliverableDocument1" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="DeliverableDocument">
               <PropertyRef Name="ID" />
@@ -3294,34 +3294,9 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DashboardModelStoreContainer" CdmEntityContainer="DashboardEntities">
-          <EntitySetMapping Name="SalesDailyByCompanies">
-            <EntityTypeMapping TypeName="DashboardModel.SalesDailyByCompany">
-              <MappingFragment StoreEntitySet="SalesDailyByCompany">
-                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Sales" ColumnName="Sales" />
-                <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalesMonthlyByCompanies">
-            <EntityTypeMapping TypeName="DashboardModel.SalesMonthlyByCompany">
-              <MappingFragment StoreEntitySet="SalesMonthlyByCompany">
-                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="OrizonModelStoreContainer" CdmEntityContainer="OrizonEntities" >
           <EntitySetMapping Name="Bugs">
-            <EntityTypeMapping TypeName="DashboardModel.Bug">
+            <EntityTypeMapping TypeName="OrizonModel.Bug">
               <MappingFragment StoreEntitySet="Bugs">
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -3337,7 +3312,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BugTags">
-            <EntityTypeMapping TypeName="DashboardModel.BugTag">
+            <EntityTypeMapping TypeName="OrizonModel.BugTag">
               <MappingFragment StoreEntitySet="BugTags">
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="BugID" ColumnName="BugID" />
@@ -3346,7 +3321,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="DashboardModel.Comment">
+            <EntityTypeMapping TypeName="OrizonModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="CommentText" ColumnName="CommentText" />
@@ -3358,7 +3333,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="DashboardModel.Company">
+            <EntityTypeMapping TypeName="OrizonModel.Company">
               <MappingFragment StoreEntitySet="Companies">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -3367,7 +3342,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CWODailyByPlants">
-            <EntityTypeMapping TypeName="DashboardModel.CWODailyByPlant">
+            <EntityTypeMapping TypeName="OrizonModel.CWODailyByPlant">
               <MappingFragment StoreEntitySet="CWODailyByPlant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -3380,7 +3355,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableComments">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableComment">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableComment">
               <MappingFragment StoreEntitySet="DeliverableComments">
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
@@ -3391,7 +3366,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableDetails">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableDetail">
               <MappingFragment StoreEntitySet="DeliverableDetail">
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
@@ -3402,7 +3377,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableDocuments">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableDocument">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableDocument">
               <MappingFragment StoreEntitySet="DeliverableDocuments">
                 <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
@@ -3416,7 +3391,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableReviewers">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableReviewer">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableReviewer">
               <MappingFragment StoreEntitySet="DeliverableReviewers">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DelID" ColumnName="DelID" />
@@ -3425,7 +3400,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableReviews">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableReview">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableReview">
               <MappingFragment StoreEntitySet="DeliverableReviews">
                 <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3435,7 +3410,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Deliverables">
-            <EntityTypeMapping TypeName="DashboardModel.Deliverable">
+            <EntityTypeMapping TypeName="OrizonModel.Deliverable">
               <MappingFragment StoreEntitySet="Deliverables">
                 <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3447,7 +3422,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableViews">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableView">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableView">
               <MappingFragment StoreEntitySet="DeliverableViews">
                 <ScalarProperty Name="TimeViewed" ColumnName="TimeViewed" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3457,7 +3432,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Goals">
-            <EntityTypeMapping TypeName="DashboardModel.Goal">
+            <EntityTypeMapping TypeName="OrizonModel.Goal">
               <MappingFragment StoreEntitySet="Goals">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -3470,7 +3445,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="DashboardModel.Group">
+            <EntityTypeMapping TypeName="OrizonModel.Group">
               <MappingFragment StoreEntitySet="Groups">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Access" ColumnName="Access" />
@@ -3480,7 +3455,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
-            <EntityTypeMapping TypeName="DashboardModel.Log">
+            <EntityTypeMapping TypeName="OrizonModel.Log">
               <MappingFragment StoreEntitySet="Log">
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3493,7 +3468,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Machines">
-            <EntityTypeMapping TypeName="DashboardModel.Machine">
+            <EntityTypeMapping TypeName="OrizonModel.Machine">
               <MappingFragment StoreEntitySet="Machines">
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3503,7 +3478,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MachineStateChanges">
-            <EntityTypeMapping TypeName="DashboardModel.MachineStateChange">
+            <EntityTypeMapping TypeName="OrizonModel.MachineStateChange">
               <MappingFragment StoreEntitySet="MachineStateChange">
                 <ScalarProperty Name="FeedRateOverride" ColumnName="FeedRateOverride" />
                 <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
@@ -3518,7 +3493,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MachineStateCurrents">
-            <EntityTypeMapping TypeName="DashboardModel.MachineStateCurrent">
+            <EntityTypeMapping TypeName="OrizonModel.MachineStateCurrent">
               <MappingFragment StoreEntitySet="MachineStateCurrent">
                 <ScalarProperty Name="TimeChanged" ColumnName="TimeChanged" />
                 <ScalarProperty Name="LengthInStatus" ColumnName="LengthInStatus" />
@@ -3534,7 +3509,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Meetings">
-            <EntityTypeMapping TypeName="DashboardModel.Meeting">
+            <EntityTypeMapping TypeName="OrizonModel.Meeting">
               <MappingFragment StoreEntitySet="Meetings">
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
@@ -3545,7 +3520,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="DashboardModel.Notification">
+            <EntityTypeMapping TypeName="OrizonModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
                 <ScalarProperty Name="DateViewed" ColumnName="DateViewed" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3560,7 +3535,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OTMonthlyByCompanies">
-            <EntityTypeMapping TypeName="DashboardModel.OTMonthlyByCompany">
+            <EntityTypeMapping TypeName="OrizonModel.OTMonthlyByCompany">
               <MappingFragment StoreEntitySet="OTMonthlyByCompany">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -3571,7 +3546,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="DashboardModel.Page">
+            <EntityTypeMapping TypeName="OrizonModel.Page">
               <MappingFragment StoreEntitySet="Pages">
                 <ScalarProperty Name="Refresh" ColumnName="Refresh" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3580,7 +3555,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PastDueSalesTrends">
-            <EntityTypeMapping TypeName="DashboardModel.PastDueSalesTrend">
+            <EntityTypeMapping TypeName="OrizonModel.PastDueSalesTrend">
               <MappingFragment StoreEntitySet="PastDueSalesTrend">
                 <ScalarProperty Name="DatePulled" ColumnName="DatePulled" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -3590,7 +3565,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Plants">
-            <EntityTypeMapping TypeName="DashboardModel.Plant">
+            <EntityTypeMapping TypeName="OrizonModel.Plant">
               <MappingFragment StoreEntitySet="Plants">
                 <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3600,7 +3575,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PrevMaints">
-            <EntityTypeMapping TypeName="DashboardModel.PrevMaint">
+            <EntityTypeMapping TypeName="OrizonModel.PrevMaint">
               <MappingFragment StoreEntitySet="PrevMaint">
                 <ScalarProperty Name="PlantID" ColumnName="PlantID" />
                 <ScalarProperty Name="SumDowntime" ColumnName="SumDowntime" />
@@ -3619,7 +3594,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectAssignees">
-            <EntityTypeMapping TypeName="DashboardModel.ProjectAssignee">
+            <EntityTypeMapping TypeName="OrizonModel.ProjectAssignee">
               <MappingFragment StoreEntitySet="ProjectAssignees">
                 <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
                 <ScalarProperty Name="ProjID" ColumnName="ProjID" />
@@ -3628,7 +3603,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="DashboardModel.Project">
+            <EntityTypeMapping TypeName="OrizonModel.Project">
               <MappingFragment StoreEntitySet="Projects">
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
@@ -3641,7 +3616,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectTasks">
-            <EntityTypeMapping TypeName="DashboardModel.ProjectTask">
+            <EntityTypeMapping TypeName="OrizonModel.ProjectTask">
               <MappingFragment StoreEntitySet="ProjectTasks">
                 <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
@@ -3656,8 +3631,33 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SalesDailyByCompanies">
+            <EntityTypeMapping TypeName="OrizonModel.SalesDailyByCompany">
+              <MappingFragment StoreEntitySet="SalesDailyByCompany">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesMonthlyByCompanies">
+            <EntityTypeMapping TypeName="OrizonModel.SalesMonthlyByCompany">
+              <MappingFragment StoreEntitySet="SalesMonthlyByCompany">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SalesStages">
-            <EntityTypeMapping TypeName="DashboardModel.SalesStage">
+            <EntityTypeMapping TypeName="OrizonModel.SalesStage">
               <MappingFragment StoreEntitySet="SalesStage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="OnTime" ColumnName="OnTime" />
@@ -3689,7 +3689,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapDailyByPlants">
-            <EntityTypeMapping TypeName="DashboardModel.ScrapDailyByPlant">
+            <EntityTypeMapping TypeName="OrizonModel.ScrapDailyByPlant">
               <MappingFragment StoreEntitySet="ScrapDailyByPlant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -3702,7 +3702,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapMonthlyByCompanies">
-            <EntityTypeMapping TypeName="DashboardModel.ScrapMonthlyByCompany">
+            <EntityTypeMapping TypeName="OrizonModel.ScrapMonthlyByCompany">
               <MappingFragment StoreEntitySet="ScrapMonthlyByCompany">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -3713,7 +3713,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapMonthlyByPlants">
-            <EntityTypeMapping TypeName="DashboardModel.ScrapMonthlyByPlant">
+            <EntityTypeMapping TypeName="OrizonModel.ScrapMonthlyByPlant">
               <MappingFragment StoreEntitySet="ScrapMonthlyByPlant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -3725,7 +3725,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapStages">
-            <EntityTypeMapping TypeName="DashboardModel.ScrapStage">
+            <EntityTypeMapping TypeName="OrizonModel.ScrapStage">
               <MappingFragment StoreEntitySet="ScrapStage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -3748,7 +3748,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShippingPlanAdjShipDates">
-            <EntityTypeMapping TypeName="DashboardModel.ShippingPlanAdjShipDate">
+            <EntityTypeMapping TypeName="OrizonModel.ShippingPlanAdjShipDate">
               <MappingFragment StoreEntitySet="ShippingPlanAdjShipDates">
                 <ScalarProperty Name="DateDue" ColumnName="DateDue" />
                 <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
@@ -3759,7 +3759,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShippingPlanStages">
-            <EntityTypeMapping TypeName="DashboardModel.ShippingPlanStage">
+            <EntityTypeMapping TypeName="OrizonModel.ShippingPlanStage">
               <MappingFragment StoreEntitySet="ShippingPlanStage">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3776,7 +3776,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFActions">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAction">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAction">
               <MappingFragment StoreEntitySet="UCFActions">
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3792,7 +3792,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAreas">
-            <EntityTypeMapping TypeName="DashboardModel.UCFArea">
+            <EntityTypeMapping TypeName="OrizonModel.UCFArea">
               <MappingFragment StoreEntitySet="UCFAreas">
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3802,7 +3802,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAudits">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAudit">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAudit">
               <MappingFragment StoreEntitySet="UCFAudit">
                 <ScalarProperty Name="AreaID" ColumnName="AreaID" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
@@ -3812,7 +3812,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAuditDetails">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAuditDetail">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAuditDetail">
               <MappingFragment StoreEntitySet="UCFAuditDetail">
                 <ScalarProperty Name="Selected" ColumnName="Selected" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
@@ -3823,7 +3823,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFCategories">
-            <EntityTypeMapping TypeName="DashboardModel.UCFCategory">
+            <EntityTypeMapping TypeName="OrizonModel.UCFCategory">
               <MappingFragment StoreEntitySet="UCFCategories">
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3834,7 +3834,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFChallenges">
-            <EntityTypeMapping TypeName="DashboardModel.UCFChallenge">
+            <EntityTypeMapping TypeName="OrizonModel.UCFChallenge">
               <MappingFragment StoreEntitySet="UCFChallenges">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3846,7 +3846,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFCriterias">
-            <EntityTypeMapping TypeName="DashboardModel.UCFCriteria">
+            <EntityTypeMapping TypeName="OrizonModel.UCFCriteria">
               <MappingFragment StoreEntitySet="UCFCriteria">
                 <ScalarProperty Name="Max" ColumnName="Max" />
                 <ScalarProperty Name="Min" ColumnName="Min" />
@@ -3859,7 +3859,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFGoals">
-            <EntityTypeMapping TypeName="DashboardModel.UCFGoal">
+            <EntityTypeMapping TypeName="OrizonModel.UCFGoal">
               <MappingFragment StoreEntitySet="UCFGoals">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
@@ -3871,7 +3871,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Updates">
-            <EntityTypeMapping TypeName="DashboardModel.Update">
+            <EntityTypeMapping TypeName="OrizonModel.Update">
               <MappingFragment StoreEntitySet="Updates">
                 <ScalarProperty Name="Updated" ColumnName="Updated" />
                 <ScalarProperty Name="DataType" ColumnName="DataType" />
@@ -3880,7 +3880,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserGroups">
-            <EntityTypeMapping TypeName="DashboardModel.UserGroup">
+            <EntityTypeMapping TypeName="OrizonModel.UserGroup">
               <MappingFragment StoreEntitySet="UserGroups">
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3889,7 +3889,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="DashboardModel.User">
+            <EntityTypeMapping TypeName="OrizonModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -3901,7 +3901,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BT_SPTransactions">
-            <EntityTypeMapping TypeName="DashboardModel.BT_SPTransactions">
+            <EntityTypeMapping TypeName="OrizonModel.BT_SPTransactions">
               <MappingFragment StoreEntitySet="BT_SPTransactions">
                 <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -3928,7 +3928,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CWOStages">
-            <EntityTypeMapping TypeName="DashboardModel.CWOStage">
+            <EntityTypeMapping TypeName="OrizonModel.CWOStage">
               <MappingFragment StoreEntitySet="CWOStage">
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -3953,7 +3953,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OnTimeDeliveries">
-            <EntityTypeMapping TypeName="DashboardModel.OnTimeDelivery">
+            <EntityTypeMapping TypeName="OrizonModel.OnTimeDelivery">
               <MappingFragment StoreEntitySet="OnTimeDelivery">
                 <ScalarProperty Name="Period" ColumnName="Period" />
                 <ScalarProperty Name="PercOnTime" ColumnName="PercOnTime" />
@@ -3963,7 +3963,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderLinesAlls">
-            <EntityTypeMapping TypeName="DashboardModel.OrderLinesAll">
+            <EntityTypeMapping TypeName="OrizonModel.OrderLinesAll">
               <MappingFragment StoreEntitySet="OrderLinesAll">
                 <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
                 <ScalarProperty Name="CUSTOMER_PO" ColumnName="CUSTOMER_PO" />
@@ -3983,7 +3983,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OTStages">
-            <EntityTypeMapping TypeName="DashboardModel.OTStage">
+            <EntityTypeMapping TypeName="OrizonModel.OTStage">
               <MappingFragment StoreEntitySet="OTStage">
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -3997,7 +3997,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OTStageFours">
-            <EntityTypeMapping TypeName="DashboardModel.OTStageFour">
+            <EntityTypeMapping TypeName="OrizonModel.OTStageFour">
               <MappingFragment StoreEntitySet="OTStageFour">
                 <ScalarProperty Name="Week" ColumnName="Week" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -4008,7 +4008,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OTStageThrees">
-            <EntityTypeMapping TypeName="DashboardModel.OTStageThree">
+            <EntityTypeMapping TypeName="OrizonModel.OTStageThree">
               <MappingFragment StoreEntitySet="OTStageThree">
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="OTCost" ColumnName="OTCost" />
@@ -4025,7 +4025,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OTStageTwoes">
-            <EntityTypeMapping TypeName="DashboardModel.OTStageTwo">
+            <EntityTypeMapping TypeName="OrizonModel.OTStageTwo">
               <MappingFragment StoreEntitySet="OTStageTwo">
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
@@ -4040,7 +4040,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PrevMaintCosts">
-            <EntityTypeMapping TypeName="DashboardModel.PrevMaintCost">
+            <EntityTypeMapping TypeName="OrizonModel.PrevMaintCost">
               <MappingFragment StoreEntitySet="PrevMaintCost">
                 <ScalarProperty Name="PlantID" ColumnName="PlantID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -4051,7 +4051,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PrevMaintTemps">
-            <EntityTypeMapping TypeName="DashboardModel.PrevMaintTemp">
+            <EntityTypeMapping TypeName="OrizonModel.PrevMaintTemp">
               <MappingFragment StoreEntitySet="PrevMaintTemp">
                 <ScalarProperty Name="PlantID" ColumnName="PlantID" />
                 <ScalarProperty Name="SUM_DOWNTIME" ColumnName="SUM_DOWNTIME" />
@@ -4069,7 +4069,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Prices">
-            <EntityTypeMapping TypeName="DashboardModel.Price">
+            <EntityTypeMapping TypeName="OrizonModel.Price">
               <MappingFragment StoreEntitySet="Prices">
                 <ScalarProperty Name="FlagOpen" ColumnName="FlagOpen" />
                 <ScalarProperty Name="Price1" ColumnName="Price" />
@@ -4078,7 +4078,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ScrapStageTemps">
-            <EntityTypeMapping TypeName="DashboardModel.ScrapStageTemp">
+            <EntityTypeMapping TypeName="OrizonModel.ScrapStageTemp">
               <MappingFragment StoreEntitySet="ScrapStageTemp">
                 <ScalarProperty Name="SCODE" ColumnName="SCODE" />
                 <ScalarProperty Name="SUF" ColumnName="SUF" />
@@ -4096,7 +4096,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BugsTopLevels">
-            <EntityTypeMapping TypeName="DashboardModel.BugsTopLevel">
+            <EntityTypeMapping TypeName="OrizonModel.BugsTopLevel">
               <MappingFragment StoreEntitySet="BugsTopLevel">
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
                 <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
@@ -4113,7 +4113,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverablesDueInNextThirtyDays">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverablesDueInNextThirtyDay">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverablesDueInNextThirtyDay">
               <MappingFragment StoreEntitySet="DeliverablesDueInNextThirtyDays">
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -4132,7 +4132,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableStatusByUserIDs">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableStatusByUserID">
+            <EntityTypeMapping TypeName="OrizonModel.DeliverableStatusByUserID">
               <MappingFragment StoreEntitySet="DeliverableStatusByUserID">
                 <ScalarProperty Name="PassedDueIncomplete" ColumnName="PassedDueIncomplete" />
                 <ScalarProperty Name="PassedDueComplete" ColumnName="PassedDueComplete" />
@@ -4146,7 +4146,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FlashReportRollUps">
-            <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
+            <EntityTypeMapping TypeName="OrizonModel.FlashReportRollUp">
               <MappingFragment StoreEntitySet="FlashReportRollUp">
                 <ScalarProperty Name="PastDue" ColumnName="PastDue" />
                 <ScalarProperty Name="OnTime" ColumnName="OnTime" />
@@ -4172,7 +4172,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FlashReportRollUpAlls">
-            <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUpAll">
+            <EntityTypeMapping TypeName="OrizonModel.FlashReportRollUpAll">
               <MappingFragment StoreEntitySet="FlashReportRollUpAll">
                 <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
                 <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
@@ -4196,7 +4196,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IncentiveRollupByPlants">
-            <EntityTypeMapping TypeName="DashboardModel.IncentiveRollupByPlant">
+            <EntityTypeMapping TypeName="OrizonModel.IncentiveRollupByPlant">
               <MappingFragment StoreEntitySet="IncentiveRollupByPlant">
                 <ScalarProperty Name="PDSales" ColumnName="PDSales" />
                 <ScalarProperty Name="PlantID" ColumnName="PlantID" />
@@ -4215,7 +4215,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OnTimeDeliveryTrends">
-            <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrend">
+            <EntityTypeMapping TypeName="OrizonModel.OnTimeDeliveryTrend">
               <MappingFragment StoreEntitySet="OnTimeDeliveryTrend">
                 <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
                 <ScalarProperty Name="PastDue" ColumnName="PastDue" />
@@ -4228,7 +4228,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OnTimeDeliveryTrendInts">
-            <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrendInt">
+            <EntityTypeMapping TypeName="OrizonModel.OnTimeDeliveryTrendInt">
               <MappingFragment StoreEntitySet="OnTimeDeliveryTrendInt">
                 <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
                 <ScalarProperty Name="PastDue" ColumnName="PastDue" />
@@ -4241,7 +4241,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PastDueDeliverables">
-            <EntityTypeMapping TypeName="DashboardModel.PastDueDeliverable">
+            <EntityTypeMapping TypeName="OrizonModel.PastDueDeliverable">
               <MappingFragment StoreEntitySet="PastDueDeliverables">
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -4260,7 +4260,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PastDueDeliverablesByReviewers">
-            <EntityTypeMapping TypeName="DashboardModel.PastDueDeliverablesByReviewer">
+            <EntityTypeMapping TypeName="OrizonModel.PastDueDeliverablesByReviewer">
               <MappingFragment StoreEntitySet="PastDueDeliverablesByReviewers">
                 <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
                 <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
@@ -4273,7 +4273,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectsTopLevels">
-            <EntityTypeMapping TypeName="DashboardModel.ProjectsTopLevel">
+            <EntityTypeMapping TypeName="OrizonModel.ProjectsTopLevel">
               <MappingFragment StoreEntitySet="ProjectsTopLevel">
                 <ScalarProperty Name="Assignees" ColumnName="Assignees" />
                 <ScalarProperty Name="EstTimeRemaining" ColumnName="EstTimeRemaining" />
@@ -4290,7 +4290,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RevieablesByUserPastDues">
-            <EntityTypeMapping TypeName="DashboardModel.RevieablesByUserPastDue">
+            <EntityTypeMapping TypeName="OrizonModel.RevieablesByUserPastDue">
               <MappingFragment StoreEntitySet="RevieablesByUserPastDue">
                 <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -4307,7 +4307,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReviewablesByUsers">
-            <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
+            <EntityTypeMapping TypeName="OrizonModel.ReviewablesByUser">
               <MappingFragment StoreEntitySet="ReviewablesByUser">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
@@ -4323,7 +4323,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShipAdjDates">
-            <EntityTypeMapping TypeName="DashboardModel.ShipAdjDate">
+            <EntityTypeMapping TypeName="OrizonModel.ShipAdjDate">
               <MappingFragment StoreEntitySet="ShipAdjDate">
                 <ScalarProperty Name="DateID" ColumnName="DateID" />
                 <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
@@ -4342,7 +4342,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TimeInStateByMachines">
-            <EntityTypeMapping TypeName="DashboardModel.TimeInStateByMachine">
+            <EntityTypeMapping TypeName="OrizonModel.TimeInStateByMachine">
               <MappingFragment StoreEntitySet="TimeInStateByMachine">
                 <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
                 <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
@@ -4354,7 +4354,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAreaTrendByMonthHalves">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAreaTrendByMonthHalf">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAreaTrendByMonthHalf">
               <MappingFragment StoreEntitySet="UCFAreaTrendByMonthHalf">
                 <ScalarProperty Name="Half" ColumnName="Half" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -4368,7 +4368,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAuditDetailLevels">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAuditDetailLevel">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAuditDetailLevel">
               <MappingFragment StoreEntitySet="UCFAuditDetailLevel">
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -4389,7 +4389,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAuditHIstoryTopLevels">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAuditHIstoryTopLevel">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAuditHIstoryTopLevel">
               <MappingFragment StoreEntitySet="UCFAuditHIstoryTopLevel">
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="PlantID" ColumnName="PlantID" />
@@ -4404,7 +4404,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFAveragesByMonths">
-            <EntityTypeMapping TypeName="DashboardModel.UCFAveragesByMonth">
+            <EntityTypeMapping TypeName="OrizonModel.UCFAveragesByMonth">
               <MappingFragment StoreEntitySet="UCFAveragesByMonth">
                 <ScalarProperty Name="Average" ColumnName="Average" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -4418,7 +4418,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFPlantRollupByMonthHalves">
-            <EntityTypeMapping TypeName="DashboardModel.UCFPlantRollupByMonthHalf">
+            <EntityTypeMapping TypeName="OrizonModel.UCFPlantRollupByMonthHalf">
               <MappingFragment StoreEntitySet="UCFPlantRollupByMonthHalf">
                 <ScalarProperty Name="Goal" ColumnName="Goal" />
                 <ScalarProperty Name="Half" ColumnName="Half" />
@@ -4432,7 +4432,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UCFPreviousScoresByChallenges">
-            <EntityTypeMapping TypeName="DashboardModel.UCFPreviousScoresByChallenge">
+            <EntityTypeMapping TypeName="OrizonModel.UCFPreviousScoresByChallenge">
               <MappingFragment StoreEntitySet="UCFPreviousScoresByChallenge">
                 <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
                 <ScalarProperty Name="Score" ColumnName="Score" />

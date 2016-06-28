@@ -13,10 +13,10 @@ namespace Orizon.Web.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DashboardEntities : DbContext
+    public partial class OrizonEntities : DbContext
     {
-        public DashboardEntities()
-            : base("name=DashboardEntities")
+        public OrizonEntities()
+            : base("name=OrizonEntities")
         {
         }
     
@@ -25,8 +25,6 @@ namespace Orizon.Web.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SalesDailyByCompany> SalesDailyByCompanies { get; set; }
-        public virtual DbSet<SalesMonthlyByCompany> SalesMonthlyByCompanies { get; set; }
         public virtual DbSet<Bug> Bugs { get; set; }
         public virtual DbSet<BugTag> BugTags { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
@@ -55,6 +53,8 @@ namespace Orizon.Web.Data
         public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
+        public virtual DbSet<SalesDailyByCompany> SalesDailyByCompanies { get; set; }
+        public virtual DbSet<SalesMonthlyByCompany> SalesMonthlyByCompanies { get; set; }
         public virtual DbSet<SalesStage> SalesStages { get; set; }
         public virtual DbSet<ScrapDailyByPlant> ScrapDailyByPlants { get; set; }
         public virtual DbSet<ScrapMonthlyByCompany> ScrapMonthlyByCompanies { get; set; }

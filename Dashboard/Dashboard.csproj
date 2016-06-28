@@ -59,8 +59,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Orizon.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\development\Repo\Release\Orizon.Web.dll</HintPath>
+      <HintPath>..\packages\OrizonWeb.1.0.7\lib\net452\Orizon.Web.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

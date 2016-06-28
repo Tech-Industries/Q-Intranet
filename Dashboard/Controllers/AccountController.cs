@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using Orizon.Web.Data; //using Dashboard.Models;
 using Dashboard.Providers;
 using Dashboard.Results;
+using Dashboard.Models;
 
 namespace Dashboard.Controllers
 {

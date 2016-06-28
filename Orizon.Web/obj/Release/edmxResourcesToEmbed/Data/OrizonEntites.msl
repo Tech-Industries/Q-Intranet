@@ -1,0 +1,1151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OrizonModelStoreContainer" CdmEntityContainer="OrizonEntities">
+    <EntitySetMapping Name="Bugs">
+      <EntityTypeMapping TypeName="OrizonModel.Bug">
+        <MappingFragment StoreEntitySet="Bugs">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Project" ColumnName="Project" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BugTags">
+      <EntityTypeMapping TypeName="OrizonModel.BugTag">
+        <MappingFragment StoreEntitySet="BugTags">
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="BugID" ColumnName="BugID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="OrizonModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="OrizonModel.Company">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CWODailyByPlants">
+      <EntityTypeMapping TypeName="OrizonModel.CWODailyByPlant">
+        <MappingFragment StoreEntitySet="CWODailyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableComments">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableComment">
+        <MappingFragment StoreEntitySet="DeliverableComments">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableDetails">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableDetail">
+        <MappingFragment StoreEntitySet="DeliverableDetail">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableDocuments">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableDocument">
+        <MappingFragment StoreEntitySet="DeliverableDocuments">
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableReviewers">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableReviewer">
+        <MappingFragment StoreEntitySet="DeliverableReviewers">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableReviews">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableReview">
+        <MappingFragment StoreEntitySet="DeliverableReviews">
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deliverables">
+      <EntityTypeMapping TypeName="OrizonModel.Deliverable">
+        <MappingFragment StoreEntitySet="Deliverables">
+          <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableViews">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableView">
+        <MappingFragment StoreEntitySet="DeliverableViews">
+          <ScalarProperty Name="TimeViewed" ColumnName="TimeViewed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="OrizonModel.Goal">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="OrizonModel.Group">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="OrizonModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Machines">
+      <EntityTypeMapping TypeName="OrizonModel.Machine">
+        <MappingFragment StoreEntitySet="Machines">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Machine1" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MachineStateChanges">
+      <EntityTypeMapping TypeName="OrizonModel.MachineStateChange">
+        <MappingFragment StoreEntitySet="MachineStateChange">
+          <ScalarProperty Name="FeedRateOverride" ColumnName="FeedRateOverride" />
+          <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="LengthOfState" ColumnName="LengthOfState" />
+          <ScalarProperty Name="TimeChanged" ColumnName="TimeChanged" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MachineStateCurrents">
+      <EntityTypeMapping TypeName="OrizonModel.MachineStateCurrent">
+        <MappingFragment StoreEntitySet="MachineStateCurrent">
+          <ScalarProperty Name="TimeChanged" ColumnName="TimeChanged" />
+          <ScalarProperty Name="LengthInStatus" ColumnName="LengthInStatus" />
+          <ScalarProperty Name="FeedRateOverride" ColumnName="FeedRateOverride" />
+          <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="TimePulled" ColumnName="TimePulled" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meetings">
+      <EntityTypeMapping TypeName="OrizonModel.Meeting">
+        <MappingFragment StoreEntitySet="Meetings">
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Meeting1" ColumnName="Meeting" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="OrizonModel.Notification">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="DateViewed" ColumnName="DateViewed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTMonthlyByCompanies">
+      <EntityTypeMapping TypeName="OrizonModel.OTMonthlyByCompany">
+        <MappingFragment StoreEntitySet="OTMonthlyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="OrizonModel.Page">
+        <MappingFragment StoreEntitySet="Pages">
+          <ScalarProperty Name="Refresh" ColumnName="Refresh" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueSalesTrends">
+      <EntityTypeMapping TypeName="OrizonModel.PastDueSalesTrend">
+        <MappingFragment StoreEntitySet="PastDueSalesTrend">
+          <ScalarProperty Name="DatePulled" ColumnName="DatePulled" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plants">
+      <EntityTypeMapping TypeName="OrizonModel.Plant">
+        <MappingFragment StoreEntitySet="Plants">
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaints">
+      <EntityTypeMapping TypeName="OrizonModel.PrevMaint">
+        <MappingFragment StoreEntitySet="PrevMaint">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="SumDowntime" ColumnName="SumDowntime" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="AnnualNextPmDue" ColumnName="AnnualNextPmDue" />
+          <ScalarProperty Name="AnnualLastPmDate" ColumnName="AnnualLastPmDate" />
+          <ScalarProperty Name="QuarterlyNextPmDue" ColumnName="QuarterlyNextPmDue" />
+          <ScalarProperty Name="QuarterlyLastPmDate" ColumnName="QuarterlyLastPmDate" />
+          <ScalarProperty Name="MonthlyNextPmDue" ColumnName="MonthlyNextPmDue" />
+          <ScalarProperty Name="MonthlyLastPmDate" ColumnName="MonthlyLastPmDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAssignees">
+      <EntityTypeMapping TypeName="OrizonModel.ProjectAssignee">
+        <MappingFragment StoreEntitySet="ProjectAssignees">
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="ProjID" ColumnName="ProjID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="OrizonModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectTasks">
+      <EntityTypeMapping TypeName="OrizonModel.ProjectTask">
+        <MappingFragment StoreEntitySet="ProjectTasks">
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="EstTime" ColumnName="EstTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProjID" ColumnName="ProjID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDailyByCompanies">
+      <EntityTypeMapping TypeName="OrizonModel.SalesDailyByCompany">
+        <MappingFragment StoreEntitySet="SalesDailyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesMonthlyByCompanies">
+      <EntityTypeMapping TypeName="OrizonModel.SalesMonthlyByCompany">
+        <MappingFragment StoreEntitySet="SalesMonthlyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesStages">
+      <EntityTypeMapping TypeName="OrizonModel.SalesStage">
+        <MappingFragment StoreEntitySet="SalesStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
+          <ScalarProperty Name="MarginPercent" ColumnName="MarginPercent" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="QtyOriginal" ColumnName="QtyOriginal" />
+          <ScalarProperty Name="QtyBo" ColumnName="QtyBo" />
+          <ScalarProperty Name="QtyShipped" ColumnName="QtyShipped" />
+          <ScalarProperty Name="QtyOrderd" ColumnName="QtyOrderd" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+          <ScalarProperty Name="DateInvoiced" ColumnName="DateInvoiced" />
+          <ScalarProperty Name="DateShipped" ColumnName="DateShipped" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderSuffix" ColumnName="OrderSuffix" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="InvoiceNum" ColumnName="InvoiceNum" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapDailyByPlants">
+      <EntityTypeMapping TypeName="OrizonModel.ScrapDailyByPlant">
+        <MappingFragment StoreEntitySet="ScrapDailyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapMonthlyByCompanies">
+      <EntityTypeMapping TypeName="OrizonModel.ScrapMonthlyByCompany">
+        <MappingFragment StoreEntitySet="ScrapMonthlyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapMonthlyByPlants">
+      <EntityTypeMapping TypeName="OrizonModel.ScrapMonthlyByPlant">
+        <MappingFragment StoreEntitySet="ScrapMonthlyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapStages">
+      <EntityTypeMapping TypeName="OrizonModel.ScrapStage">
+        <MappingFragment StoreEntitySet="ScrapStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ScrapCode" ColumnName="ScrapCode" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DispositionAction" ColumnName="DispositionAction" />
+          <ScalarProperty Name="QtyDisposed" ColumnName="QtyDisposed" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="DateDisposed" ColumnName="DateDisposed" />
+          <ScalarProperty Name="DisposedValue" ColumnName="DisposedValue" />
+          <ScalarProperty Name="ControlNumber" ColumnName="ControlNumber" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingPlanAdjShipDates">
+      <EntityTypeMapping TypeName="OrizonModel.ShippingPlanAdjShipDate">
+        <MappingFragment StoreEntitySet="ShippingPlanAdjShipDates">
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingPlanStages">
+      <EntityTypeMapping TypeName="OrizonModel.ShippingPlanStage">
+        <MappingFragment StoreEntitySet="ShippingPlanStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFActions">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAction">
+        <MappingFragment StoreEntitySet="UCFActions">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAreas">
+      <EntityTypeMapping TypeName="OrizonModel.UCFArea">
+        <MappingFragment StoreEntitySet="UCFAreas">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAudits">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAudit">
+        <MappingFragment StoreEntitySet="UCFAudit">
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditDetails">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAuditDetail">
+        <MappingFragment StoreEntitySet="UCFAuditDetail">
+          <ScalarProperty Name="Selected" ColumnName="Selected" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFCategories">
+      <EntityTypeMapping TypeName="OrizonModel.UCFCategory">
+        <MappingFragment StoreEntitySet="UCFCategories">
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFChallenges">
+      <EntityTypeMapping TypeName="OrizonModel.UCFChallenge">
+        <MappingFragment StoreEntitySet="UCFChallenges">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFCriterias">
+      <EntityTypeMapping TypeName="OrizonModel.UCFCriteria">
+        <MappingFragment StoreEntitySet="UCFCriteria">
+          <ScalarProperty Name="Max" ColumnName="Max" />
+          <ScalarProperty Name="Min" ColumnName="Min" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFGoals">
+      <EntityTypeMapping TypeName="OrizonModel.UCFGoal">
+        <MappingFragment StoreEntitySet="UCFGoals">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Updates">
+      <EntityTypeMapping TypeName="OrizonModel.Update">
+        <MappingFragment StoreEntitySet="Updates">
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="OrizonModel.UserGroup">
+        <MappingFragment StoreEntitySet="UserGroups">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="OrizonModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BT_SPTransactions">
+      <EntityTypeMapping TypeName="OrizonModel.BT_SPTransactions">
+        <MappingFragment StoreEntitySet="BT_SPTransactions">
+          <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ReceiptRecordNumber" ColumnName="ReceiptRecordNumber" />
+          <ScalarProperty Name="POLine" ColumnName="POLine" />
+          <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+          <ScalarProperty Name="ProcessedOn" ColumnName="ProcessedOn" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+          <ScalarProperty Name="QuantityPieces" ColumnName="QuantityPieces" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ActStartQty" ColumnName="ActStartQty" />
+          <ScalarProperty Name="ExpStartQty" ColumnName="ExpStartQty" />
+          <ScalarProperty Name="TransactionUserID" ColumnName="TransactionUserID" />
+          <ScalarProperty Name="TransactionUser" ColumnName="TransactionUser" />
+          <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="TransType" ColumnName="TransType" />
+          <ScalarProperty Name="TransactionTimeStamp" ColumnName="TransactionTimeStamp" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CWOStages">
+      <EntityTypeMapping TypeName="OrizonModel.CWOStage">
+        <MappingFragment StoreEntitySet="CWOStage">
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PERIOD" ColumnName="PERIOD" />
+          <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+          <ScalarProperty Name="AMT_COST" ColumnName="AMT_COST" />
+          <ScalarProperty Name="AMT_PRICE_PER_UNIT" ColumnName="AMT_PRICE_PER_UNIT" />
+          <ScalarProperty Name="AMT_PRICE" ColumnName="AMT_PRICE" />
+          <ScalarProperty Name="AMT_SALES" ColumnName="AMT_SALES" />
+          <ScalarProperty Name="QTY_COMPLETED" ColumnName="QTY_COMPLETED" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="SUFFIX" ColumnName="SUFFIX" />
+          <ScalarProperty Name="JOB" ColumnName="JOB" />
+          <ScalarProperty Name="PRODUCT_LINE_NAME" ColumnName="PRODUCT_LINE_NAME" />
+          <ScalarProperty Name="PROGRAM" ColumnName="PROGRAM" />
+          <ScalarProperty Name="CODE_SORT" ColumnName="CODE_SORT" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveries">
+      <EntityTypeMapping TypeName="OrizonModel.OnTimeDelivery">
+        <MappingFragment StoreEntitySet="OnTimeDelivery">
+          <ScalarProperty Name="Period" ColumnName="Period" />
+          <ScalarProperty Name="PercOnTime" ColumnName="PercOnTime" />
+          <ScalarProperty Name="NumTotal" ColumnName="NumTotal" />
+          <ScalarProperty Name="NumOnTime" ColumnName="NumOnTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLinesAlls">
+      <EntityTypeMapping TypeName="OrizonModel.OrderLinesAll">
+        <MappingFragment StoreEntitySet="OrderLinesAll">
+          <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
+          <ScalarProperty Name="CUSTOMER_PO" ColumnName="CUSTOMER_PO" />
+          <ScalarProperty Name="RECORD_NO" ColumnName="RECORD_NO" />
+          <ScalarProperty Name="ORDER_NO" ColumnName="ORDER_NO" />
+          <ScalarProperty Name="EXT" ColumnName="EXT" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="PRODUCT_LINE" ColumnName="PRODUCT_LINE" />
+          <ScalarProperty Name="CUSTOMER" ColumnName="CUSTOMER" />
+          <ScalarProperty Name="NAME_CUSTOMER" ColumnName="NAME_CUSTOMER" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="DATE_DUE" ColumnName="DATE_DUE" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStages">
+      <EntityTypeMapping TypeName="OrizonModel.OTStage">
+        <MappingFragment StoreEntitySet="OTStage">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageFours">
+      <EntityTypeMapping TypeName="OrizonModel.OTStageFour">
+        <MappingFragment StoreEntitySet="OTStageFour">
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="OTCost" ColumnName="OTCost" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageThrees">
+      <EntityTypeMapping TypeName="OrizonModel.OTStageThree">
+        <MappingFragment StoreEntitySet="OTStageThree">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="OTCost" ColumnName="OTCost" />
+          <ScalarProperty Name="OTRate" ColumnName="OTRate" />
+          <ScalarProperty Name="OTHours" ColumnName="OTHours" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageTwoes">
+      <EntityTypeMapping TypeName="OrizonModel.OTStageTwo">
+        <MappingFragment StoreEntitySet="OTStageTwo">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaintCosts">
+      <EntityTypeMapping TypeName="OrizonModel.PrevMaintCost">
+        <MappingFragment StoreEntitySet="PrevMaintCost">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SumDowntime" ColumnName="SumDowntime" />
+          <ScalarProperty Name="WorkOrderBaseID" ColumnName="WorkOrderBaseID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaintTemps">
+      <EntityTypeMapping TypeName="OrizonModel.PrevMaintTemp">
+        <MappingFragment StoreEntitySet="PrevMaintTemp">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="SUM_DOWNTIME" ColumnName="SUM_DOWNTIME" />
+          <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+          <ScalarProperty Name="ANNUAL_NEXT_PM_DUE" ColumnName="ANNUAL_NEXT_PM_DUE" />
+          <ScalarProperty Name="ANNUAL_LAST_PM_DATE" ColumnName="ANNUAL_LAST_PM_DATE" />
+          <ScalarProperty Name="QUARTERLY_NEXT_PM_DUE" ColumnName="QUARTERLY_NEXT_PM_DUE" />
+          <ScalarProperty Name="QUARTERLY_LAST_PM_DATE" ColumnName="QUARTERLY_LAST_PM_DATE" />
+          <ScalarProperty Name="MONTHLY_NEXT_PM_DUE" ColumnName="MONTHLY_NEXT_PM_DUE" />
+          <ScalarProperty Name="MONTHLY_LAST_PM_DATE" ColumnName="MONTHLY_LAST_PM_DATE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prices">
+      <EntityTypeMapping TypeName="OrizonModel.Price">
+        <MappingFragment StoreEntitySet="Prices">
+          <ScalarProperty Name="FlagOpen" ColumnName="FlagOpen" />
+          <ScalarProperty Name="Price1" ColumnName="Price" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapStageTemps">
+      <EntityTypeMapping TypeName="OrizonModel.ScrapStageTemp">
+        <MappingFragment StoreEntitySet="ScrapStageTemp">
+          <ScalarProperty Name="SCODE" ColumnName="SCODE" />
+          <ScalarProperty Name="SUF" ColumnName="SUF" />
+          <ScalarProperty Name="JOB" ColumnName="JOB" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="DISPOSED_VALUE" ColumnName="DISPOSED_VALUE" />
+          <ScalarProperty Name="CN" ColumnName="CN" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BugsTopLevels">
+      <EntityTypeMapping TypeName="OrizonModel.BugsTopLevel">
+        <MappingFragment StoreEntitySet="BugsTopLevel">
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Assignee" ColumnName="Assignee" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Project" ColumnName="Project" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverablesDueInNextThirtyDays">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverablesDueInNextThirtyDay">
+        <MappingFragment StoreEntitySet="DeliverablesDueInNextThirtyDays">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableStatusByUserIDs">
+      <EntityTypeMapping TypeName="OrizonModel.DeliverableStatusByUserID">
+        <MappingFragment StoreEntitySet="DeliverableStatusByUserID">
+          <ScalarProperty Name="PassedDueIncomplete" ColumnName="PassedDueIncomplete" />
+          <ScalarProperty Name="PassedDueComplete" ColumnName="PassedDueComplete" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="CompleteOnTime" ColumnName="CompleteOnTime" />
+          <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUps">
+      <EntityTypeMapping TypeName="OrizonModel.FlashReportRollUp">
+        <MappingFragment StoreEntitySet="FlashReportRollUp">
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUpAlls">
+      <EntityTypeMapping TypeName="OrizonModel.FlashReportRollUpAll">
+        <MappingFragment StoreEntitySet="FlashReportRollUpAll">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncentiveRollupByPlants">
+      <EntityTypeMapping TypeName="OrizonModel.IncentiveRollupByPlant">
+        <MappingFragment StoreEntitySet="IncentiveRollupByPlant">
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrends">
+      <EntityTypeMapping TypeName="OrizonModel.OnTimeDeliveryTrend">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrend">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrendInts">
+      <EntityTypeMapping TypeName="OrizonModel.OnTimeDeliveryTrendInt">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrendInt">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueDeliverables">
+      <EntityTypeMapping TypeName="OrizonModel.PastDueDeliverable">
+        <MappingFragment StoreEntitySet="PastDueDeliverables">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueDeliverablesByReviewers">
+      <EntityTypeMapping TypeName="OrizonModel.PastDueDeliverablesByReviewer">
+        <MappingFragment StoreEntitySet="PastDueDeliverablesByReviewers">
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="ReviewerName" ColumnName="ReviewerName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectsTopLevels">
+      <EntityTypeMapping TypeName="OrizonModel.ProjectsTopLevel">
+        <MappingFragment StoreEntitySet="ProjectsTopLevel">
+          <ScalarProperty Name="Assignees" ColumnName="Assignees" />
+          <ScalarProperty Name="EstTimeRemaining" ColumnName="EstTimeRemaining" />
+          <ScalarProperty Name="PercComplete" ColumnName="PercComplete" />
+          <ScalarProperty Name="TotalTasks" ColumnName="TotalTasks" />
+          <ScalarProperty Name="TasksComplete" ColumnName="TasksComplete" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RevieablesByUserPastDues">
+      <EntityTypeMapping TypeName="OrizonModel.RevieablesByUserPastDue">
+        <MappingFragment StoreEntitySet="RevieablesByUserPastDue">
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewablesByUsers">
+      <EntityTypeMapping TypeName="OrizonModel.ReviewablesByUser">
+        <MappingFragment StoreEntitySet="ReviewablesByUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipAdjDates">
+      <EntityTypeMapping TypeName="OrizonModel.ShipAdjDate">
+        <MappingFragment StoreEntitySet="ShipAdjDate">
+          <ScalarProperty Name="DateID" ColumnName="DateID" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeInStateByMachines">
+      <EntityTypeMapping TypeName="OrizonModel.TimeInStateByMachine">
+        <MappingFragment StoreEntitySet="TimeInStateByMachine">
+          <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
+          <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAreaTrendByMonthHalves">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAreaTrendByMonthHalf">
+        <MappingFragment StoreEntitySet="UCFAreaTrendByMonthHalf">
+          <ScalarProperty Name="Half" ColumnName="Half" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditDetailLevels">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAuditDetailLevel">
+        <MappingFragment StoreEntitySet="UCFAuditDetailLevel">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Challenge" ColumnName="Challenge" />
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="Criteria" ColumnName="Criteria" />
+          <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+          <ScalarProperty Name="Selected" ColumnName="Selected" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditHIstoryTopLevels">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAuditHIstoryTopLevel">
+        <MappingFragment StoreEntitySet="UCFAuditHIstoryTopLevel">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAveragesByMonths">
+      <EntityTypeMapping TypeName="OrizonModel.UCFAveragesByMonth">
+        <MappingFragment StoreEntitySet="UCFAveragesByMonth">
+          <ScalarProperty Name="Average" ColumnName="Average" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFPlantRollupByMonthHalves">
+      <EntityTypeMapping TypeName="OrizonModel.UCFPlantRollupByMonthHalf">
+        <MappingFragment StoreEntitySet="UCFPlantRollupByMonthHalf">
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
+          <ScalarProperty Name="Half" ColumnName="Half" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantsScored" ColumnName="PlantsScored" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFPreviousScoresByChallenges">
+      <EntityTypeMapping TypeName="OrizonModel.UCFPreviousScoresByChallenge">
+        <MappingFragment StoreEntitySet="UCFPreviousScoresByChallenge">
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

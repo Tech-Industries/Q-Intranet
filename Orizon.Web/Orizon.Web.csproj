@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D46D2A4E-6356-4277-9292-54F4E3348B2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orizon.Web</RootNamespace>
+    <AssemblyName>Orizon.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Data\BT_SPTransactions.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Bug.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BugsTopLevel.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BugTag.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Comment.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Company.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CWODailyByPlant.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CWOStage.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Deliverable.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableComment.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableDetail.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableDocument.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableReview.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableReviewer.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverablesDueInNextThirtyDay.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableStatusByUserID.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliverableView.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FlashReportRollUp.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FlashReportRollUpAll.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Goal.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Group.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\IncentiveRollupByPlant.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Log.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Machine.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MachineStateChange.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MachineStateCurrent.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Meeting.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Notification.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OnTimeDelivery.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OnTimeDeliveryTrend.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OnTimeDeliveryTrendInt.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrderLinesAll.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrizonData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrizonData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrizonData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OTMonthlyByCompany.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OTStage.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OTStageFour.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OTStageThree.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OTStageTwo.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Page.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PastDueDeliverable.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PastDueDeliverablesByReviewer.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PastDueSalesTrend.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Plant.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PrevMaint.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PrevMaintCost.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PrevMaintTemp.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Price.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Project.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectAssignee.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectsTopLevel.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectTask.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RevieablesByUserPastDue.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReviewablesByUser.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesDailyByCompany.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesMonthlyByCompany.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesStage.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScrapDailyByPlant.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScrapMonthlyByCompany.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScrapMonthlyByPlant.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScrapStage.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScrapStageTemp.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShipAdjDate.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShippingPlanAdjShipDate.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShippingPlanStage.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TimeInStateByMachine.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAction.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFArea.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAreaTrendByMonthHalf.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAudit.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAuditDetail.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAuditDetailLevel.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAuditHIstoryTopLevel.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFAveragesByMonth.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFCategory.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFChallenge.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFCriteria.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFGoal.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFPlantRollupByMonthHalf.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UCFPreviousScoresByChallenge.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Update.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\User.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserGroup.cs">
+      <DependentUpon>OrizonData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Data\OrizonData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrizonData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\OrizonData.edmx.diagram">
+      <DependentUpon>OrizonData.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\OrizonData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrizonData.edmx</DependentUpon>
+      <LastGenOutput>OrizonData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\OrizonData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrizonData.edmx</DependentUpon>
+      <LastGenOutput>OrizonData.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

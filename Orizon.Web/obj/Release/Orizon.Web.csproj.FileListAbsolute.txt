@@ -1,0 +1,10 @@
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\Orizon.Web.dll.config
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\Orizon.Web.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\Orizon.Web.pdb
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\EntityFramework.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\EntityFramework.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.csprojResolveAssemblyReference.cache
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.pdb

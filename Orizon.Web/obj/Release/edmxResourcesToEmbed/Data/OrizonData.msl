@@ -1,0 +1,1151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DashboardModelStoreContainer" CdmEntityContainer="DashboardEntities">
+    <EntitySetMapping Name="SalesDailyByCompanies">
+      <EntityTypeMapping TypeName="DashboardModel.SalesDailyByCompany">
+        <MappingFragment StoreEntitySet="SalesDailyByCompany">
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesMonthlyByCompanies">
+      <EntityTypeMapping TypeName="DashboardModel.SalesMonthlyByCompany">
+        <MappingFragment StoreEntitySet="SalesMonthlyByCompany">
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bugs">
+      <EntityTypeMapping TypeName="DashboardModel.Bug">
+        <MappingFragment StoreEntitySet="Bugs">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Project" ColumnName="Project" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BugTags">
+      <EntityTypeMapping TypeName="DashboardModel.BugTag">
+        <MappingFragment StoreEntitySet="BugTags">
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="BugID" ColumnName="BugID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="DashboardModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="DashboardModel.Company">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CWODailyByPlants">
+      <EntityTypeMapping TypeName="DashboardModel.CWODailyByPlant">
+        <MappingFragment StoreEntitySet="CWODailyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableComments">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableComment">
+        <MappingFragment StoreEntitySet="DeliverableComments">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableDetails">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
+        <MappingFragment StoreEntitySet="DeliverableDetail">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableDocuments">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableDocument">
+        <MappingFragment StoreEntitySet="DeliverableDocuments">
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableReviewers">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableReviewer">
+        <MappingFragment StoreEntitySet="DeliverableReviewers">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableReviews">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableReview">
+        <MappingFragment StoreEntitySet="DeliverableReviews">
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deliverables">
+      <EntityTypeMapping TypeName="DashboardModel.Deliverable">
+        <MappingFragment StoreEntitySet="Deliverables">
+          <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableViews">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableView">
+        <MappingFragment StoreEntitySet="DeliverableViews">
+          <ScalarProperty Name="TimeViewed" ColumnName="TimeViewed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="DashboardModel.Goal">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="DashboardModel.Group">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="DashboardModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Machines">
+      <EntityTypeMapping TypeName="DashboardModel.Machine">
+        <MappingFragment StoreEntitySet="Machines">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Machine1" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MachineStateChanges">
+      <EntityTypeMapping TypeName="DashboardModel.MachineStateChange">
+        <MappingFragment StoreEntitySet="MachineStateChange">
+          <ScalarProperty Name="FeedRateOverride" ColumnName="FeedRateOverride" />
+          <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="LengthOfState" ColumnName="LengthOfState" />
+          <ScalarProperty Name="TimeChanged" ColumnName="TimeChanged" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MachineStateCurrents">
+      <EntityTypeMapping TypeName="DashboardModel.MachineStateCurrent">
+        <MappingFragment StoreEntitySet="MachineStateCurrent">
+          <ScalarProperty Name="TimeChanged" ColumnName="TimeChanged" />
+          <ScalarProperty Name="LengthInStatus" ColumnName="LengthInStatus" />
+          <ScalarProperty Name="FeedRateOverride" ColumnName="FeedRateOverride" />
+          <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="TimePulled" ColumnName="TimePulled" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meetings">
+      <EntityTypeMapping TypeName="DashboardModel.Meeting">
+        <MappingFragment StoreEntitySet="Meetings">
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Meeting1" ColumnName="Meeting" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="DashboardModel.Notification">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="DateViewed" ColumnName="DateViewed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTMonthlyByCompanies">
+      <EntityTypeMapping TypeName="DashboardModel.OTMonthlyByCompany">
+        <MappingFragment StoreEntitySet="OTMonthlyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="DashboardModel.Page">
+        <MappingFragment StoreEntitySet="Pages">
+          <ScalarProperty Name="Refresh" ColumnName="Refresh" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueSalesTrends">
+      <EntityTypeMapping TypeName="DashboardModel.PastDueSalesTrend">
+        <MappingFragment StoreEntitySet="PastDueSalesTrend">
+          <ScalarProperty Name="DatePulled" ColumnName="DatePulled" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plants">
+      <EntityTypeMapping TypeName="DashboardModel.Plant">
+        <MappingFragment StoreEntitySet="Plants">
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaints">
+      <EntityTypeMapping TypeName="DashboardModel.PrevMaint">
+        <MappingFragment StoreEntitySet="PrevMaint">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="SumDowntime" ColumnName="SumDowntime" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="AnnualNextPmDue" ColumnName="AnnualNextPmDue" />
+          <ScalarProperty Name="AnnualLastPmDate" ColumnName="AnnualLastPmDate" />
+          <ScalarProperty Name="QuarterlyNextPmDue" ColumnName="QuarterlyNextPmDue" />
+          <ScalarProperty Name="QuarterlyLastPmDate" ColumnName="QuarterlyLastPmDate" />
+          <ScalarProperty Name="MonthlyNextPmDue" ColumnName="MonthlyNextPmDue" />
+          <ScalarProperty Name="MonthlyLastPmDate" ColumnName="MonthlyLastPmDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAssignees">
+      <EntityTypeMapping TypeName="DashboardModel.ProjectAssignee">
+        <MappingFragment StoreEntitySet="ProjectAssignees">
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="ProjID" ColumnName="ProjID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="DashboardModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectTasks">
+      <EntityTypeMapping TypeName="DashboardModel.ProjectTask">
+        <MappingFragment StoreEntitySet="ProjectTasks">
+          <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="EstTime" ColumnName="EstTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProjID" ColumnName="ProjID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesStages">
+      <EntityTypeMapping TypeName="DashboardModel.SalesStage">
+        <MappingFragment StoreEntitySet="SalesStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MarginAmt" ColumnName="MarginAmt" />
+          <ScalarProperty Name="MarginPercent" ColumnName="MarginPercent" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="QtyOriginal" ColumnName="QtyOriginal" />
+          <ScalarProperty Name="QtyBo" ColumnName="QtyBo" />
+          <ScalarProperty Name="QtyShipped" ColumnName="QtyShipped" />
+          <ScalarProperty Name="QtyOrderd" ColumnName="QtyOrderd" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+          <ScalarProperty Name="DateInvoiced" ColumnName="DateInvoiced" />
+          <ScalarProperty Name="DateShipped" ColumnName="DateShipped" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderSuffix" ColumnName="OrderSuffix" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="InvoiceNum" ColumnName="InvoiceNum" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapDailyByPlants">
+      <EntityTypeMapping TypeName="DashboardModel.ScrapDailyByPlant">
+        <MappingFragment StoreEntitySet="ScrapDailyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapMonthlyByCompanies">
+      <EntityTypeMapping TypeName="DashboardModel.ScrapMonthlyByCompany">
+        <MappingFragment StoreEntitySet="ScrapMonthlyByCompany">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapMonthlyByPlants">
+      <EntityTypeMapping TypeName="DashboardModel.ScrapMonthlyByPlant">
+        <MappingFragment StoreEntitySet="ScrapMonthlyByPlant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapStages">
+      <EntityTypeMapping TypeName="DashboardModel.ScrapStage">
+        <MappingFragment StoreEntitySet="ScrapStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ScrapCode" ColumnName="ScrapCode" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DispositionAction" ColumnName="DispositionAction" />
+          <ScalarProperty Name="QtyDisposed" ColumnName="QtyDisposed" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="DateDisposed" ColumnName="DateDisposed" />
+          <ScalarProperty Name="DisposedValue" ColumnName="DisposedValue" />
+          <ScalarProperty Name="ControlNumber" ColumnName="ControlNumber" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingPlanAdjShipDates">
+      <EntityTypeMapping TypeName="DashboardModel.ShippingPlanAdjShipDate">
+        <MappingFragment StoreEntitySet="ShippingPlanAdjShipDates">
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingPlanStages">
+      <EntityTypeMapping TypeName="DashboardModel.ShippingPlanStage">
+        <MappingFragment StoreEntitySet="ShippingPlanStage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFActions">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAction">
+        <MappingFragment StoreEntitySet="UCFActions">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAreas">
+      <EntityTypeMapping TypeName="DashboardModel.UCFArea">
+        <MappingFragment StoreEntitySet="UCFAreas">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAudits">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAudit">
+        <MappingFragment StoreEntitySet="UCFAudit">
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditDetails">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAuditDetail">
+        <MappingFragment StoreEntitySet="UCFAuditDetail">
+          <ScalarProperty Name="Selected" ColumnName="Selected" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFCategories">
+      <EntityTypeMapping TypeName="DashboardModel.UCFCategory">
+        <MappingFragment StoreEntitySet="UCFCategories">
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFChallenges">
+      <EntityTypeMapping TypeName="DashboardModel.UCFChallenge">
+        <MappingFragment StoreEntitySet="UCFChallenges">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFCriterias">
+      <EntityTypeMapping TypeName="DashboardModel.UCFCriteria">
+        <MappingFragment StoreEntitySet="UCFCriteria">
+          <ScalarProperty Name="Max" ColumnName="Max" />
+          <ScalarProperty Name="Min" ColumnName="Min" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFGoals">
+      <EntityTypeMapping TypeName="DashboardModel.UCFGoal">
+        <MappingFragment StoreEntitySet="UCFGoals">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Updates">
+      <EntityTypeMapping TypeName="DashboardModel.Update">
+        <MappingFragment StoreEntitySet="Updates">
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="DashboardModel.UserGroup">
+        <MappingFragment StoreEntitySet="UserGroups">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DashboardModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BT_SPTransactions">
+      <EntityTypeMapping TypeName="DashboardModel.BT_SPTransactions">
+        <MappingFragment StoreEntitySet="BT_SPTransactions">
+          <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ReceiptRecordNumber" ColumnName="ReceiptRecordNumber" />
+          <ScalarProperty Name="POLine" ColumnName="POLine" />
+          <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+          <ScalarProperty Name="ProcessedOn" ColumnName="ProcessedOn" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+          <ScalarProperty Name="QuantityPieces" ColumnName="QuantityPieces" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ActStartQty" ColumnName="ActStartQty" />
+          <ScalarProperty Name="ExpStartQty" ColumnName="ExpStartQty" />
+          <ScalarProperty Name="TransactionUserID" ColumnName="TransactionUserID" />
+          <ScalarProperty Name="TransactionUser" ColumnName="TransactionUser" />
+          <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="TransType" ColumnName="TransType" />
+          <ScalarProperty Name="TransactionTimeStamp" ColumnName="TransactionTimeStamp" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CWOStages">
+      <EntityTypeMapping TypeName="DashboardModel.CWOStage">
+        <MappingFragment StoreEntitySet="CWOStage">
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PERIOD" ColumnName="PERIOD" />
+          <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+          <ScalarProperty Name="AMT_COST" ColumnName="AMT_COST" />
+          <ScalarProperty Name="AMT_PRICE_PER_UNIT" ColumnName="AMT_PRICE_PER_UNIT" />
+          <ScalarProperty Name="AMT_PRICE" ColumnName="AMT_PRICE" />
+          <ScalarProperty Name="AMT_SALES" ColumnName="AMT_SALES" />
+          <ScalarProperty Name="QTY_COMPLETED" ColumnName="QTY_COMPLETED" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="SUFFIX" ColumnName="SUFFIX" />
+          <ScalarProperty Name="JOB" ColumnName="JOB" />
+          <ScalarProperty Name="PRODUCT_LINE_NAME" ColumnName="PRODUCT_LINE_NAME" />
+          <ScalarProperty Name="PROGRAM" ColumnName="PROGRAM" />
+          <ScalarProperty Name="CODE_SORT" ColumnName="CODE_SORT" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveries">
+      <EntityTypeMapping TypeName="DashboardModel.OnTimeDelivery">
+        <MappingFragment StoreEntitySet="OnTimeDelivery">
+          <ScalarProperty Name="Period" ColumnName="Period" />
+          <ScalarProperty Name="PercOnTime" ColumnName="PercOnTime" />
+          <ScalarProperty Name="NumTotal" ColumnName="NumTotal" />
+          <ScalarProperty Name="NumOnTime" ColumnName="NumOnTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLinesAlls">
+      <EntityTypeMapping TypeName="DashboardModel.OrderLinesAll">
+        <MappingFragment StoreEntitySet="OrderLinesAll">
+          <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
+          <ScalarProperty Name="CUSTOMER_PO" ColumnName="CUSTOMER_PO" />
+          <ScalarProperty Name="RECORD_NO" ColumnName="RECORD_NO" />
+          <ScalarProperty Name="ORDER_NO" ColumnName="ORDER_NO" />
+          <ScalarProperty Name="EXT" ColumnName="EXT" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="PRODUCT_LINE" ColumnName="PRODUCT_LINE" />
+          <ScalarProperty Name="CUSTOMER" ColumnName="CUSTOMER" />
+          <ScalarProperty Name="NAME_CUSTOMER" ColumnName="NAME_CUSTOMER" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="DATE_DUE" ColumnName="DATE_DUE" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStages">
+      <EntityTypeMapping TypeName="DashboardModel.OTStage">
+        <MappingFragment StoreEntitySet="OTStage">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageFours">
+      <EntityTypeMapping TypeName="DashboardModel.OTStageFour">
+        <MappingFragment StoreEntitySet="OTStageFour">
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="OTCost" ColumnName="OTCost" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageThrees">
+      <EntityTypeMapping TypeName="DashboardModel.OTStageThree">
+        <MappingFragment StoreEntitySet="OTStageThree">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="OTCost" ColumnName="OTCost" />
+          <ScalarProperty Name="OTRate" ColumnName="OTRate" />
+          <ScalarProperty Name="OTHours" ColumnName="OTHours" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OTStageTwoes">
+      <EntityTypeMapping TypeName="DashboardModel.OTStageTwo">
+        <MappingFragment StoreEntitySet="OTStageTwo">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="RateEmployee" ColumnName="RateEmployee" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaintCosts">
+      <EntityTypeMapping TypeName="DashboardModel.PrevMaintCost">
+        <MappingFragment StoreEntitySet="PrevMaintCost">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SumDowntime" ColumnName="SumDowntime" />
+          <ScalarProperty Name="WorkOrderBaseID" ColumnName="WorkOrderBaseID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrevMaintTemps">
+      <EntityTypeMapping TypeName="DashboardModel.PrevMaintTemp">
+        <MappingFragment StoreEntitySet="PrevMaintTemp">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="SUM_DOWNTIME" ColumnName="SUM_DOWNTIME" />
+          <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+          <ScalarProperty Name="ANNUAL_NEXT_PM_DUE" ColumnName="ANNUAL_NEXT_PM_DUE" />
+          <ScalarProperty Name="ANNUAL_LAST_PM_DATE" ColumnName="ANNUAL_LAST_PM_DATE" />
+          <ScalarProperty Name="QUARTERLY_NEXT_PM_DUE" ColumnName="QUARTERLY_NEXT_PM_DUE" />
+          <ScalarProperty Name="QUARTERLY_LAST_PM_DATE" ColumnName="QUARTERLY_LAST_PM_DATE" />
+          <ScalarProperty Name="MONTHLY_NEXT_PM_DUE" ColumnName="MONTHLY_NEXT_PM_DUE" />
+          <ScalarProperty Name="MONTHLY_LAST_PM_DATE" ColumnName="MONTHLY_LAST_PM_DATE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prices">
+      <EntityTypeMapping TypeName="DashboardModel.Price">
+        <MappingFragment StoreEntitySet="Prices">
+          <ScalarProperty Name="FlagOpen" ColumnName="FlagOpen" />
+          <ScalarProperty Name="Price1" ColumnName="Price" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrapStageTemps">
+      <EntityTypeMapping TypeName="DashboardModel.ScrapStageTemp">
+        <MappingFragment StoreEntitySet="ScrapStageTemp">
+          <ScalarProperty Name="SCODE" ColumnName="SCODE" />
+          <ScalarProperty Name="SUF" ColumnName="SUF" />
+          <ScalarProperty Name="JOB" ColumnName="JOB" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="PART" ColumnName="PART" />
+          <ScalarProperty Name="DD" ColumnName="DD" />
+          <ScalarProperty Name="DISPOSED_VALUE" ColumnName="DISPOSED_VALUE" />
+          <ScalarProperty Name="CN" ColumnName="CN" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BugsTopLevels">
+      <EntityTypeMapping TypeName="DashboardModel.BugsTopLevel">
+        <MappingFragment StoreEntitySet="BugsTopLevel">
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Assignee" ColumnName="Assignee" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Project" ColumnName="Project" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverablesDueInNextThirtyDays">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverablesDueInNextThirtyDay">
+        <MappingFragment StoreEntitySet="DeliverablesDueInNextThirtyDays">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableStatusByUserIDs">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableStatusByUserID">
+        <MappingFragment StoreEntitySet="DeliverableStatusByUserID">
+          <ScalarProperty Name="PassedDueIncomplete" ColumnName="PassedDueIncomplete" />
+          <ScalarProperty Name="PassedDueComplete" ColumnName="PassedDueComplete" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="CompleteOnTime" ColumnName="CompleteOnTime" />
+          <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUps">
+      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
+        <MappingFragment StoreEntitySet="FlashReportRollUp">
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUpAlls">
+      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUpAll">
+        <MappingFragment StoreEntitySet="FlashReportRollUpAll">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncentiveRollupByPlants">
+      <EntityTypeMapping TypeName="DashboardModel.IncentiveRollupByPlant">
+        <MappingFragment StoreEntitySet="IncentiveRollupByPlant">
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrends">
+      <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrend">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrend">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnTimeDeliveryTrendInts">
+      <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrendInt">
+        <MappingFragment StoreEntitySet="OnTimeDeliveryTrendInt">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueDeliverables">
+      <EntityTypeMapping TypeName="DashboardModel.PastDueDeliverable">
+        <MappingFragment StoreEntitySet="PastDueDeliverables">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PastDueDeliverablesByReviewers">
+      <EntityTypeMapping TypeName="DashboardModel.PastDueDeliverablesByReviewer">
+        <MappingFragment StoreEntitySet="PastDueDeliverablesByReviewers">
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="ReviewerName" ColumnName="ReviewerName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectsTopLevels">
+      <EntityTypeMapping TypeName="DashboardModel.ProjectsTopLevel">
+        <MappingFragment StoreEntitySet="ProjectsTopLevel">
+          <ScalarProperty Name="Assignees" ColumnName="Assignees" />
+          <ScalarProperty Name="EstTimeRemaining" ColumnName="EstTimeRemaining" />
+          <ScalarProperty Name="PercComplete" ColumnName="PercComplete" />
+          <ScalarProperty Name="TotalTasks" ColumnName="TotalTasks" />
+          <ScalarProperty Name="TasksComplete" ColumnName="TasksComplete" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RevieablesByUserPastDues">
+      <EntityTypeMapping TypeName="DashboardModel.RevieablesByUserPastDue">
+        <MappingFragment StoreEntitySet="RevieablesByUserPastDue">
+          <ScalarProperty Name="DaysPast" ColumnName="DaysPast" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewablesByUsers">
+      <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
+        <MappingFragment StoreEntitySet="ReviewablesByUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipAdjDates">
+      <EntityTypeMapping TypeName="DashboardModel.ShipAdjDate">
+        <MappingFragment StoreEntitySet="ShipAdjDate">
+          <ScalarProperty Name="DateID" ColumnName="DateID" />
+          <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="QtySched" ColumnName="QtySched" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeInStateByMachines">
+      <EntityTypeMapping TypeName="DashboardModel.TimeInStateByMachine">
+        <MappingFragment StoreEntitySet="TimeInStateByMachine">
+          <ScalarProperty Name="TotalTimeInMode" ColumnName="TotalTimeInMode" />
+          <ScalarProperty Name="CurrentMode" ColumnName="CurrentMode" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAreaTrendByMonthHalves">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAreaTrendByMonthHalf">
+        <MappingFragment StoreEntitySet="UCFAreaTrendByMonthHalf">
+          <ScalarProperty Name="Half" ColumnName="Half" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditDetailLevels">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAuditDetailLevel">
+        <MappingFragment StoreEntitySet="UCFAuditDetailLevel">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Challenge" ColumnName="Challenge" />
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="Criteria" ColumnName="Criteria" />
+          <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+          <ScalarProperty Name="Selected" ColumnName="Selected" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAuditHIstoryTopLevels">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAuditHIstoryTopLevel">
+        <MappingFragment StoreEntitySet="UCFAuditHIstoryTopLevel">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="Auditor" ColumnName="Auditor" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFAveragesByMonths">
+      <EntityTypeMapping TypeName="DashboardModel.UCFAveragesByMonth">
+        <MappingFragment StoreEntitySet="UCFAveragesByMonth">
+          <ScalarProperty Name="Average" ColumnName="Average" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFPlantRollupByMonthHalves">
+      <EntityTypeMapping TypeName="DashboardModel.UCFPlantRollupByMonthHalf">
+        <MappingFragment StoreEntitySet="UCFPlantRollupByMonthHalf">
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
+          <ScalarProperty Name="Half" ColumnName="Half" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="PlantsScored" ColumnName="PlantsScored" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UCFPreviousScoresByChallenges">
+      <EntityTypeMapping TypeName="DashboardModel.UCFPreviousScoresByChallenge">
+        <MappingFragment StoreEntitySet="UCFPreviousScoresByChallenge">
+          <ScalarProperty Name="ChallengeID" ColumnName="ChallengeID" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

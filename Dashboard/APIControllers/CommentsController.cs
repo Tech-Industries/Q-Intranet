@@ -9,8 +9,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Dashboard.Models;
 using Dashboard.ViewModels;
+using Orizon.Web.Data;
 using Newtonsoft.Json.Linq;
 using System.Web;
 

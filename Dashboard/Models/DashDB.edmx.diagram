@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8afd3c441a5447bfa2dc54f9f5f43b51" Name="Diagram1">
+      <Diagram DiagramId="8afd3c441a5447bfa2dc54f9f5f43b51" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="DashboardModel.Company" Width="1.5" PointX="13" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DashboardModel.Plant" Width="1.5" PointX="13" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="DashboardModel.Update" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
@@ -35,18 +35,6 @@
         <EntityTypeShape EntityType="DashboardModel.PastDueDeliverable" Width="2.375" PointX="8.875" PointY="13" />
         <EntityTypeShape EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" Width="2.625" PointX="6" PointY="13" />
         <EntityTypeShape EntityType="DashboardModel.BugTag" Width="1.5" PointX="2.125" PointY="13.375" />
-        <EntityTypeShape EntityType="DashboardModel.Comment" Width="1.5" PointX="12.375" PointY="13.75" />
-        <EntityTypeShape EntityType="DashboardModel.UCFCategory" Width="1.5" PointX="0.625" PointY="16.875" />
-        <EntityTypeShape EntityType="DashboardModel.UCFChallenge" Width="1.5" PointX="2.125" PointY="16.875" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAudit" Width="1.5" PointX="2.125" PointY="19.5" />
-        <EntityTypeShape EntityType="DashboardModel.UCFArea" Width="1.5" PointX="3.625" PointY="19.5" />
-        <EntityTypeShape EntityType="DashboardModel.UCFCriteria" Width="1.5" PointX="3.625" PointY="16.875" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAuditDetail" Width="1.5" PointX="0.625" PointY="19.5" />
-        <EntityTypeShape EntityType="DashboardModel.UCFPlantRollupByMonthHalf" Width="1.5" PointX="0.625" PointY="21.625" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAreaTrendByMonthHalf" Width="1.5" PointX="2.125" PointY="21.625" />
-        <EntityTypeShape EntityType="DashboardModel.UCFGoal" Width="1.5" PointX="5.25" PointY="20.5" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAction" Width="1.5" PointX="5.25" PointY="16.875" />
-        <EntityTypeShape EntityType="DashboardModel.UCFPreviousScoresByChallenge" Width="1.5" PointX="3.625" PointY="21.625" />
         <EntityTypeShape EntityType="DashboardModel.Price" Width="1.5" PointX="13.375" PointY="7.75" />
         <EntityTypeShape EntityType="DashboardModel.IncentiveRollupByPlant" Width="1.5" PointX="14.375" PointY="9.875" />
         <EntityTypeShape EntityType="DashboardModel.Bug" Width="1.5" PointX="0.625" PointY="13.375" />
@@ -54,19 +42,35 @@
         <EntityTypeShape EntityType="DashboardModel.BugsTopLevel" Width="1.5" PointX="3.625" PointY="13.375" />
         <EntityTypeShape EntityType="DashboardModel.PrevMaint" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="DashboardModel.Meetings" Width="1.5" PointX="15.375" PointY="5.75" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAuditHIstoryTopLevel" Width="1.5" PointX="9.5" PointY="20.5" />
         <EntityTypeShape EntityType="DashboardModel.Page" Width="1.5" PointX="14.375" PointY="18.625" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAveragesByMonth" Width="1.5" PointX="7.125" PointY="17.625" />
         <EntityTypeShape EntityType="DashboardModel.Notification" Width="1.5" PointX="17.375" PointY="4.75" />
         <EntityTypeShape EntityType="DashboardModel.CWOStage" Width="1.5" PointX="11.625" PointY="17.75" />
-        <EntityTypeShape EntityType="DashboardModel.UCFAuditDetailLevel" Width="1.5" PointX="9.625" PointY="16.625" />
         <EntityTypeShape EntityType="DashboardModel.Log" Width="1.5" PointX="17.375" PointY="0.75" />
-        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="2.125" PointX="13.875" PointY="13.75" />
         <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrend" Width="2.25" PointX="16.375" PointY="8.75" />
         <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrendInt" Width="1.5" PointX="18.375" PointY="12.75" />
-        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="1.5" PointX="16" PointY="13.75" />
         <EntityTypeShape EntityType="DashboardModel.ShipAdjDate" Width="1.5" PointX="19.875" PointY="16.75" />
         <EntityTypeShape EntityType="DashboardModel.ShippingPlanAdjShipDate" Width="1.5" PointX="18.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DashboardModel.Comment" Width="1.5" PointX="12.75" PointY="14.75" />
+        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="1.5" PointX="2.75" PointY="17.75" />
+      </Diagram>
+      <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
+        </Diagram>
+      <Diagram DiagramId="ab3eefb9e1864cbc86a441570e412542" Name="UCF" >
+        <EntityTypeShape EntityType="DashboardModel.UCFCategory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFChallenge" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAudit" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFArea" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFCriteria" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAuditDetail" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFPlantRollupByMonthHalf" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAreaTrendByMonthHalf" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFGoal" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAction" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFPreviousScoresByChallenge" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAuditHIstoryTopLevel" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAveragesByMonth" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.UCFAuditDetailLevel" Width="1.5" PointX="8.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

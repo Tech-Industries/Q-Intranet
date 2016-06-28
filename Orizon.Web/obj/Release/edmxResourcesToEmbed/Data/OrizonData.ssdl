@@ -1,0 +1,2088 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.BT_SPTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BT_SPTransactions">
+    <Key>
+      <PropertyRef Name="RecordNumber" />
+    </Key>
+    <Property Name="RecordNumber" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="varchar" MaxLength="50" />
+    <Property Name="TransactionTimeStamp" Type="varchar" MaxLength="50" />
+    <Property Name="TransType" Type="varchar" MaxLength="32" />
+    <Property Name="ProductName" Type="varchar" MaxLength="50" />
+    <Property Name="PartNo" Type="varchar" MaxLength="50" />
+    <Property Name="TransactionUser" Type="varchar" MaxLength="50" />
+    <Property Name="TransactionUserID" Type="varchar" MaxLength="50" />
+    <Property Name="ExpStartQty" Type="float" />
+    <Property Name="ActStartQty" Type="float" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="QuantityPieces" Type="float" />
+    <Property Name="CurrentPrice" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="ProductDescription" Type="varchar" MaxLength="128" />
+    <Property Name="ProcessedOn" Type="varchar" MaxLength="50" />
+    <Property Name="PONumber" Type="varchar" MaxLength="15" />
+    <Property Name="POLine" Type="varchar" MaxLength="6" />
+    <Property Name="ReceiptRecordNumber" Type="varchar" MaxLength="15" />
+    <Property Name="FileName" Type="varchar" MaxLength="255" />
+    <Property Name="TransactionNumber" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Bugs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Project" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="BugTags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BugID" Type="int" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.ClosedWOStage' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ClosedWOStage">
+          <Property Name="JOB" Type="char" MaxLength="6" />
+          <Property Name="SUFFIX" Type="char" MaxLength="3" />
+          <Property Name="FILLER1" Type="char" MaxLength="1" />
+          <Property Name="PART" Type="char" MaxLength="20" />
+          <Property Name="LOCATION" Type="char" MaxLength="2" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="ROUTER" Type="char" MaxLength="20" />
+          <Property Name="PRIORITY" Type="char" MaxLength="3" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="CUSTOMER" Type="char" MaxLength="6" />
+          <Property Name="SALESPERSON_OLD" Type="char" MaxLength="2" />
+          <Property Name="CUSTOMER_PO" Type="char" MaxLength="20" />
+          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_OPENED" Type="char" MaxLength="6" />
+          <Property Name="DATE_DUE" Type="char" MaxLength="6" />
+          <Property Name="DATE_CLOSED" Type="char" MaxLength="6" />
+          <Property Name="DATE_START" Type="char" MaxLength="6" />
+          <Property Name="DATE_SCH_CMPL_INF" Type="char" MaxLength="6" />
+          <Property Name="DATE_SCH_CMPL_FIN" Type="char" MaxLength="6" />
+          <Property Name="DATE_LAST_SCH_INF" Type="char" MaxLength="6" />
+          <Property Name="DATE_ORIG_DUE" Type="char" MaxLength="6" />
+          <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_SALES" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_MATERIAL" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="NUM_HOURS" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_LABOR" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="COMMENTS_1" Type="char" MaxLength="70" />
+          <Property Name="COMMENTS_2" Type="char" MaxLength="70" />
+          <Property Name="FLAG_PURGE" Type="char" MaxLength="1" />
+          <Property Name="PART_CUSTOMER" Type="char" MaxLength="20" />
+          <Property Name="DRAWING_CUSTOMER" Type="char" MaxLength="20" />
+          <Property Name="AMT_PARTIAL_SHPMNT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="CODE_SORT" Type="char" MaxLength="20" />
+          <Property Name="CODE_SORT_OTHER" Type="char" MaxLength="20" />
+          <Property Name="DATE_START_OTHER" Type="char" MaxLength="6" />
+          <Property Name="HOUR_START" Type="numeric" Precision="5" Scale="3" />
+          <Property Name="SYSTEM_PRIORITY" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="USER_SCHEDULE" Type="char" MaxLength="1" />
+          <Property Name="FREIGHT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_FREIGHT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_SHIP_1" Type="char" MaxLength="6" />
+          <Property Name="DATE_SHIP_2" Type="char" MaxLength="6" />
+          <Property Name="DATE_SHIP_3" Type="char" MaxLength="6" />
+          <Property Name="DATE_SHIP_4" Type="char" MaxLength="6" />
+          <Property Name="QTY_SHIP_1" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_2" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_3" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_4" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="DATE_LAST_SCH_FIN" Type="char" MaxLength="6" />
+          <Property Name="BIN" Type="char" MaxLength="6" />
+          <Property Name="OTHER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OTHER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_DUE_NEW" Type="char" MaxLength="6" />
+          <Property Name="CTR_DATE_REVUE_DUE" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="CTR_DATE_DUE_NEW" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="FLAG_WO_PRTD" Type="char" MaxLength="1" />
+          <Property Name="QTY_CUSTOMER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_MATERIAL_DUE" Type="char" MaxLength="6" />
+          <Property Name="CTR_DATE_MATL_DUE" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="COMMENTS_3" Type="char" MaxLength="70" />
+          <Property Name="DATE_MATL_ORDER" Type="char" MaxLength="6" />
+          <Property Name="PARTIAL_MATERIAL" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_LABOR" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="FLAG_HOLD" Type="char" MaxLength="1" />
+          <Property Name="SALESPERSON" Type="char" MaxLength="3" />
+          <Property Name="SCH_GRP" Type="char" MaxLength="9" />
+          <Property Name="FILLER3" Type="char" MaxLength="2" />
+          <Property Name="PARENT_WO" Type="char" MaxLength="6" />
+          <Property Name="PARENT_SUFFIX_PARENT" Type="char" MaxLength="3" />
+          <Property Name="DATE_RELEASED" Type="char" MaxLength="6" />
+          <Property Name="PART_DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="SALES_ORDER" Type="char" MaxLength="7" />
+          <Property Name="SALES_ORDER_LINE" Type="char" MaxLength="3" />
+          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
+          <Property Name="OUTS" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OUTSIDE" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="SCHEDULED_DUE_DATE" Type="char" MaxLength="6" />
+          <Property Name="PROJECT" Type="char" MaxLength="7" />
+          <Property Name="DUE_OFFSET" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="JOB_LOCKED" Type="char" MaxLength="1" />
+          <Property Name="SCHEDULE_DIR" Type="char" MaxLength="1" />
+          <Property Name="CREATE_FROM_QUALITY" Type="char" MaxLength="1" />
+          <Property Name="TRAV_REV" Type="char" MaxLength="2" />
+          <Property Name="SPECIAL_START_SEQ" Type="char" MaxLength="6" />
+          <Property Name="SPECIAL_STOP_SEQ" Type="char" MaxLength="6" />
+          <Property Name="PMAINT_FLAG" Type="char" MaxLength="1" />
+          <Property Name="SHIPTO_ID" Type="char" MaxLength="6" />
+          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
+          <Property Name="EXPORTED" Type="char" MaxLength="1" />
+          <Property Name="PHASE" Type="char" MaxLength="4" />
+          <Property Name="JOB_TYPE" Type="char" MaxLength="1" />
+          <Property Name="PRE_RELEASE" Type="char" MaxLength="1" />
+          <Property Name="PROCESS_GRP" Type="char" MaxLength="1" />
+          <Property Name="SHIPD_FLG" Type="char" MaxLength="1" />
+          <Property Name="FILLER4" Type="char" MaxLength="6" />
+        </EntityType>-->
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+    <Property Name="CommentText" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CWODailyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.CWOList' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CWOList">
+          <Property Name="Job" Type="char" MaxLength="6" />
+          <Property Name="Suffix" Type="char" MaxLength="3" />
+          <Property Name="QtyCompleted" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DateSequence" Type="char" MaxLength="6" />
+          <Property Name="LMO" Type="char" MaxLength="1" />
+          <Property Name="Description" Type="char" MaxLength="30" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CWOStage">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="DATE_CLOSED" />
+      <PropertyRef Name="PERIOD" />
+      <PropertyRef Name="Year" />
+    </Key>
+    <Property Name="CompanyCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="CODE_SORT" Type="char" MaxLength="10" />
+    <Property Name="PROGRAM" Type="char" MaxLength="20" />
+    <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+    <Property Name="JOB" Type="char" MaxLength="6" />
+    <Property Name="SUFFIX" Type="char" MaxLength="3" />
+    <Property Name="PART" Type="nvarchar" MaxLength="30" />
+    <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+    <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="AMT_SALES" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="AMT_PRICE" Type="numeric" Precision="13" Scale="5" />
+    <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="AMT_COST" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="DATE_CLOSED" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="PERIOD" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="DeliverableComments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DeliverableDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DeliverableDocuments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="Path" Type="nvarchar" MaxLength="200" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DeliverableReviewers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliverableReviews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="TimeReviewed" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Deliverables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstDueDate" Type="date" />
+  </EntityType>
+  <EntityType Name="DeliverableViews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeViewed" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.Employees' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Employees">
+          <Property Name="ID" Type="char" MaxLength="5" />
+          <Property Name="Name" Type="char" MaxLength="50" />
+          <Property Name="DateBirth" Type="date" />
+          <Property Name="DateHire" Type="date" />
+          <Property Name="DateTerm" Type="date" />
+        </EntityType>-->
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Amount" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="20" />
+    <Property Name="Access" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.InventoryAllTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="InventoryAllTemp">
+          <Property Name="PART" Type="char" MaxLength="20" />
+          <Property Name="LOCATION" Type="char" MaxLength="2" />
+          <Property Name="CODE_ABC" Type="char" MaxLength="1" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="BIN" Type="char" MaxLength="6" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="UM_PURCHASING" Type="char" MaxLength="3" />
+          <Property Name="UM_INVENTORY" Type="char" MaxLength="3" />
+          <Property Name="FACTOR_CONVERSION" Type="numeric" Precision="11" Scale="5" />
+          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_SAFETY" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_ONHAND" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_REORDER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_ONORDER_PO" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_ONORDER_WO" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_REQUIRED" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_COST" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_USAGE_MO_01" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_02" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_03" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_04" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_05" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_06" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_07" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_08" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_09" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_10" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_11" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_USAGE_MO_12" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="PRIOR_USAGE" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="DATE_LAST_USAGE" Type="date" />
+          <Property Name="AMT_PRICE" Type="numeric" Precision="13" Scale="5" />
+          <Property Name="OBSOLETE_FLAG" Type="char" MaxLength="1" />
+          <Property Name="CODE_BOM" Type="char" MaxLength="1" />
+          <Property Name="CODE_DISCOUNT" Type="char" MaxLength="1" />
+          <Property Name="CODE_TOTAL" Type="char" MaxLength="1" />
+          <Property Name="CODE_SORT" Type="char" MaxLength="10" />
+          <Property Name="QTY_RECVD_NOT_INSP" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_MFG_REQMTS" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="QTY_CURRENT_USAGE" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="YEAR_LAST_ROLL" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="DATE_LAST_AUDIT" Type="date" />
+          <Property Name="CODE_EXTRA_DESC" Type="char" MaxLength="1" />
+          <Property Name="PCT_ORDER_DISC" Type="numeric" Precision="4" Scale="4" />
+          <Property Name="TIME_MATERIAL_LEAD" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="PRIM_DIM" Type="numeric" Precision="7" Scale="4" />
+          <Property Name="SEC_DIM" Type="numeric" Precision="7" Scale="4" />
+          <Property Name="QTY_BEGINNING" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="AMT_BEG_COST" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="CODE_EXCEPTION" Type="char" MaxLength="1" />
+          <Property Name="CODE_PERM_FIX" Type="char" MaxLength="1" />
+          <Property Name="DATE_EXCEPTION" Type="date" />
+          <Property Name="CTR_BACK_ORDER" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="AMT_ALT_COST" Type="numeric" Precision="16" Scale="6" />
+          <Property Name="DATE_LAST_CHG" Type="date" />
+          <Property Name="WHO_CHG_LAST" Type="char" MaxLength="8" />
+          <Property Name="TRM_CHG_LAST" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="LENGTH_RAW_MATL" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="WIDTH_RAW_MATL" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="DENSITY_RAW_MATL" Type="numeric" Precision="7" Scale="5" />
+          <Property Name="CODE_RM_SHAPE" Type="char" MaxLength="1" />
+          <Property Name="QTY_LAST_ONHAND" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_LAST_VERIFY" Type="date" />
+          <Property Name="FLAG_LOT" Type="char" MaxLength="1" />
+          <Property Name="FLAG_DROP" Type="char" MaxLength="1" />
+          <Property Name="FLAG_6_COST" Type="char" MaxLength="1" />
+          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
+          <Property Name="FLAG_INACTIVE" Type="char" MaxLength="1" />
+          <Property Name="FLAG_WARRANTY" Type="char" MaxLength="1" />
+          <Property Name="USE_ZERO_LEAD" Type="char" MaxLength="1" />
+          <Property Name="QTY_MAXIMUM" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="HRS_STANDARD" Type="numeric" Precision="7" Scale="3" />
+          <Property Name="LBS" Type="numeric" Precision="9" Scale="4" />
+          <Property Name="CODE_SOURCE" Type="char" MaxLength="12" />
+          <Property Name="NAME_VENDOR" Type="char" MaxLength="20" />
+          <Property Name="TEXT_INFO1" Type="char" MaxLength="20" />
+          <Property Name="TEXT_INFO2" Type="char" MaxLength="20" />
+          <Property Name="DESCRIPTION_2" Type="char" MaxLength="30" />
+          <Property Name="DESCRIPTION_3" Type="char" MaxLength="30" />
+          <Property Name="AMT_COST_1" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="AMT_COST_2" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="AMT_COST_3" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="DATE_CYCLE" Type="date" />
+          <Property Name="LIFO_BASE" Type="numeric" Precision="11" Scale="4" />
+          <Property Name="SIX_DECIMAL_COST" Type="numeric" Precision="14" Scale="6" />
+          <Property Name="WT_PER_FOOT" Type="numeric" Precision="9" Scale="4" />
+          <Property Name="CUTTING_CHARGE" Type="char" MaxLength="1" />
+          <Property Name="SHP_CNV_FACTOR" Type="numeric" Precision="11" Scale="5" />
+          <Property Name="SHIP_UM" Type="char" MaxLength="3" />
+          <Property Name="LENGTH" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="WIDTH" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="WARRANTY_TYPE" Type="char" MaxLength="2" />
+          <Property Name="PROP_CODE" Type="char" MaxLength="10" />
+          <Property Name="REQUIRES_INSP" Type="char" MaxLength="1" />
+          <Property Name="BASE_PART" Type="char" MaxLength="1" />
+          <Property Name="PRICE_CATG" Type="char" MaxLength="1" />
+          <Property Name="ISSUE_UM" Type="char" MaxLength="3" />
+          <Property Name="PART_PRICE_CODE" Type="char" MaxLength="3" />
+          <Property Name="MATL_SCHRG_TYPE" Type="char" MaxLength="20" />
+          <Property Name="HM_FLAG" Type="char" MaxLength="1" />
+          <Property Name="FRT_CLASS" Type="char" MaxLength="5" />
+          <Property Name="PALLET_FLAG" Type="char" MaxLength="1" />
+          <Property Name="CNTNRS_PER_PALLET" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="PKGD_BY" Type="char" MaxLength="1" />
+          <Property Name="PCS_PER_CNTNR" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="DFLT_CARTON_CD" Type="char" MaxLength="11" />
+          <Property Name="DFLT_PALLET_CD" Type="char" MaxLength="11" />
+          <Property Name="COMM_DESCR" Type="char" MaxLength="30" />
+          <Property Name="NMFC_NO" Type="char" MaxLength="6" />
+          <Property Name="PKGD_WEIGHT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PKG_COMPONENTS" Type="char" MaxLength="1" />
+          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
+          <Property Name="DROP_SHIP" Type="char" MaxLength="1" />
+          <Property Name="CONSUMP_CONV" Type="numeric" Precision="11" Scale="5" />
+          <Property Name="BOM_REF" Type="char" MaxLength="1" />
+          <Property Name="STOCK_BIN" Type="char" MaxLength="6" />
+          <Property Name="GEN_PART_SEQ" Type="char" MaxLength="1" />
+          <Property Name="GEN_PART_NBR" Type="char" MaxLength="17" />
+          <Property Name="NMFC_SUB_NO" Type="char" MaxLength="4" />
+          <Property Name="IC_VENDOR" Type="char" MaxLength="6" />
+          <Property Name="MATL_SCHRG_DATE" Type="date" />
+          <Property Name="PART_CREATE_DATE" Type="date" />
+          <Property Name="SHELF_LIFE" Type="char" MaxLength="1" />
+          <Property Name="REQUIRES_TESTING" Type="char" MaxLength="1" />
+          <Property Name="BIZ_WEB_PART_FLG" Type="char" MaxLength="1" />
+          <Property Name="AUTO_LOT_NUM" Type="char" MaxLength="1" />
+          <Property Name="COST_DATE" Type="date" />
+          <Property Name="AGING" Type="numeric" Precision="1" Scale="0" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.JobHeaderTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="JobHeaderTemp">
+          <Property Name="JOB" Type="char" MaxLength="6" />
+          <Property Name="SUFFIX" Type="char" MaxLength="3" />
+          <Property Name="PART" Type="char" MaxLength="20" />
+          <Property Name="LOCATION" Type="char" MaxLength="2" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="ROUTER" Type="char" MaxLength="20" />
+          <Property Name="PRIORITY" Type="char" MaxLength="3" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="CUSTOMER" Type="char" MaxLength="6" />
+          <Property Name="SALESPERSON_OLD" Type="char" MaxLength="2" />
+          <Property Name="CUSTOMER_PO" Type="char" MaxLength="20" />
+          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_OPENED" Type="date" />
+          <Property Name="DATE_DUE" Type="date" />
+          <Property Name="DATE_CLOSED" Type="date" />
+          <Property Name="DATE_START" Type="date" />
+          <Property Name="DATE_SCH_CMPL_INF" Type="date" />
+          <Property Name="DATE_SCH_CMPL_FIN" Type="date" />
+          <Property Name="DATE_LAST_SCH_INF" Type="date" />
+          <Property Name="DATE_ORIG_DUE" Type="date" />
+          <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_SALES" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_MATERIAL" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="NUM_HOURS" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_LABOR" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="AMT_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="COMMENTS_1" Type="char" MaxLength="70" />
+          <Property Name="COMMENTS_2" Type="char" MaxLength="70" />
+          <Property Name="FLAG_PURGE" Type="char" MaxLength="1" />
+          <Property Name="PART_CUSTOMER" Type="char" MaxLength="20" />
+          <Property Name="DRAWING_CUSTOMER" Type="char" MaxLength="20" />
+          <Property Name="AMT_PARTIAL_SHPMNT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="CODE_SORT" Type="char" MaxLength="20" />
+          <Property Name="CODE_SORT_OTHER" Type="char" MaxLength="20" />
+          <Property Name="DATE_START_OTHER" Type="date" />
+          <Property Name="HOUR_START" Type="numeric" Precision="5" Scale="3" />
+          <Property Name="SYSTEM_PRIORITY" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="USER_SCHEDULE" Type="char" MaxLength="1" />
+          <Property Name="FREIGHT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_FREIGHT" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_SHIP_1" Type="date" />
+          <Property Name="DATE_SHIP_2" Type="date" />
+          <Property Name="DATE_SHIP_3" Type="date" />
+          <Property Name="DATE_SHIP_4" Type="date" />
+          <Property Name="QTY_SHIP_1" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_2" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_3" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="QTY_SHIP_4" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="DATE_LAST_SCH_FIN" Type="date" />
+          <Property Name="BIN" Type="char" MaxLength="6" />
+          <Property Name="OTHER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OTHER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_DUE_NEW" Type="date" />
+          <Property Name="CTR_DATE_REVUE_DUE" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="CTR_DATE_DUE_NEW" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="FLAG_WO_PRTD" Type="char" MaxLength="1" />
+          <Property Name="QTY_CUSTOMER" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="DATE_MATERIAL_DUE" Type="date" />
+          <Property Name="CTR_DATE_MATL_DUE" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="COMMENTS_3" Type="char" MaxLength="70" />
+          <Property Name="DATE_MATL_ORDER" Type="date" />
+          <Property Name="PARTIAL_MATERIAL" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_LABOR" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="FLAG_HOLD" Type="char" MaxLength="1" />
+          <Property Name="SALESPERSON" Type="char" MaxLength="3" />
+          <Property Name="SCH_GRP" Type="char" MaxLength="9" />
+          <Property Name="PARENT_WO" Type="char" MaxLength="6" />
+          <Property Name="PARENT_SUFFIX_PARENT" Type="char" MaxLength="3" />
+          <Property Name="DATE_RELEASED" Type="date" />
+          <Property Name="PART_DESCRIPTION" Type="char" MaxLength="30" />
+          <Property Name="SALES_ORDER" Type="char" MaxLength="7" />
+          <Property Name="SALES_ORDER_LINE" Type="char" MaxLength="3" />
+          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
+          <Property Name="OUTS" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="PARTIAL_OUTSIDE" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="SCHEDULED_DUE_DATE" Type="date" />
+          <Property Name="PROJECT" Type="char" MaxLength="7" />
+          <Property Name="DUE_OFFSET" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="JOB_LOCKED" Type="char" MaxLength="1" />
+          <Property Name="SCHEDULE_DIR" Type="char" MaxLength="1" />
+          <Property Name="CREATE_FROM_QUALITY" Type="char" MaxLength="1" />
+          <Property Name="TRAV_REV" Type="char" MaxLength="2" />
+          <Property Name="SPECIAL_START_SEQ" Type="char" MaxLength="6" />
+          <Property Name="SPECIAL_STOP_SEQ" Type="char" MaxLength="6" />
+          <Property Name="PMAINT_FLAG" Type="char" MaxLength="1" />
+          <Property Name="SHIPTO_ID" Type="char" MaxLength="6" />
+          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
+          <Property Name="EXPORTED" Type="char" MaxLength="1" />
+          <Property Name="PHASE" Type="char" MaxLength="4" />
+          <Property Name="JOB_TYPE" Type="char" MaxLength="1" />
+          <Property Name="PRE_RELEASE" Type="char" MaxLength="1" />
+          <Property Name="PROCESS_GRP" Type="char" MaxLength="1" />
+          <Property Name="SHIPD_FLG" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Reference" Type="nvarchar" MaxLength="40" />
+    <Property Name="ReferenceID" Type="int" />
+    <Property Name="Action" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Machines">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Machine" Type="nvarchar" MaxLength="4" />
+    <Property Name="Description" Type="nvarchar" MaxLength="20" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="MachineStateChange">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Machine" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mode" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeChanged" Type="datetime" />
+    <Property Name="LengthOfState" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Speed" Type="int" />
+    <Property Name="FeedRate" Type="int" />
+    <Property Name="FeedRateOverride" Type="int" />
+  </EntityType>
+  <EntityType Name="MachineStateCurrent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Machine" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="Mode" Type="nvarchar" MaxLength="30" />
+    <Property Name="TimePulled" Type="datetime" />
+    <Property Name="Speed" Type="int" />
+    <Property Name="FeedRate" Type="int" />
+    <Property Name="FeedRateOverride" Type="int" />
+    <Property Name="LengthInStatus" Type="int" />
+    <Property Name="TimeChanged" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Meetings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Meeting" Type="nvarchar" MaxLength="50" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="Location" Type="nvarchar" MaxLength="75" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="Message" Type="nvarchar" MaxLength="200" />
+    <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReferenceID" Type="int" />
+    <Property Name="Viewed" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateViewed" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDelivery' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDelivery">
+    <Key>
+      <PropertyRef Name="NumTotal" />
+      <PropertyRef Name="PercOnTime" />
+    </Key>
+    <Property Name="NumOnTime" Type="int" />
+    <Property Name="NumTotal" Type="int" Nullable="false" />
+    <Property Name="PercOnTime" Type="int" Nullable="false" />
+    <Property Name="Period" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OrderLinesAll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OrderLinesAll">
+    <Key>
+      <PropertyRef Name="PlantID" />
+      <PropertyRef Name="ORDER_TYPE" />
+    </Key>
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="9" />
+    <Property Name="DATE_DUE" Type="date" />
+    <Property Name="PART" Type="char" MaxLength="20" />
+    <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+    <Property Name="NAME_CUSTOMER" Type="char" MaxLength="30" />
+    <Property Name="CUSTOMER" Type="char" MaxLength="6" />
+    <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+    <Property Name="ORDER_QTY" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="EXT" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="ORDER_NO" Type="char" MaxLength="7" />
+    <Property Name="RECORD_NO" Type="char" MaxLength="4" />
+    <Property Name="CUSTOMER_PO" Type="char" MaxLength="15" />
+    <Property Name="ORDER_TYPE" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OTMonthlyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="3" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OTStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OTStage">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Hours" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="RateEmployee" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="EmpID" Type="char" MaxLength="5" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OTStageFour' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OTStageFour">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="OTCost" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Week" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OTStageThree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OTStageThree">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Week" Type="datetime" />
+    <Property Name="Hours" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="RateEmployee" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="OTHours" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="OTRate" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="OTCost" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="EmpID" Type="char" MaxLength="5" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OTStageTwo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OTStageTwo">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Week" Type="datetime" />
+    <Property Name="Count" Type="int" />
+    <Property Name="Hours" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="RateEmployee" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="EmpID" Type="char" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Pages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Refresh" Type="bit" />
+  </EntityType>
+  <EntityType Name="PastDueSalesTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DatePulled" Type="date" />
+  </EntityType>
+  <EntityType Name="Plants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PrevMaint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="MachineID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="40" />
+    <Property Name="MonthlyLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="MonthlyNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="QuarterlyLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="QuarterlyNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="AnnualLastPmDate" Type="varchar" MaxLength="23" />
+    <Property Name="AnnualNextPmDue" Type="varchar" MaxLength="23" />
+    <Property Name="TotalCost" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="SumDowntime" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.PrevMaintCost' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PrevMaintCost">
+    <Key>
+      <PropertyRef Name="Type" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ResourceID" Type="varchar" MaxLength="30" />
+    <Property Name="WorkOrderBaseID" Type="varchar" MaxLength="30" />
+    <Property Name="SumDowntime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="Type" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.PrevMaintTemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PrevMaintTemp">
+    <Key>
+      <PropertyRef Name="STATUS" />
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="STATUS" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="ID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="varchar" MaxLength="40" />
+    <Property Name="MONTHLY_LAST_PM_DATE" Type="varchar" MaxLength="23" />
+    <Property Name="MONTHLY_NEXT_PM_DUE" Type="varchar" MaxLength="23" />
+    <Property Name="QUARTERLY_LAST_PM_DATE" Type="varchar" MaxLength="23" />
+    <Property Name="QUARTERLY_NEXT_PM_DUE" Type="varchar" MaxLength="23" />
+    <Property Name="ANNUAL_LAST_PM_DATE" Type="varchar" MaxLength="23" />
+    <Property Name="ANNUAL_NEXT_PM_DUE" Type="varchar" MaxLength="23" />
+    <Property Name="TOTAL_COST" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="SUM_DOWNTIME" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.PriceHistoryTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PriceHistoryTemp">
+          <Property Name="PartNum" Type="char" MaxLength="20" />
+          <Property Name="Price" Type="numeric" Precision="36" Scale="6" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.PriceOpenTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PriceOpenTemp">
+          <Property Name="PartNum" Type="char" MaxLength="20" />
+          <Property Name="Price" Type="numeric" Precision="36" Scale="6" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Prices">
+    <Key>
+      <PropertyRef Name="FlagOpen" />
+    </Key>
+    <Property Name="PartNum" Type="char" MaxLength="20" />
+    <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ProductLineTemp">
+          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="LINE" Type="char" MaxLength="3" />
+          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
+          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
+          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
+          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
+          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
+          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
+          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
+          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
+        </EntityType>-->
+  <EntityType Name="ProjectAssignees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ProjectTasks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="EstTime" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <EntityType Name="SalesDailyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Date" Type="char" MaxLength="8" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesMonthlyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesStage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="PlantName" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="InvoiceNum" Type="char" MaxLength="7" />
+    <Property Name="OrderNum" Type="char" MaxLength="7" />
+    <Property Name="OrderSuffix" Type="char" MaxLength="4" />
+    <Property Name="OrderLine" Type="char" MaxLength="4" />
+    <Property Name="DateOrder" Type="char" MaxLength="8" />
+    <Property Name="DateDue" Type="char" MaxLength="8" />
+    <Property Name="DateShipped" Type="char" MaxLength="8" />
+    <Property Name="DateInvoiced" Type="char" MaxLength="8" />
+    <Property Name="ShipVia" Type="char" MaxLength="20" />
+    <Property Name="PartNum" Type="varchar" MaxLength="30" />
+    <Property Name="QtyOrderd" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyShipped" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyBo" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="QtyOriginal" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Customer" Type="varchar" MaxLength="50" />
+    <Property Name="Extension" Type="numeric" Precision="16" Scale="2" />
+    <Property Name="MarginPercent" Type="numeric" Precision="14" Scale="6" />
+    <Property Name="MarginAmt" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
+    <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
+    <Property Name="OnTime" Type="bit" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapDailyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapMonthlyByCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapMonthlyByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScrapStage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="ControlNumber" Type="char" MaxLength="7" />
+    <Property Name="DisposedValue" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="DateDisposed" Type="char" MaxLength="8" />
+    <Property Name="PartNum" Type="varchar" MaxLength="30" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="QtyDisposed" Type="numeric" Precision="14" Scale="6" />
+    <Property Name="DispositionAction" Type="char" MaxLength="30" />
+    <Property Name="Name" Type="char" MaxLength="20" />
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="ScrapCode" Type="varchar" MaxLength="2" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Day" Type="varchar" MaxLength="2" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ScrapStageTemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ScrapStageTemp">
+    <Key>
+      <PropertyRef Name="CompanyCode" />
+      <PropertyRef Name="PlantCode" />
+    </Key>
+    <Property Name="CompanyCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PlantCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="CN" Type="char" MaxLength="7" />
+    <Property Name="DISPOSED_VALUE" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="DD" Type="char" MaxLength="8" />
+    <Property Name="PART" Type="char" MaxLength="20" />
+    <Property Name="QTY" Type="numeric" Precision="14" Scale="6" />
+    <Property Name="ACTION" Type="char" MaxLength="30" />
+    <Property Name="NAME" Type="char" MaxLength="20" />
+    <Property Name="JOB" Type="char" MaxLength="6" />
+    <Property Name="SUF" Type="char" MaxLength="3" />
+    <Property Name="SCODE" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="ShippingPlanAdjShipDates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderNo" Type="nvarchar" MaxLength="10" />
+    <Property Name="AdjShipDate" Type="date" />
+    <Property Name="OrderLine" Type="nvarchar" MaxLength="10" />
+    <Property Name="DateDue" Type="date" />
+  </EntityType>
+  <EntityType Name="ShippingPlanStage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="OrderNo" Type="char" MaxLength="7" />
+    <Property Name="OrderLine" Type="char" MaxLength="4" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="QtySched" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="Customer" Type="char" MaxLength="6" />
+    <Property Name="CustomerName" Type="char" MaxLength="30" />
+    <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
+    <Property Name="Sales" Type="numeric" Precision="30" Scale="10" />
+    <Property Name="Part" Type="char" MaxLength="20" />
+    <Property Name="Description" Type="char" MaxLength="30" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UCFActions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="date" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateComplete" Type="date" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="OwnerID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAreas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnerID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="UCFAuditDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="CriteriaID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Selected" Type="bit" />
+  </EntityType>
+  <EntityType Name="UCFCategories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Area" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UCFChallenges">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UCFCriteria">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChallengeID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Weight" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+    <Property Name="Min" Type="decimal" Precision="2" Scale="1" />
+    <Property Name="Max" Type="decimal" Precision="2" Scale="1" />
+  </EntityType>
+  <EntityType Name="UCFGoals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+  </EntityType>
+  <EntityType Name="Updates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataType" Type="nvarchar" MaxLength="20" />
+    <Property Name="Updated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserGroups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="GroupID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="SupervisorID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BugsTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Project" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Creator" Type="nvarchar" MaxLength="61" />
+    <Property Name="Assignee" Type="nvarchar" MaxLength="61" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="Tags" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.DeliverablesDueInNextThirtyDays' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DeliverablesDueInNextThirtyDays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DaysPast" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.DeliverableStatusByUserID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DeliverableStatusByUserID">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Incomplete" Type="int" />
+    <Property Name="CompleteOnTime" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="PassedDueComplete" Type="int" />
+    <Property Name="PassedDueIncomplete" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FlashReportRollUp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="DaysInMonth" Type="int" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="UCFScore" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="PDSales" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUpAll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FlashReportRollUpAll">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="nvarchar" MaxLength="4" />
+    <Property Name="Month" Type="nvarchar" MaxLength="2" />
+    <Property Name="DaysInMonth" Type="int" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="38" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="UCFScore" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="PDSales" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="numeric" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.IncentiveRollupByPlant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IncentiveRollupByPlant">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Year" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="numeric" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="UCFScore" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="PDSales" Type="numeric" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.OnTimeDeliveryTrendInt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OnTimeDeliveryTrendInt">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PastDue" />
+      <PropertyRef Name="OnTimePercent" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Year" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Month" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="OnTime" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="numeric" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="OnTimePercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.PastDueDeliverables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PastDueDeliverables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" />
+    <Property Name="DelDetID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DaysPast" Type="int" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.PastDueDeliverablesByReviewers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PastDueDeliverablesByReviewers">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ReviewerName" Type="nvarchar" MaxLength="61" />
+    <Property Name="OwnerName" Type="nvarchar" MaxLength="61" />
+    <Property Name="DaysPast" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ProjectsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProjectsTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="varchar" MaxLength="9" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="30" />
+    <Property Name="TasksComplete" Type="int" />
+    <Property Name="TotalTasks" Type="int" />
+    <Property Name="PercComplete" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="EstTimeRemaining" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="Assignees" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.RevieablesByUserPastDue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RevieablesByUserPastDue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelID" />
+      <PropertyRef Name="DelDetID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="61" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="TimeReviewed" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="DaysPast" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ReviewablesByUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReviewablesByUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelID" />
+      <PropertyRef Name="DelDetID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DelID" Type="int" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="61" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="TimeReviewed" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.ShipAdjDate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ShipAdjDate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="OrderNo" Type="char" MaxLength="7" />
+    <Property Name="OrderLine" Type="char" MaxLength="4" />
+    <Property Name="DateDue" Type="date" />
+    <Property Name="QtySched" Type="numeric" Precision="13" Scale="4" />
+    <Property Name="Customer" Type="char" MaxLength="6" />
+    <Property Name="CustomerName" Type="char" MaxLength="30" />
+    <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
+    <Property Name="Sales" Type="numeric" Precision="30" Scale="10" />
+    <Property Name="Part" Type="char" MaxLength="20" />
+    <Property Name="Description" Type="char" MaxLength="30" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="AdjShipDate" Type="date" />
+    <Property Name="DateID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.TimeInStateByMachine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TimeInStateByMachine">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Mode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Machine" Type="nvarchar" MaxLength="20" />
+    <Property Name="CurrentMode" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalTimeInMode" Type="decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAreaTrendByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFAreaTrendByMonthHalf">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantID" />
+      <PropertyRef Name="Half" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Half" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAuditDetailLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFAuditDetailLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="Auditor" Type="nvarchar" MaxLength="61" />
+    <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Score" Type="numeric" Precision="4" Scale="2" />
+    <Property Name="Weight" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="Selected" Type="bit" />
+    <Property Name="CriteriaID" Type="int" />
+    <Property Name="Criteria" Type="nvarchar" MaxLength="300" />
+    <Property Name="ChallengeID" Type="int" />
+    <Property Name="Challenge" Type="nvarchar" MaxLength="500" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="Category" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAuditHIstoryTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFAuditHIstoryTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="Auditor" Type="nvarchar" MaxLength="61" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFAveragesByMonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFAveragesByMonth">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="PlantName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaID" Type="int" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Average" Type="decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFPlantRollupByMonthHalf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFPlantRollupByMonthHalf">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantID" />
+      <PropertyRef Name="Half" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PlantID" Type="int" Nullable="false" />
+    <Property Name="Score" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="PlantsScored" Type="int" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Half" Type="int" Nullable="false" />
+    <Property Name="Goal" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UCFPreviousScoresByChallenge">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="AuditID" Type="int" />
+    <Property Name="Score" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="ChallengeID" Type="int" />
+  </EntityType>
+  <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
+    <End Role="DeliverableDocuments" Type="Self.DeliverableDocuments" Multiplicity="1" />
+    <End Role="DeliverableDocuments1" Type="Self.DeliverableDocuments" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableDocuments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeliverableDocuments1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CWODailyByPlant" EntityType="Self.CWODailyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableComments" EntityType="Self.DeliverableComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableDetail" EntityType="Self.DeliverableDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableDocuments" EntityType="Self.DeliverableDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableReviewers" EntityType="Self.DeliverableReviewers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableReviews" EntityType="Self.DeliverableReviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deliverables" EntityType="Self.Deliverables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableViews" EntityType="Self.DeliverableViews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Machines" EntityType="Self.Machines" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MachineStateChange" EntityType="Self.MachineStateChange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MachineStateCurrent" EntityType="Self.MachineStateCurrent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meetings" EntityType="Self.Meetings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OTMonthlyByCompany" EntityType="Self.OTMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PastDueSalesTrend" EntityType="Self.PastDueSalesTrend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plants" EntityType="Self.Plants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrevMaint" EntityType="Self.PrevMaint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectAssignees" EntityType="Self.ProjectAssignees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesDailyByCompany" EntityType="Self.SalesDailyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesMonthlyByCompany" EntityType="Self.SalesMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesStage" EntityType="Self.SalesStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapDailyByPlant" EntityType="Self.ScrapDailyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapMonthlyByCompany" EntityType="Self.ScrapMonthlyByCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapMonthlyByPlant" EntityType="Self.ScrapMonthlyByPlant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScrapStage" EntityType="Self.ScrapStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShippingPlanAdjShipDates" EntityType="Self.ShippingPlanAdjShipDates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShippingPlanStage" EntityType="Self.ShippingPlanStage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFActions" EntityType="Self.UCFActions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAreas" EntityType="Self.UCFAreas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAudit" EntityType="Self.UCFAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFAuditDetail" EntityType="Self.UCFAuditDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFCategories" EntityType="Self.UCFCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFChallenges" EntityType="Self.UCFChallenges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFCriteria" EntityType="Self.UCFCriteria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UCFGoals" EntityType="Self.UCFGoals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BT_SPTransactions" EntityType="Self.BT_SPTransactions" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BT_SPTransactions].[RecordNumber] AS [RecordNumber], 
+    [BT_SPTransactions].[JobCode] AS [JobCode], 
+    [BT_SPTransactions].[TransactionTimeStamp] AS [TransactionTimeStamp], 
+    [BT_SPTransactions].[TransType] AS [TransType], 
+    [BT_SPTransactions].[ProductName] AS [ProductName], 
+    [BT_SPTransactions].[PartNo] AS [PartNo], 
+    [BT_SPTransactions].[TransactionUser] AS [TransactionUser], 
+    [BT_SPTransactions].[TransactionUserID] AS [TransactionUserID], 
+    [BT_SPTransactions].[ExpStartQty] AS [ExpStartQty], 
+    [BT_SPTransactions].[ActStartQty] AS [ActStartQty], 
+    [BT_SPTransactions].[Quantity] AS [Quantity], 
+    [BT_SPTransactions].[QuantityPieces] AS [QuantityPieces], 
+    [BT_SPTransactions].[CurrentPrice] AS [CurrentPrice], 
+    [BT_SPTransactions].[Amount] AS [Amount], 
+    [BT_SPTransactions].[ProductDescription] AS [ProductDescription], 
+    [BT_SPTransactions].[ProcessedOn] AS [ProcessedOn], 
+    [BT_SPTransactions].[PONumber] AS [PONumber], 
+    [BT_SPTransactions].[POLine] AS [POLine], 
+    [BT_SPTransactions].[ReceiptRecordNumber] AS [ReceiptRecordNumber], 
+    [BT_SPTransactions].[FileName] AS [FileName], 
+    [BT_SPTransactions].[TransactionNumber] AS [TransactionNumber]
+    FROM [dbo].[BT_SPTransactions] AS [BT_SPTransactions]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CWOStage].[CompanyCode] AS [CompanyCode], 
+    [CWOStage].[PlantCode] AS [PlantCode], 
+    [CWOStage].[CODE_SORT] AS [CODE_SORT], 
+    [CWOStage].[PROGRAM] AS [PROGRAM], 
+    [CWOStage].[PRODUCT_LINE_NAME] AS [PRODUCT_LINE_NAME], 
+    [CWOStage].[JOB] AS [JOB], 
+    [CWOStage].[SUFFIX] AS [SUFFIX], 
+    [CWOStage].[PART] AS [PART], 
+    [CWOStage].[DESCRIPTION] AS [DESCRIPTION], 
+    [CWOStage].[QTY_COMPLETED] AS [QTY_COMPLETED], 
+    [CWOStage].[AMT_SALES] AS [AMT_SALES], 
+    [CWOStage].[AMT_PRICE] AS [AMT_PRICE], 
+    [CWOStage].[AMT_PRICE_PER_UNIT] AS [AMT_PRICE_PER_UNIT], 
+    [CWOStage].[AMT_COST] AS [AMT_COST], 
+    [CWOStage].[DATE_CLOSED] AS [DATE_CLOSED], 
+    [CWOStage].[PERIOD] AS [PERIOD], 
+    [CWOStage].[Year] AS [Year], 
+    [CWOStage].[Month] AS [Month], 
+    [CWOStage].[Day] AS [Day]
+    FROM [dbo].[CWOStage] AS [CWOStage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDelivery" EntityType="Self.OnTimeDelivery" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDelivery].[NumOnTime] AS [NumOnTime], 
+    [OnTimeDelivery].[NumTotal] AS [NumTotal], 
+    [OnTimeDelivery].[PercOnTime] AS [PercOnTime], 
+    [OnTimeDelivery].[Period] AS [Period]
+    FROM [dbo].[OnTimeDelivery] AS [OnTimeDelivery]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OrderLinesAll" EntityType="Self.OrderLinesAll" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OrderLinesAll].[PlantID] AS [PlantID], 
+    [OrderLinesAll].[Status] AS [Status], 
+    [OrderLinesAll].[DATE_DUE] AS [DATE_DUE], 
+    [OrderLinesAll].[PART] AS [PART], 
+    [OrderLinesAll].[DESCRIPTION] AS [DESCRIPTION], 
+    [OrderLinesAll].[NAME_CUSTOMER] AS [NAME_CUSTOMER], 
+    [OrderLinesAll].[CUSTOMER] AS [CUSTOMER], 
+    [OrderLinesAll].[PRODUCT_LINE] AS [PRODUCT_LINE], 
+    [OrderLinesAll].[ORDER_QTY] AS [ORDER_QTY], 
+    [OrderLinesAll].[EXT] AS [EXT], 
+    [OrderLinesAll].[ORDER_NO] AS [ORDER_NO], 
+    [OrderLinesAll].[RECORD_NO] AS [RECORD_NO], 
+    [OrderLinesAll].[CUSTOMER_PO] AS [CUSTOMER_PO], 
+    [OrderLinesAll].[ORDER_TYPE] AS [ORDER_TYPE]
+    FROM [dbo].[OrderLinesAll] AS [OrderLinesAll]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OTStage" EntityType="Self.OTStage" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OTStage].[CompanyCode] AS [CompanyCode], 
+    [OTStage].[PlantCode] AS [PlantCode], 
+    [OTStage].[Hours] AS [Hours], 
+    [OTStage].[RateEmployee] AS [RateEmployee], 
+    [OTStage].[Year] AS [Year], 
+    [OTStage].[Month] AS [Month], 
+    [OTStage].[Day] AS [Day], 
+    [OTStage].[EmpID] AS [EmpID]
+    FROM [dbo].[OTStage] AS [OTStage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OTStageFour" EntityType="Self.OTStageFour" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OTStageFour].[CompanyCode] AS [CompanyCode], 
+    [OTStageFour].[OTCost] AS [OTCost], 
+    [OTStageFour].[Year] AS [Year], 
+    [OTStageFour].[Month] AS [Month], 
+    [OTStageFour].[Week] AS [Week]
+    FROM [dbo].[OTStageFour] AS [OTStageFour]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OTStageThree" EntityType="Self.OTStageThree" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OTStageThree].[CompanyCode] AS [CompanyCode], 
+    [OTStageThree].[PlantCode] AS [PlantCode], 
+    [OTStageThree].[Year] AS [Year], 
+    [OTStageThree].[Month] AS [Month], 
+    [OTStageThree].[Week] AS [Week], 
+    [OTStageThree].[Hours] AS [Hours], 
+    [OTStageThree].[RateEmployee] AS [RateEmployee], 
+    [OTStageThree].[OTHours] AS [OTHours], 
+    [OTStageThree].[OTRate] AS [OTRate], 
+    [OTStageThree].[OTCost] AS [OTCost], 
+    [OTStageThree].[EmpID] AS [EmpID]
+    FROM [dbo].[OTStageThree] AS [OTStageThree]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OTStageTwo" EntityType="Self.OTStageTwo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OTStageTwo].[CompanyCode] AS [CompanyCode], 
+    [OTStageTwo].[PlantCode] AS [PlantCode], 
+    [OTStageTwo].[Year] AS [Year], 
+    [OTStageTwo].[Month] AS [Month], 
+    [OTStageTwo].[Week] AS [Week], 
+    [OTStageTwo].[Count] AS [Count], 
+    [OTStageTwo].[Hours] AS [Hours], 
+    [OTStageTwo].[RateEmployee] AS [RateEmployee], 
+    [OTStageTwo].[EmpID] AS [EmpID]
+    FROM [dbo].[OTStageTwo] AS [OTStageTwo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PrevMaintCost" EntityType="Self.PrevMaintCost" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PrevMaintCost].[ResourceID] AS [ResourceID], 
+    [PrevMaintCost].[WorkOrderBaseID] AS [WorkOrderBaseID], 
+    [PrevMaintCost].[SumDowntime] AS [SumDowntime], 
+    [PrevMaintCost].[Type] AS [Type], 
+    [PrevMaintCost].[PlantID] AS [PlantID]
+    FROM [dbo].[PrevMaintCost] AS [PrevMaintCost]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PrevMaintTemp" EntityType="Self.PrevMaintTemp" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PrevMaintTemp].[STATUS] AS [STATUS], 
+    [PrevMaintTemp].[ID] AS [ID], 
+    [PrevMaintTemp].[DESCRIPTION] AS [DESCRIPTION], 
+    [PrevMaintTemp].[MONTHLY_LAST_PM_DATE] AS [MONTHLY_LAST_PM_DATE], 
+    [PrevMaintTemp].[MONTHLY_NEXT_PM_DUE] AS [MONTHLY_NEXT_PM_DUE], 
+    [PrevMaintTemp].[QUARTERLY_LAST_PM_DATE] AS [QUARTERLY_LAST_PM_DATE], 
+    [PrevMaintTemp].[QUARTERLY_NEXT_PM_DUE] AS [QUARTERLY_NEXT_PM_DUE], 
+    [PrevMaintTemp].[ANNUAL_LAST_PM_DATE] AS [ANNUAL_LAST_PM_DATE], 
+    [PrevMaintTemp].[ANNUAL_NEXT_PM_DUE] AS [ANNUAL_NEXT_PM_DUE], 
+    [PrevMaintTemp].[TOTAL_COST] AS [TOTAL_COST], 
+    [PrevMaintTemp].[SUM_DOWNTIME] AS [SUM_DOWNTIME], 
+    [PrevMaintTemp].[PlantID] AS [PlantID]
+    FROM [dbo].[PrevMaintTemp] AS [PrevMaintTemp]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Prices" EntityType="Self.Prices" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Prices].[PartNum] AS [PartNum], 
+    [Prices].[Price] AS [Price], 
+    [Prices].[FlagOpen] AS [FlagOpen]
+    FROM [dbo].[Prices] AS [Prices]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ScrapStageTemp" EntityType="Self.ScrapStageTemp" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ScrapStageTemp].[CompanyCode] AS [CompanyCode], 
+    [ScrapStageTemp].[PlantCode] AS [PlantCode], 
+    [ScrapStageTemp].[CN] AS [CN], 
+    [ScrapStageTemp].[DISPOSED_VALUE] AS [DISPOSED_VALUE], 
+    [ScrapStageTemp].[DD] AS [DD], 
+    [ScrapStageTemp].[PART] AS [PART], 
+    [ScrapStageTemp].[QTY] AS [QTY], 
+    [ScrapStageTemp].[ACTION] AS [ACTION], 
+    [ScrapStageTemp].[NAME] AS [NAME], 
+    [ScrapStageTemp].[JOB] AS [JOB], 
+    [ScrapStageTemp].[SUF] AS [SUF], 
+    [ScrapStageTemp].[SCODE] AS [SCODE]
+    FROM [dbo].[ScrapStageTemp] AS [ScrapStageTemp]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BugsTopLevel" EntityType="Self.BugsTopLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BugsTopLevel].[ID] AS [ID], 
+    [BugsTopLevel].[Project] AS [Project], 
+    [BugsTopLevel].[Description] AS [Description], 
+    [BugsTopLevel].[Creator] AS [Creator], 
+    [BugsTopLevel].[Assignee] AS [Assignee], 
+    [BugsTopLevel].[Type] AS [Type], 
+    [BugsTopLevel].[Status] AS [Status], 
+    [BugsTopLevel].[Notes] AS [Notes], 
+    [BugsTopLevel].[DateCreated] AS [DateCreated], 
+    [BugsTopLevel].[DateClosed] AS [DateClosed], 
+    [BugsTopLevel].[Tags] AS [Tags]
+    FROM [dbo].[BugsTopLevel] AS [BugsTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="Self.DeliverablesDueInNextThirtyDays" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DeliverablesDueInNextThirtyDays].[ID] AS [ID], 
+    [DeliverablesDueInNextThirtyDays].[DelID] AS [DelID], 
+    [DeliverablesDueInNextThirtyDays].[DelDetID] AS [DelDetID], 
+    [DeliverablesDueInNextThirtyDays].[Name] AS [Name], 
+    [DeliverablesDueInNextThirtyDays].[Description] AS [Description], 
+    [DeliverablesDueInNextThirtyDays].[Frequency] AS [Frequency], 
+    [DeliverablesDueInNextThirtyDays].[DateDue] AS [DateDue], 
+    [DeliverablesDueInNextThirtyDays].[DaysPast] AS [DaysPast], 
+    [DeliverablesDueInNextThirtyDays].[DateCompleted] AS [DateCompleted], 
+    [DeliverablesDueInNextThirtyDays].[UserID] AS [UserID], 
+    [DeliverablesDueInNextThirtyDays].[FirstName] AS [FirstName], 
+    [DeliverablesDueInNextThirtyDays].[LastName] AS [LastName], 
+    [DeliverablesDueInNextThirtyDays].[Email] AS [Email]
+    FROM [dbo].[DeliverablesDueInNextThirtyDays] AS [DeliverablesDueInNextThirtyDays]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DeliverableStatusByUserID" EntityType="Self.DeliverableStatusByUserID" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DeliverableStatusByUserID].[ID] AS [ID], 
+    [DeliverableStatusByUserID].[Total] AS [Total], 
+    [DeliverableStatusByUserID].[Incomplete] AS [Incomplete], 
+    [DeliverableStatusByUserID].[CompleteOnTime] AS [CompleteOnTime], 
+    [DeliverableStatusByUserID].[Month] AS [Month], 
+    [DeliverableStatusByUserID].[UserID] AS [UserID], 
+    [DeliverableStatusByUserID].[PassedDueComplete] AS [PassedDueComplete], 
+    [DeliverableStatusByUserID].[PassedDueIncomplete] AS [PassedDueIncomplete]
+    FROM [dbo].[DeliverableStatusByUserID] AS [DeliverableStatusByUserID]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FlashReportRollUp" EntityType="Self.FlashReportRollUp" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FlashReportRollUp].[ID] AS [ID], 
+    [FlashReportRollUp].[Year] AS [Year], 
+    [FlashReportRollUp].[Month] AS [Month], 
+    [FlashReportRollUp].[DaysInMonth] AS [DaysInMonth], 
+    [FlashReportRollUp].[Cwo] AS [Cwo], 
+    [FlashReportRollUp].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUp].[Scrap] AS [Scrap], 
+    [FlashReportRollUp].[ScrapGoal] AS [ScrapGoal], 
+    [FlashReportRollUp].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [FlashReportRollUp].[PlantCode] AS [PlantCode], 
+    [FlashReportRollUp].[UCFScore] AS [UCFScore], 
+    [FlashReportRollUp].[UCFGoal] AS [UCFGoal], 
+    [FlashReportRollUp].[PlantID] AS [PlantID], 
+    [FlashReportRollUp].[PDSales] AS [PDSales], 
+    [FlashReportRollUp].[Sales] AS [Sales], 
+    [FlashReportRollUp].[Margins] AS [Margins], 
+    [FlashReportRollUp].[MarginPct] AS [MarginPct], 
+    [FlashReportRollUp].[OnTimePercent] AS [OnTimePercent], 
+    [FlashReportRollUp].[OnTime] AS [OnTime], 
+    [FlashReportRollUp].[PastDue] AS [PastDue]
+    FROM [dbo].[FlashReportRollUp] AS [FlashReportRollUp]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="FlashReportRollUpAll" EntityType="Self.FlashReportRollUpAll" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FlashReportRollUpAll].[ID] AS [ID], 
+    [FlashReportRollUpAll].[Year] AS [Year], 
+    [FlashReportRollUpAll].[Month] AS [Month], 
+    [FlashReportRollUpAll].[DaysInMonth] AS [DaysInMonth], 
+    [FlashReportRollUpAll].[Cwo] AS [Cwo], 
+    [FlashReportRollUpAll].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUpAll].[Scrap] AS [Scrap], 
+    [FlashReportRollUpAll].[ScrapGoal] AS [ScrapGoal], 
+    [FlashReportRollUpAll].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [FlashReportRollUpAll].[PlantCode] AS [PlantCode], 
+    [FlashReportRollUpAll].[UCFScore] AS [UCFScore], 
+    [FlashReportRollUpAll].[UCFGoal] AS [UCFGoal], 
+    [FlashReportRollUpAll].[PlantID] AS [PlantID], 
+    [FlashReportRollUpAll].[PDSales] AS [PDSales], 
+    [FlashReportRollUpAll].[Sales] AS [Sales], 
+    [FlashReportRollUpAll].[Margins] AS [Margins], 
+    [FlashReportRollUpAll].[MarginPct] AS [MarginPct], 
+    [FlashReportRollUpAll].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[FlashReportRollUpAll] AS [FlashReportRollUpAll]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IncentiveRollupByPlant" EntityType="Self.IncentiveRollupByPlant" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IncentiveRollupByPlant].[ID] AS [ID], 
+    [IncentiveRollupByPlant].[Year] AS [Year], 
+    [IncentiveRollupByPlant].[Month] AS [Month], 
+    [IncentiveRollupByPlant].[Cwo] AS [Cwo], 
+    [IncentiveRollupByPlant].[CWOGoal] AS [CWOGoal], 
+    [IncentiveRollupByPlant].[Scrap] AS [Scrap], 
+    [IncentiveRollupByPlant].[ScrapGoal] AS [ScrapGoal], 
+    [IncentiveRollupByPlant].[ScrapAsPercent] AS [ScrapAsPercent], 
+    [IncentiveRollupByPlant].[PlantCode] AS [PlantCode], 
+    [IncentiveRollupByPlant].[UCFScore] AS [UCFScore], 
+    [IncentiveRollupByPlant].[UCFGoal] AS [UCFGoal], 
+    [IncentiveRollupByPlant].[PlantID] AS [PlantID], 
+    [IncentiveRollupByPlant].[PDSales] AS [PDSales]
+    FROM [dbo].[IncentiveRollupByPlant] AS [IncentiveRollupByPlant]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrend" EntityType="Self.OnTimeDeliveryTrend" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrend].[ID] AS [ID], 
+    [OnTimeDeliveryTrend].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrend].[Year] AS [Year], 
+    [OnTimeDeliveryTrend].[Month] AS [Month], 
+    [OnTimeDeliveryTrend].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrend].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrend].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrend] AS [OnTimeDeliveryTrend]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OnTimeDeliveryTrendInt" EntityType="Self.OnTimeDeliveryTrendInt" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OnTimeDeliveryTrendInt].[ID] AS [ID], 
+    [OnTimeDeliveryTrendInt].[PlantID] AS [PlantID], 
+    [OnTimeDeliveryTrendInt].[Year] AS [Year], 
+    [OnTimeDeliveryTrendInt].[Month] AS [Month], 
+    [OnTimeDeliveryTrendInt].[OnTime] AS [OnTime], 
+    [OnTimeDeliveryTrendInt].[PastDue] AS [PastDue], 
+    [OnTimeDeliveryTrendInt].[OnTimePercent] AS [OnTimePercent]
+    FROM [dbo].[OnTimeDeliveryTrendInt] AS [OnTimeDeliveryTrendInt]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PastDueDeliverables" EntityType="Self.PastDueDeliverables" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PastDueDeliverables].[ID] AS [ID], 
+    [PastDueDeliverables].[DelID] AS [DelID], 
+    [PastDueDeliverables].[DelDetID] AS [DelDetID], 
+    [PastDueDeliverables].[Name] AS [Name], 
+    [PastDueDeliverables].[Description] AS [Description], 
+    [PastDueDeliverables].[Frequency] AS [Frequency], 
+    [PastDueDeliverables].[DateDue] AS [DateDue], 
+    [PastDueDeliverables].[DaysPast] AS [DaysPast], 
+    [PastDueDeliverables].[DateCompleted] AS [DateCompleted], 
+    [PastDueDeliverables].[UserID] AS [UserID], 
+    [PastDueDeliverables].[FirstName] AS [FirstName], 
+    [PastDueDeliverables].[LastName] AS [LastName], 
+    [PastDueDeliverables].[Email] AS [Email]
+    FROM [dbo].[PastDueDeliverables] AS [PastDueDeliverables]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PastDueDeliverablesByReviewers" EntityType="Self.PastDueDeliverablesByReviewers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PastDueDeliverablesByReviewers].[ID] AS [ID], 
+    [PastDueDeliverablesByReviewers].[Name] AS [Name], 
+    [PastDueDeliverablesByReviewers].[DateDue] AS [DateDue], 
+    [PastDueDeliverablesByReviewers].[UserID] AS [UserID], 
+    [PastDueDeliverablesByReviewers].[ReviewerName] AS [ReviewerName], 
+    [PastDueDeliverablesByReviewers].[OwnerName] AS [OwnerName], 
+    [PastDueDeliverablesByReviewers].[DaysPast] AS [DaysPast]
+    FROM [dbo].[PastDueDeliverablesByReviewers] AS [PastDueDeliverablesByReviewers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProjectsTopLevel" EntityType="Self.ProjectsTopLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProjectsTopLevel].[ID] AS [ID], 
+    [ProjectsTopLevel].[Name] AS [Name], 
+    [ProjectsTopLevel].[Description] AS [Description], 
+    [ProjectsTopLevel].[Status] AS [Status], 
+    [ProjectsTopLevel].[DateCreated] AS [DateCreated], 
+    [ProjectsTopLevel].[Priority] AS [Priority], 
+    [ProjectsTopLevel].[TasksComplete] AS [TasksComplete], 
+    [ProjectsTopLevel].[TotalTasks] AS [TotalTasks], 
+    [ProjectsTopLevel].[PercComplete] AS [PercComplete], 
+    [ProjectsTopLevel].[EstTimeRemaining] AS [EstTimeRemaining], 
+    [ProjectsTopLevel].[Assignees] AS [Assignees]
+    FROM [dbo].[ProjectsTopLevel] AS [ProjectsTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RevieablesByUserPastDue" EntityType="Self.RevieablesByUserPastDue" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RevieablesByUserPastDue].[ID] AS [ID], 
+    [RevieablesByUserPastDue].[DelID] AS [DelID], 
+    [RevieablesByUserPastDue].[DelDetID] AS [DelDetID], 
+    [RevieablesByUserPastDue].[Name] AS [Name], 
+    [RevieablesByUserPastDue].[Description] AS [Description], 
+    [RevieablesByUserPastDue].[Owner] AS [Owner], 
+    [RevieablesByUserPastDue].[DateDue] AS [DateDue], 
+    [RevieablesByUserPastDue].[DateCompleted] AS [DateCompleted], 
+    [RevieablesByUserPastDue].[TimeReviewed] AS [TimeReviewed], 
+    [RevieablesByUserPastDue].[UserID] AS [UserID], 
+    [RevieablesByUserPastDue].[DaysPast] AS [DaysPast]
+    FROM [dbo].[RevieablesByUserPastDue] AS [RevieablesByUserPastDue]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReviewablesByUser" EntityType="Self.ReviewablesByUser" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReviewablesByUser].[ID] AS [ID], 
+    [ReviewablesByUser].[DelID] AS [DelID], 
+    [ReviewablesByUser].[DelDetID] AS [DelDetID], 
+    [ReviewablesByUser].[Name] AS [Name], 
+    [ReviewablesByUser].[Description] AS [Description], 
+    [ReviewablesByUser].[Owner] AS [Owner], 
+    [ReviewablesByUser].[DateDue] AS [DateDue], 
+    [ReviewablesByUser].[DateCompleted] AS [DateCompleted], 
+    [ReviewablesByUser].[TimeReviewed] AS [TimeReviewed], 
+    [ReviewablesByUser].[UserID] AS [UserID]
+    FROM [dbo].[ReviewablesByUser] AS [ReviewablesByUser]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ShipAdjDate" EntityType="Self.ShipAdjDate" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ShipAdjDate].[OrderNo] AS [OrderNo], 
+    [ShipAdjDate].[OrderLine] AS [OrderLine], 
+    [ShipAdjDate].[DateDue] AS [DateDue], 
+    [ShipAdjDate].[QtySched] AS [QtySched], 
+    [ShipAdjDate].[Customer] AS [Customer], 
+    [ShipAdjDate].[CustomerName] AS [CustomerName], 
+    [ShipAdjDate].[Price] AS [Price], 
+    [ShipAdjDate].[Sales] AS [Sales], 
+    [ShipAdjDate].[Part] AS [Part], 
+    [ShipAdjDate].[Description] AS [Description], 
+    [ShipAdjDate].[ID] AS [ID], 
+    [ShipAdjDate].[AdjShipDate] AS [AdjShipDate], 
+    [ShipAdjDate].[DateID] AS [DateID]
+    FROM [dbo].[ShipAdjDate] AS [ShipAdjDate]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TimeInStateByMachine" EntityType="Self.TimeInStateByMachine" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TimeInStateByMachine].[ID] AS [ID], 
+    [TimeInStateByMachine].[Mode] AS [Mode], 
+    [TimeInStateByMachine].[Status] AS [Status], 
+    [TimeInStateByMachine].[Machine] AS [Machine], 
+    [TimeInStateByMachine].[CurrentMode] AS [CurrentMode], 
+    [TimeInStateByMachine].[TotalTimeInMode] AS [TotalTimeInMode]
+    FROM [dbo].[TimeInStateByMachine] AS [TimeInStateByMachine]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFAreaTrendByMonthHalf" EntityType="Self.UCFAreaTrendByMonthHalf" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFAreaTrendByMonthHalf].[ID] AS [ID], 
+    [UCFAreaTrendByMonthHalf].[PlantID] AS [PlantID], 
+    [UCFAreaTrendByMonthHalf].[Area] AS [Area], 
+    [UCFAreaTrendByMonthHalf].[AreaID] AS [AreaID], 
+    [UCFAreaTrendByMonthHalf].[Score] AS [Score], 
+    [UCFAreaTrendByMonthHalf].[Year] AS [Year], 
+    [UCFAreaTrendByMonthHalf].[Month] AS [Month], 
+    [UCFAreaTrendByMonthHalf].[Half] AS [Half]
+    FROM [dbo].[UCFAreaTrendByMonthHalf] AS [UCFAreaTrendByMonthHalf]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFAuditDetailLevel" EntityType="Self.UCFAuditDetailLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFAuditDetailLevel].[ID] AS [ID], 
+    [UCFAuditDetailLevel].[AuditID] AS [AuditID], 
+    [UCFAuditDetailLevel].[Auditor] AS [Auditor], 
+    [UCFAuditDetailLevel].[PlantName] AS [PlantName], 
+    [UCFAuditDetailLevel].[AreaName] AS [AreaName], 
+    [UCFAuditDetailLevel].[DateCompleted] AS [DateCompleted], 
+    [UCFAuditDetailLevel].[Score] AS [Score], 
+    [UCFAuditDetailLevel].[Weight] AS [Weight], 
+    [UCFAuditDetailLevel].[Selected] AS [Selected], 
+    [UCFAuditDetailLevel].[CriteriaID] AS [CriteriaID], 
+    [UCFAuditDetailLevel].[Criteria] AS [Criteria], 
+    [UCFAuditDetailLevel].[ChallengeID] AS [ChallengeID], 
+    [UCFAuditDetailLevel].[Challenge] AS [Challenge], 
+    [UCFAuditDetailLevel].[CategoryID] AS [CategoryID], 
+    [UCFAuditDetailLevel].[Category] AS [Category]
+    FROM [dbo].[UCFAuditDetailLevel] AS [UCFAuditDetailLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFAuditHIstoryTopLevel" EntityType="Self.UCFAuditHIstoryTopLevel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFAuditHIstoryTopLevel].[ID] AS [ID], 
+    [UCFAuditHIstoryTopLevel].[AuditID] AS [AuditID], 
+    [UCFAuditHIstoryTopLevel].[Auditor] AS [Auditor], 
+    [UCFAuditHIstoryTopLevel].[DateCompleted] AS [DateCompleted], 
+    [UCFAuditHIstoryTopLevel].[AreaName] AS [AreaName], 
+    [UCFAuditHIstoryTopLevel].[AreaID] AS [AreaID], 
+    [UCFAuditHIstoryTopLevel].[PlantName] AS [PlantName], 
+    [UCFAuditHIstoryTopLevel].[PlantID] AS [PlantID], 
+    [UCFAuditHIstoryTopLevel].[Score] AS [Score]
+    FROM [dbo].[UCFAuditHIstoryTopLevel] AS [UCFAuditHIstoryTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFAveragesByMonth" EntityType="Self.UCFAveragesByMonth" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFAveragesByMonth].[ID] AS [ID], 
+    [UCFAveragesByMonth].[PlantID] AS [PlantID], 
+    [UCFAveragesByMonth].[PlantName] AS [PlantName], 
+    [UCFAveragesByMonth].[AreaName] AS [AreaName], 
+    [UCFAveragesByMonth].[AreaID] AS [AreaID], 
+    [UCFAveragesByMonth].[Year] AS [Year], 
+    [UCFAveragesByMonth].[Month] AS [Month], 
+    [UCFAveragesByMonth].[Average] AS [Average]
+    FROM [dbo].[UCFAveragesByMonth] AS [UCFAveragesByMonth]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFPlantRollupByMonthHalf" EntityType="Self.UCFPlantRollupByMonthHalf" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFPlantRollupByMonthHalf].[ID] AS [ID], 
+    [UCFPlantRollupByMonthHalf].[PlantID] AS [PlantID], 
+    [UCFPlantRollupByMonthHalf].[Score] AS [Score], 
+    [UCFPlantRollupByMonthHalf].[PlantsScored] AS [PlantsScored], 
+    [UCFPlantRollupByMonthHalf].[Year] AS [Year], 
+    [UCFPlantRollupByMonthHalf].[Month] AS [Month], 
+    [UCFPlantRollupByMonthHalf].[Half] AS [Half], 
+    [UCFPlantRollupByMonthHalf].[Goal] AS [Goal]
+    FROM [dbo].[UCFPlantRollupByMonthHalf] AS [UCFPlantRollupByMonthHalf]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UCFPreviousScoresByChallenge" EntityType="Self.UCFPreviousScoresByChallenge" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UCFPreviousScoresByChallenge].[ID] AS [ID], 
+    [UCFPreviousScoresByChallenge].[AuditID] AS [AuditID], 
+    [UCFPreviousScoresByChallenge].[Score] AS [Score], 
+    [UCFPreviousScoresByChallenge].[ChallengeID] AS [ChallengeID]
+    FROM [dbo].[UCFPreviousScoresByChallenge] AS [UCFPreviousScoresByChallenge]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="Self.FK_DeliverableDocuments_DeliverableDocuments">
+      <End Role="DeliverableDocuments" EntitySet="DeliverableDocuments" />
+      <End Role="DeliverableDocuments1" EntitySet="DeliverableDocuments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

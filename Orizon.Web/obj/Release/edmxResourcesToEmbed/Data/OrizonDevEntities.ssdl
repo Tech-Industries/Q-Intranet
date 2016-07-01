@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OrizonDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="20" />
+    <Property Name="Access" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserGroups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="GroupID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="SupervisorID" Type="int" />
+  </EntityType>
+  <EntityType Name="Bugs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Project" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ProjectID" Type="int" />
+  </EntityType>
+  <EntityType Name="BugTags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BugID" Type="int" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProjectAssignees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ProjectTasks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="EstTime" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="CreatorID" Type="int" />
+    <Property Name="AssigneeID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Bugs_Projects">
+    <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+    <End Role="Bugs" Type="Self.Bugs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bugs">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BugTags_Bugs">
+    <End Role="Bugs" Type="Self.Bugs" Multiplicity="0..1" />
+    <End Role="BugTags" Type="Self.BugTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bugs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BugTags">
+        <PropertyRef Name="BugID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAssignees_Projects">
+    <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+    <End Role="ProjectAssignees" Type="Self.ProjectAssignees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAssignees">
+        <PropertyRef Name="ProjID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAssignees_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="ProjectAssignees" Type="Self.ProjectAssignees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAssignees">
+        <PropertyRef Name="AssigneeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projects_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="CreatorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectTasks_Assignee">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectTasks">
+        <PropertyRef Name="AssigneeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectTasks_Creator">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectTasks">
+        <PropertyRef Name="CreatorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectTasks_Projects">
+    <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+    <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectTasks">
+        <PropertyRef Name="ProjID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGroups_Groups">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGroups">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGroups_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGroups">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OrizonDevModelStoreContainer">
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="Auth" store:Type="Tables" />
+    <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="Auth" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="Auth" store:Type="Tables" />
+    <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="Projects" store:Type="Tables" />
+    <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="Projects" store:Type="Tables" />
+    <EntitySet Name="ProjectAssignees" EntityType="Self.ProjectAssignees" Schema="Projects" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="Projects" store:Type="Tables" />
+    <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="Projects" store:Type="Tables" />
+    <AssociationSet Name="FK_Bugs_Projects" Association="Self.FK_Bugs_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Bugs" EntitySet="Bugs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BugTags_Bugs" Association="Self.FK_BugTags_Bugs">
+      <End Role="Bugs" EntitySet="Bugs" />
+      <End Role="BugTags" EntitySet="BugTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAssignees_Projects" Association="Self.FK_ProjectAssignees_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="ProjectAssignees" EntitySet="ProjectAssignees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAssignees_Users" Association="Self.FK_ProjectAssignees_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProjectAssignees" EntitySet="ProjectAssignees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projects_Users" Association="Self.FK_Projects_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectTasks_Assignee" Association="Self.FK_ProjectTasks_Assignee">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectTasks_Creator" Association="Self.FK_ProjectTasks_Creator">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGroups_Groups" Association="Self.FK_UserGroups_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="UserGroups" EntitySet="UserGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGroups_Users" Association="Self.FK_UserGroups_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserGroups" EntitySet="UserGroups" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

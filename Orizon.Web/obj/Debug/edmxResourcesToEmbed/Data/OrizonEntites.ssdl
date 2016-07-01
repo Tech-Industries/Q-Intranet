@@ -42,6 +42,7 @@ warning 6002: The table/view 'Dashboard.dbo.BT_SPTransactions' does not have a p
     <Property Name="DateClosed" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="20" />
     <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ProjectID" Type="int" />
   </EntityType>
   <EntityType Name="BugTags">
     <Key>
@@ -51,108 +52,6 @@ warning 6002: The table/view 'Dashboard.dbo.BT_SPTransactions' does not have a p
     <Property Name="BugID" Type="int" />
     <Property Name="Tag" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ClosedWOStage' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ClosedWOStage">
-          <Property Name="JOB" Type="char" MaxLength="6" />
-          <Property Name="SUFFIX" Type="char" MaxLength="3" />
-          <Property Name="FILLER1" Type="char" MaxLength="1" />
-          <Property Name="PART" Type="char" MaxLength="20" />
-          <Property Name="LOCATION" Type="char" MaxLength="2" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="ROUTER" Type="char" MaxLength="20" />
-          <Property Name="PRIORITY" Type="char" MaxLength="3" />
-          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
-          <Property Name="CUSTOMER" Type="char" MaxLength="6" />
-          <Property Name="SALESPERSON_OLD" Type="char" MaxLength="2" />
-          <Property Name="CUSTOMER_PO" Type="char" MaxLength="20" />
-          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_OPENED" Type="char" MaxLength="6" />
-          <Property Name="DATE_DUE" Type="char" MaxLength="6" />
-          <Property Name="DATE_CLOSED" Type="char" MaxLength="6" />
-          <Property Name="DATE_START" Type="char" MaxLength="6" />
-          <Property Name="DATE_SCH_CMPL_INF" Type="char" MaxLength="6" />
-          <Property Name="DATE_SCH_CMPL_FIN" Type="char" MaxLength="6" />
-          <Property Name="DATE_LAST_SCH_INF" Type="char" MaxLength="6" />
-          <Property Name="DATE_ORIG_DUE" Type="char" MaxLength="6" />
-          <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_SALES" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_MATERIAL" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="NUM_HOURS" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_LABOR" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="COMMENTS_1" Type="char" MaxLength="70" />
-          <Property Name="COMMENTS_2" Type="char" MaxLength="70" />
-          <Property Name="FLAG_PURGE" Type="char" MaxLength="1" />
-          <Property Name="PART_CUSTOMER" Type="char" MaxLength="20" />
-          <Property Name="DRAWING_CUSTOMER" Type="char" MaxLength="20" />
-          <Property Name="AMT_PARTIAL_SHPMNT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="CODE_SORT" Type="char" MaxLength="20" />
-          <Property Name="CODE_SORT_OTHER" Type="char" MaxLength="20" />
-          <Property Name="DATE_START_OTHER" Type="char" MaxLength="6" />
-          <Property Name="HOUR_START" Type="numeric" Precision="5" Scale="3" />
-          <Property Name="SYSTEM_PRIORITY" Type="numeric" Precision="3" Scale="0" />
-          <Property Name="USER_SCHEDULE" Type="char" MaxLength="1" />
-          <Property Name="FREIGHT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_FREIGHT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_SHIP_1" Type="char" MaxLength="6" />
-          <Property Name="DATE_SHIP_2" Type="char" MaxLength="6" />
-          <Property Name="DATE_SHIP_3" Type="char" MaxLength="6" />
-          <Property Name="DATE_SHIP_4" Type="char" MaxLength="6" />
-          <Property Name="QTY_SHIP_1" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_2" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_3" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_4" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="DATE_LAST_SCH_FIN" Type="char" MaxLength="6" />
-          <Property Name="BIN" Type="char" MaxLength="6" />
-          <Property Name="OTHER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OTHER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_DUE_NEW" Type="char" MaxLength="6" />
-          <Property Name="CTR_DATE_REVUE_DUE" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="CTR_DATE_DUE_NEW" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="FLAG_WO_PRTD" Type="char" MaxLength="1" />
-          <Property Name="QTY_CUSTOMER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_MATERIAL_DUE" Type="char" MaxLength="6" />
-          <Property Name="CTR_DATE_MATL_DUE" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="COMMENTS_3" Type="char" MaxLength="70" />
-          <Property Name="DATE_MATL_ORDER" Type="char" MaxLength="6" />
-          <Property Name="PARTIAL_MATERIAL" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_LABOR" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="FLAG_HOLD" Type="char" MaxLength="1" />
-          <Property Name="SALESPERSON" Type="char" MaxLength="3" />
-          <Property Name="SCH_GRP" Type="char" MaxLength="9" />
-          <Property Name="FILLER3" Type="char" MaxLength="2" />
-          <Property Name="PARENT_WO" Type="char" MaxLength="6" />
-          <Property Name="PARENT_SUFFIX_PARENT" Type="char" MaxLength="3" />
-          <Property Name="DATE_RELEASED" Type="char" MaxLength="6" />
-          <Property Name="PART_DESCRIPTION" Type="char" MaxLength="30" />
-          <Property Name="SALES_ORDER" Type="char" MaxLength="7" />
-          <Property Name="SALES_ORDER_LINE" Type="char" MaxLength="3" />
-          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
-          <Property Name="OUTS" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OUTSIDE" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="SCHEDULED_DUE_DATE" Type="char" MaxLength="6" />
-          <Property Name="PROJECT" Type="char" MaxLength="7" />
-          <Property Name="DUE_OFFSET" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="JOB_LOCKED" Type="char" MaxLength="1" />
-          <Property Name="SCHEDULE_DIR" Type="char" MaxLength="1" />
-          <Property Name="CREATE_FROM_QUALITY" Type="char" MaxLength="1" />
-          <Property Name="TRAV_REV" Type="char" MaxLength="2" />
-          <Property Name="SPECIAL_START_SEQ" Type="char" MaxLength="6" />
-          <Property Name="SPECIAL_STOP_SEQ" Type="char" MaxLength="6" />
-          <Property Name="PMAINT_FLAG" Type="char" MaxLength="1" />
-          <Property Name="SHIPTO_ID" Type="char" MaxLength="6" />
-          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
-          <Property Name="EXPORTED" Type="char" MaxLength="1" />
-          <Property Name="PHASE" Type="char" MaxLength="4" />
-          <Property Name="JOB_TYPE" Type="char" MaxLength="1" />
-          <Property Name="PRE_RELEASE" Type="char" MaxLength="1" />
-          <Property Name="PROCESS_GRP" Type="char" MaxLength="1" />
-          <Property Name="SHIPD_FLG" Type="char" MaxLength="1" />
-          <Property Name="FILLER4" Type="char" MaxLength="6" />
-        </EntityType>-->
   <EntityType Name="Comments">
     <Key>
       <PropertyRef Name="ID" />
@@ -184,16 +83,6 @@ warning 6013: The table/view 'Dashboard.dbo.ClosedWOStage' does not have a prima
     <Property Name="Day" Type="varchar" MaxLength="2" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.CWOList' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CWOList">
-          <Property Name="Job" Type="char" MaxLength="6" />
-          <Property Name="Suffix" Type="char" MaxLength="3" />
-          <Property Name="QtyCompleted" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DateSequence" Type="char" MaxLength="6" />
-          <Property Name="LMO" Type="char" MaxLength="1" />
-          <Property Name="Description" Type="char" MaxLength="30" />
-        </EntityType>-->
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CWOStage">
@@ -294,15 +183,6 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="TimeViewed" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.Employees' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Employees">
-          <Property Name="ID" Type="char" MaxLength="5" />
-          <Property Name="Name" Type="char" MaxLength="50" />
-          <Property Name="DateBirth" Type="date" />
-          <Property Name="DateHire" Type="date" />
-          <Property Name="DateTerm" Type="date" />
-        </EntityType>-->
   <EntityType Name="Goals">
     <Key>
       <PropertyRef Name="ID" />
@@ -324,237 +204,6 @@ warning 6013: The table/view 'Dashboard.dbo.Employees' does not have a primary k
     <Property Name="Access" Type="nvarchar" MaxLength="20" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.InventoryAllTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="InventoryAllTemp">
-          <Property Name="PART" Type="char" MaxLength="20" />
-          <Property Name="LOCATION" Type="char" MaxLength="2" />
-          <Property Name="CODE_ABC" Type="char" MaxLength="1" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="BIN" Type="char" MaxLength="6" />
-          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
-          <Property Name="UM_PURCHASING" Type="char" MaxLength="3" />
-          <Property Name="UM_INVENTORY" Type="char" MaxLength="3" />
-          <Property Name="FACTOR_CONVERSION" Type="numeric" Precision="11" Scale="5" />
-          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_SAFETY" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_ONHAND" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_REORDER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_ONORDER_PO" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_ONORDER_WO" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_REQUIRED" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_COST" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_USAGE_MO_01" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_02" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_03" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_04" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_05" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_06" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_07" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_08" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_09" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_10" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_11" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_USAGE_MO_12" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="PRIOR_USAGE" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="DATE_LAST_USAGE" Type="date" />
-          <Property Name="AMT_PRICE" Type="numeric" Precision="13" Scale="5" />
-          <Property Name="OBSOLETE_FLAG" Type="char" MaxLength="1" />
-          <Property Name="CODE_BOM" Type="char" MaxLength="1" />
-          <Property Name="CODE_DISCOUNT" Type="char" MaxLength="1" />
-          <Property Name="CODE_TOTAL" Type="char" MaxLength="1" />
-          <Property Name="CODE_SORT" Type="char" MaxLength="10" />
-          <Property Name="QTY_RECVD_NOT_INSP" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_MFG_REQMTS" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="QTY_CURRENT_USAGE" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="YEAR_LAST_ROLL" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="DATE_LAST_AUDIT" Type="date" />
-          <Property Name="CODE_EXTRA_DESC" Type="char" MaxLength="1" />
-          <Property Name="PCT_ORDER_DISC" Type="numeric" Precision="4" Scale="4" />
-          <Property Name="TIME_MATERIAL_LEAD" Type="numeric" Precision="4" Scale="0" />
-          <Property Name="PRIM_DIM" Type="numeric" Precision="7" Scale="4" />
-          <Property Name="SEC_DIM" Type="numeric" Precision="7" Scale="4" />
-          <Property Name="QTY_BEGINNING" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="AMT_BEG_COST" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="CODE_EXCEPTION" Type="char" MaxLength="1" />
-          <Property Name="CODE_PERM_FIX" Type="char" MaxLength="1" />
-          <Property Name="DATE_EXCEPTION" Type="date" />
-          <Property Name="CTR_BACK_ORDER" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="AMT_ALT_COST" Type="numeric" Precision="16" Scale="6" />
-          <Property Name="DATE_LAST_CHG" Type="date" />
-          <Property Name="WHO_CHG_LAST" Type="char" MaxLength="8" />
-          <Property Name="TRM_CHG_LAST" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="LENGTH_RAW_MATL" Type="numeric" Precision="3" Scale="0" />
-          <Property Name="WIDTH_RAW_MATL" Type="numeric" Precision="3" Scale="0" />
-          <Property Name="DENSITY_RAW_MATL" Type="numeric" Precision="7" Scale="5" />
-          <Property Name="CODE_RM_SHAPE" Type="char" MaxLength="1" />
-          <Property Name="QTY_LAST_ONHAND" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_LAST_VERIFY" Type="date" />
-          <Property Name="FLAG_LOT" Type="char" MaxLength="1" />
-          <Property Name="FLAG_DROP" Type="char" MaxLength="1" />
-          <Property Name="FLAG_6_COST" Type="char" MaxLength="1" />
-          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
-          <Property Name="FLAG_INACTIVE" Type="char" MaxLength="1" />
-          <Property Name="FLAG_WARRANTY" Type="char" MaxLength="1" />
-          <Property Name="USE_ZERO_LEAD" Type="char" MaxLength="1" />
-          <Property Name="QTY_MAXIMUM" Type="numeric" Precision="7" Scale="0" />
-          <Property Name="HRS_STANDARD" Type="numeric" Precision="7" Scale="3" />
-          <Property Name="LBS" Type="numeric" Precision="9" Scale="4" />
-          <Property Name="CODE_SOURCE" Type="char" MaxLength="12" />
-          <Property Name="NAME_VENDOR" Type="char" MaxLength="20" />
-          <Property Name="TEXT_INFO1" Type="char" MaxLength="20" />
-          <Property Name="TEXT_INFO2" Type="char" MaxLength="20" />
-          <Property Name="DESCRIPTION_2" Type="char" MaxLength="30" />
-          <Property Name="DESCRIPTION_3" Type="char" MaxLength="30" />
-          <Property Name="AMT_COST_1" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="AMT_COST_2" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="AMT_COST_3" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="DATE_CYCLE" Type="date" />
-          <Property Name="LIFO_BASE" Type="numeric" Precision="11" Scale="4" />
-          <Property Name="SIX_DECIMAL_COST" Type="numeric" Precision="14" Scale="6" />
-          <Property Name="WT_PER_FOOT" Type="numeric" Precision="9" Scale="4" />
-          <Property Name="CUTTING_CHARGE" Type="char" MaxLength="1" />
-          <Property Name="SHP_CNV_FACTOR" Type="numeric" Precision="11" Scale="5" />
-          <Property Name="SHIP_UM" Type="char" MaxLength="3" />
-          <Property Name="LENGTH" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="WIDTH" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="WARRANTY_TYPE" Type="char" MaxLength="2" />
-          <Property Name="PROP_CODE" Type="char" MaxLength="10" />
-          <Property Name="REQUIRES_INSP" Type="char" MaxLength="1" />
-          <Property Name="BASE_PART" Type="char" MaxLength="1" />
-          <Property Name="PRICE_CATG" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_UM" Type="char" MaxLength="3" />
-          <Property Name="PART_PRICE_CODE" Type="char" MaxLength="3" />
-          <Property Name="MATL_SCHRG_TYPE" Type="char" MaxLength="20" />
-          <Property Name="HM_FLAG" Type="char" MaxLength="1" />
-          <Property Name="FRT_CLASS" Type="char" MaxLength="5" />
-          <Property Name="PALLET_FLAG" Type="char" MaxLength="1" />
-          <Property Name="CNTNRS_PER_PALLET" Type="numeric" Precision="8" Scale="0" />
-          <Property Name="PKGD_BY" Type="char" MaxLength="1" />
-          <Property Name="PCS_PER_CNTNR" Type="numeric" Precision="8" Scale="0" />
-          <Property Name="DFLT_CARTON_CD" Type="char" MaxLength="11" />
-          <Property Name="DFLT_PALLET_CD" Type="char" MaxLength="11" />
-          <Property Name="COMM_DESCR" Type="char" MaxLength="30" />
-          <Property Name="NMFC_NO" Type="char" MaxLength="6" />
-          <Property Name="PKGD_WEIGHT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PKG_COMPONENTS" Type="char" MaxLength="1" />
-          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
-          <Property Name="DROP_SHIP" Type="char" MaxLength="1" />
-          <Property Name="CONSUMP_CONV" Type="numeric" Precision="11" Scale="5" />
-          <Property Name="BOM_REF" Type="char" MaxLength="1" />
-          <Property Name="STOCK_BIN" Type="char" MaxLength="6" />
-          <Property Name="GEN_PART_SEQ" Type="char" MaxLength="1" />
-          <Property Name="GEN_PART_NBR" Type="char" MaxLength="17" />
-          <Property Name="NMFC_SUB_NO" Type="char" MaxLength="4" />
-          <Property Name="IC_VENDOR" Type="char" MaxLength="6" />
-          <Property Name="MATL_SCHRG_DATE" Type="date" />
-          <Property Name="PART_CREATE_DATE" Type="date" />
-          <Property Name="SHELF_LIFE" Type="char" MaxLength="1" />
-          <Property Name="REQUIRES_TESTING" Type="char" MaxLength="1" />
-          <Property Name="BIZ_WEB_PART_FLG" Type="char" MaxLength="1" />
-          <Property Name="AUTO_LOT_NUM" Type="char" MaxLength="1" />
-          <Property Name="COST_DATE" Type="date" />
-          <Property Name="AGING" Type="numeric" Precision="1" Scale="0" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.JobHeaderTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="JobHeaderTemp">
-          <Property Name="JOB" Type="char" MaxLength="6" />
-          <Property Name="SUFFIX" Type="char" MaxLength="3" />
-          <Property Name="PART" Type="char" MaxLength="20" />
-          <Property Name="LOCATION" Type="char" MaxLength="2" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="ROUTER" Type="char" MaxLength="20" />
-          <Property Name="PRIORITY" Type="char" MaxLength="3" />
-          <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
-          <Property Name="CUSTOMER" Type="char" MaxLength="6" />
-          <Property Name="SALESPERSON_OLD" Type="char" MaxLength="2" />
-          <Property Name="CUSTOMER_PO" Type="char" MaxLength="20" />
-          <Property Name="QTY_ORDER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="QTY_COMPLETED" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_OPENED" Type="date" />
-          <Property Name="DATE_DUE" Type="date" />
-          <Property Name="DATE_CLOSED" Type="date" />
-          <Property Name="DATE_START" Type="date" />
-          <Property Name="DATE_SCH_CMPL_INF" Type="date" />
-          <Property Name="DATE_SCH_CMPL_FIN" Type="date" />
-          <Property Name="DATE_LAST_SCH_INF" Type="date" />
-          <Property Name="DATE_ORIG_DUE" Type="date" />
-          <Property Name="AMT_PRICE_PER_UNIT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_SALES" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_MATERIAL" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="NUM_HOURS" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_LABOR" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="AMT_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="COMMENTS_1" Type="char" MaxLength="70" />
-          <Property Name="COMMENTS_2" Type="char" MaxLength="70" />
-          <Property Name="FLAG_PURGE" Type="char" MaxLength="1" />
-          <Property Name="PART_CUSTOMER" Type="char" MaxLength="20" />
-          <Property Name="DRAWING_CUSTOMER" Type="char" MaxLength="20" />
-          <Property Name="AMT_PARTIAL_SHPMNT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="CODE_SORT" Type="char" MaxLength="20" />
-          <Property Name="CODE_SORT_OTHER" Type="char" MaxLength="20" />
-          <Property Name="DATE_START_OTHER" Type="date" />
-          <Property Name="HOUR_START" Type="numeric" Precision="5" Scale="3" />
-          <Property Name="SYSTEM_PRIORITY" Type="numeric" Precision="3" Scale="0" />
-          <Property Name="USER_SCHEDULE" Type="char" MaxLength="1" />
-          <Property Name="FREIGHT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_FREIGHT" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_SHIP_1" Type="date" />
-          <Property Name="DATE_SHIP_2" Type="date" />
-          <Property Name="DATE_SHIP_3" Type="date" />
-          <Property Name="DATE_SHIP_4" Type="date" />
-          <Property Name="QTY_SHIP_1" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_2" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_3" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="QTY_SHIP_4" Type="numeric" Precision="9" Scale="2" />
-          <Property Name="DATE_LAST_SCH_FIN" Type="date" />
-          <Property Name="BIN" Type="char" MaxLength="6" />
-          <Property Name="OTHER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OTHER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_DUE_NEW" Type="date" />
-          <Property Name="CTR_DATE_REVUE_DUE" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="CTR_DATE_DUE_NEW" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="FLAG_WO_PRTD" Type="char" MaxLength="1" />
-          <Property Name="QTY_CUSTOMER" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="DATE_MATERIAL_DUE" Type="date" />
-          <Property Name="CTR_DATE_MATL_DUE" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="COMMENTS_3" Type="char" MaxLength="70" />
-          <Property Name="DATE_MATL_ORDER" Type="date" />
-          <Property Name="PARTIAL_MATERIAL" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_LABOR" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OVERHEAD" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="FLAG_HOLD" Type="char" MaxLength="1" />
-          <Property Name="SALESPERSON" Type="char" MaxLength="3" />
-          <Property Name="SCH_GRP" Type="char" MaxLength="9" />
-          <Property Name="PARENT_WO" Type="char" MaxLength="6" />
-          <Property Name="PARENT_SUFFIX_PARENT" Type="char" MaxLength="3" />
-          <Property Name="DATE_RELEASED" Type="date" />
-          <Property Name="PART_DESCRIPTION" Type="char" MaxLength="30" />
-          <Property Name="SALES_ORDER" Type="char" MaxLength="7" />
-          <Property Name="SALES_ORDER_LINE" Type="char" MaxLength="3" />
-          <Property Name="FLAG_SERIALIZE" Type="char" MaxLength="1" />
-          <Property Name="OUTS" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="PARTIAL_OUTSIDE" Type="numeric" Precision="12" Scale="4" />
-          <Property Name="SCHEDULED_DUE_DATE" Type="date" />
-          <Property Name="PROJECT" Type="char" MaxLength="7" />
-          <Property Name="DUE_OFFSET" Type="numeric" Precision="2" Scale="0" />
-          <Property Name="JOB_LOCKED" Type="char" MaxLength="1" />
-          <Property Name="SCHEDULE_DIR" Type="char" MaxLength="1" />
-          <Property Name="CREATE_FROM_QUALITY" Type="char" MaxLength="1" />
-          <Property Name="TRAV_REV" Type="char" MaxLength="2" />
-          <Property Name="SPECIAL_START_SEQ" Type="char" MaxLength="6" />
-          <Property Name="SPECIAL_STOP_SEQ" Type="char" MaxLength="6" />
-          <Property Name="PMAINT_FLAG" Type="char" MaxLength="1" />
-          <Property Name="SHIPTO_ID" Type="char" MaxLength="6" />
-          <Property Name="LOT_TO_LOT" Type="char" MaxLength="1" />
-          <Property Name="EXPORTED" Type="char" MaxLength="1" />
-          <Property Name="PHASE" Type="char" MaxLength="4" />
-          <Property Name="JOB_TYPE" Type="char" MaxLength="1" />
-          <Property Name="PRE_RELEASE" Type="char" MaxLength="1" />
-          <Property Name="PROCESS_GRP" Type="char" MaxLength="1" />
-          <Property Name="SHIPD_FLG" Type="char" MaxLength="1" />
-        </EntityType>-->
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="ID" />
@@ -816,18 +465,6 @@ warning 6002: The table/view 'Dashboard.dbo.PrevMaintTemp' does not have a prima
     <Property Name="PlantID" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.PriceHistoryTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PriceHistoryTemp">
-          <Property Name="PartNum" Type="char" MaxLength="20" />
-          <Property Name="Price" Type="numeric" Precision="36" Scale="6" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.PriceOpenTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PriceOpenTemp">
-          <Property Name="PartNum" Type="char" MaxLength="20" />
-          <Property Name="Price" Type="numeric" Precision="36" Scale="6" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Prices">
     <Key>
@@ -837,26 +474,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
     <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ProductLineTemp">
-          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="LINE" Type="char" MaxLength="3" />
-          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
-          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
-          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
-          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
-          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
-          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
-          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
-          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
-        </EntityType>-->
   <EntityType Name="ProjectAssignees">
     <Key>
       <PropertyRef Name="ID" />

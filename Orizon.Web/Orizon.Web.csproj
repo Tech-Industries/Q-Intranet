@@ -148,6 +148,21 @@
     <Compile Include="Data\OrderLinesAll.cs">
       <DependentUpon>OrizonEntites.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\OrizonDevEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonDevEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrizonDevEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonDevEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrizonDevEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrizonDevEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\OrizonEntites.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -318,6 +333,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrizonEntites.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Data\OrizonDevEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrizonDevEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\OrizonDevEntities.edmx.diagram">
+      <DependentUpon>OrizonDevEntities.edmx</DependentUpon>
+    </None>
     <None Include="Data\OrizonEntites.edmx.diagram">
       <DependentUpon>OrizonEntites.edmx</DependentUpon>
     </None>
@@ -328,6 +350,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\OrizonDevEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrizonDevEntities.edmx</DependentUpon>
+      <LastGenOutput>OrizonDevEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\OrizonDevEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrizonDevEntities.edmx</DependentUpon>
+      <LastGenOutput>OrizonDevEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Data\OrizonEntites.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrizonEntites.edmx</DependentUpon>

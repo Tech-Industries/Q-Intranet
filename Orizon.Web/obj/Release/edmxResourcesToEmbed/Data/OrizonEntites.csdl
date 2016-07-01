@@ -101,6 +101,7 @@
     <Property Name="DateClosed" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectID" Type="Int32" />
   </EntityType>
   <EntityType Name="BugTag">
     <Key>

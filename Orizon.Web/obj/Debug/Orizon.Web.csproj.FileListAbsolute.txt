@@ -7,3 +7,4 @@ C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Debug\EntityFramewor
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Debug\Orizon.Web.dll
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Debug\Orizon.Web.pdb
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Debug\Orizon.Web.csprojResolveAssemblyReference.cache

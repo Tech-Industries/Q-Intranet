@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Bugs">
       <EntityTypeMapping TypeName="OrizonModel.Bug">
         <MappingFragment StoreEntitySet="Bugs">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />

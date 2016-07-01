@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0a29b0f49fa4ab5aeef1a7ffbc35df4" Name="Diagram1">
+        <EntityTypeShape EntityType="OrizonDevModel.Group" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.UserGroup" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.User" Width="1.5" PointX="0.625" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.Bug" Width="1.5" PointX="3.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.BugTag" Width="1.5" PointX="5.375" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.ProjectAssignee" Width="1.5" PointX="5.875" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.Project" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrizonDevModel.ProjectTask" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="OrizonDevModel.FK_ProjectAssignees_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_Projects_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_ProjectTasks_Assignee" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_ProjectTasks_Creator" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_ProjectAssignees_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_ProjectTasks_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="OrizonDevModel.FK_Groups_Groups" />
+        <AssociationConnector Association="OrizonDevModel.FK_UserGroups_Groups" />
+        <AssociationConnector Association="OrizonDevModel.FK_UserGroups_Users" />
+        <AssociationConnector Association="OrizonDevModel.FK_BugTags_Bugs" />
+        <AssociationConnector Association="OrizonDevModel.FK_Bugs_Projects" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

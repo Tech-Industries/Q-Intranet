@@ -511,7 +511,7 @@
         if (plantid == 0 || areaid == 0 || score == 0) {
         }
         else {
-            var sendData = "UserID=" + $('#UID').val() + "&DateCompleted=" + DateNowFormatted() + "&AreaID=" + areaid;
+            var sendData = "UserID=" + $('#UID').val() + "&DateCompleted=&AreaID=" + areaid;
             var addAudit = $.ajax({ type: "POST", url: UCFAuditsAPI, cache: false, data: sendData });
             addAudit.done(function (data) {
                 AuditID = data.ID;

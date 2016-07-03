@@ -8,3 +8,16 @@ C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\EntityFramew
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.csprojResolveAssemblyReference.cache
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.dll
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\obj\Release\Orizon.Web.pdb
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\Microsoft.Web.Infrastructure.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Helpers.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Mvc.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Razor.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.Deployment.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.Razor.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Helpers.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Mvc.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.Razor.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.Deployment.xml
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Orizon.Web\bin\Release\System.Web.WebPages.Razor.xml

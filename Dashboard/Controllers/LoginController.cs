@@ -29,6 +29,28 @@ namespace Dashboard.Controllers
         }
 
         private DashboardEntities db = new DashboardEntities();
+        public ActionResult SignIn()
+        {
+            var path = "";
+            var username = "";
+            var password = "";
+            using (PrincipalContext ctx = new PrincipalContext(ContextType.Domain, path, "adminUser", "adminPass"))
+            {
+                if(ctx.ValidateCredentials(username, password))
+                {
+                    using(var up = UserPrincipal.FindByIdentity(ctx, username))
+                    {
+                        if(up == null)
+                        {
+                            return null;
+                        }
+                        
+                    }
+                }
+            }
+            return null;
+        }
+
         public ActionResult Login(String UserName, String password)
         {
             // APIControllers.LoginController LC = new APIControllers.LoginController();
@@ -68,7 +90,7 @@ namespace Dashboard.Controllers
                         authCookie.Value = test[0].ID.ToString();
                         authCookie.Expires = DateTime.Now.AddMinutes(120);
                         Response.Cookies.Add(authCookie);
-                            
+
                         string FullName = test[0].FirstName + " " + test[0].LastName;
                         HttpCookie cookie = new HttpCookie("FullName");
                         cookie.Value = FullName;

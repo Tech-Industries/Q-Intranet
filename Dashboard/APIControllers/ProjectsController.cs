@@ -23,30 +23,61 @@ namespace Dashboard.APIControllers
 
         #region Projects
 
-        [Route("api/v1/projects/toplevel")]
+
+
+
+        [Route("api/v1/projects")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetProjectsTopLevel()
+        public async Task<IHttpActionResult> GetProjects()
         {
-            return Ok(await db.ProjectsTopLevels.ToListAsync());
+            return await GetProjects();
+
         }
 
-        [Route("api/v1/projects/toplevel")]
+        [Route("api/v1/projects")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetProjectsTopLevel(string status)
+        public async Task<IHttpActionResult> GetProjects(bool? top = false)
         {
-            var projects = new List<ProjectsTopLevel>();
 
-            if (!string.IsNullOrEmpty(status))
+            if (top.HasValue || !top.Value)
             {
-                var stats = status.ToLower().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                projects = await db.ProjectsTopLevels.Where(x => stats.Contains(x.Status.ToLower())).ToListAsync(); // SELECT * FROM Bugs WHERE Status IN ()
-
+                return Ok(await db.Projects.ToListAsync());
             }
 
-            return Ok(projects);
+            return Ok(await db.ProjectsTopLevels.ToListAsync());
 
-            
+        }
+
+
+        [Route("api/v1/projects/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProjectId(int id)
+        {
+            return await GetProjectId(id);
+        }
+
+        [Route("api/v1/projects/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProjectId(int id, bool? top = false)
+        {
+
+            if (!top.Value)
+            {
+                var project = await db.Projects.FindAsync(id);
+                if (project == null)
+                {
+                    return NotFound();
+                }
+                return Ok(project);
+            }
+
+            var projectTop = await db.ProjectsTopLevels.FindAsync(id);
+            if (projectTop == null)
+            {
+                return NotFound();
+            }
+            return Ok(projectTop);
+
         }
 
         [Route("api/v1/projects")]
@@ -69,28 +100,6 @@ namespace Dashboard.APIControllers
             return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.Created));
         }
 
-        [Route("api/v1/projects")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetProjects()
-        {
-            return Ok(await db.Projects.ToListAsync());
-        }
-
-
-        [Route("api/v1/projects/{id:int}")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetProjectId(int id)
-        {
-            var project = await db.Projects.FindAsync(id);
-
-            if (project == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(project);
-        }
-
 
         [Route("api/v1/projects/{id:int}")]
         [HttpPut]
@@ -99,19 +108,22 @@ namespace Dashboard.APIControllers
 
 
             var oldProject = await db.Projects.FindAsync(id);
+
             if (oldProject == null || project == null)
             {
                 return NotFound();
             }
             try
             {
+
                 var entry = db.Entry(oldProject);
-                if (oldProject.Name != project.Name) { oldProject.Name = project.Name; entry.Property(x => x.Name).IsModified = true; }
-                if (oldProject.Description != project.Description) { oldProject.Description = project.Description; entry.Property(x => x.Description).IsModified = true; }
-                if (oldProject.Status != project.Status) { oldProject.Status = project.Status; entry.Property(x => x.Status).IsModified = true; }
-                if (oldProject.DateCreated != project.DateCreated) { oldProject.DateCreated = project.DateCreated; entry.Property(x => x.DateCreated).IsModified = true; }
-                if (oldProject.CreatorID != project.CreatorID) { oldProject.CreatorID = project.CreatorID; entry.Property(x => x.CreatorID).IsModified = true; }
-                if (oldProject.Priority != project.Priority) { oldProject.Priority = project.Priority; entry.Property(x => x.Priority).IsModified = true; }
+
+                oldProject.Name = project.Name;
+                oldProject.Description = project.Description;
+                oldProject.Status = project.Status;
+                oldProject.DateCreated = project.DateCreated;
+                oldProject.CreatorID = project.CreatorID;
+                oldProject.Priority = project.Priority;
 
                 await db.SaveChangesAsync();
             }
@@ -120,7 +132,7 @@ namespace Dashboard.APIControllers
                 return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
             }
 
-            return Ok(project);
+            return Ok(oldProject);
         }
 
         [Route("api/v1/projects/{id:int}")]
@@ -138,14 +150,7 @@ namespace Dashboard.APIControllers
             }
             return Ok();
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-        }
+        
         #endregion
 
         #region ProjectAssignees
@@ -386,7 +391,7 @@ namespace Dashboard.APIControllers
             return Ok();
         }
         #endregion
-        
+
         #region BugTags
         [Route("api/v1/projects/bugs/{bugId:int}/tags")]
         [HttpGet]
@@ -440,6 +445,14 @@ namespace Dashboard.APIControllers
         }
 
         #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+        }
 
     }
     public class ProjectsController : ApiController

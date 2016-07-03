@@ -232,7 +232,9 @@
 
             data[0].ScrapAsPercent = formatPercent(data[0].ScrapAsPercent);
             data[0].Cwo = formatMoney(data[0].Cwo).split('.')[0];
+            data[0].CWOGoal = formatMoney(data[0].CWOGoal).split('.')[0];
             data[0].PDSales = formatMoney(data[0].PDSales).split('.')[0];
+            console.log(data[0]);
             self.Incentives(data[0]);
         });
     }

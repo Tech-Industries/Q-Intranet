@@ -18,7 +18,7 @@ namespace Dashboard.APIControllers
     public class UCFAuditsController : ApiController
     {
         private DashboardEntities db = new DashboardEntities();
-
+        
         [ResponseType(typeof(List<object>))]
         public List<object> Get(int ID)
         {
@@ -109,6 +109,7 @@ namespace Dashboard.APIControllers
         [ResponseType(typeof(UCFAuditsViewModel))]
         public async Task<IHttpActionResult> Post(UCFAudit audit)
         {
+            audit.DateCompleted = DateTime.Now;
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
             db.UCFAudits.Add(audit);

@@ -24,5 +24,6 @@ namespace Dashboard.Models
         public Nullable<System.DateTime> DateClosed { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> ProjectID { get; set; }
     }
 }

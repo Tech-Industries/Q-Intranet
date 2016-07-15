@@ -151,7 +151,7 @@
                     <h5>Action Items</h5>
                     <div class="ibox-tools">
                         <button class="btn btn-success btn-xs" id="ucf-action-history" data-toggle="modal" data-target="#ucf-action-history-modal">History</button>
-                        <span data-bind="if: @ViewBag.UID == OwnerID  || '@ViewBag.RelPer' == 'Admin'">
+                        <span data-bind="if: @ViewBag.UID == OwnerID()  || '@ViewBag.RelPer' == 'Admin'">
                             <button class="btn btn-primary btn-xs" id="new-action" data-toggle="modal" data-target="#ucf-action">New Action Item</button>
                         </span>
                     </div>
@@ -581,7 +581,7 @@
             var ID = $('#plantSelect option:selected').attr('plantid');
             console.log(ID);
             vm.loadAreas(ID);
-            $('#areaSelect').trigger("change");
+            vm.loadPlantRollup();
         });
 
         $(document).on('change', '#areaSelect', function () {

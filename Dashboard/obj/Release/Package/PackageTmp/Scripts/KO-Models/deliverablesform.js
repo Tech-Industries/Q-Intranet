@@ -143,6 +143,12 @@ $("#freq").change(function () {
         $("#period").removeAttr("disabled");
 
     }
+    else if (freq == "BiWeekly") {
+        loadBiWeeks();
+        $("#period").val(monYear + "-" + monMonth + "-" + monDay);
+        $("#period").removeAttr("disabled");
+
+    }
     else if (freq == "Monthly") {
         $("#period").append("<option value='01'>January</option><option value='02'>February</option><option value='03'>March</option><option value='04'>April</option><option value='05'>May</option><option value='06'>June</option><option value='07'>July</option><option value='08'>August</option><option value='09'>September</option><option value='10'>October</option><option value='11'>November</option><option value='12'>December</option>");
         $("#period").val(curMonth);
@@ -214,6 +220,45 @@ function loadWeeks() {
         var weekStart = smonth + "/" + sday;
         var dincr = firstDay.getDate() + 4;
         var wincr = firstDay.getDate() + 7;
+        var lastDay = new Date(firstDay);
+        lastDay = new Date(lastDay.setDate(dincr));
+        var lday = lastDay.getDate();
+        if (lday < 10) {
+            lday = "0" + lday;
+        }
+        var lmonth = lastDay.getMonth() + 1;
+        if (lmonth < 10) {
+            lmonth = "0" + lmonth;
+        }
+        var lyear = lastDay.getFullYear();
+        var weekEnd = lmonth + "/" + lday;
+        $('#period').append("<option value='" + syear + "-" + smonth + "-" + sday + "'>" + weekStart + " - " + weekEnd + "</option>");
+        firstDay = new Date(firstDay.setDate(wincr));
+        i += 1;
+    }
+}
+
+function loadBiWeeks() {
+    $("#period").html("");
+    var ycheck = $('#year').val();
+    var date = new Date(ycheck + "-01-07T12:00:00");
+    var first = date.getDate() - (date.getDay() - 1);
+    var firstDay = new Date(date.setDate(first));
+    var i = 1;
+    while (firstDay <= new Date(ycheck + "-12-31T12:00:00")) {
+        var sday = firstDay.getDate();
+        if (sday < 10) {
+            sday = "0" + sday;
+        }
+        var smonth = firstDay.getMonth() + 1;
+        if (smonth < 10) {
+            smonth = "0" + smonth;
+        }
+        var syear = firstDay.getFullYear();
+
+        var weekStart = smonth + "/" + sday;
+        var dincr = firstDay.getDate() + 11;
+        var wincr = firstDay.getDate() + 14;
         var lastDay = new Date(firstDay);
         lastDay = new Date(lastDay.setDate(dincr));
         var lday = lastDay.getDate();

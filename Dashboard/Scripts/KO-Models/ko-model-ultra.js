@@ -44,7 +44,7 @@
     var test = 0;
 
     self.checkOwnerID = function () {
-        self.OwnerID($('#areaSelect option:selected').attr('ownerid'));
+        self.OwnerID(parseInt($('#areaSelect option:selected').attr('ownerid')));
     }
 
     self.addAction = function () {
@@ -102,6 +102,7 @@
         test += 1;
         console.log(test);
         var AreaID = $('#areaSelect').val();
+        console.log("############ - " + AreaID);
         var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { ID: AreaID, Type: 'TopLevelHistory' } });
         load.done(function (data) {
             var array = $.map(data, function (item) {

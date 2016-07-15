@@ -22,9 +22,8 @@ var daysInWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 function setCookies() {
     var homeLink = $("#setCookiesLink").attr("href");
     var plantName = $("#plantSelect").val();
-    var month = $("#monthSelect").val();
-    var year = $("#yearSelect").val();
-    var load = $.ajax({ type: "GET", url: homeLink, cache: false, data: { plantName: plantName, month: month, year: year } });
+    var period = $("#periodSelect").val();
+    var load = $.ajax({ type: "GET", url: homeLink, cache: false, data: { plantName: plantName, period: period } });
     load.done(function () {
     });
     load.fail(function () {
@@ -107,6 +106,12 @@ function formatShortDate(date) {
     var d = date.substring(6, 8);
     return m + "/" + d + "/" + y;
 }
+function formatToShortDate(date) {
+    var y = date.split('-')[0];
+    var m = date.split('-')[1];
+    var d = date.split('-')[2];
+    return m + "/" + d + "/" + y;
+}
 
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
@@ -169,7 +174,7 @@ function formatSqlDateTimeToShortDate(ts) {
 
 function DateNowFormatted() {
     var d = new Date;
-    return d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + ('0' + (d.getHours() + 1)).slice(-2) + ":" + ('0' + (d.getMinutes() + 1)).slice(-2) + ":" + ('0' + (d.getSeconds() + 1)).slice(-2);
+    return d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + ('0' + (d.getHours())).slice(-2) + ":" + ('0' + (d.getMinutes())).slice(-2) + ":" + ('0' + (d.getSeconds())).slice(-2);
 }
 
 function GetDate() {
@@ -312,6 +317,10 @@ function findPeriodVal(Frequency, DateDue) {
         value = getMonday(DateDue);
 
     }
+    else if (Frequency == 'BiWeekly') {
+        value = getMonday(DateDue);
+
+    }
     else if (Frequency == 'Monthly') {
         value = DateDue.split('-')[1].toString();
 
@@ -425,7 +434,7 @@ function addComment(TypeID, UserID, Comment, Type, API, self) {
         item.LastName = $("#user-full-name").html().split(" ")[1];
         item.TimeSubmitted = formatSqlDateTime(item.TimeSubmitted);
         self.Comments.push(item);
-        addNotification(TypeID, Type, UserID);
+        addNotification(TypeID, Type+'CommentAdd', UserID);
 
     });
 
@@ -443,10 +452,12 @@ function updateComment(ID, TimeSubmitted, Comment, AllComments, API) {
 function removeComment(ID, API, self) {
     var del = $.ajax({ type: 'DELETE', url: API + '/' + ID, contentType: 'application/json' });
     del.done(function (data) {
-
+        console.log(data);
     });
     var remove = $.grep(self.Comments(), function (e) { return e.ID == ID })[0];
     self.Comments.remove(remove);
+
+    //addNotification(ID, Type + 'CommentDelete', UserID);
 }
 
 
@@ -460,8 +471,8 @@ function removeComment(ID, API, self) {
 function addNotification(TypeID, Type, UserID) {
     var notificationsApi = $("#NotificationsLink").attr('href');
     var message = '';
-    if (Type == 'Deliverables') {
-        message = "has commented on one of your " + Type
+    if (Type == 'DeliverableDetailCommentAdd') {
+        message = "has commented on one of your Deliverables"
     }
     else if (Type == 'Bug') {
         message = "has submitted a Bug";

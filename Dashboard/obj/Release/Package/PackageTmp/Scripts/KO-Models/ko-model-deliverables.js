@@ -16,6 +16,7 @@
 
     self.Users = ko.observableArray([]);
     self.WeeklyDels = ko.observableArray([]);
+    self.BiWeeklyDels = ko.observableArray([]);
     self.MonthlyDels = ko.observableArray([]);
     self.QuarterlyDels = ko.observableArray([]);
     self.SemiAnnualDels = ko.observableArray([]);
@@ -35,6 +36,7 @@
     self.Comments = ko.observableArray([]);
     self.DDDocuments = ko.observableArray([]);
     self.DDReviewers = ko.observableArray([]);
+    self.Owner = ko.observable();
     self.Reviewables = ko.observableArray([]);
     self.UserAccess = ko.observable(false);
 
@@ -133,6 +135,7 @@
         self.DelUserID(parseInt(UserID));
 
         self.WeeklyDels([]);
+        self.BiWeeklyDels([]);
         self.MonthlyDels([]);
         self.QuarterlyDels([]);
         self.SemiAnnualDels([]);
@@ -153,6 +156,9 @@
             array.forEach(function (item) {
                 if (item.Frequency == "Weekly") {
                     self.WeeklyDels.push(item);
+                }
+                else if (item.Frequency == "BiWeekly") {
+                    self.BiWeeklyDels.push(item);
                 }
                 else if (item.Frequency == "Monthly") {
                     self.MonthlyDels.push(item);
@@ -229,6 +235,8 @@
             dateDue = dateDue.split('T')[0];
             self.DDDateDue(dateDue);
             self.DelDetID(data.ID);
+
+            self.Owner(data.UserID);
             if (data.DateCompleted == null) {
                 self.DDComplete(false);
             }
@@ -237,15 +245,8 @@
                 self.DDComplete(true);
             }
 
-            self.loadDelDetReviews();
             var userid = $('#UserID').val();
             self.loadDelDetReviews();
-            self.DDReviewers().forEach(function (r) {
-                if (userid == r.UserID) {
-                    self.UserAccess(true);
-                }
-            });
-            if ($('#Assignee option:selected').val() == userid) { self.UserAccess(true); }
             if ($('#RelPer').val() == 3) { self.UserAccess(true); }
             self.loadComments();
             self.SelectedDD(data);
@@ -268,10 +269,12 @@
         if (Period != 0 || Frequency == "Annual") {
             var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { Frequency: Frequency, DelID: DelID, Period: Period, Year: Year } });
             load.done(function (data) {
+                console.log(data);
                 var dateDue = data.DateDue;
                 dateDue = dateDue.split('T')[0];
                 self.DDDateDue(dateDue);
                 self.DelDetID(data.ID);
+                self.Owner(data.UserID);
                 if (data.DateCompleted == null) {
                     self.DDComplete(false);
                 }
@@ -281,13 +284,6 @@
                 }
                 self.loadDelDetReviews();
                 var userid = $('#UserID').val();
-                self.loadDelDetReviews();
-                self.DDReviewers().forEach(function (r) {
-                    if (userid == r.UserID) {
-                        self.UserAccess(true);
-                    }
-                });
-                if ($('#Assignee option:selected').val() == userid) { self.UserAccess(true); }
                 if ($('#RelPer').val() == 3) { self.UserAccess(true); }
                 self.loadComments();
                 self.SelectedDD(data);
@@ -297,16 +293,16 @@
                 })
             });
         }
-
     }
 
     self.loadDelDetReviews = function () {
         var DelDetID = $("#DelDetID").val();
         var DelID = $("#DelID").val();
-        var loadReqReviewed = $.ajax({ type: "GET", url: deliverableReviewersAPI, cache: false, data: { DelID: DelID } });
+        var loadReqReviewed = $.ajax({ type: "GET", url: deliverableReviewersAPI, cache: false, data: { DelID: DelID} });
         var exists = false;
         var arr0 = [];
         var arr1 = [];
+        var IDSCheck = [];
         loadReqReviewed.done(function (data) {
             arr0 = data;
             var loadHasReviewed = $.ajax({ type: "GET", url: deliverableReviewsAPI, cache: false, data: { DelDetID: DelDetID } });
@@ -319,14 +315,22 @@
                             exists = true;
                         }
                     });
-
-                    if (exists == false) {
-                        var addRev = { ID: 0, UserID: i.UserID, FirstName: i.FirstName, LastName: i.LastName, TimeReviewed: "" }
+                    if (exists == false && self.DDDateDue() >= i.DateAdded.split('T')[0]) {
+                        var addRev = { ID: i.ID, UserID: i.UserID, FirstName: i.FirstName, LastName: i.LastName, TimeReviewed: "", DateAdded: i.DateAdded.split('T')[0] }
                         arr1.push(addRev);
                     }
                     exists = false;
                 });
                 self.DDReviewers(arr1);
+                arr1.forEach(function (r) {
+                    IDSCheck.push(r.UserID);
+                });
+                IDSCheck.push(parseInt($('#Assignee option:selected').val()));
+                var UserID = parseInt($('#layoutUserID').val());
+                if ($.inArray(UserID, IDSCheck) > -1) {
+                    self.UserAccess(true);
+                    
+                }
             });
         });
     }
@@ -427,6 +431,16 @@
         //delFile.done(function () { console.log("File Deleted") });
     }
 
+    self.removeReviewer = function (id) {
+
+        var del = $.ajax({ type: 'DELETE', url: deliverableReviewersAPI + '/' + id, contentType: 'application/json' });
+        del.done(function (data) {
+            console.log(data);
+            var remove = $.grep(self.DDReviewers(), function (e) { return e.ID == id })[0];
+            self.DDReviewers.remove(remove);
+        });
+    }
+
     self.addDelDetDocument = function () {
         var formData = new FormData($('#frm-doc-up')[0]);
         var uploadLink = $('#UploadFileLink').attr('href');
@@ -493,8 +507,11 @@
         var TypeID = $("#DelDetID").val();
         var UserID = $("#UserID").val();
         var Comment = $("#txt-new-comment").val();
-        addComment(TypeID, UserID, Comment, "DeliverableDetail", CommentsAPI, self);
-        $("#txt-new-comment").val('');
+        if (Comment.length > 0) {
+            addComment(TypeID, UserID, Comment, "DeliverableDetail", CommentsAPI, self);
+            $("#txt-new-comment").val('');
+
+        }
 
     }
     self.updateComment = function (ID, TimeSubmitted, Comment) {

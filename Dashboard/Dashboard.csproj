@@ -464,6 +464,15 @@
     <Compile Include="Models\ShippingPlanAdjShipDate.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StagingCriteria.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingDetail.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingTopLevel.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TimeInStateByMachine.cs">
       <DependentUpon>NKCConnect.tt</DependentUpon>
     </Compile>

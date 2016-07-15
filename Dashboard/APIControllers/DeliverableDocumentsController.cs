@@ -61,9 +61,6 @@ namespace Dashboard.APIControllers
                 await db.SaveChangesAsync();
                 return Ok(DeliverableDocumentsViewModel.MapFrom(c));
             }
-            
-
-
     }
 }
 }

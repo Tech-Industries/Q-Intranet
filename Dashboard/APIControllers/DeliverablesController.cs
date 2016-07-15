@@ -180,6 +180,17 @@ namespace Dashboard.APIControllers
 
 
             }
+            else if (Frequency == "BiWeekly")
+            {
+                string[] dateParts = Period.Split('-');
+                year = int.Parse(dateParts[0]);
+                month = int.Parse(dateParts[1]);
+                day = int.Parse(dateParts[2]);
+
+                //return db.Deliverables.Join(db.DeliverableDetails, d => d.ID, dd => dd.DelID, (d, dd) => new { d, dd }).Where(x => x.d.ID == DelID && x.dd.DateDue >= new DateTime(year, month, day)).Select( x=> new {x.dd.DateDue, x.dd.DateCompleted, x.dd.ID}).First();
+
+
+            }
             else if (Frequency == "Monthly")
             {
                 month = int.Parse(Period);
@@ -223,7 +234,7 @@ namespace Dashboard.APIControllers
                 day = 1;
                 month = 1;
             }
-            return db.DeliverableDetails.Where(x => x.DelID == DelID && x.DateDue >= new DateTime(year, month, day)).First();
+            return db.DeliverableDetails.Join(db.Deliverables, dd => dd.DelID, d => d.ID, (dd, d) => new { dd, d }).Where(x => x.dd.DelID == DelID && x.dd.DateDue >= new DateTime(year, month, day)).Select(x => new {x.dd.DateCompleted, x.dd.DateDue, x.dd.DelID, x.dd.ID, x.d.UserID }).First();
         }
 
 
@@ -289,12 +300,23 @@ namespace Dashboard.APIControllers
                 d[1] = '0' + d[1];
             }
             newDelDate = d[0] + '/' + d[1] + '/' + d[2];
-            System.Diagnostics.Debug.WriteLine(newDelDate);
+            System.Diagnostics.Debug.WriteLine(del.Frequency);
             var interval = 0;
             if (del.Frequency == "Weekly")
             {
                 interval = 1095;
                 for (var i = 0; i <= interval; i += 7)
+                {
+                    delDet.DateDue = DateTime.ParseExact(newDelDate, "MM/dd/yyyy", null).AddDays(i);
+                    db.DeliverableDetails.Add(delDet);
+                    await db.SaveChangesAsync();
+                }
+
+            }
+            else if (del.Frequency == "BiWeekly")
+            {
+                interval = 1095;
+                for (var i = 0; i <= interval; i += 14)
                 {
                     delDet.DateDue = DateTime.ParseExact(newDelDate, "MM/dd/yyyy", null).AddDays(i);
                     db.DeliverableDetails.Add(delDet);

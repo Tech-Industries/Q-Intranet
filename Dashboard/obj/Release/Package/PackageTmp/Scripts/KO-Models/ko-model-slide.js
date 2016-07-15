@@ -71,7 +71,6 @@
         Year = $("#yearSelect").val();
         Month = $("#monthSelect").val();
         Range = 11;
-        console.log(ID + ' - ' + Year + ' - ' + Month);
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: ID, Year: Year, Month: Month, Range: Range } });
         load.done(function (data) {
             var deliveryRates = [];
@@ -112,16 +111,11 @@
         PlantID = $('#plantSelect option:selected').attr('plantid');
         Year = $('#yearSelect').val();
         Month = $('#monthSelect').val();
-        console.log(PlantID);
-        console.log(Year);
-        console.log(Month);
 
         var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { PlantID: 3, Year: Year, Month: '05' } });
         load.done(function (data) {
-            console.log(data);
             if (data.length > 0) {
                 var t = $.grep(data, function (e) { return e.AreaName == 'Facility' })[0];
-                console.log(t.Average);
             }
         });
     }
@@ -232,6 +226,7 @@
 
             data[0].ScrapAsPercent = formatPercent(data[0].ScrapAsPercent);
             data[0].Cwo = formatMoney(data[0].Cwo).split('.')[0];
+            data[0].CWOGoal = formatMoney(data[0].CWOGoal).split('.')[0];
             data[0].PDSales = formatMoney(data[0].PDSales).split('.')[0];
             self.Incentives(data[0]);
         });

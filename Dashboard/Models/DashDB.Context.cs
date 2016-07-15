@@ -41,7 +41,6 @@ namespace Dashboard.Models
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Deliverable> Deliverables { get; set; }
-        public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
         public virtual DbSet<DeliverableReview> DeliverableReviews { get; set; }
         public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
         public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
@@ -86,5 +85,9 @@ namespace Dashboard.Models
         public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
         public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
         public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
+        public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
+        public virtual DbSet<StagingDetail> StagingDetails { get; set; }
+        public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
+        public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
     }
 }

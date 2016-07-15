@@ -11,8 +11,9 @@ namespace Dashboard.ViewModels
     public class DeliverableReviewersViewModel
     {
         public long ID { get; set; }
-        public int? DelID { get; set; }
-        public int? UserID { get; set; }
+        public int DelID { get; set; }
+        public int UserID { get; set; }
+        public DateTime? DateAdded { get; set; }
 
 
 
@@ -36,7 +37,8 @@ namespace Dashboard.ViewModels
             {
                 ID = d.ID,
                 UserID = d.UserID,
-                DelID = d.DelID
+                DelID = d.DelID,
+                DateAdded = d.DateAdded
             };
         }
 

@@ -17,5 +17,6 @@ namespace Dashboard.Models
         public int ID { get; set; }
         public int DelID { get; set; }
         public int UserID { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
     }
 }

@@ -14,6 +14,7 @@
     <Property Name="DateClosed" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="20" />
     <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ProjectID" Type="int" />
   </EntityType>
   <EntityType Name="BugTags">
     <Key>
@@ -124,6 +125,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DelID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" />
   </EntityType>
   <EntityType Name="DeliverableReviews">
     <Key>
@@ -515,6 +517,42 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="SupervisorID" Type="int" />
   </EntityType>
+  <EntityType Name="StagingCriteria">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="OwnerID" Type="int" Nullable="false" />
+    <Property Name="Important" Type="bit" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StagingDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="Seq" Type="char" MaxLength="6" />
+    <Property Name="PARTNUM" Type="char" MaxLength="20" />
+    <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+    <Property Name="WC" Type="char" MaxLength="20" />
+    <Property Name="DATE_START" Type="date" />
+    <Property Name="DATE_CLOSED" Type="date" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StagingTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="Steps" Type="int" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="PartNum" Type="char" MaxLength="20" />
+    <Property Name="Description" Type="char" MaxLength="30" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="BugsTopLevel">
@@ -727,7 +765,7 @@ warning 6002: The table/view 'Dashboard.dbo.ReviewablesByUser' does not have a p
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Description" Type="nvarchar" MaxLength="300" />
     <Property Name="Owner" Type="nvarchar" MaxLength="61" />
-    <Property Name="DateDue" Type="date" />
+    <Property Name="DateDue" Type="datetime" />
     <Property Name="DateCompleted" Type="datetime" />
     <Property Name="TimeReviewed" Type="datetime" />
     <Property Name="UserID" Type="int" />
@@ -902,6 +940,9 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
+    <EntitySet Name="StagingDetail" EntityType="Self.StagingDetail" Schema="Operations" store:Type="Tables" />
+    <EntitySet Name="StagingTopLevel" EntityType="Self.StagingTopLevel" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [CWOStage].[CompanyCode] AS [CompanyCode], 

@@ -30,7 +30,7 @@ namespace Dashboard.APIControllers
         //{
         //    //var remoteFile = "newTest/testing.txt";
 
-        //    ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "Anonymous", "");
+        //    ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "orizonftp", "");
         //    //ftp.createDirectory("test");
         //    //ftp.createDirectory(data.remoteFile.Substring(0, index));
         //    List<string> folders = data.remoteFile.Split('/').ToList();
@@ -55,7 +55,7 @@ namespace Dashboard.APIControllers
             var check = new List<string>();
 
             Console.WriteLine("test" + d);
-                ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "Anonymous", "");
+                ftpCont ftp = new ftpCont(@"ftp://q.ti-kc.com/", "orizonftp", "H4shTh!s)!");
                 //ftp.createDirectory("test");
                 //ftp.createDirectory(data.remoteFile.Substring(0, index));
                 List<string> folders = d.remoteFile.Split('/').ToList();

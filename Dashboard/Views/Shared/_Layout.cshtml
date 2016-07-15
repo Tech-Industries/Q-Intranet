@@ -88,7 +88,7 @@
             @Html.ActionLink("click me", "Page", "api", null, new { id = "PageLink" });
             @Html.ActionLink("click me", "PrevMaint", "api", null, new { id = "PrevMaintLink" });
             @Html.ActionLink("click me", "Notifications", "api", null, new { id = "NotificationsLink" });
-            @Html.ActionLink("click me", "Operations", "api", null, new { id = "OperationsLink" });
+            @Html.ActionLink("click me", "operations", "api/v1", null, new { id = "OperationsLink" });
             @Html.ActionLink("click me", "Log", "api", null, new { id = "LogsLink" });
 
         </div>
@@ -102,8 +102,7 @@
         $(function () {
             $("#user-full-name").html("@{if (Request.Cookies["FullName"] != null) { Write(Request.Cookies["FullName"].Value); } else { Write(""); } }");
             $("#plantSelect").val("@{if (Request.Cookies["PlantCookie"] != null) { Write(Request.Cookies["PlantCookie"].Value); } else { Write("All"); } }");
-            $("#monthSelect").val("@{ if (Request.Cookies["MonthCookie"] != null) { Write(Request.Cookies["MonthCookie"].Value); } else { if (DateTime.Now.Month < 10) { Write("0"+DateTime.Now.Month.ToString()); } else { Write(DateTime.Now.Month); } } }");
-            $("#yearSelect").val("@{ if (Request.Cookies["YearCookie"] != null) { Write(Request.Cookies["YearCookie"].Value); } else { Write(DateTime.Now.Year); } }");
+            $("#periodSelect").val("@{  if (Request.Cookies["PeriodCookie"] != null) { Write(Request.Cookies["PeriodCookie"].Value); }  else{ Write("2016-07"); } }");
 
             //Bugs form code
             $(".tags-select2").select2();

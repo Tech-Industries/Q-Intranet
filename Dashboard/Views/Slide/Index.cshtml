@@ -106,7 +106,7 @@
     </div>
 </div>
 
-<div class="row slide" id="slide-6">
+@*<div class="row slide" id="slide-6">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
         <center><h1 style="font-weight: bold; color: #000"><i class="fa fa-flag"></i> Fourth Of July <i class="fa fa-flag"></i></h1></center>
     </div>
@@ -152,7 +152,7 @@
         <br />
         <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>
     </div>
-</div>
+</div>*@
 
 <div class="modal" id="setting-modal">
     <div class="modal-dialog modal-md">
@@ -196,7 +196,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Month:</span>
                                     <select class="form-control" id="monthSelect">
-                                        <option value="06">06</option>
+                                        <option value="07">07</option>
                                     </select>
                                 </div>
                             </div>
@@ -212,17 +212,29 @@
     <script src="~/Scripts/KO-Models/ko-model-slide.js"></script>
 
     <script>
-
+        var SalesChart;
         $(function () {
+
             $(document).idleTimer(5000);
             var vm = new SlideViewModel();
             ko.applyBindings(vm);
             vm.loadData();
             var loadDataInterval = setInterval(function () {
                 vm.loadData();
+                console.log('test');
+                
+
             }, 300000);
             var paused = false;
 
+            function positionCurrentLabel(chart) {
+                var xdata = chart.xAxis[0].series[2].processedXData;
+                var ydata = chart.yAxis[0].series[2].processedYData;
+                var xpoint = xdata[xdata.length - 1];
+                var ypoint = ydata[ydata.length - 1];
+                console.log(chart.xAxis[0].translate(xpoint) + " - " + chart.yAxis[0].translate(ypoint));
+            }
+            
             refInterval = setInterval(function () {
                 vm.CheckRefreshFlag();
             }, 5000);
@@ -265,7 +277,6 @@
 
 
 
-            var SalesChart
             SalesChart = $('#sales-chart').highcharts({
                 title: {
                     text: 'Sales - Month to Date',
@@ -352,6 +363,8 @@
                     color: 'rgba(217, 104, 0, 0.80)'
                 }]
             }).highcharts();
+
+            positionCurrentLabel(SalesChart);
 
             var ScrapChart = $('#scrap-chart').highcharts({
                 title: {
@@ -440,6 +453,7 @@
                 }]
             }).highcharts();
 
+            
 
             OTDChart = $('#otd-chart').highcharts({
                 title: {
@@ -542,7 +556,7 @@
 
 
         var current = 1;
-        var slides = 8;
+        var slides = 5;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

@@ -214,15 +214,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DeliverableReviewers">
-      <EntityTypeMapping TypeName="DashboardModel.DeliverableReviewer">
-        <MappingFragment StoreEntitySet="DeliverableReviewers">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="DelID" ColumnName="DelID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DeliverableReviews">
       <EntityTypeMapping TypeName="DashboardModel.DeliverableReview">
         <MappingFragment StoreEntitySet="DeliverableReviews">
@@ -560,6 +551,7 @@
     <EntitySetMapping Name="Bugs">
       <EntityTypeMapping TypeName="DashboardModel.Bug">
         <MappingFragment StoreEntitySet="Bugs">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
@@ -851,6 +843,55 @@
           <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
           <ScalarProperty Name="AdjShipDate" ColumnName="AdjShipDate" />
           <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableReviewers">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableReviewer">
+        <MappingFragment StoreEntitySet="DeliverableReviewers">
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingDetails">
+      <EntityTypeMapping TypeName="DashboardModel.StagingDetail">
+        <MappingFragment StoreEntitySet="StagingDetail">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+          <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
+          <ScalarProperty Name="WC" ColumnName="WC" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PARTNUM" ColumnName="PARTNUM" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingTopLevels">
+      <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
+        <MappingFragment StoreEntitySet="StagingTopLevel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingCriterias">
+      <EntityTypeMapping TypeName="DashboardModel.StagingCriteria">
+        <MappingFragment StoreEntitySet="StagingCriteria">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Important" ColumnName="Important" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

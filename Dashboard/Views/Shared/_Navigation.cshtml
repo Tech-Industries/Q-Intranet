@@ -46,11 +46,7 @@
                 <a href="@Url.Action("Overview", "Machine")"><i class="fa fa-search"></i> <span class="nav-label">Machine Monitoring </span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Ultra") @Html.IsAuth(groupID: 10)">
-                <a href="@Url.Action("Index", "Ultra")"><i class="fa fa-star"></i> <span class="nav-label">Ultra C-Lean</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li class="@Html.IsSelected(action: "Admin")">@Html.ActionLink("Admin", "Admin", "Ultra").IfAuth(groupID: 9)</li>
-                    <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Detail", "Index", "Ultra").IfAuth(groupID: 10)</li>
-                </ul>
+                <a href="@Url.Action("Index", "Ultra")"><i class="fa fa-star"></i> <span class="nav-label">Ultra C-Lean</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Projects") @Html.IsAuth(groupID: 5)">
                 <a href="@Url.Action("Index", "Projects")"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Projects </span></a>
@@ -62,7 +58,7 @@
                     <li class="@Html.IsSelected(action: "ShippingPlan")">@Html.ActionLink("Shipping Plan", "ShippingPlan", "Operations").IfAuth(groupID: 14)</>
                 </ul>
             </li>
-            <li>
+            @*<li class="@Html.IsSelected(controller: "Operations") @Html.IsAuth(groupID: 15)">
                 <a><i class="fa fa-map "></i> <span class="nav-label">Business Dev.</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li>@Html.ActionLink("Accounts", "Accounts", "BusinessDev").IfAuth(groupID: 1)</li>
@@ -70,7 +66,7 @@
                     <li>@Html.ActionLink("Opportunities", "Opportunities", "BusinessDev").IfAuth(groupID: 1)</li>
                     <li>@Html.ActionLink("Metrics", "Metrics", "BusinessDev").IfAuth(groupID: 1)</li>
                 </ul>
-            </li>
+            </li>*@
             <li class="@Html.IsSelected(controller: "Admin") @Html.IsAuth(groupID: 1)">
                 <a href="@Url.Action("Index", "Admin")"><i class="fa fa-cogs"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

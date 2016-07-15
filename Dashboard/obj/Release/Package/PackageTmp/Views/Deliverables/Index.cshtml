@@ -43,7 +43,7 @@
                 <div class="ibox ibox-borderd">
                     <div class="ibox-title">
                         <h5>Deliverables</h5>
-                        <div class="ibox-tools" data-bind="if: @ViewBag.RelPer == 3">
+                        <div class="ibox-tools" data-bind="if: @ViewBag.UID == DelUserID() || @ViewBag.RelPer == 3">
                             <i class="fa fa-plus hover-add" data-toggle="modal" data-target="#modal-new-del"></i>
                         </div>
                     </div>
@@ -60,6 +60,12 @@
                                     <div class="deliverable-group" data-bind="if: WeeklyDels().length > 0">
                                         <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Weekly</h2></div></div>
                                         <div data-bind="foreach: WeeklyDels">
+                                            <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="deliverable-group" data-bind="if: BiWeeklyDels().length > 0">
+                                        <div class="row"><div class="col-md-12 deliverable-frequency"><h2>Bi-Weekly</h2></div></div>
+                                        <div data-bind="foreach: BiWeeklyDels">
                                             <div class="row"><div class="col-md-12 deliverable-type" data-bind="attr: {delid: $data.ID, desc: $data.Description, freq: $data.Frequency}"><h3 data-bind="text: $data.Name"></h3></div></div>
                                         </div>
                                     </div>
@@ -235,6 +241,7 @@
                                             <select class="form-control" id="Frequency" name="Frequency">
                                                 <option value="">Select a Frequency</option>
                                                 <option value="Weekly">Weekly</option>
+                                                <option value="BiWeekly">Bi-Weekly</option>
                                                 <option value="Monthly">Monthly</option>
                                                 <option value="Quarterly">Quarterly</option>
                                                 <option value="Semi-Annual">Semi-Annual</option>
@@ -353,6 +360,11 @@
 
         });
 
+        $(document).on('click', '.remove-reviewer', function () {
+            var RevID = $(this).attr('id').split('-')[2];
+            vm.removeReviewer(RevID);
+        });
+
         $(document).on('click', '#report-metrics', function () {
             if (toggle == 0) {
                 $('#del-detail-section').toggle('slide', { direction: 'right' }, '250');
@@ -389,8 +401,6 @@
             var Frequency = $(this).attr("frequency");
             var DateDue = $(this).attr("datedue");
             var val = findPeriodVal(Frequency, DateDue);
-            console.log(Frequency);
-            console.log(val);
             $('#DelDetID').val(ID);
             vm.loadDeliverableByID(ID);
             $('#freq').val(Frequency).change();

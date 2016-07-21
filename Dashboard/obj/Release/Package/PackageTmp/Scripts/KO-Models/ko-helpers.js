@@ -294,9 +294,9 @@ function getWeekNumber(datedue) {
     return weekNo;
 }
 
-function getMonday(datedue) {
-    dateParts = datedue.split('-');
-    var curr = new Date(datedue); // get current date
+function getMonday(date) {
+    dateParts = date.split('-');
+    var curr = new Date(date); // get current date
     var first = curr.getDate() - (curr.getDay() - 1); // First day is the day of the month - the day of the week
     var last = first + 6; // last day is the first day + 6
 

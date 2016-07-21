@@ -56,23 +56,32 @@ namespace Dashboard.APIControllers
             }
 
             DeliverableDetail upDel = (DeliverableDetail)db.DeliverableDetails.Where(x => x.ID == ID).First();
-            
-            upDel.DateCompleted = DateTime.Now;
-            var logDescription = "";
-            var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
-            var UserID = db.Deliverables.Where(x => x.ID == upDel.DelID).First().UserID;
-            if (UserID != UID)
+            Console.WriteLine(deldet.DateCompleted.ToString());
+            if(upDel.DateCompleted == null)
             {
+                upDel.DateCompleted = DateTime.Now;
+                var logDescription = "";
+                var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
+                var UserID = db.Deliverables.Where(x => x.ID == upDel.DelID).First().UserID;
 
-                var behalf = db.Users.Where(x => x.ID == UserID).First();
-                logDescription = "completed a deliverable on behalf of " + behalf.FirstName + " " + behalf.LastName + ".";
+                if (UserID != UID)
+                {
+
+                    var behalf = db.Users.Where(x => x.ID == UserID).First();
+                    logDescription = "completed a deliverable on behalf of " + behalf.FirstName + " " + behalf.LastName + ".";
+                }
+                else
+                {
+                    logDescription = "completed a deliverable.";
+                }
+                var h = new Helpers.Helpers();
+                h.NewLogEntry(UID, "DeliverableDetail", deldet.ID, "Completed", logDescription);
             }
             else
             {
-                logDescription = "completed a deliverable.";
+                upDel.DateCompleted = null;
             }
-            var h = new Helpers.Helpers();
-            h.NewLogEntry(UID, "DeliverableDetail", deldet.ID, "Completed", logDescription);
+            
 
             db.DeliverableDetails.Attach(upDel);
             var entry = db.Entry(upDel);
@@ -84,7 +93,7 @@ namespace Dashboard.APIControllers
             //System.Diagnostics.Debug.WriteLine("Modified");
             try
             {
-                System.Diagnostics.Debug.WriteLine("Saved "+ ID.ToString()+" | "+deldet.DateCompleted.ToString());
+                System.Diagnostics.Debug.WriteLine("Saved " + ID.ToString() + " | " + deldet.DateCompleted.ToString());
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -94,7 +103,8 @@ namespace Dashboard.APIControllers
                     System.Diagnostics.Debug.WriteLine("Catch If");
                     return NotFound();
                 }
-                else {
+                else
+                {
                     System.Diagnostics.Debug.WriteLine("Catch If Else");
                     throw;
                 }
@@ -103,7 +113,7 @@ namespace Dashboard.APIControllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        public async Task<IHttpActionResult> Put (DeliverableDetail deldet)
+        public async Task<IHttpActionResult> Put(DeliverableDetail deldet)
         {
             return await this.Put(deldet.ID, deldet);
         }

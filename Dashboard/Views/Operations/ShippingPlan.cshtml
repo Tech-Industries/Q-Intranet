@@ -5,6 +5,45 @@
 
 <h2>Shipping Plan</h2>
 <div class="row">
+    <div class="col-lg-3 col-sm-6">
+        @*<div class="ibox float-e-margins">
+            <div class="ibox-title">
+               <span class="label label-success pull-right">Monthly</span>
+                            <h5>Margins</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins"><span data-bind="text: RollupValues().MarginsF"></span> <span class="pull-right" data-bind="text: RollupValues().MarginPctF"></span></h1>
+                            <div class="stat-percent font-bold text-info">N/A% <i class="fa fa-level-up"></i></div>
+                            <small class="pull-right">of Sales</small>
+                        </div>
+                    </div>*@
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-success pull-right">Monthly</span>*@
+                <h5>Past Due Sales</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: PastDueSales()"></span></h1>
+                @*<div class="stat-percent font-bold text-info">N/A% <i class="fa fa-level-up"></i></div>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-danger pull-right">Low value</span>*@
+                <h5>Adj. Ship Date Dollars</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: AdjShipDollars()"></span> </h1>
+                @*<div class="stat-percent font-bold text-danger">N/A% <i class="fa fa-level-down"></i></div>
+                    <small>In first month</small>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-12">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
@@ -22,6 +61,7 @@
                                 <th>Qty</th>
                                 <th>Price</th>
                                 <th>Sale</th>
+                                <th class="hidden">SaleHidden</th>
                                 <th>DateDue</th>
                                 <th>Adj. Ship Date</th>
                                 <th class="hidden">DateID</th>
@@ -44,34 +84,43 @@
             var vm = new OperationsViewModel();
             ko.applyBindings(vm);
             vm.LoadUpcomingShipments();
-
+            currentDate = GetDate();
             var table = $('.dtShippingPlan').DataTable({
                 "createdRow": function (row, data, index) {
+
+                    dateDue = formatShortDate($('td', row).eq(11).html());
+                    if (dateDue < currentDate) {
+                        $('td', row).eq(11).addClass('td-red');
+                    }
                     $('td', row).eq(0).addClass("hidden");
-                    $('td', row).eq(12).addClass("hidden");
+                    $('td', row).eq(13).addClass("hidden");
                     $('td', row).eq(7).addClass("dtRightAlign");
                     $('td', row).eq(8).addClass("dtRightAlign");
                     $('td', row).eq(9).addClass("dtRightAlign");
-                    var date = $('td', row).eq(11).html();
+
+                    $('td', row).eq(10).addClass("hidden");
+                    var date = $('td', row).eq(12).html();
                     if (date == '01/01/1900') {
-                        $('td', row).eq(11).html('<span class="adj-date-update"></span><div class="input-group date" data-provide="datepicker"><input type="text" class="hidden form-control adj-ship-date" readonly><div class="input-group-addon"><i class="fa fa-calendar"></i></div></div>');
+                        $('td', row).eq(12).html('<span class="adj-date-update"></span><div class="input-group date" data-provide="datepicker"><input type="text" class="hidden form-control adj-ship-date" readonly><div class="input-group-addon"><i class="fa fa-calendar"></i></div></div>');
                     }
                     else {
-                        $('td', row).eq(11).html('<span class="adj-date-update">' + date + '</span><div class="input-group date" data-provide="datepicker"><input type="text" class="hidden form-control adj-ship-date" value="' + date + '" readonly><div class="input-group-addon"><i class="fa fa-calendar"></i></div></div>');
+                        $('td', row).eq(12).html('<span class="adj-date-update">' + date + '</span><div class="input-group date" data-provide="datepicker"><input type="text" class="hidden form-control adj-ship-date" value="' + date + '" readonly><div class="input-group-addon"><i class="fa fa-calendar"></i></div></div>');
                     }
                 }
             });
 
             $(document).on('change', '.adj-ship-date', function () {
                 var ID = $(this).parent().parent().parent().children().first().html();
+                var sale = $(this).parent().parent().prev().prev().html();
+                
                 var newDate = $(this).val();
-                if($(this).parent().parent().children().first().html() == ''){
-                    vm.AddAdjShipDate(ID, newDate, this);
-                    
+                if ($(this).parent().parent().children().first().html() == '') {
+                    vm.AddAdjShipDate(ID, newDate, this, sale);
+
                 }
                 else {
                     DateID = $(this).parent().parent().next().html();
-                    vm.UpdateAdjShipDate(ID, DateID, newDate);
+                    //vm.UpdateAdjShipDate(ID, DateID, newDate);
                 }
                 $(this).parent().parent().children().first().html(newDate);
             });

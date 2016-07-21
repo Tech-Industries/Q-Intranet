@@ -10215,3 +10215,10 @@ body.md-skin {
     .checkboxSpecial input[type=checkbox]:checked + label {
         background: #26ca28;
     }
+
+
+.td-red{
+    background-color: #c0392b;
+    font-weight: bold;
+    color: #000;
+}

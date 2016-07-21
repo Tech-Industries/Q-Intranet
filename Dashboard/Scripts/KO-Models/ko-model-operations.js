@@ -18,6 +18,10 @@
 
     self.Criteria = ko.observableArray([]);
 
+    self.PastDueSales = ko.observable();
+    self.AdjShipDollars = ko.observable();
+    self.AdjShipDollarsInt = ko.observable();
+
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
         load.done(function (data) {
@@ -38,6 +42,8 @@
 
         var load = $.ajax({ type: "GET", url: shippingAPI, cache: false});
         load.done(function (data) {
+            adjDol = 0;
+            pastDol = 0;
             $.each(data, function (i, item) {
                 $('.dtShippingPlan').DataTable().row.add([
                 item.ID,
@@ -50,11 +56,24 @@
                 item.QtySched,
                 formatMoney(item.Price),
                 formatMoney(item.Sales),
+                item.Sales,
                 formatToShortDate(item.DateDue.split('T')[0]),
                 formatToShortDate(item.AdjShipDate.split('T')[0]),
                 item.DateID
                 ]).draw();
+                
+                if (item.AdjShipDate != '1900-01-01T00:00:00') {
+                    adjDol += item.Sales;
+                    
+                }
+                if (item.DateDue.split('T')[0] < GetDate()) {
+                    pastDol += item.Sales;
+                }
+                
             });
+            self.AdjShipDollarsInt(adjDol);
+            self.AdjShipDollars(formatMoney(adjDol));
+            self.PastDueSales(formatMoney(pastDol));
             self.UpcomingShipments(data);
         });
         load.fail(function () {
@@ -72,7 +91,7 @@
         });
     }
 
-    self.AddAdjShipDate = function (ID, newDate, obj) {
+    self.AddAdjShipDate = function (ID, newDate, obj, sale) {
         var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
         
         var newDateID = 0;
@@ -82,6 +101,13 @@
             newDateID = data.ID;
             $(obj).parent().parent().parent().children().last().html(newDateID);
         });
+
+        console.log(self.AdjShipDollarsInt());
+        sale = parseFloat(sale);
+        self.AdjShipDollarsInt(self.AdjShipDollarsInt() +  sale);
+        console.log(self.AdjShipDollarsInt());
+        self.AdjShipDollars(formatMoney(self.AdjShipDollarsInt()));
+
         return newDateID;
     }
 
@@ -95,6 +121,7 @@
                 '0',
                 item.Job,
                 formatToShortDate(item.DateStart.split('T')[0]),
+                formatToShortDate(item.DateStageDue.split('T')[0]),
                 item.Steps,
                 item.PartNum,
                 item.Description

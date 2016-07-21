@@ -16,12 +16,12 @@ namespace Dashboard.Models
     {
         public string Job { get; set; }
         public string Suffix { get; set; }
+        public string Seq { get; set; }
         public string PARTNUM { get; set; }
         public string DESCRIPTION { get; set; }
         public string WC { get; set; }
         public Nullable<System.DateTime> DATE_START { get; set; }
         public Nullable<System.DateTime> DATE_CLOSED { get; set; }
         public int ID { get; set; }
-        public string Seq { get; set; }
     }
 }

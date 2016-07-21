@@ -83,7 +83,7 @@ namespace Dashboard.APIControllers
         public async Task<IHttpActionResult> GetStaging(int DaysOut = 14)
         {
             var dateComp = DateTime.Now.AddDays(DaysOut).Date;
-            var stagDets = await db.StagingTopLevels.Where(x => x.DateStart <= dateComp).OrderBy(o => o.Job).ToListAsync();
+            var stagDets = await db.StagingTopLevels.Where(x => x.DateStageDue <= dateComp).OrderBy(o => o.Job).ToListAsync();
             if (!stagDets.Any())
             {
                 return NotFound();
@@ -92,17 +92,6 @@ namespace Dashboard.APIControllers
         }
 
 
-        [Route("api/v1/operations/staging")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetStagingDetialByJob(string Job)
-        {
-            var stagDets = await db.StagingDetails.Where(x => x.Job == Job).OrderBy(o => o.DATE_START).ToListAsync();
-            if (!stagDets.Any())
-            {
-                return NotFound();
-            }
-            return Ok(stagDets);
-        }
 
         [Route("api/v1/operations/stagingdetail")]
         [HttpGet]
@@ -120,7 +109,7 @@ namespace Dashboard.APIControllers
         [HttpGet]
         public async Task<IHttpActionResult> GetStagingCriteria()
         {
-            var stagDets = await db.StagingCriterias.ToListAsync();
+            var stagDets = await db.StagingCriterias.Where(x => x.Active == true).ToListAsync();
             if (!stagDets.Any())
             {
                 return NotFound();

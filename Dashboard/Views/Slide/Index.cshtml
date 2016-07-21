@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-6">
                 <center><h1 style="font-size: 30px; font-weight: bold; color: #2c3e50;">Ultra Clean</h1></center>
-                <center><h2 style="font-weight: bold;">Goal: 36</h2></center>
+                <center><h2 style="font-weight: bold;">Goal: <span data-bind="text: Incentives().UCFGoal"></span></h2></center>
                 <center><h2 style="font-weight: bold;">Actual: <span data-bind="text: Incentives().UCFScore"></span></h2></center>
                 <center><div class="circle-lg" data-bind="css: 'circle-'+Incentives().UCFStatus"></div></center> <br />
             </div>
@@ -106,6 +106,17 @@
     </div>
 </div>
 
+<div class="row slide" id="slide-6">
+    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+        <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
+    </div>
+    <div class="col-md-12" style="height: 100vh;">
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>We need <em>All</em> Employees to Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <span style="color: #c0392b">Employee Survey</span><br /> no later than <span style="color: #c0392b">Friday</span> July 22<sup>nd</sup>.<br /><br /> Access this by selecting the "Surveys July 2016" link on the GUI Station.</span></span></h1></center>
+        <br />
+    </div>
+</div>
+
 @*<div class="row slide" id="slide-6">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
         <center><h1 style="font-weight: bold; color: #000"><i class="fa fa-flag"></i> Fourth Of July <i class="fa fa-flag"></i></h1></center>
@@ -127,16 +138,7 @@
     </div>
 </div>
 
-<div class="row slide" id="slide-7">
-    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
-        <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
-    </div>
-    <div class="col-md-12" style="height: 100vh;">
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>Please Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <br /><br /><span style="color: #c0392b">Employee Survey</span> by <span style="color: #c0392b">Friday</span> July 1<sup>st</sup>.</span></span></h1></center>
-        <br />
-    </div>
-</div>
+
 
 <div class="row slide" id="slide-8">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
@@ -166,7 +168,6 @@
                     <div class="col-md-6">
                         <h2>Override</h2>
                         <hr />
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
@@ -556,7 +557,7 @@
 
 
         var current = 1;
-        var slides = 5;
+        var slides = 6;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

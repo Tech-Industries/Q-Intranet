@@ -20,6 +20,7 @@ namespace Dashboard.Models
         public Nullable<System.DateTime> DateStart { get; set; }
         public string PartNum { get; set; }
         public string Description { get; set; }
+        public Nullable<System.DateTime> DateStageDue { get; set; }
         public int ID { get; set; }
     }
 }

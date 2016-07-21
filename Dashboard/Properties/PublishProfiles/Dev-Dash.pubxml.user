@@ -2380,7 +2380,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:52:10</publishTime>
     </File>
     <File Include="Views/Slide/Index.cshtml">
-      <publishTime>07/08/2016 14:21:39</publishTime>
+      <publishTime>07/20/2016 08:29:43</publishTime>
     </File>
     <File Include="Views/Ultra/Admin.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>

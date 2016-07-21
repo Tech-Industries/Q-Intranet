@@ -53,9 +53,9 @@
         <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" PointX="6.75" PointY="14.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" PointX="14.75" PointY="11.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableReviewer" PointX="15.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.StagingDetail" PointX="9.375" PointY="20.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="1.5" PointX="21.375" PointY="10.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingCriteria" Width="1.5" PointX="21.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingDetail" Width="1.5" PointX="9.375" PointY="20.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="2.25" PointX="21.375" PointY="10.75" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

@@ -264,6 +264,26 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
           <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ProductLineTemp">
+          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="LINE" Type="char" MaxLength="3" />
+          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
+          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
+          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
+          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
+          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
+          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
+          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
+          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
+        </EntityType>-->
         <EntityType Name="ProjectAssignees">
           <Key>
             <PropertyRef Name="ID" />
@@ -556,6 +576,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="DateStart" Type="date" />
           <Property Name="PartNum" Type="char" MaxLength="20" />
           <Property Name="Description" Type="char" MaxLength="30" />
+          <Property Name="DateStageDue" Type="date" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1348,9 +1369,9 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="ShipAdjDates" EntityType="DashboardModel.ShipAdjDate" />
           <EntitySet Name="ShippingPlanAdjShipDates" EntityType="DashboardModel.ShippingPlanAdjShipDate" />
           <EntitySet Name="DeliverableReviewers" EntityType="DashboardModel.DeliverableReviewer" />
+          <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
           <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
           <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
-          <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -2151,19 +2172,29 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="UserID" Nullable="false" Type="Int32" />
           <Property Name="DateAdded" Precision="3" Type="DateTime" />
         </EntityType>
+        <EntityType Name="StagingCriteria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <Property Name="Important" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="StagingDetail">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Job" MaxLength="6" FixedLength="true" Unicode="false" Type="String" />
-          <Property Name="Suffix" MaxLength="3" FixedLength="true" Unicode="false" Type="String" />
-          <Property Name="PARTNUM" MaxLength="20" FixedLength="true" Unicode="false" Type="String" />
-          <Property Name="DESCRIPTION" MaxLength="30" FixedLength="true" Unicode="false" Type="String" />
-          <Property Name="WC" MaxLength="20" FixedLength="true" Unicode="false" Type="String" />
-          <Property Name="DATE_START" Precision="0" Type="DateTime" />
-          <Property Name="DATE_CLOSED" Precision="0" Type="DateTime" />
-          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="Seq" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="PARTNUM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="WC" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="DATE_START" Type="DateTime" Precision="0" />
+          <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="StagingTopLevel">
           <Key>
@@ -2175,17 +2206,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="DateStart" Type="DateTime" Precision="0" />
           <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="DateStageDue" Type="DateTime" Precision="0" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="StagingCriteria">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="OwnerID" Type="Int32" Nullable="false" />
-          <Property Name="Important" Type="Boolean" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3049,16 +3071,27 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StagingCriterias">
+            <EntityTypeMapping TypeName="DashboardModel.StagingCriteria">
+              <MappingFragment StoreEntitySet="StagingCriteria">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Important" ColumnName="Important" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StagingDetails">
             <EntityTypeMapping TypeName="DashboardModel.StagingDetail">
               <MappingFragment StoreEntitySet="StagingDetail">
-                <ScalarProperty Name="Seq" ColumnName="Seq" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
                 <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
                 <ScalarProperty Name="WC" ColumnName="WC" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="PARTNUM" ColumnName="PARTNUM" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="Job" ColumnName="Job" />
               </MappingFragment>
@@ -3068,23 +3101,13 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
             <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
               <MappingFragment StoreEntitySet="StagingTopLevel">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PartNum" ColumnName="PartNum" />
                 <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="Steps" ColumnName="Steps" />
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="Job" ColumnName="Job" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StagingCriterias">
-            <EntityTypeMapping TypeName="DashboardModel.StagingCriteria">
-              <MappingFragment StoreEntitySet="StagingCriteria">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Important" ColumnName="Important" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

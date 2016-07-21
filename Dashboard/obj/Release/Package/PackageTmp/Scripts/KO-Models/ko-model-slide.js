@@ -199,7 +199,7 @@
                 data[0].ScrapStatus = 'green';
             }
 
-
+            
             if (data[0].UCFScore == null) {
                 data[0].UCFStatus = 'yellow';
                 data[0].UCFScore = 'N/A';

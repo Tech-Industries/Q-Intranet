@@ -96,7 +96,15 @@ $(document).on('click', '.remove-document', function () {
 
 
 $(document).on('click', '.btn-complete-del', function () {
-    vm.updateDelDet();
+    vm.updateDelDet('complete');
+    //var parent = $(this).parent();
+    //$(this).parent().parent().removeClass("un-rev");
+    //$(this).parent().parent().addClass("rev");
+    //parent.html("<i class='fa fa-check primary' style='color: #1ab394'></i>");
+});
+
+$(document).on('click', '.btn-uncomplete-del', function () {
+    vm.updateDelDet('uncomplete');
     //var parent = $(this).parent();
     //$(this).parent().parent().removeClass("un-rev");
     //$(this).parent().parent().addClass("rev");

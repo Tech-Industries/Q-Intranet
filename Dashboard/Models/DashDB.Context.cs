@@ -86,8 +86,8 @@ namespace Dashboard.Models
         public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
         public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
         public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
+        public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
         public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
-        public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
     }
 }

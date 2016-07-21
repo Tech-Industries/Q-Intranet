@@ -11,7 +11,7 @@
                 <h3>List of Jobs</h3>
             </div>
             <div class="ibox-content" style="height: 600px;">
-                <div class="table-responsive full-height-scroll">
+                <div class="table-responsive full-height">
                     <table class="table table-striped table-bordered table-hover dtStaging">
                         <thead>
                             <tr>
@@ -19,6 +19,7 @@
                                 <th>Status</th>
                                 <th>Job</th>
                                 <th>Date Start</th>
+                                <th>Date Due</th>
                                 <th>Steps</th>
                                 <th>Part</th>
                                 <th>Desc.</th>
@@ -36,8 +37,8 @@
                 <h3>Detail</h3>
             </div>
             <div class="ibox-content" style="height: 600px;">
-                <div class="table-responsive full-height-scroll">
-                    <table class="table table-striped table-bordered table-hover dtStagingDetail">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover  full-height dtStagingDetail">
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
@@ -56,29 +57,66 @@
                 </div>
             </div>
         </div>
-        <div class="ibox float-e-margins right-menu-slider" tabindex="-1" id="staging-checklist" hidden>
-            <div class="ibox-title">
-                <h3>Checklist</h3>
+        @*<div class="ibox float-e-margins right-menu-slider" tabindex="-1" id="staging-checklist" hidden>
+                <div class="ibox-title">
+                    <h3>Checklist - <i class="fa fa-close hover-rem" id="checklist-close"></i></h3>
+                </div>
+                <div class="ibox-content">
+                    <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job"> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
+                    <hr />
+                    <div data-bind="foreach: Criteria">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="checkboxSpecial">
+                                    <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
+                                    <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="height: 70px;">
+                                <h3 class="center-vertically" data-bind="text: $data.Name"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>
+<div class="modal inmodal fade" id="chkListModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Staging Check List</h4>
             </div>
-            <div class="ibox-content">
-                <div class="row"><div class="col-md-3"><h2></h2></div></div>
+            <div class="modal-body">
+                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job"> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
+                <hr />
                 <div data-bind="foreach: Criteria">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="checkboxSpecial">
                                 <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
                                 <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
                             </div>
                         </div>
-                        <div class="col-md-6" style="height: 70px;">
+                        <div class="col-md-3" style="height: 70px;">
                             <h3 class="center-vertically" data-bind="text: $data.Name"></h3>
+                        </div>
+                        <div class="col-md-1" style="height: 70px;">
+                            <span class="center-vertically" data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
+
+
 @section Scripts {
     <script src="~/Scripts/KO-Models/ko-model-operations.js"></script>
 
@@ -89,6 +127,12 @@
             var vm = new OperationsViewModel();
             ko.applyBindings(vm);
             vm.LoadStagingTopLevel();
+
+
+            var selectedJob = "";
+            var selectedSuf = "";
+            var selectedSeq = "";
+
 
             var table = $('.dtStaging').DataTable({
                 "order": [[3, "asc"], [2, "asc"]],
@@ -113,16 +157,29 @@
             });
 
             $(document).on('click', '.staging-detail-item', function () {
-                var Job = $(this).children().next().next().html();
-                var Suffix = $(this).children().next().next().next().html();
-                var Seq = $(this).children().next().next().next().next().html();
-                $('#staging-checklist').show('slide', { direction: 'right' }, '250');
+                selectedJob = $(this).children().next().next().html();
+                selectedSeq = $(this).children().next().next().next().next().html();
+                selectedWC = $(this).children().last().html();
+                //selectedWC = $('tr.staging-detail-item>td:nth-child(9)').html();
+                $('#selected-job').html(selectedJob);
+                $('#selected-seq').html(selectedSeq);
+                $('#selected-wc').html(selectedWC);
+                $('#chkListModal').modal('show');
+                //$('#chkListModal').show('slide', { direction: 'right' }, '250');
                 vm.LoadStagingCriteria();
             });
 
             $(document).on('click', '.chk-criteria', function () {
+                var checked = "false";
+                if ($(this).is(':checked')) {
+                    checked = "true";
+                }
                 var criteriaID = $(this).attr('id').split('-')[2];
-                console.log(criteriaID);
+                console.log(criteriaID + " - " + checked);
+            });
+
+            $(document).on('click', '#checklist-close', function () {
+                $('#staging-checklist').hide('slide', { direction: 'right' }, '250');
             });
 
             //$(document).on('change', '.adj-ship-date', function () {

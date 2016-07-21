@@ -118,8 +118,11 @@
         $('#sel-add-reviewer').val("0");
     }
 
-    self.updateDelDet = function () {
-        var update = $.ajax({ type: "PUT", url: deliverableDetailAPI, cache: false, data: { ID: self.SelectedDD().ID, deldet: self.SelectedDD() } });
+    self.updateDelDet = function (comp) {
+        var update = ""
+        console.log(comp);
+        update = $.ajax({ type: "PUT", url: deliverableDetailAPI, cache: false, data: { ID: self.SelectedDD().ID, deldet: self.SelectedDD() } });
+
         update.done(function (data) {
 
             self.loadDelDet();
@@ -298,7 +301,7 @@
     self.loadDelDetReviews = function () {
         var DelDetID = $("#DelDetID").val();
         var DelID = $("#DelID").val();
-        var loadReqReviewed = $.ajax({ type: "GET", url: deliverableReviewersAPI, cache: false, data: { DelID: DelID} });
+        var loadReqReviewed = $.ajax({ type: "GET", url: deliverableReviewersAPI, cache: false, data: { DelID: DelID } });
         var exists = false;
         var arr0 = [];
         var arr1 = [];
@@ -329,7 +332,7 @@
                 var UserID = parseInt($('#layoutUserID').val());
                 if ($.inArray(UserID, IDSCheck) > -1) {
                     self.UserAccess(true);
-                    
+
                 }
             });
         });

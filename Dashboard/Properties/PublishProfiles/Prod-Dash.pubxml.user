@@ -733,7 +733,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>07/18/2016 09:08:46</publishTime>
+      <publishTime>07/21/2016 14:28:09</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>06/16/2016 08:51:46</publishTime>

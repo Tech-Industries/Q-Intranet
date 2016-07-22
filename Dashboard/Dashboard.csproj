@@ -280,13 +280,7 @@
     <Compile Include="Models\BugsTopLevel.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BugTag.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Comment.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Company.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentMachineState.cs">
@@ -301,20 +295,10 @@
     <Compile Include="Models\CWOStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DashDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DashDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DashDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DashDB.Designer.cs">
+      <DependentUpon>DashDB.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DashDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Deliverable.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -322,16 +306,10 @@
     <Compile Include="Models\DeliverableComment.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeliverableDetail.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DeliverableDocument.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeliverableReview.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliverableReviewer.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeliverablesDueInNextThirtyDay.cs">
@@ -352,36 +330,11 @@
     <Compile Include="Models\Group.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IncentiveRollupByPlant.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JP_CurrentMachineState.cs">
-      <DependentUpon>PMMConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JP_TimeInStateByMachine.cs">
-      <DependentUpon>PMMConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Log.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Meetings.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NKCConnect.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NKCConnect.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NKCConnect.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NKCConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NKCConnect.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NKCConnect.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -395,29 +348,11 @@
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Page.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PastDueDeliverable.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Plant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMMConnect.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMMConnect.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMMConnect.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMMConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PMMConnect.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMMConnect.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PrevMaint.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -425,10 +360,14 @@
     <Compile Include="Models\Price.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Project.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JP_CurrentMachineState.cs">
+      <DependentUpon>PMMConnect.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectAssignee.cs">
+    <Compile Include="Models\JP_TimeInStateByMachine.cs">
+      <DependentUpon>PMMConnect.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Project.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjectsTopLevel.cs">
@@ -470,16 +409,77 @@
     <Compile Include="Models\StagingDetail.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StagingTopLevel.cs">
+    <Compile Include="Models\StagingItem.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TimeInStateByMachine.cs">
-      <DependentUpon>NKCConnect.tt</DependentUpon>
+    <Compile Include="Models\StagingTopLevel.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFAction.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFArea.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NKCConnect.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NKCConnect.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NKCConnect.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NKCConnect.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NKCConnect.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NKCConnect.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DashDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DashDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverableReviewer.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliverableDetail.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Page.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectAssignee.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PMMConnect.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMMConnect.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PMMConnect.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMMConnect.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PMMConnect.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMMConnect.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimeInStateByMachine.cs">
+      <DependentUpon>NKCConnect.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugTag.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFAreaTrendByMonthHalf.cs">
@@ -718,16 +718,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DashDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DashDB.edmx</DependentUpon>
-      <LastGenOutput>DashDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DashDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DashDB.edmx</DependentUpon>
-      <LastGenOutput>DashDB.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\NKCConnect.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NKCConnect.edmx</DependentUpon>
@@ -737,6 +727,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NKCConnect.edmx</DependentUpon>
       <LastGenOutput>NKCConnect.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DashDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Company.cs</DependentUpon>
+      <LastGenOutput>DashDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DashDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Company.cs</DependentUpon>
+      <LastGenOutput>DashDB.cs</LastGenOutput>
     </Content>
     <Content Include="Models\PMMConnect.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -808,13 +808,6 @@
     <Content Include="Content\plugins\slick\fonts\slick.ttf" />
     <Content Include="Content\plugins\slick\fonts\slick.woff" />
     <Content Include="Content\bootstrap.css.map" />
-    <EntityDeploy Include="Models\DashDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DashDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DashDB.edmx.diagram">
-      <DependentUpon>DashDB.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
@@ -831,6 +824,17 @@
     </EntityDeploy>
     <Content Include="Models\PMMConnect.edmx.diagram">
       <DependentUpon>PMMConnect.edmx</DependentUpon>
+    </Content>
+    <Compile Include="Models\Company.cs">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Company.Designer.cs</LastGenOutput>
+    </Compile>
+    <EntityDeploy Include="Models\DashDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DashDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DashDB.edmx.diagram">
+      <DependentUpon>DashDB.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Dev-Dash.pubxml" />
     <None Include="Properties\PublishProfiles\Prod-Dash.pubxml" />
@@ -1351,6 +1355,7 @@
     <Folder Include="Content\patterns\font-awesome\less\" />
     <Folder Include="Content\patterns\font-awesome\scss\" />
     <Folder Include="Content\patterns\themes\base\" />
+    <Folder Include="Views\Onboarding\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

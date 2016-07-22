@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
 using System.Web;
+using System.Web.Http.Results;
 
 namespace Dashboard.APIControllers
 {
@@ -117,6 +118,65 @@ namespace Dashboard.APIControllers
             return Ok(stagDets);
         }
 
+        [Route("api/v1/operations/stagingitems")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllStagingItems()
+        {
+            var stagItems = await db.StagingItems.ToListAsync();
+            if (!stagItems.Any())
+            {
+                return NotFound();
+            }
+            return Ok(stagItems);
+        }
+
+        [Route("api/v1/operations/stagingitems")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetStagingItems(int JobID)
+        {
+            var stagItems = await db.StagingItems.Where(x => x.JobID == JobID).ToListAsync();
+            if (!stagItems.Any())
+            {
+                return NotFound();
+            }
+            return Ok(stagItems);
+        }
+
+
+        [Route("api/v1/operations/stagingitems")]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostItem(StagingItem s)
+        {
+            s.DateIssued = DateTime.Now;
+            db.StagingItems.Add(s);
+            await db.SaveChangesAsync();
+
+            return Ok(s);
+        }
+
+        [Route("api/v1/operations/stagingitems/{id:int}")]
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteItem(int id)
+        {
+            try
+            {
+                db.StagingItems.Remove(await db.StagingItems.FindAsync(id));
+                await db.SaveChangesAsync();
+            }
+            catch
+            {
+                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+            return Ok();
+        }
+
+
+
+
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -125,6 +185,7 @@ namespace Dashboard.APIControllers
             }
             base.Dispose(disposing);
         }
+
 
         #endregion
 

@@ -566,6 +566,20 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="DATE_CLOSED" Type="date" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="StagingItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="254" />
+          <Property Name="Location" Type="nvarchar" MaxLength="20" />
+          <Property Name="Consumable" Type="bit" />
+          <Property Name="IssuerID" Type="int" />
+          <Property Name="DateIssued" Type="datetime" />
+          <Property Name="DateReturned" Type="datetime" />
+          <Property Name="JobID" Type="int" />
+        </EntityType>
         <EntityType Name="StagingTopLevel">
           <Key>
             <PropertyRef Name="ID" />
@@ -970,6 +984,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingDetail" EntityType="Self.StagingDetail" Schema="Operations" store:Type="Tables" />
+          <EntitySet Name="StagingItems" EntityType="Self.StagingItems" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingTopLevel" EntityType="Self.StagingTopLevel" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1372,6 +1387,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
           <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
           <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
+          <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -2208,6 +2224,20 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
           <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="DateStageDue" Type="DateTime" Precision="0" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="StagingItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Consumable" Type="Boolean" />
+          <Property Name="IssuerID" Type="Int32" />
+          <Property Name="DateIssued" Type="DateTime" Precision="3" />
+          <Property Name="DateReturned" Type="DateTime" Precision="3" />
+          <Property Name="JobID" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3108,6 +3138,21 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
                 <ScalarProperty Name="Steps" ColumnName="Steps" />
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="Job" ColumnName="Job" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StagingItems">
+            <EntityTypeMapping TypeName="DashboardModel.StagingItem">
+              <MappingFragment StoreEntitySet="StagingItems">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="IssuerID" ColumnName="IssuerID" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

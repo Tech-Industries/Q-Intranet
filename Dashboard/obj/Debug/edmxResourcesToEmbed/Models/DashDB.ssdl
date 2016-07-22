@@ -561,6 +561,20 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="DATE_CLOSED" Type="date" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="StagingItems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="254" />
+    <Property Name="Location" Type="nvarchar" MaxLength="20" />
+    <Property Name="Consumable" Type="bit" />
+    <Property Name="IssuerID" Type="int" />
+    <Property Name="DateIssued" Type="datetime" />
+    <Property Name="DateReturned" Type="datetime" />
+    <Property Name="JobID" Type="int" />
+  </EntityType>
   <EntityType Name="StagingTopLevel">
     <Key>
       <PropertyRef Name="ID" />
@@ -963,6 +977,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingDetail" EntityType="Self.StagingDetail" Schema="Operations" store:Type="Tables" />
+    <EntitySet Name="StagingItems" EntityType="Self.StagingItems" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingTopLevel" EntityType="Self.StagingTopLevel" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

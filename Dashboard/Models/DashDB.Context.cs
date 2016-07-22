@@ -89,5 +89,6 @@ namespace Dashboard.Models
         public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
         public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
+        public virtual DbSet<StagingItem> StagingItems { get; set; }
     }
 }

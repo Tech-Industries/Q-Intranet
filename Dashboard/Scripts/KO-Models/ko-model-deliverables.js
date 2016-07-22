@@ -446,6 +446,7 @@
 
     self.addDelDetDocument = function () {
         var formData = new FormData($('#frm-doc-up')[0]);
+        console.log(formData.toString());
         var uploadLink = $('#UploadFileLink').attr('href');
         for (var i = 0, len = document.getElementById('doc-upload').files.length; i < len; i++) {
             formData.append("doc-upload" + (i + 1), document.getElementById('doc-upload').files[i]);

@@ -8,6 +8,7 @@
     var stagingAPI = operationsAPI + '/' + 'staging';
     var stagingDetailAPI = operationsAPI + '/' + 'stagingdetail';
     var stagingCriteriaAPI = operationsAPI + '/' + 'stagingcriteria';
+    var stagingItemsAPI = operationsAPI + '/' + 'stagingitems';
 
     self.Users = ko.observableArray([]);
     self.UpcomingShipments = ko.observableArray([]);
@@ -21,6 +22,9 @@
     self.PastDueSales = ko.observable();
     self.AdjShipDollars = ko.observable();
     self.AdjShipDollarsInt = ko.observable();
+
+    self.Materials = ko.observableArray();
+    self.Equipment = ko.observableArray();
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
@@ -113,7 +117,7 @@
 
 
     self.LoadStagingTopLevel = function () {
-        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false });
+        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: {DaysOut: 14} });
         load.done(function (data) {
             $.each(data, function (i, item) {
                 $('.dtStaging').DataTable().row.add([
@@ -167,5 +171,31 @@
         });
     }
 
+    self.LoadSelectedStagingItems = function (JobID) {
+        var load = $.ajax({ type: "GET", url: stagingItemsAPI, cache: false, data: {JobID: JobID} });
+        load.done(function (data) {
+            self.Materials($.grep(data, function (e) { return e.Type == 'Material' }));
+            self.Equipment($.grep(data, function (e) { return e.Type == 'Equipment' }));
+        });
+        load.fail(function () {
+            self.Materials([]);
+            self.Equipment([]);
+        });
+    }
+
+    self.AddItem = function (JobID, Type, Description, Location, Consumable) {
+        var UserID = parseInt($('#layoutUserID').val());
+        var sendData = "JobID=" + JobID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID+ "&Consumable=" + Consumable;
+        var add = $.ajax({ type: "POST", cache: false, url: stagingItemsAPI, data: sendData });
+        add.success(function (data) {
+            console.log(data);
+            self.LoadSelectedStagingItems();
+        });
+        $('#addItem').removeClass('hidden');
+    }
+
+    self.RemoveItem = function (ID) {
+
+    }
 
 }

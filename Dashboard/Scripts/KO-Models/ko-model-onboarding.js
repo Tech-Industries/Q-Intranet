@@ -3,28 +3,14 @@
     var usersAPI = $("#usersLink").attr('href');
     var groupsAPI = $("#groupsLink").attr('href');
     var userGroupsAPI = $("#userGroupsLink").attr('href');
-    var operationsAPI = $("#OperationsLink").attr('href');
-    var shippingAPI = operationsAPI + '/' + 'shipping';
-    var stagingAPI = operationsAPI + '/' + 'staging';
-    var stagingDetailAPI = operationsAPI + '/' + 'stagingdetail';
-    var stagingCriteriaAPI = operationsAPI + '/' + 'stagingcriteria';
-    var stagingItemsAPI = operationsAPI + '/' + 'stagingitems';
+    var onboardingAPI = $("#OnboardingLink").attr('href');
+
+    self.isLoading = ko.observable();
 
     self.Users = ko.observableArray([]);
-    self.UpcomingShipments = ko.observableArray([]);
+    self.OnboardingParts = ko.observableArray([]);
+    self.OnboardingTasks = ko.observableArray([]);
 
-
-    self.StagingTopLevel = ko.observableArray([]);
-    self.StagingDetail = ko.observableArray([]);
-
-    self.Criteria = ko.observableArray([]);
-
-    self.PastDueSales = ko.observable();
-    self.AdjShipDollars = ko.observable();
-    self.AdjShipDollarsInt = ko.observable();
-
-    self.Materials = ko.observableArray();
-    self.Equipment = ko.observableArray();
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
@@ -42,44 +28,75 @@
         });
     }
 
-    self.LoadOnboardingParts = function () {
+    var P = function (part, tasks) {
+        this.part = part;
+        this.tasks = ko.observableArray([]);
 
-        var load = $.ajax({ type: "GET", url: shippingAPI, cache: false});
-        load.done(function (data) {
-            adjDol = 0;
-            pastDol = 0;
-            $.each(data, function (i, item) {
-                $('.dtShippingPlan').DataTable().row.add([
-                item.ID,
-                item.OrderNo,
-                item.OrderLine,
-                item.Customer,
-                item.CustomerName,
-                item.Part,
-                item.Description,
-                item.QtySched,
-                formatMoney(item.Price),
-                formatMoney(item.Sales),
-                item.Sales,
-                formatToShortDate(item.DateDue.split('T')[0]),
-                formatToShortDate(item.AdjShipDate.split('T')[0]),
-                item.DateID
-                ]).draw();
-                
-                if (item.AdjShipDate != '1900-01-01T00:00:00') {
-                    adjDol += item.Sales;
-                    
-                }
-                if (item.DateDue.split('T')[0] < GetDate()) {
-                    pastDol += item.Sales;
-                }
-                
+    }
+    self.Parts = ko.observableArray([]);
+
+    self.LoadOnboardingParts = function () {
+        self.isLoading(true)
+        var parts = [];
+        var tasks = [];
+        var outer = 0;
+        var inner = 0;
+        self.OnboardingTasks([]);
+
+        var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
+        load.success(function (data) {
+            self.OnboardingParts(data);
+            outerStart = data.length;
+            data.forEach(function (i) {
+                i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
+                i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+
+                outer += 1;
+                var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
+                loadTasks.done(function (data1) {
+                    innerStart = data1.length;
+                    data1.forEach(function (ii) {
+                        ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                        ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
+                    });
+                    if (data1[13].TaskDescription != 'FAI Populated') {
+                        data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0})
+                    }
+                    self.OnboardingTasks.push(data1);
+
+                    inner += 1;
+                    if (inner == innerStart) {
+                        self.isLoading(false)
+                    }
+                });
             });
-            self.AdjShipDollarsInt(adjDol);
-            self.AdjShipDollars(formatMoney(adjDol));
-            self.PastDueSales(formatMoney(pastDol));
-            self.UpcomingShipments(data);
+            self.OnboardingParts(data);
         });
+
+        //var load = $.ajax({ type: "GET", url: onboardingAPI, cache: false });
+        //load.done(function (data) {
+        //    var tasks = [];
+        //    self.OnboardingParts(data);
+        //    data.each
+        //    for (i = 0; i < data.length; i++) {
+        //        var recordNum = data[i].RecordNumber;
+        //        var subTasks = [];
+        //        var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + recordNum + '/Tasks', cache: false });
+        //        loadTasks.done(function (taskData) {
+
+        //            for (ii = 0; ii < taskData.length; ii++) {
+        //                tasks.push(taskData[ii]);
+        //            }
+        //            var p = $.grep(data, function (e) { return e.RecordNumber == taskData[0].OnBoardPart });
+        //            p[0].Tasks = taskData;
+                    
+        //        });
+
+        //    }
+
+        //    self.OnboardingTasks().push(taskData[ii]);
+            
+        //});
         load.fail(function () {
             console.log('test');
         });
@@ -97,9 +114,9 @@
 
     self.AddAdjShipDate = function (ID, newDate, obj, sale) {
         var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
-        
+
         var newDateID = 0;
-        var sendData = "OrderNo=" + t.OrderNo+ "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine+ "&DateDue=" + t.DateDue.split('T')[0];
+        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine + "&DateDue=" + t.DateDue.split('T')[0];
         var add = $.ajax({ type: "POST", cache: false, url: shippingAPI, data: sendData });
         add.success(function (data) {
             newDateID = data.ID;
@@ -108,7 +125,7 @@
 
         console.log(self.AdjShipDollarsInt());
         sale = parseFloat(sale);
-        self.AdjShipDollarsInt(self.AdjShipDollarsInt() +  sale);
+        self.AdjShipDollarsInt(self.AdjShipDollarsInt() + sale);
         console.log(self.AdjShipDollarsInt());
         self.AdjShipDollars(formatMoney(self.AdjShipDollarsInt()));
 
@@ -117,7 +134,7 @@
 
 
     self.LoadStagingTopLevel = function () {
-        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: {DaysOut: 14} });
+        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: { DaysOut: 14 } });
         load.done(function (data) {
             $.each(data, function (i, item) {
                 $('.dtStaging').DataTable().row.add([
@@ -138,7 +155,7 @@
         });
     }
 
-    self.LoadStagingDetail= function (Job) {
+    self.LoadStagingDetail = function (Job) {
         var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job } });
         load.done(function (data) {
             $('.dtStagingDetail').DataTable().clear().draw();
@@ -155,7 +172,7 @@
                 item.WC
                 ]).draw();
             });
-            
+
             self.StagingDetail(data);
         });
         load.fail(function () {
@@ -164,15 +181,15 @@
     }
 
     self.LoadStagingCriteria = function (job) {
-        var load = $.ajax({ type: "GET", url: stagingCriteriaAPI, cache: false});
+        var load = $.ajax({ type: "GET", url: stagingCriteriaAPI, cache: false });
         load.done(function (data) {
-            
+
             self.Criteria(data);
         });
     }
 
     self.LoadSelectedStagingItems = function (JobID) {
-        var load = $.ajax({ type: "GET", url: stagingItemsAPI, cache: false, data: {JobID: JobID} });
+        var load = $.ajax({ type: "GET", url: stagingItemsAPI, cache: false, data: { JobID: JobID } });
         load.done(function (data) {
             self.Materials($.grep(data, function (e) { return e.Type == 'Material' }));
             self.Equipment($.grep(data, function (e) { return e.Type == 'Equipment' }));
@@ -185,7 +202,7 @@
 
     self.AddItem = function (JobID, Type, Description, Location, Consumable) {
         var UserID = parseInt($('#layoutUserID').val());
-        var sendData = "JobID=" + JobID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID+ "&Consumable=" + Consumable;
+        var sendData = "JobID=" + JobID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID + "&Consumable=" + Consumable;
         var add = $.ajax({ type: "POST", cache: false, url: stagingItemsAPI, data: sendData });
         add.success(function (data) {
             console.log(data);

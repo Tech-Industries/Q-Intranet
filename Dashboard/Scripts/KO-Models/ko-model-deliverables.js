@@ -22,6 +22,7 @@
     self.SemiAnnualDels = ko.observableArray([]);
     self.AnnualDels = ko.observableArray([]);
     self.DelUserID = ko.observableArray([]);
+    self.DelOwnerID = ko.observableArray([]);
     //DD stands for Deliverable Detail
     self.DDName = ko.observable();
     self.DDDesc = ko.observable();
@@ -232,7 +233,7 @@
         var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { ID: ID, DataPull: "DelDet" } });
         load.done(function (data) {
             data = data[0];
-
+            console.log(data);
             $('#DelID').val(data.DelID);
             var dateDue = data.DateDue;
             dateDue = dateDue.split('T')[0];
@@ -255,6 +256,8 @@
             self.SelectedDD(data);
             self.loadDelDetDocuments();
             $('#del-title').html(data.Name);
+            $('#del-title').attr('ownerid', data.UserID);
+            self.DelOwnerID(data.UserID);
             $('#del-desc').html(data.Description);
             $('.full-height-scroll').slimscroll({
                 height: '100%'
@@ -278,6 +281,8 @@
                 self.DDDateDue(dateDue);
                 self.DelDetID(data.ID);
                 self.Owner(data.UserID);
+                $('#del-title').attr('ownerid', data.UserID);
+                self.DelOwnerID(data.UserID);
                 if (data.DateCompleted == null) {
                     self.DDComplete(false);
                 }

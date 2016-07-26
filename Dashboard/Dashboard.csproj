@@ -185,6 +185,7 @@
   <ItemGroup>
     <Compile Include="APIControllers\NotificationsController.cs" />
     <Compile Include="APIControllers\FlashController.cs" />
+    <Compile Include="APIControllers\OnboardingController.cs" />
     <Compile Include="APIControllers\PageController.cs" />
     <Compile Include="APIControllers\PrevMaintController.cs" />
     <Compile Include="APIControllers\SlideController.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Controllers\MachineController.cs" />
     <Compile Include="Controllers\PrevMaintController.cs" />
     <Compile Include="Controllers\OperationsController.cs" />
+    <Compile Include="Controllers\OnboardingController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SlideController.cs" />
     <Compile Include="Controllers\UltraController.cs" />
@@ -288,6 +290,9 @@
     </Compile>
     <Compile Include="Models\CURRENT_MACHINE_INFORMATION.cs">
       <DependentUpon>PMMConnect.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CWODailyByPlant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -339,6 +344,30 @@
     <Compile Include="Models\Notification.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OnboardingDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnboardingDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnboardingDB.Designer.cs">
+      <DependentUpon>OnboardingDB.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\OnboardingDB1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnBoardingPartsToAdd.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnBoardPart.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnBoardTask.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OnTimeDeliveryTrend.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -347,6 +376,12 @@
     </Compile>
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Parameter.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartMaster.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PastDueDeliverable.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -414,6 +449,9 @@
     </Compile>
     <Compile Include="Models\StagingTopLevel.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemLog.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UCFAction.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -526,6 +564,12 @@
     </Compile>
     <Compile Include="Models\UserGroup.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Z_OnBoardPartJobs.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Z_OnBoardPartOSSPO.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -738,6 +782,16 @@
       <DependentUpon>Company.cs</DependentUpon>
       <LastGenOutput>DashDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\OnboardingDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnboardingDB.edmx</DependentUpon>
+      <LastGenOutput>OnboardingDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OnboardingDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnboardingDB.edmx</DependentUpon>
+      <LastGenOutput>OnboardingDB1.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\PMMConnect.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PMMConnect.edmx</DependentUpon>
@@ -836,6 +890,13 @@
     <Content Include="Models\DashDB.edmx.diagram">
       <DependentUpon>DashDB.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\OnboardingDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OnboardingDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OnboardingDB.edmx.diagram">
+      <DependentUpon>OnboardingDB.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev-Dash.pubxml" />
     <None Include="Properties\PublishProfiles\Prod-Dash.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -875,6 +936,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\KO-Models\deliverablesform.js" />
+    <Content Include="Scripts\KO-Models\ko-model-onboarding.js" />
     <Content Include="Scripts\KO-Models\ko-model-prevmaint.js" />
     <Content Include="Scripts\KO-Models\ko-model-slide.js" />
     <Content Include="Scripts\KO-Models\ko-model-ultra.js" />
@@ -1347,6 +1409,7 @@
     <Content Include="Views\PrevMaint\Index.cshtml" />
     <Content Include="Views\Operations\Staging.cshtml" />
     <Content Include="Views\Operations\ShippingPlan.cshtml" />
+    <Content Include="Views\Onboarding\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1355,7 +1418,6 @@
     <Folder Include="Content\patterns\font-awesome\less\" />
     <Folder Include="Content\patterns\font-awesome\scss\" />
     <Folder Include="Content\patterns\themes\base\" />
-    <Folder Include="Views\Onboarding\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

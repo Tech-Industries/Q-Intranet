@@ -94,6 +94,7 @@
     <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
     <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
     <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
+    <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -930,5 +931,19 @@
     <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="DateStageDue" Type="DateTime" Precision="0" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="StagingItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Consumable" Type="Boolean" />
+    <Property Name="IssuerID" Type="Int32" />
+    <Property Name="DateIssued" Type="DateTime" Precision="3" />
+    <Property Name="DateReturned" Type="DateTime" Precision="3" />
+    <Property Name="JobID" Type="Int32" />
   </EntityType>
 </Schema>

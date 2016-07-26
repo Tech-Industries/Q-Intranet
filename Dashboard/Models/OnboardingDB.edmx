@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnBoardingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="5" />
+          <Property Name="CustomerNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OnBoardingPartsToAdd">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="5" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DateRequestedToAdd" Type="date" />
+          <Property Name="DateAdded" Type="date" />
+          <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OnBoardParts">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="5" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="PartDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateEntered" Type="datetime" />
+          <Property Name="EnteredBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartType" Type="nvarchar" MaxLength="32" />
+          <Property Name="OnBoardClass" Type="nvarchar" MaxLength="32" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Priority" Type="nchar" MaxLength="10" />
+          <Property Name="QtyPerShipSet" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="PriceEach" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="EstimatedMachineHours" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedMaterial" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedLaborDollars" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedOutsideCost" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="FirstArticleJobNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="FirstArticleJobScheduleDate" Type="datetime" />
+          <Property Name="ProductionJobNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProductionJobScheduleDate" Type="datetime" />
+          <Property Name="DatePOReceived" Type="datetime" />
+          <Property Name="DatePODue" Type="datetime" />
+          <Property Name="DatePOCommitted" Type="datetime" />
+          <Property Name="DateScheduledRun" Type="datetime" />
+          <Property Name="PercentComplete" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="DateComplete" Type="datetime" />
+          <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="OnBoardTasks">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OnBoardPart" Type="bigint" />
+          <Property Name="Task" Type="bigint" />
+          <Property Name="TaskDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaskSequence" Type="int" />
+          <Property Name="ChildOfTask" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="64" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="64" />
+          <Property Name="Weight" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="Complexity" Type="int" />
+          <Property Name="StandardCompletionHours" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="ActualCompletionHours" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="ResponsibleUser" Type="nvarchar" MaxLength="20" />
+          <Property Name="DelegatedTo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PercentComplete" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="DueBy" Type="datetime" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CompletedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompletionStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Parameters">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramID" Type="nvarchar" MaxLength="30" />
+          <Property Name="ParameterID" Type="nvarchar" MaxLength="30" />
+          <Property Name="ParameterSequence" Type="int" Nullable="false" />
+          <Property Name="ParamN1" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ParamN2" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ParamS1" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParamS2" Type="nvarchar" MaxLength="200" />
+          <Property Name="ParamS3" Type="nvarchar" MaxLength="200" />
+          <Property Name="ParamS4" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PartMaster">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateEntered" Type="datetime" />
+          <Property Name="EnteredBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartType" Type="nvarchar" MaxLength="32" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="PriceEach" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedMachineTimeHours" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedMaterial" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedLaborDollars" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstimatedOutsideCost" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="DatePOReceived" Type="datetime" />
+          <Property Name="DatePODue" Type="datetime" />
+          <Property Name="DatePOCommitted" Type="datetime" />
+          <Property Name="DateScheduledRun" Type="datetime" />
+          <Property Name="Complete" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateComplete" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SystemLog">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferenceID" Type="bigint" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Z-OnBoardPartJobs">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartRecordNumber" Type="bigint" />
+          <Property Name="PlanningJobNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="ProductionJobNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Z-OnBoardPartOSSPO">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartRecordNumber" Type="bigint" />
+          <Property Name="JobOSSSequence" Type="nvarchar" MaxLength="10" />
+          <Property Name="SchedStartDate" Type="datetime" />
+          <Property Name="SchedEndDate" Type="datetime" />
+          <Property Name="OSSPONumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="OSSPOLine" Type="nvarchar" MaxLength="10" />
+          <Property Name="OSSPOLineDueDate" Type="datetime" />
+          <Property Name="OSSPOStartDate" Type="datetime" />
+          <Property Name="OSSPOReceiveDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="OnBoardingModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnBoardingPartsToAdd" EntityType="Self.OnBoardingPartsToAdd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parameters" EntityType="Self.Parameters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartMaster" EntityType="Self.PartMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z-OnBoardPartJobs" EntityType="Self.Z-OnBoardPartJobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z-OnBoardPartOSSPO" EntityType="Self.Z-OnBoardPartOSSPO" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnBoardingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OnBoardingPartsToAdd">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DateRequestedToAdd" Type="DateTime" Precision="0" />
+          <Property Name="DateAdded" Type="DateTime" Precision="0" />
+          <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OnBoardPart">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" />
+          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
+          <Property Name="DatePODue" Type="DateTime" Precision="3" />
+          <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
+          <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
+          <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DateComplete" Type="DateTime" Precision="3" />
+          <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OnBoardTask">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OnBoardPart" Type="Int64" />
+          <Property Name="Task" Type="Int64" />
+          <Property Name="TaskDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskSequence" Type="Int32" />
+          <Property Name="ChildOfTask" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Complexity" Type="Int32" />
+          <Property Name="StandardCompletionHours" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="ActualCompletionHours" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DelegatedTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DueBy" Type="DateTime" Precision="3" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Parameter">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParameterID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParameterSequence" Type="Int32" Nullable="false" />
+          <Property Name="ParamN1" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ParamN2" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ParamS1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParamS2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParamS3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParamS4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PartMaster">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" />
+          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PriceEach" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedMachineTimeHours" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
+          <Property Name="DatePODue" Type="DateTime" Precision="3" />
+          <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
+          <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
+          <Property Name="Complete" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateComplete" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SystemLog">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceID" Type="Int64" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Z_OnBoardPartJobs">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartRecordNumber" Type="Int64" />
+          <Property Name="PlanningJobNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionJobNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderLine" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Z_OnBoardPartOSSPO">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartRecordNumber" Type="Int64" />
+          <Property Name="JobOSSSequence" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SchedStartDate" Type="DateTime" Precision="3" />
+          <Property Name="SchedEndDate" Type="DateTime" Precision="3" />
+          <Property Name="OSSPONumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OSSPOLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OSSPOLineDueDate" Type="DateTime" Precision="3" />
+          <Property Name="OSSPOStartDate" Type="DateTime" Precision="3" />
+          <Property Name="OSSPOReceiveDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="OnBoardingEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="OnBoardingPartsToAdds" EntityType="Self.OnBoardingPartsToAdd" />
+          <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardPart" />
+          <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTask" />
+          <EntitySet Name="Parameters" EntityType="Self.Parameter" />
+          <EntitySet Name="PartMasters" EntityType="Self.PartMaster" />
+          <EntitySet Name="SystemLogs" EntityType="Self.SystemLog" />
+          <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
+          <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnBoardingModelStoreContainer" CdmEntityContainer="OnBoardingEntities1">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OnBoardingModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnBoardingPartsToAdds">
+            <EntityTypeMapping TypeName="OnBoardingModel.OnBoardingPartsToAdd">
+              <MappingFragment StoreEntitySet="OnBoardingPartsToAdd">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="DateRequestedToAdd" ColumnName="DateRequestedToAdd" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnBoardParts">
+            <EntityTypeMapping TypeName="OnBoardingModel.OnBoardPart">
+              <MappingFragment StoreEntitySet="OnBoardParts">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="OnBoardClass" ColumnName="OnBoardClass" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="QtyPerShipSet" ColumnName="QtyPerShipSet" />
+                <ScalarProperty Name="PriceEach" ColumnName="PriceEach" />
+                <ScalarProperty Name="EstimatedMachineHours" ColumnName="EstimatedMachineHours" />
+                <ScalarProperty Name="EstimatedMaterial" ColumnName="EstimatedMaterial" />
+                <ScalarProperty Name="EstimatedLaborDollars" ColumnName="EstimatedLaborDollars" />
+                <ScalarProperty Name="EstimatedOutsideCost" ColumnName="EstimatedOutsideCost" />
+                <ScalarProperty Name="FirstArticleJobNumber" ColumnName="FirstArticleJobNumber" />
+                <ScalarProperty Name="FirstArticleJobScheduleDate" ColumnName="FirstArticleJobScheduleDate" />
+                <ScalarProperty Name="ProductionJobNumber" ColumnName="ProductionJobNumber" />
+                <ScalarProperty Name="ProductionJobScheduleDate" ColumnName="ProductionJobScheduleDate" />
+                <ScalarProperty Name="DatePOReceived" ColumnName="DatePOReceived" />
+                <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
+                <ScalarProperty Name="DatePOCommitted" ColumnName="DatePOCommitted" />
+                <ScalarProperty Name="DateScheduledRun" ColumnName="DateScheduledRun" />
+                <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
+                <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+                <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnBoardTasks">
+            <EntityTypeMapping TypeName="OnBoardingModel.OnBoardTask">
+              <MappingFragment StoreEntitySet="OnBoardTasks">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="TaskSequence" ColumnName="TaskSequence" />
+                <ScalarProperty Name="ChildOfTask" ColumnName="ChildOfTask" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Complexity" ColumnName="Complexity" />
+                <ScalarProperty Name="StandardCompletionHours" ColumnName="StandardCompletionHours" />
+                <ScalarProperty Name="ActualCompletionHours" ColumnName="ActualCompletionHours" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+                <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+                <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
+                <ScalarProperty Name="DueBy" ColumnName="DueBy" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="CompletionStatus" ColumnName="CompletionStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parameters">
+            <EntityTypeMapping TypeName="OnBoardingModel.Parameter">
+              <MappingFragment StoreEntitySet="Parameters">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ParameterID" ColumnName="ParameterID" />
+                <ScalarProperty Name="ParameterSequence" ColumnName="ParameterSequence" />
+                <ScalarProperty Name="ParamN1" ColumnName="ParamN1" />
+                <ScalarProperty Name="ParamN2" ColumnName="ParamN2" />
+                <ScalarProperty Name="ParamS1" ColumnName="ParamS1" />
+                <ScalarProperty Name="ParamS2" ColumnName="ParamS2" />
+                <ScalarProperty Name="ParamS3" ColumnName="ParamS3" />
+                <ScalarProperty Name="ParamS4" ColumnName="ParamS4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartMasters">
+            <EntityTypeMapping TypeName="OnBoardingModel.PartMaster">
+              <MappingFragment StoreEntitySet="PartMaster">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="PriceEach" ColumnName="PriceEach" />
+                <ScalarProperty Name="EstimatedMachineTimeHours" ColumnName="EstimatedMachineTimeHours" />
+                <ScalarProperty Name="EstimatedMaterial" ColumnName="EstimatedMaterial" />
+                <ScalarProperty Name="EstimatedLaborDollars" ColumnName="EstimatedLaborDollars" />
+                <ScalarProperty Name="EstimatedOutsideCost" ColumnName="EstimatedOutsideCost" />
+                <ScalarProperty Name="DatePOReceived" ColumnName="DatePOReceived" />
+                <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
+                <ScalarProperty Name="DatePOCommitted" ColumnName="DatePOCommitted" />
+                <ScalarProperty Name="DateScheduledRun" ColumnName="DateScheduledRun" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemLogs">
+            <EntityTypeMapping TypeName="OnBoardingModel.SystemLog">
+              <MappingFragment StoreEntitySet="SystemLog">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_OnBoardPartJobs">
+            <EntityTypeMapping TypeName="OnBoardingModel.Z_OnBoardPartJobs">
+              <MappingFragment StoreEntitySet="Z-OnBoardPartJobs">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="PartRecordNumber" ColumnName="PartRecordNumber" />
+                <ScalarProperty Name="PlanningJobNumber" ColumnName="PlanningJobNumber" />
+                <ScalarProperty Name="ProductionJobNumber" ColumnName="ProductionJobNumber" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+                <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_OnBoardPartOSSPO">
+            <EntityTypeMapping TypeName="OnBoardingModel.Z_OnBoardPartOSSPO">
+              <MappingFragment StoreEntitySet="Z-OnBoardPartOSSPO">
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+                <ScalarProperty Name="PartRecordNumber" ColumnName="PartRecordNumber" />
+                <ScalarProperty Name="JobOSSSequence" ColumnName="JobOSSSequence" />
+                <ScalarProperty Name="SchedStartDate" ColumnName="SchedStartDate" />
+                <ScalarProperty Name="SchedEndDate" ColumnName="SchedEndDate" />
+                <ScalarProperty Name="OSSPONumber" ColumnName="OSSPONumber" />
+                <ScalarProperty Name="OSSPOLine" ColumnName="OSSPOLine" />
+                <ScalarProperty Name="OSSPOLineDueDate" ColumnName="OSSPOLineDueDate" />
+                <ScalarProperty Name="OSSPOStartDate" ColumnName="OSSPOStartDate" />
+                <ScalarProperty Name="OSSPOReceiveDate" ColumnName="OSSPOReceiveDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

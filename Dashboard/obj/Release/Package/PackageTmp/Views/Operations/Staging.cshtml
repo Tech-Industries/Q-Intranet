@@ -37,8 +37,8 @@
                 <h3>Detail</h3>
             </div>
             <div class="ibox-content" style="height: 600px;">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover  full-height dtStagingDetail">
+                <div class="table-responsive full-height">
+                    <table class="table table-striped table-bordered table-hover dtStagingDetail">
                         <thead>
                             <tr>
                                 <th class="hidden">ID</th>
@@ -89,25 +89,127 @@
                 <h4 class="modal-title">Staging Check List</h4>
             </div>
             <div class="modal-body">
-                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job"> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
+                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job" jobid=""> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
                 <hr />
-                <div data-bind="foreach: Criteria">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="checkboxSpecial">
-                                <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
-                                <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
+                <div class="row">
+                    <div class="col-md-6" style="border-right: dashed 1px #4155b4">
+                        <div data-bind="foreach: Criteria">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="checkboxSpecial">
+                                        <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
+                                        <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="height: 70px;">
+                                    <h3 class="center-vertically" data-bind="text: $data.Name"></h3>
+                                </div>
+                                <div class="col-md-2" style="height: 70px;">
+                                    <span class="center-vertically" data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3" style="height: 70px;">
-                            <h3 class="center-vertically" data-bind="text: $data.Name"></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Type</span>
+                                    <select class="form-control" id="typeSelect">
+                                        <option value="">Select a Type...</option>
+                                        <option value="Material">Material</option>
+                                        <option value="Equipment">Equipment</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Desc.</span>
+                                    <input type="text" class="form-control" id="descText" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Location</span>
+                                    <select class="form-control" id="locationSelect">
+                                        <option value="">Select a Location...</option>
+                                        <option value="Staging Pallet">Staging Pallet</option>
+                                        <option value="Work Center">Work Center</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="consumableCheck" />
+                                <label for="consumableCheck">Consumable</label>
+                            </div>
+                            <div class="col-md-1">
+                                <i class="fa fa-2x fa-plus hover-add" id="addItem"></i>
+                            </div>
                         </div>
-                        <div class="col-md-1" style="height: 70px;">
-                            <span class="center-vertically" data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <center><h2>Material</h2></center>
+                                <hr />
+                                <div style="height: 500px;">
+                                    <div class="full-height-scroll">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th class="hidden">ID</th>
+                                                    <th>Description</th>
+                                                    <th>Location</th>
+                                                    <th>Issuer</th>
+                                                    <th>Date Issued</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: Materials()">
+                                                <tr>
+                                                    <td class="hidden" data-bind="text: $data.ID"></td>
+                                                    <td data-bind="text: $data.Description"></td>
+                                                    <td data-bind="text: $data.Location"></td>
+                                                    <td data-bind="text: $data.IssuerID"></td>
+                                                    <td data-bind="text: $data.DateIssued"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <center><h2>Equipment</h2></center>
+                                <hr />
+                                <div style="height: 500px;">
+                                    <div class="full-height-scroll">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th class="hidden">ID</th>
+                                                    <th>Description</th>
+                                                    <th>Location</th>
+                                                    <th>Consumable</th>
+                                                    <th>Issuer</th>
+                                                    <th>Date Issued</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: Equipment()">
+                                                <tr>
+                                                    <td class="hidden" data-bind="text: $data.ID"></td>
+                                                    <td data-bind="text: $data.Description"></td>
+                                                    <td data-bind="text: $data.Location"></td>
+                                                    <td data-bind="text: $data.Consumable"></td>
+                                                    <td data-bind="text: $data.IssuerID"></td>
+                                                    <td data-bind="text: $data.DateIssued"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -129,6 +231,7 @@
             vm.LoadStagingTopLevel();
 
 
+            var selectedID = "";
             var selectedJob = "";
             var selectedSuf = "";
             var selectedSeq = "";
@@ -157,15 +260,19 @@
             });
 
             $(document).on('click', '.staging-detail-item', function () {
+                selectedID = $(this).children().first().html();
                 selectedJob = $(this).children().next().next().html();
                 selectedSeq = $(this).children().next().next().next().next().html();
                 selectedWC = $(this).children().last().html();
                 //selectedWC = $('tr.staging-detail-item>td:nth-child(9)').html();
+                $('#selected-job').attr('jobid', selectedID);
                 $('#selected-job').html(selectedJob);
                 $('#selected-seq').html(selectedSeq);
                 $('#selected-wc').html(selectedWC);
+                ClearItemForm();
                 $('#chkListModal').modal('show');
                 //$('#chkListModal').show('slide', { direction: 'right' }, '250');
+                vm.LoadSelectedStagingItems(selectedID);
                 vm.LoadStagingCriteria();
             });
 
@@ -195,6 +302,42 @@
             //    }
             //    $(this).parent().parent().children().first().html(newDate);
             //});
+
+            $(document).on('change', '#typeSelect', function () {
+                if ($(this).val() == "Material") {
+                    if (!$('#consumableCheck').is(':checked')) {
+                        $('#consumableCheck').click();
+                    }
+                }
+            });
+
+            $(document).on('click', '#addItem', function () {
+                var JobID = $('#selected-job').attr('jobid');
+                var Type = $('#typeSelect').val();
+                var Desc = $('#descText').val();
+                var Location = $('#locationSelect').val();
+                var Consumable = $('#consumableCheck').is(':checked');
+                if (Type.length > 0 && Desc.length > 0 && Location.length > 0) {
+
+                    $(this).addClass('hidden');
+                    vm.AddItem(JobID, Type, Desc, Location, Consumable);
+                    vm.LoadSelectedStagingItems(JobID);
+                }
+                else {
+                    console.log("Foo");
+                }
+            });
         });
+
+        function ClearItemForm() {
+            $('#typeSelect').val("");
+            $('#descText').val("");
+            $('#locationSelect').val("");
+            $('#consumableCheck').attr("checked", false);
+        }
+
+        function validateItemForm() {
+
+        }
     </script>
 }

@@ -897,5 +897,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="StagingItems">
+      <EntityTypeMapping TypeName="DashboardModel.StagingItem">
+        <MappingFragment StoreEntitySet="StagingItems">
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
+          <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+          <ScalarProperty Name="IssuerID" ColumnName="IssuerID" />
+          <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

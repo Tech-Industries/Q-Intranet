@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom: 0;">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Onboarding</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div data-bind="foreach: {data: OnboardingTasks()[0]}">
+                                <div class="onboard-task-header" data-bind="text: TaskDescription"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 800px; white-space: nowrap;">
+                        <div class="full-height-scroll">
+                            <div data-bind="foreach: {data: OnboardingParts(), as: 'part' }">
+                                <div class="row onboard-part-item" style="white-space: nowrap;">
+                                    <div class="col-md-2">
+                                        <div style="float: left">
+                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                                <h5 data-bind="text: part.PartNumber"></h5>
+                                            </div>
+                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
+                                                <h5 data-bind="text: part.PartDescription"></h5>
+                                            </div>
+                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
+                                                <span data-bind="text: part.FirstArticleJobNumber"></span>
+                                            </div>
+                                        </div>
+                                        <div style="width: 60px; height: 80px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;float: left; padding: 0 5px;">
+                                            <h6 data-bind="text: part.DateEntered"></h6>
+                                            <h6 data-bind="text: part.DatePODue"></h6>
+                                            <h6 data-bind="text: part.PartType"></h6>
+                                            <h6 data-bind="text: part.OnBoardClass"></h6>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="onboard-tasks">
+                                            <div data-bind="foreach: $root.OnboardingTasks()">
+                                                <div data-bind="if: $data[0].OnBoardPart == $parent.RecordNumber">
+                                                    <div data-bind="foreach: $data">
+                                                        <div class="onboard-task-item" data-bind="css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == ''}">
+                                                            <div data-bind="text: PercentComplete"></div>
+                                                            <div data-bind="text: DueBy"></div>
+                                                            <div data-bind="text: ActualCompletionHours+'/'+StandardCompletionHours +' hrs'"></div>
+                                                            <div data-bind="text: CurrentStatus"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-bind="if: isLoading()">
+    <div id="is-loading">
+        <div id="is-loading-inner" class="center-vertically">
+            <center class="center-vertically"><i class="fa fa-circle-o-notch fa-spin"></i> Loading ...</center>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/KO-Models/ko-model-onboarding.js"></script>
+
+
+    <script>
+
+
+        var vm = null;
+
+        $(function () {
+
+
+            vm = new OnboardingViewModel();
+            ko.applyBindings(vm);
+            vm.LoadOnboardingParts();
+        });
+    </script>
+}

@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h5><span id="del-desc"></span></h5>
+                <h5><span id="del-desc"></span></h5> 
             </div>
         </div>
         <div class="row">
@@ -37,12 +37,12 @@
                 <h5>
                     Date Completed -
                     <span data-bind="if: DDComplete()">
-                        <span data-bind="text: DDDateCompleted()"></span> -
-                        <span data-bind="if:(DelUserID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
-                            <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button>
+                        <span data-bind="text: DDDateCompleted()"></span>
+                        <span data-bind="if:(DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
+                            - <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button>
                         </span>
                     </span>
-                    <span data-bind="if: !DDComplete() && (DelUserID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
+                    <span data-bind="if: !DDComplete() && (DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
                         <button type="button" class="btn btn-xs btn-success btn-complete-del">Complete</button>
                     </span>
                 </h5>

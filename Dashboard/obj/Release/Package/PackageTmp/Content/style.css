@@ -9949,12 +9949,12 @@ body.md-skin {
 }
 
 .blink {
-    animation: blink-animation 1s steps(2, start) infinite;
+    animation: blink-animation-red 1s steps(2, start) infinite;
     -webkit-animation: blink-animation-red 1s steps(2, start) infinite;
 }
 
 .blink-orange {
-    animation: blink-animation 1s steps(2, start) infinite;
+    animation: blink-animation-orange 1s steps(2, start) infinite;
     -webkit-animation: blink-animation-orange 1s steps(2, start) infinite;
 }
 

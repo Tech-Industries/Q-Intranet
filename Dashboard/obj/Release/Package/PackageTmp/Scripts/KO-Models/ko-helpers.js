@@ -90,6 +90,16 @@ function formatPercent(amount) {
     }
 }
 
+function formatPercent(amount, precision) {
+
+    if (amount == null) {
+        return '0.0%';
+    }
+    else {
+        return parseFloat(amount, 10).toFixed(precision).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() + "%";
+    }
+}
+
 
 //  _____        _           ______                         _   _   _             
 // |  __ \      | |         |  ____|                       | | | | (_)            
@@ -164,7 +174,7 @@ function formatSqlDateTime(ts) {
 
 function formatSqlDateTimeToShortDate(ts) {
     var date = ts.split("T")[0];
-    var y = date.substring(0, 4);
+    var y = date.substring(2, 4);
     var m = date.substring(5, 7);
     var d = date.substring(8, 10);
     return m + "/" + d + "/" + y;

@@ -51,6 +51,9 @@
             <li class="@Html.IsSelected(controller: "Projects") @Html.IsAuth(groupID: 5)">
                 <a href="@Url.Action("Index", "Projects")"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Projects </span></a>
             </li>
+            <li class="@Html.IsSelected(controller: "Onboarding") @Html.IsAuth(groupID: 17)">
+                <a href="@Url.Action("Index", "Onboarding")"><i class="fa fa-folder-open"></i> <span class="nav-label">Onboarding </span></a>
+            </li>
             <li class="@Html.IsSelected(controller: "Operations") @Html.IsAuth(groupID: 15)">
                 <a><i class="fa fa-cube "></i> <span class="nav-label">Operations</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

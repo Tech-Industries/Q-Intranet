@@ -50,7 +50,7 @@ namespace Dashboard.APIControllers
         [HttpGet]
         public async Task<IHttpActionResult> GetPartTasksByID(int id)
         {
-            var tasks = await onbdb.OnBoardTasks.Where(x => x.OnBoardPart == id).ToListAsync();
+            var tasks = await onbdb.OnBoardTasks.Where(x => x.OnBoardPart == id && x.TaskSequence < 100).OrderBy(o => o.TaskSequence).ToListAsync();
             if (!tasks.Any())
             {
                 return NotFound();

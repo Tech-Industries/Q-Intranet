@@ -22,7 +22,7 @@
                     <div style="height: 800px; white-space: nowrap;">
                         <div class="full-height-scroll">
                             <div data-bind="foreach: {data: OnboardingParts(), as: 'part' }">
-                                <div class="row onboard-part-item" >
+                                <div class="row onboard-part-item" style="white-space: nowrap;">
                                     <div class="col-md-2">
                                         <div style="float: left">
                                             <div style="width: 120px; height: 20px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
@@ -45,7 +45,7 @@
 
 
                                     </div>
-                                    <div class="col-md-10" style="white-space: nowrap; overflow: hidden">
+                                    <div class="col-md-10">
                                         <div class="onboard-tasks">
                                             <div data-bind="foreach: $root.OnboardingTasks()">
                                                 <div data-bind="if: $data[0].OnBoardPart == $parent.RecordNumber">
@@ -88,17 +88,6 @@
                     <div class="col-md-3">
                         <span data-bind="text: SelectedTask().CurrentStatus == 'Complete' || SelectedTask().CurrentStatus == 'Completed Late' ? SelectedTask().CurrentStatus+' - '+SelectedTask().CompletedOn : SelectedTask().CurrentStatus"></span><br />
                         <span data-bind="text: SelectedTask().ActualCompletionHours+' / '+ SelectedTask().StandardCompletionHours+' Hours'"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon">Perc. Comp.</span>
-                            <input type="text" class="form-control" data-bind="value: SelectedTask().PercentComplete" />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <textarea class="form-control" id="selected-task-notes" rows="20"></textarea>
-                        <br />
-                        <button class="btn dim btn-primary"><i class="fa fa-save"></i></button>
                     </div>
                 </div>
                 

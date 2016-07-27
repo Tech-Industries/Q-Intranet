@@ -10168,19 +10168,17 @@ body.md-skin {
 }
 
 .right-menu-slider {
-    width: 120%;
-    height: 70%;
+    width: 100%;
+    height: 500px;
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 20px;
     background-color: #ffffff;
     color: inherit;
-    font-size: 40px;
     z-index: 10;
     border-color: #e7eaec;
     border-image: none;
     border-style: solid solid none;
-    border-width: 1px 0px 1px 1px;
+    border-width: 1px 1px 5px 1px;
 }
 
 .checkboxSpecial input[type=checkbox] {
@@ -10226,6 +10224,9 @@ body.md-skin {
 .onboard-part-item{
     border-bottom: 1px solid #999999;
     margin-bottom: 2px;
+    height: 80px;
+    white-space: nowrap;
+
 
 }
 .onboard-task-item{
@@ -10239,11 +10240,11 @@ body.md-skin {
     padding: 2px;
 }
     .onboard-task-complete{
-        background-color: #27ae60;
+        background-color: #2ecc71;
         color: #0e0e0e;
     }
     .onboard-task-complete-late{
-        background-color: #16a085;
+        background-color: #1a8045;
         color: #0e0e0e;
     }
     .onboard-task-late{

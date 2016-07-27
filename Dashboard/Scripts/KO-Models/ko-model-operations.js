@@ -1,4 +1,4 @@
-﻿function OnboardingViewModel() {
+﻿function OperationsViewModel() {
     var self = this;
     var usersAPI = $("#usersLink").attr('href');
     var groupsAPI = $("#groupsLink").attr('href');

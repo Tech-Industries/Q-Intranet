@@ -1,4 +1,4 @@
-﻿function OperationsViewModel() {
+﻿function OnboardingViewModel() {
     var self = this;
     var usersAPI = $("#usersLink").attr('href');
     var groupsAPI = $("#groupsLink").attr('href');
@@ -42,7 +42,7 @@
         });
     }
 
-    self.LoadUpcomingShipments = function () {
+    self.LoadOnboardingParts = function () {
 
         var load = $.ajax({ type: "GET", url: shippingAPI, cache: false});
         load.done(function (data) {

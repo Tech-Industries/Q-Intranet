@@ -209,6 +209,9 @@
 
             $(document).on('focusout', '#selectedPerct', function () {
                 var newPerct = parseInt($(this).val());
+                if (newPerct == 100) {
+                    vm.SelectedTask().CompletedBy = $('#layoutUserID').val();
+                }
                 vm.SelectedTask().PercentComplete = newPerct;
             });
 

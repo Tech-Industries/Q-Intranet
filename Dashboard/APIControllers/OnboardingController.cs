@@ -107,6 +107,7 @@ namespace Dashboard.APIControllers
                 {
                     if (oldTask.CompletedOn == null)
                     {
+                        oldTask.CompletedBy = task.CompletedBy;
                         if (oldTask.DueBy >= timeSubmitted)
                         {
                             oldTask.CurrentStatus = "Complete";
@@ -128,8 +129,9 @@ namespace Dashboard.APIControllers
                     {
                         oldTask.CurrentStatus = "Late";
                     }
-                    
+
                     oldTask.CompletedOn = null;
+                    oldTask.CompletedBy = null;
                 }
 
                 //entry.State = EntityState.Modified;

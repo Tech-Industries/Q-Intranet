@@ -24,6 +24,7 @@
 
     self.OwnerID = ko.observable();
 
+    self.isLoading = ko.observable(false);
 
 
     //Metrics

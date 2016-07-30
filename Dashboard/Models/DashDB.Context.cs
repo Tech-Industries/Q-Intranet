@@ -45,7 +45,6 @@ namespace Dashboard.Models
         public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
         public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
         public virtual DbSet<DeliverableDetail> DeliverableDetails { get; set; }
-        public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
         public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
         public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
@@ -90,5 +89,6 @@ namespace Dashboard.Models
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
         public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
         public virtual DbSet<StagingItem> StagingItems { get; set; }
+        public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
     }
 }

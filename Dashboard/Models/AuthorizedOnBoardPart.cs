@@ -12,18 +12,11 @@ namespace Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ReviewablesByUser
+    public partial class AuthorizedOnBoardPart
     {
         public long ID { get; set; }
-        public int DelID { get; set; }
-        public int DelDetID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Owner { get; set; }
-        public string Frequency { get; set; }
-        public Nullable<System.DateTime> DateDue { get; set; }
-        public Nullable<System.DateTime> DateCompleted { get; set; }
-        public Nullable<System.DateTime> TimeReviewed { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public Nullable<long> OnBoardPart { get; set; }
+        public Nullable<int> DelegatedTo { get; set; }
+        public Nullable<int> ResponsibleUser { get; set; }
     }
 }

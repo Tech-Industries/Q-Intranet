@@ -5,19 +5,26 @@
     var userGroupsAPI = $("#userGroupsLink").attr('href');
     var onboardingAPI = $("#OnboardingLink").attr('href');
 
+    var CommentsAPI = $("#CommentsLink").attr('href');
+    self.Comments = ko.observableArray([]);
+
     self.isLoading = ko.observable();
 
     self.Users = ko.observableArray([]);
     self.OnboardingParts = ko.observableArray([]);
     self.OnboardingTasks = ko.observableArray([]);
 
-    
+    self.OnboardingPure = ko.observableArray([]);
+
+
     self.SelectedPart = ko.observable();
     self.SelectedTask = ko.observable();
 
+    self.SelectedTaskPure = ko.observable();
+
 
     self.loadUsers = function () {
-        var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
+        var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: { type: 'Onboarding' } });
         load.done(function (data) {
             var array = $.map(data, function (item) {
                 return {
@@ -29,6 +36,7 @@
                 }
             });
             self.Users(array);
+            console.log(data);
         });
     }
 
@@ -40,82 +48,165 @@
     self.Parts = ko.observableArray([]);
 
     self.SelectTask = function (TaskID, PartID) {
-        console.log("Part: " + PartID);
-        console.log("Task: " + TaskID);
         var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == PartID })[0];
         var task = $.grep(tasks, function (e) { return e.RecordNumber == TaskID })[0];
-        var part = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID})[0];
-        console.log(task);
+        var part = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
         self.SelectedPart(part);
         self.SelectedTask(task);
 
+        $('#selectedDelegate').val(task.DelegatedTo);
+
+    }
+
+
+    self.UpdateTasksForPart = function () {
+        var part = self.SelectedPart();
+        var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + part.RecordNumber + '/Tasks', cache: false });
+        loadTasks.done(function (data1) {
+            innerStart = data1.length;
+            data1.forEach(function (ii) {
+                ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+            });
+            var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber })[0];
+            self.OnboardingTasks.remove(tasks);
+            self.OnboardingTasks.push(data1);
+        });
+
+
+    }
+
+    self.SaveChanges = function () {
+        var update = self.SelectedTask();
+
+        var save = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/Tasks/' + update.RecordNumber, data: update });
+        save.done(function (data) {
+
+            self.UpdateTasksForPart();
+        });
     }
 
     self.LoadOnboardingParts = function () {
+        var UserID = $('#layoutUserID').val();
         self.isLoading(true)
         var parts = [];
         var tasks = [];
         var outer = 0;
         var inner = 0;
         self.OnboardingTasks([]);
+        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID });
+        loadAuthParts.done(function (authParts) {
 
-        var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
-        load.success(function (data) {
-            self.OnboardingParts(data);
-            outerStart = data.length;
-            data.forEach(function (i) {
-                i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
-                i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
+            load.success(function (data) {
+                
+                if ($('#RelPer').val() == 18) {
+                    parts = data;
+                }
+                else {
+                    for (x = 0; x < authParts.length; x++) {
+                        parts.push($.grep(data, function (e) { return e.RecordNumber == authParts[x].OnBoardPart })[0])
+                    }
+                }
 
-                outer += 1;
-                var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
-                loadTasks.done(function (data1) {
-                    innerStart = data1.length;
-                    data1.forEach(function (ii) {
-                        ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
-                        ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
+                self.OnboardingParts(parts);
+                outerStart = parts.length;
+                parts.forEach(function (i) {
+                    i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
+                    i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+
+                    outer += 1;
+                    var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
+                    loadTasks.done(function (data1) {
+                        innerStart = data1.length;
+                        data1.forEach(function (ii) {
+                            ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                        });
+                        if (data1[10].TaskDescription != 'FAI Populated') {
+                            data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
+                        }
+                        self.OnboardingTasks.push(data1);
+
+                        inner += 1;
+                        if (inner == outerStart) {
+                            self.isLoading(false)
+                        }
                     });
-                    if (data1[10].TaskDescription != 'FAI Populated') {
-                        data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
-                    }
-                    self.OnboardingTasks.push(data1);
-
-                    inner += 1;
-                    if (inner == outerStart) {
-                        self.isLoading(false)
-                    }
                 });
             });
-            self.OnboardingParts(data);
+            load.fail(function () {
+                console.log('test');
+            });
         });
+    }
 
-        //var load = $.ajax({ type: "GET", url: onboardingAPI, cache: false });
-        //load.done(function (data) {
-        //    var tasks = [];
-        //    self.OnboardingParts(data);
-        //    data.each
-        //    for (i = 0; i < data.length; i++) {
-        //        var recordNum = data[i].RecordNumber;
-        //        var subTasks = [];
-        //        var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + recordNum + '/Tasks', cache: false });
-        //        loadTasks.done(function (taskData) {
 
-        //            for (ii = 0; ii < taskData.length; ii++) {
-        //                tasks.push(taskData[ii]);
-        //            }
-        //            var p = $.grep(data, function (e) { return e.RecordNumber == taskData[0].OnBoardPart });
-        //            p[0].Tasks = taskData;
 
-        //        });
+     //self.LoadOnboardingParts = function () {
+     //       var UserID = $('#layoutUserID').val();
+     //       self.isLoading(true)
+     //       var parts = [];
+     //       var tasks = [];
+     //       var outer = 0;
+     //       var inner = 0;
+     //       self.OnboardingTasks([]);
+        
+     //           var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
+     //           load.success(function (data) {
+     //               self.OnboardingParts(data);
+     //               outerStart = data.length;
+     //               data.forEach(function (i) {
+     //                   i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
+     //                   i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
 
-        //    }
+     //                   outer += 1;
+     //                   var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
+     //                   loadTasks.done(function (data1) {
+     //                       innerStart = data1.length;
+     //                       data1.forEach(function (ii) {
+     //                           ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+     //                           ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
+     //                       });
+     //                       if (data1[10].TaskDescription != 'FAI Populated') {
+     //                           data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
+     //                       }
+     //                       self.OnboardingTasks.push(data1);
 
-        //    self.OnboardingTasks().push(taskData[ii]);
+     //                       inner += 1;
+     //                       if (inner == outerStart) {
+     //                           self.isLoading(false)
+     //                       }
+     //                   });
+     //               });
+     //               self.OnboardingParts(data);
+     //           });
+     //           load.fail(function () {
+     //               console.log('test');
+     //           });
+     //       }
 
-        //});
-        load.fail(function () {
-            console.log('test');
-        });
+
+    self.loadComments = function () {
+        var TypeID = self.SelectedTask().RecordNumber;
+        console.log(TypeID);
+        loadComments(TypeID, 'OnboardingTasks', CommentsAPI, self)
+    };
+
+    self.addComment = function () {
+        var TypeID = self.SelectedTask().RecordNumber;
+        var UserID = $('#layoutUserID').val();
+        var Comment = $("#txt-new-comment").val();
+        if (Comment.length > 0) {
+            addComment(TypeID, UserID, Comment, "OnboardingTasks", CommentsAPI, self);
+            $("#txt-new-comment").val('');
+
+        }
+
+    }
+    self.updateComment = function (ID, TimeSubmitted, Comment) {
+        updateComment(ID, TimeSubmitted, Comment, self.Comments(), CommentsAPI);
+    }
+    self.removeComment = function (ID) {
+        removeComment(ID, CommentsAPI, self);
     }
 
     self.UpdateAdjShipDate = function (ID, DateID, newDate) {

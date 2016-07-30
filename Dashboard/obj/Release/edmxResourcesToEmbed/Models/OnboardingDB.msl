@@ -183,5 +183,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AuthorizedOnBoardParts">
+      <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
+        <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
+          <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+          <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+          <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

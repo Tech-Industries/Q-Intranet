@@ -11,6 +11,7 @@
     self.SelectedUserID = ko.observable();
     self.SelectedUserInfo = ko.observableArray([]);
 
+    self.isLoading = ko.observable(false);
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });

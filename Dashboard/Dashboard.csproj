@@ -276,6 +276,9 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuthorizedOnBoardPart.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bug.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>

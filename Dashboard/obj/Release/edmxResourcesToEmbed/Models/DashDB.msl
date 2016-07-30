@@ -260,22 +260,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ReviewablesByUsers">
-      <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
-        <MappingFragment StoreEntitySet="ReviewablesByUser">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
-          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
-          <ScalarProperty Name="DelID" ColumnName="DelID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ProjectTasks">
       <EntityTypeMapping TypeName="DashboardModel.ProjectTask">
         <MappingFragment StoreEntitySet="ProjectTasks">
@@ -908,6 +892,23 @@
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewablesByUsers">
+      <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
+        <MappingFragment StoreEntitySet="ReviewablesByUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TimeReviewed" ColumnName="TimeReviewed" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -173,6 +173,17 @@
     <Property Name="OSSPOStartDate" Type="datetime" />
     <Property Name="OSSPOReceiveDate" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AuthorizedOnBoardParts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="OnBoardPart" Type="bigint" />
+    <Property Name="DelegatedTo" Type="int" />
+    <Property Name="ResponsibleUser" Type="int" />
+  </EntityType>
   <EntityContainer Name="OnBoardingModelStoreContainer">
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnBoardingPartsToAdd" EntityType="Self.OnBoardingPartsToAdd" Schema="dbo" store:Type="Tables" />
@@ -183,5 +194,13 @@
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartJobs" EntityType="Self.Z-OnBoardPartJobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartOSSPO" EntityType="Self.Z-OnBoardPartOSSPO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuthorizedOnBoardParts" EntityType="Self.AuthorizedOnBoardParts" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AuthorizedOnBoardParts].[ID] AS [ID], 
+    [AuthorizedOnBoardParts].[OnBoardPart] AS [OnBoardPart], 
+    [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo], 
+    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser]
+    FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

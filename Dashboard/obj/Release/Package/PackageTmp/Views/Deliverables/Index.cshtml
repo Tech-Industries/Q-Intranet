@@ -155,7 +155,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody data-bind="foreach: Reviewables()">
-                                                    <tr class="reviewable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID}">
+                                                    <tr class="reviewable-item" data-bind="attr:{deldetid: $data.DelDetID, delid: $data.DelID, frequency: $data.Frequency, datedue: $data.DateDue}">
                                                         <td data-bind="text: $data.Name"></td>
                                                         <!--<td data-bind="text: $data.Description"></td>-->
                                                         <td data-bind="text: $data.Owner"></td>
@@ -401,6 +401,7 @@
             var Frequency = $(this).attr("frequency");
             var DateDue = $(this).attr("datedue");
             var val = findPeriodVal(Frequency, DateDue);
+            console.log(val);
             $('#DelDetID').val(ID);
             vm.loadDeliverableByID(ID);
             $('#freq').val(Frequency).change();
@@ -551,8 +552,14 @@
         $(document).on("click", ".reviewable-item", function () {
             var ID = $(this).attr("deldetid");
             $('#DelDetID').val(ID);
+
+            var Frequency = $(this).attr("frequency");
+            var DateDue = $(this).attr("datedue");
+            var val = findPeriodVal(Frequency, DateDue);
             vm.loadDeliverableByID(ID);
-            $("#del-modal").modal("show");
+            console.log(Frequency);
+            $('#freq').val(Frequency).change();
+            $("#period").val(val);
         });
 
 

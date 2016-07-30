@@ -52,6 +52,8 @@
 
     self.Test = ko.observableArray([]);
 
+    self.isLoading = ko.observable(false);
+
 
 
     self.loadUsers = function () {
@@ -233,7 +235,6 @@
         var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { ID: ID, DataPull: "DelDet" } });
         load.done(function (data) {
             data = data[0];
-            console.log(data);
             $('#DelID').val(data.DelID);
             var dateDue = data.DateDue;
             dateDue = dateDue.split('T')[0];
@@ -411,17 +412,20 @@
 
         var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { ID: UserID, DataPull: "Reviewables" } });
         load.done(function (data) {
+            console.log(data);
             var array = $.map(data, function (item) {
                 return {
                     ID: item.ID,
                     Name: item.Name,
                     Description: item.Description,
                     Owner: item.Owner,
+                    Frequency: item.Frequency,
                     DelDetID: item.DelDetID,
                     DateDue: item.DateDue.split("T")[0],
                     DateCompleted: item.DateCompleted.split("T")[0]
                 }
             });
+            console.log(array);
             self.Reviewables(array);
 
         });

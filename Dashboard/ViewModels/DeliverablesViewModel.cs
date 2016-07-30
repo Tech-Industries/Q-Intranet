@@ -1,11 +1,12 @@
 ﻿
-using Orizon.Web.Data;
+//using Orizon.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Dashboard.Models;
 
 namespace Dashboard.ViewModels
 {

@@ -1,4 +1,4 @@
-﻿function OnboardingViewModel() {
+﻿function OperationsViewModel() {
     var self = this;
     var usersAPI = $("#usersLink").attr('href');
     var groupsAPI = $("#groupsLink").attr('href');
@@ -12,7 +12,7 @@
 
     self.Users = ko.observableArray([]);
     self.UpcomingShipments = ko.observableArray([]);
-
+    self.isLoading = ko.observable(false);
 
     self.StagingTopLevel = ko.observableArray([]);
     self.StagingDetail = ko.observableArray([]);
@@ -42,12 +42,14 @@
         });
     }
 
-    self.LoadOnboardingParts = function () {
-
+    self.LoadUpcomingShipments = function () {
+        self.isLoading(true);
         var load = $.ajax({ type: "GET", url: shippingAPI, cache: false});
         load.done(function (data) {
             adjDol = 0;
             pastDol = 0;
+            var start = data.length;
+            var count = 0;
             $.each(data, function (i, item) {
                 $('.dtShippingPlan').DataTable().row.add([
                 item.ID,
@@ -72,6 +74,10 @@
                 }
                 if (item.DateDue.split('T')[0] < GetDate()) {
                     pastDol += item.Sales;
+                }
+                count += 1;
+                if (count == start) {
+                    self.isLoading(false);
                 }
                 
             });

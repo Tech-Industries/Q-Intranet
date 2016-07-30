@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnBoardingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OnBoardingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="RecordNumber" />
@@ -178,6 +178,17 @@
           <Property Name="OSSPOStartDate" Type="datetime" />
           <Property Name="OSSPOReceiveDate" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AuthorizedOnBoardParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="OnBoardPart" Type="bigint" />
+          <Property Name="DelegatedTo" Type="int" />
+          <Property Name="ResponsibleUser" Type="int" />
+        </EntityType>
         <EntityContainer Name="OnBoardingModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OnBoardingPartsToAdd" EntityType="Self.OnBoardingPartsToAdd" Schema="dbo" store:Type="Tables" />
@@ -188,9 +199,16 @@
           <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Z-OnBoardPartJobs" EntityType="Self.Z-OnBoardPartJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Z-OnBoardPartOSSPO" EntityType="Self.Z-OnBoardPartOSSPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorizedOnBoardParts" EntityType="Self.AuthorizedOnBoardParts" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AuthorizedOnBoardParts].[ID] AS [ID], 
+    [AuthorizedOnBoardParts].[OnBoardPart] AS [OnBoardPart], 
+    [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo], 
+    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser]
+    FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnBoardingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -377,7 +395,17 @@
           <EntitySet Name="SystemLogs" EntityType="Self.SystemLog" />
           <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
           <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
+          <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
         </EntityContainer>
+        <EntityType Name="AuthorizedOnBoardPart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="OnBoardPart" Type="Int64" />
+          <Property Name="DelegatedTo" Type="Int32" />
+          <Property Name="ResponsibleUser" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -563,6 +591,16 @@
                 <ScalarProperty Name="OSSPOLineDueDate" ColumnName="OSSPOLineDueDate" />
                 <ScalarProperty Name="OSSPOStartDate" ColumnName="OSSPOStartDate" />
                 <ScalarProperty Name="OSSPOReceiveDate" ColumnName="OSSPOReceiveDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorizedOnBoardParts">
+            <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
+              <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
+                <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+                <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+                <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

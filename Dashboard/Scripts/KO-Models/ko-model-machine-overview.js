@@ -10,6 +10,7 @@
     self.SUPercent = ko.observable();
     self.TrendChartCats = ko.observableArray([]);
 
+    self.isLoading = ko.observable(false);
 
     self.loadMachineStates = function () {
         var location = $('#plant-select').val();

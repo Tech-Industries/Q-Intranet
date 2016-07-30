@@ -2,6 +2,7 @@
     var self = this;
     var prevmaintAPI = $("#PrevMaintLink").attr('href');
 
+    self.isLoading = ko.observable(false);
     self.loadScorecard = function (year, month, day) {
 
         PlantID = $('#selPlant').val();

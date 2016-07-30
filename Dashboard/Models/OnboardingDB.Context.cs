@@ -34,5 +34,6 @@ namespace Dashboard.Models
         public virtual DbSet<SystemLog> SystemLogs { get; set; }
         public virtual DbSet<Z_OnBoardPartJobs> Z_OnBoardPartJobs { get; set; }
         public virtual DbSet<Z_OnBoardPartOSSPO> Z_OnBoardPartOSSPO { get; set; }
+        public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
     }
 }

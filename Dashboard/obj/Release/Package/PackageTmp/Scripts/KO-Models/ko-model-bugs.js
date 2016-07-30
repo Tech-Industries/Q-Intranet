@@ -16,6 +16,8 @@
     self.Users = ko.observableArray([]);
     self.AllBugs = ko.observableArray([]);
 
+    self.isLoading = ko.observable(false);
+
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
         load.done(function (data) {

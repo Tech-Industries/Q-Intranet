@@ -11,141 +11,142 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Dashboard.ViewModels;
 using System.Web;
-using Orizon.Web.Data;
+//using Orizon.Web.Data;
 using System.Web.Http.Results;
+using Dashboard.Models;
 
 namespace Dashboard.APIControllers
 {
 
-    public class Deliverabes2Controller : ApiController
-    {
+    //public class Deliverabes2Controller : ApiController
+    //{
 
-        private OrizonEntities db = new OrizonEntities();
+    //    private OrizonEntities db = new OrizonEntities();
 
-        #region Deliverables
+    //    #region Deliverables
 
-        [Route("api/v1/deliverables")]
-        [ResponseType(typeof(IHttpActionResult))]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetDeliverables()
-        {
-            var dels = await db.Deliverables.ToListAsync();
-            if (!dels.Any())
-            {
-                return NotFound();
-            }
-            return Ok(dels);
-        }
+    //    [Route("api/v1/deliverables")]
+    //    [ResponseType(typeof(IHttpActionResult))]
+    //    [HttpGet]
+    //    public async Task<IHttpActionResult> GetDeliverables()
+    //    {
+    //        var dels = await db.Deliverables.ToListAsync();
+    //        if (!dels.Any())
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok(dels);
+    //    }
 
-        [Route("api/v1/deliverables")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetDeliverablesByUser(int userId)
-        {
-            var dels = await db.Deliverables.Where(x => x.UserID == userId).ToListAsync();
-            if (!dels.Any())
-            {
-                return NotFound();
-            }
-            return Ok(dels);
-        }
-
-
-        #endregion
+    //    [Route("api/v1/deliverables")]
+    //    [HttpGet]
+    //    public async Task<IHttpActionResult> GetDeliverablesByUser(int userId)
+    //    {
+    //        var dels = await db.Deliverables.Where(x => x.UserID == userId).ToListAsync();
+    //        if (!dels.Any())
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok(dels);
+    //    }
 
 
-        #region Deliverable Detail
-        [Route("api/v1/deliverables/detail/{id:int}")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetDeliverableDetail(int id)
-        {
-            var detail = await db.DeliverableDetails.Join(db.Deliverables, dd => dd.DelID, d => d.ID, (dd, d) => new { dd, d }).Where(x => x.dd.ID == id).Select(x => new { x.dd.ID, x.dd.DateDue, x.dd.DateCompleted, x.dd.DelID, x.d.UserID, x.d.Name, x.d.Description, x.d.Frequency }).ToListAsync();
-            if (!detail.Any())
-            {
-                return NotFound();
-            }
-            return Ok(detail);
-        }
-        #endregion
-
-        #region Deliverable Reviewers
-        [Route("api/v1/deliverables/{delId:int}/reviewers")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetReviewers(int delId)
-        {
-            var reviewers = await db.DeliverableReviewers.Where(x => x.DelID == delId).ToListAsync();
-            if (!reviewers.Any())
-            {
-                return NotFound();
-            }
-            return Ok(reviewers);
-        }
-
-        [Route("api/v1/deliverables/{delId:int}/reviewers")]
-        [HttpPost]
-        public async Task<IHttpActionResult> PostReviewer(int delId, DeliverableReviewer reviewer)
-        {
-            try
-            {
-                db.DeliverableReviewers.Add(reviewer);
-                await db.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
-            }
-            return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.Created));
-        }
-
-        [Route("api/v1/deliverables/reviewers/{reviewerId:int}")]
-        [HttpDelete]
-        public async Task<IHttpActionResult> DeleteReviewer(int reviewerId)
-        {
-            try
-            {
-                db.DeliverableReviewers.Remove(await db.DeliverableReviewers.FindAsync(reviewerId));
-                await db.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-            return Ok();
-        }
-        #endregion
+    //    #endregion
 
 
-        #region Deliverable Reviews
-        [Route("api/v1/deliverables/detail/{delDetId:int}/reviews")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetReviewByDetailId(int delDetId)
-        {
-            var reviews = await db.DeliverableReviews.Where(x => x.DelDetID == delDetId).ToListAsync();
-            if (!reviews.Any())
-            {
-                return NotFound();
-            }
-            return Ok(reviews);
-        }
+    //    #region Deliverable Detail
+    //    [Route("api/v1/deliverables/detail/{id:int}")]
+    //    [HttpGet]
+    //    public async Task<IHttpActionResult> GetDeliverableDetail(int id)
+    //    {
+    //        var detail = await db.DeliverableDetails.Join(db.Deliverables, dd => dd.DelID, d => d.ID, (dd, d) => new { dd, d }).Where(x => x.dd.ID == id).Select(x => new { x.dd.ID, x.dd.DateDue, x.dd.DateCompleted, x.dd.DelID, x.d.UserID, x.d.Name, x.d.Description, x.d.Frequency }).ToListAsync();
+    //        if (!detail.Any())
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok(detail);
+    //    }
+    //    #endregion
 
-        #endregion
+    //    #region Deliverable Reviewers
+    //    [Route("api/v1/deliverables/{delId:int}/reviewers")]
+    //    [HttpGet]
+    //    public async Task<IHttpActionResult> GetReviewers(int delId)
+    //    {
+    //        var reviewers = await db.DeliverableReviewers.Where(x => x.DelID == delId).ToListAsync();
+    //        if (!reviewers.Any())
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok(reviewers);
+    //    }
 
-        #region DeliverableDocuments
-        /// Convert to Universal Documents controller
-        #endregion
+    //    [Route("api/v1/deliverables/{delId:int}/reviewers")]
+    //    [HttpPost]
+    //    public async Task<IHttpActionResult> PostReviewer(int delId, DeliverableReviewer reviewer)
+    //    {
+    //        try
+    //        {
+    //            db.DeliverableReviewers.Add(reviewer);
+    //            await db.SaveChangesAsync();
+    //        }
+    //        catch (Exception e)
+    //        {
+    //            return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+    //        }
+    //        return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.Created));
+    //    }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    //    [Route("api/v1/deliverables/reviewers/{reviewerId:int}")]
+    //    [HttpDelete]
+    //    public async Task<IHttpActionResult> DeleteReviewer(int reviewerId)
+    //    {
+    //        try
+    //        {
+    //            db.DeliverableReviewers.Remove(await db.DeliverableReviewers.FindAsync(reviewerId));
+    //            await db.SaveChangesAsync();
+    //        }
+    //        catch (Exception e)
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok();
+    //    }
+    //    #endregion
 
-    }
+
+    //    #region Deliverable Reviews
+    //    [Route("api/v1/deliverables/detail/{delDetId:int}/reviews")]
+    //    [HttpGet]
+    //    public async Task<IHttpActionResult> GetReviewByDetailId(int delDetId)
+    //    {
+    //        var reviews = await db.DeliverableReviews.Where(x => x.DelDetID == delDetId).ToListAsync();
+    //        if (!reviews.Any())
+    //        {
+    //            return NotFound();
+    //        }
+    //        return Ok(reviews);
+    //    }
+
+    //    #endregion
+
+    //    #region DeliverableDocuments
+    //    /// Convert to Universal Documents controller
+    //    #endregion
+
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            db.Dispose();
+    //        }
+    //        base.Dispose(disposing);
+    //    }
+
+    //}
     public class DeliverablesController : ApiController
     {
-        private OrizonEntities db = new OrizonEntities();
+        private DashboardEntities db = new DashboardEntities();
         // GET: api/Organizations
         [ResponseType(typeof(List<DeliverablesViewModel>))]
         public async Task<IHttpActionResult> Get(int UserID)

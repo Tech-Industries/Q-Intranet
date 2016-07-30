@@ -221,6 +221,14 @@
 
         });
     </script>
+
     @RenderSection("scripts", required: false)
+    <div data-bind="if: isLoading()">
+        <div id="is-loading">
+            <div id="is-loading-inner" class="center-vertically">
+                <center class="center-vertically"><i class="fa fa-circle-o-notch fa-spin"></i> Loading ...</center>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

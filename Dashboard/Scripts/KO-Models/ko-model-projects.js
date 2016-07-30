@@ -13,6 +13,8 @@
     self.Complete = ko.observableArray([]);
     self.AllTasks = ko.observableArray([]);
 
+    self.isLoading = ko.observable();
+
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
         load.done(function (data) {
@@ -30,6 +32,7 @@
     }
 
     self.LoadProjects = function () {
+        self.isLoading(true);
         var status = $('#status').val();
         if (status == 'All') {
             var load = $.ajax({ type: "GET", cache: false, url: projectsAPI });
@@ -64,6 +67,7 @@
                 };
             });
             self.Projects(array);
+            self.isLoading(false);
         });
     }
 

@@ -35,6 +35,17 @@ namespace Dashboard.APIControllers
             return Ok(await UsersViewModel.MapFromAsync(db.Users.Where(x => x.ID.Equals(ID)).ToList()));
         }
 
+
+        [ResponseType(typeof(List<UsersViewModel>))]
+        public async Task<IHttpActionResult> Get(string type)
+        {
+            if(type == "Onboarding")
+            {
+                return Ok(await db.Users.Join(db.UserGroups, u => u.ID, ug => ug.UserID, (u, ug) => new { u, ug }).Where(x => x.ug.GroupID == 17).Select(s => new { s.u.ID, s.u.UserName, s.u.FirstName, s.u.LastName, s.u.Email }).OrderBy(o => o.FirstName).ToListAsync<object>());
+            }
+            return NotFound();            
+        }
+
         [ResponseType(typeof(List<object>))]
         public List<object> Get(int ID, string type)
         {

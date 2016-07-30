@@ -341,13 +341,13 @@ function findPeriodVal(Frequency, DateDue) {
         if (month <= 3) {
             value = "Q1";
         }
-        else if (mont <= 6) {
+        else if (month <= 6) {
             value = "Q2";
         }
-        else if (mont <= 9) {
+        else if (month <= 9) {
             value = "Q3";
         }
-        else if (mont <= 12) {
+        else if (month <= 12) {
             value = "Q4";
         }
 

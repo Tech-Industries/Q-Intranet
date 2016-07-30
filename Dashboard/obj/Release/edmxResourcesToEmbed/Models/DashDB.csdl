@@ -50,7 +50,6 @@
     </AssociationSet>
     <EntitySet Name="DeliverableComments" EntityType="DashboardModel.DeliverableComment" />
     <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
-    <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
     <EntitySet Name="ProjectTasks" EntityType="DashboardModel.ProjectTask" />
     <EntitySet Name="ProjectAssignees" EntityType="DashboardModel.ProjectAssignee" />
     <EntitySet Name="Projects" EntityType="DashboardModel.Project" />
@@ -95,6 +94,7 @@
     <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
     <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
     <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
+    <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -323,23 +323,6 @@
     <Property Name="DateDue" Precision="0" Type="DateTime" />
     <Property Name="DateCompleted" Precision="3" Type="DateTime" />
     <Property Name="Notes" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
-  </EntityType>
-  <EntityType Name="ReviewablesByUser">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="DelID" />
-      <PropertyRef Name="DelDetID" />
-    </Key>
-    <Property Name="ID" Nullable="false" Type="Int64" />
-    <Property Name="DelID" Nullable="false" Type="Int32" />
-    <Property Name="DelDetID" Nullable="false" Type="Int32" />
-    <Property Name="Name" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Description" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Owner" MaxLength="61" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="DateDue" Precision="3" Type="DateTime" />
-    <Property Name="DateCompleted" Precision="3" Type="DateTime" />
-    <Property Name="TimeReviewed" Precision="3" Type="DateTime" />
-    <Property Name="UserID" Type="Int32" />
   </EntityType>
   <EntityType Name="ProjectTask">
     <Key>
@@ -945,5 +928,23 @@
     <Property Name="DateIssued" Type="DateTime" Precision="3" />
     <Property Name="DateReturned" Type="DateTime" Precision="3" />
     <Property Name="JobID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ReviewablesByUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelID" />
+      <PropertyRef Name="DelDetID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="DelID" Type="Int32" Nullable="false" />
+    <Property Name="DelDetID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Owner" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+    <Property Name="Frequency" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateDue" Type="DateTime" Precision="3" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+    <Property Name="TimeReviewed" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int32" />
   </EntityType>
 </Schema>

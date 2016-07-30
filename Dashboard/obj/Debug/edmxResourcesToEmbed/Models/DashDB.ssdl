@@ -259,26 +259,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
     <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ProductLineTemp">
-          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="LINE" Type="char" MaxLength="3" />
-          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
-          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
-          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
-          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
-          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
-          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
-          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
-          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
-        </EntityType>-->
   <EntityType Name="ProjectAssignees">
     <Key>
       <PropertyRef Name="ID" />
@@ -800,6 +780,7 @@ warning 6002: The table/view 'Dashboard.dbo.ReviewablesByUser' does not have a p
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Description" Type="nvarchar" MaxLength="300" />
     <Property Name="Owner" Type="nvarchar" MaxLength="61" />
+    <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
     <Property Name="DateDue" Type="datetime" />
     <Property Name="DateCompleted" Type="datetime" />
     <Property Name="TimeReviewed" Type="datetime" />
@@ -1178,6 +1159,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [ReviewablesByUser].[Name] AS [Name], 
     [ReviewablesByUser].[Description] AS [Description], 
     [ReviewablesByUser].[Owner] AS [Owner], 
+    [ReviewablesByUser].[Frequency] AS [Frequency], 
     [ReviewablesByUser].[DateDue] AS [DateDue], 
     [ReviewablesByUser].[DateCompleted] AS [DateCompleted], 
     [ReviewablesByUser].[TimeReviewed] AS [TimeReviewed], 

@@ -149,8 +149,8 @@
                 </div>
                 <div style="height: 150px;">
                     <div class="full-height-scroll" data-bind="if: UserAccess">
-                        <div class="col-md-12" data-bind="foreach: DDReviewers()">
-                            <h3 data-bind="attr: {UserID: $data.UserID}, css: $data.TimeReviewed != '' ? 'rev' : 'un-rev'"><span data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small data-bind="text: $data.TimeReviewed"></small> <span class="pull-right" data-bind="if: @ViewBag.UID == $root.Owner()|| @ViewBag.RelPer == 3"><i class="fa fa-close hover-rem remove-reviewer" data-bind="attr: { id: 'remove-reviewer-'+$data.ID}"></i></span><span data-bind="if: $data.TimeReviewed == '' && ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3) && $root.DDComplete()"><button type="button" class="btn btn-xs btn-primary btn-sign-review pull-right" data-bind="attr: {UserID: $data.UserID}">Sign-Off</button></span></h3>
+                        <div class="col-md-12" data-bind="foreach: DDReviewers()" style="padding-bottom: 20px;">
+                            <h3 data-bind="attr: {UserID: $data.UserID}, css: $data.TimeReviewed != '' ? 'rev' : 'un-rev'"><span data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small data-bind="text: $data.TimeReviewed"></small> <span class="pull-right" data-bind="if: @ViewBag.UID == $root.Owner()|| @ViewBag.RelPer == 3"><i class="fa fa-close hover-rem remove-reviewer" data-bind="attr: { id: 'remove-reviewer-'+$data.ID}"></i></span><span data-bind="if: $data.TimeReviewed == '' && ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3) && $root.DDComplete()"><button type="button" class="btn btn-xs btn-primary btn-sign-review pull-right"  data-bind="attr: {UserID: $data.UserID}">Sign-Off</button></span></h3>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                     <div class="col-md-8">
                         <div id="del-comments-section" class="" style="height: 300px">
                             <div class="full-height-scroll" data-bind="if: UserAccess">
-                                <div data-bind="if: Comments().length < 1"><h3>No Comments Yet.</h3></div>
+                                <div data-bind="if: Comments().length <1"><h3>No Comments Yet.</h3></div>
                                 <div data-bind="foreach: Comments">
                                     <div class="row comment-item" data-bind="attr: {commentid: $data.ID, userid: $data.UserID}">
                                         <div class="col-md-12">
@@ -192,7 +192,7 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-3 pull-right">
-                                    <button type="button" id="btn-submit-comment" class="btn btn-primary pull-right">Submit</button>
+                                    <button type="button" id="btn-submit-comment" class="btn btn-primary pull-right">Submit Comment</button>
                                 </div>
                             </div>
                         </form>

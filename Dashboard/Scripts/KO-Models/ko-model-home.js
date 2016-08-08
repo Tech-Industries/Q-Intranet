@@ -82,11 +82,11 @@
             var month = dateNow.getMonth() + 1;
             var day = dateNow.getDate();
 
-            if (parseInt(Year) == year) {
+            if (parseInt(Year) === year) {
                 if (parseInt(Month) < month) {
                     data.SalesShouldBePerc = 100;
                 }
-                else if (parseInt(Month) == month) {
+                else if (parseInt(Month) === month) {
                     data.SalesShouldBePerc = ((SalesGoalIncr[day - 1] / data.CWOGoal) * 100).toFixed(0);
                 }
                 else {
@@ -111,7 +111,7 @@
                 data.CwoF = formatMoney(data.Cwo);
                 data.ScrapF = formatMoney(data.Scrap);
                 data.ScrapGoalF = formatMoney(data.ScrapGoal);
-
+                data.OvertimeF = formatMoney(data.Overtime);
                 data.MarginPctF = formatPercent(data.MarginPct);
                 data.ScrapAsPercentF = formatPercent(data.ScrapAsPercent);
                 data.ScrapAsPercent = data.ScrapAsPercent.toFixed(0);
@@ -177,7 +177,7 @@
             i = 0;
             while (incr <= Range) {
                 if (i < data.length) {
-                    if (data[i].Month == check) {
+                    if (data[i].Month === check) {
                         deliveryRates.push(data[i].OnTimePercent);
                         i++;
                     }
@@ -205,7 +205,7 @@
         nameContain = $("#plantSelect").val();
         var year = $("#periodSelect").val().split('-')[0];
         var month = $("#periodSelect").val().split('-')[1];
-        if (nameContain == null) {
+        if (nameContain === null) {
             nameContain = "All";
         }
         var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "Sales", nameContain: nameContain, year: year, month: month } });
@@ -252,13 +252,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm == month && dayIncr < dd - 1) {
+                if (mm === month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm == month && dayIncr > dd - 1) {
+                else if (mm === month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm != month) {
+                if (mm !== month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
 
@@ -283,7 +283,7 @@
         nameContain = $("#plantSelect").val();
         var year = $("#periodSelect").val().split('-')[0];
         var month = $("#periodSelect").val().split('-')[1];
-        if (nameContain == null) {
+        if (nameContain === null) {
             nameContain = "All";
         }
         var load = $.ajax({ type: "GET", url: qualityAPI, cache: false, data: { fType: 'MTDChart', nameContain: nameContain, year: year, month: month } });
@@ -326,13 +326,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm == month && dayIncr < dd - 1) {
+                if (mm === month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm == month && dayIncr > dd - 1) {
+                else if (mm === month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm != month) {
+                if (mm !== month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
             }
@@ -407,10 +407,10 @@
         year = data.split(' ')[0];
         month = data.split(' ')[1];
         day = data.split(' ')[2];
-        if (type == 'sales') {
+        if (type === 'sales') {
             self.loadSelectDaySales(year, month, day);
         }
-        else if (type == 'scrap') {
+        else if (type === 'scrap') {
             self.loadSelectDayScrap(year, month, day);
         }
     }
@@ -419,7 +419,8 @@
 
         if (parseInt(day) < 10) { day = "0" + parseInt(day); }
         nameContain = $("#plantSelect").val();
-        if (day == '') {
+        
+        if (day === '') {
             var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "MonthSnapShot", nameContain: nameContain, year: year, month: month, day: day } });
         }
         else {
@@ -457,14 +458,14 @@
             self.SelectedDayMargAccum(formatMoney(margAccum));
             self.SelectedDayMargPerc(formatPercent((margAccum / accum) * 100));
             self.SelectedDaySales(tempArray);
-            if (day == '') {
+            if (day === '') {
                 self.SelectedDay(year + "-" + month);
             }
             else {
                 self.SelectedDay(year + "-" + month + "-" + day);
             }
 
-            if (self.SelectedDaySalesAccum() != '$0.00') {
+            if (self.SelectedDaySalesAccum() !== '$0.00') {
 
                 $('.dtSalesDetail').DataTable().clear();
                 $('.dtSalesDetailSmall').DataTable().clear();
@@ -528,7 +529,7 @@
 
         if (parseInt(day) < 10) { day = "0" + parseInt(day); }
         nameContain = $("#plantSelect").val();
-        if (day == '') {
+        if (day === '') {
             var load = $.ajax({ type: "GET", url: qualityAPI, cache: false, data: { fType: "MonthSnapShot", nameContain: nameContain, year: year, month: month, day: day } });
         }
         else {
@@ -562,7 +563,7 @@
 
 
 
-            if (self.SelectedDayScrapAccum() != '$0.00') {
+            if (self.SelectedDayScrapAccum() !== '$0.00') {
 
                 $('.dtScrapDetail').DataTable().clear();
 
@@ -607,7 +608,7 @@
         nameContain = $("#plantSelect").val();
         var year = $("#periodSelect").val().split('-')[0];
         var month = $("#periodSelect").val().split('-')[1];
-        if (nameContain == null) {
+        if (nameContain === null) {
             nameContain = "All";
         }
         var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "CWO", nameContain: nameContain, year: year, month: month } });
@@ -650,13 +651,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm == month && dayIncr < dd - 1) {
+                if (mm === month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm == month && dayIncr > dd - 1) {
+                else if (mm === month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm != month) {
+                if (mm !== month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
 
@@ -709,7 +710,7 @@
                     Amount: item.Amount
                 };
             });
-            if (array.length != 1) {
+            if (array.length !== 1) {
                 self.OTMTD("$0.00");
             }
             else {
@@ -729,7 +730,7 @@
         self.loadOnTimeDeliveryTrend();
         self.loadCWO();
         //self.loadSalesGoals();        
-        self.loadOTMTD();
+        //self.loadOTMTD();
 
         //$('.dtSalesDetail').dataTable().fnClearTable();
     }

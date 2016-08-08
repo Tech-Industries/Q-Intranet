@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
 using System.Web;
+using Dashboard.Helpers;
 
 namespace Dashboard.APIControllers
 {
@@ -31,7 +32,14 @@ namespace Dashboard.APIControllers
             var now = DateTime.Now;
             l.DateCreated = now;
             db.Logs.Add(l);
+
+
             db.SaveChangesAsync();
+            //if (l.Action == "Add-Comment" && l.Reference == "DeliverableDetail")
+            //{
+                
+            //}
+
         }
 
         

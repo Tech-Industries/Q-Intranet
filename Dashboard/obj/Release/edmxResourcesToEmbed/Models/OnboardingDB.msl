@@ -71,6 +71,7 @@
     <EntitySetMapping Name="OnBoardTasks">
       <EntityTypeMapping TypeName="OnBoardingModel.OnBoardTask">
         <MappingFragment StoreEntitySet="OnBoardTasks">
+          <ScalarProperty Name="RecoveryDate" ColumnName="RecoveryDate" />
           <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
           <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
           <ScalarProperty Name="Task" ColumnName="Task" />
@@ -190,6 +191,19 @@
           <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
           <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AvailPlanJobs">
+      <EntityTypeMapping TypeName="OnBoardingModel.AvailPlanJob">
+        <MappingFragment StoreEntitySet="AvailPlanJobs">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

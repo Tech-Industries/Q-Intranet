@@ -305,7 +305,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Day" Type="varchar" MaxLength="2" />
     <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
     <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="SalesMonthlyByCompany">
     <Key>
@@ -315,7 +315,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="int" />
     <Property Name="Month" Type="int" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="SalesStage">
     <Key>
@@ -346,7 +346,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
     <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
     <Property Name="OnTime" Type="bit" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapDailyByPlant">
     <Key>
@@ -358,7 +358,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapMonthlyByPlant">
     <Key>
@@ -369,7 +369,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapStage">
     <Key>
@@ -391,7 +391,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ShippingPlanAdjShipDates">
     <Key>
@@ -633,6 +633,7 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUp' does not have a p
     <Property Name="DaysInMonth" Type="int" />
     <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
     <Property Name="CWOGoal" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="Overtime" Type="numeric" Precision="38" Scale="6" />
     <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
     <Property Name="ScrapGoal" Type="numeric" Precision="16" Scale="5" />
     <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
@@ -662,6 +663,7 @@ warning 6002: The table/view 'Dashboard.dbo.FlashReportRollUpAll' does not have 
     <Property Name="DaysInMonth" Type="int" />
     <Property Name="Cwo" Type="numeric" Precision="38" Scale="6" />
     <Property Name="CWOGoal" Type="numeric" Precision="38" Scale="2" />
+    <Property Name="Overtime" Type="numeric" Precision="38" Scale="6" />
     <Property Name="Scrap" Type="numeric" Precision="38" Scale="2" />
     <Property Name="ScrapGoal" Type="numeric" Precision="38" Scale="5" />
     <Property Name="ScrapAsPercent" Type="numeric" Precision="38" Scale="6" />
@@ -1042,6 +1044,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [FlashReportRollUp].[DaysInMonth] AS [DaysInMonth], 
     [FlashReportRollUp].[Cwo] AS [Cwo], 
     [FlashReportRollUp].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUp].[Overtime] AS [Overtime], 
     [FlashReportRollUp].[Scrap] AS [Scrap], 
     [FlashReportRollUp].[ScrapGoal] AS [ScrapGoal], 
     [FlashReportRollUp].[ScrapAsPercent] AS [ScrapAsPercent], 
@@ -1066,6 +1069,7 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [FlashReportRollUpAll].[DaysInMonth] AS [DaysInMonth], 
     [FlashReportRollUpAll].[Cwo] AS [Cwo], 
     [FlashReportRollUpAll].[CWOGoal] AS [CWOGoal], 
+    [FlashReportRollUpAll].[Overtime] AS [Overtime], 
     [FlashReportRollUpAll].[Scrap] AS [Scrap], 
     [FlashReportRollUpAll].[ScrapGoal] AS [ScrapGoal], 
     [FlashReportRollUpAll].[ScrapAsPercent] AS [ScrapAsPercent], 

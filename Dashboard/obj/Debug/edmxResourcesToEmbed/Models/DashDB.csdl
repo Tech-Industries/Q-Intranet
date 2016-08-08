@@ -83,10 +83,8 @@
     <EntitySet Name="CWOStages" EntityType="DashboardModel.CWOStage" />
     <EntitySet Name="UCFAuditDetailLevels" EntityType="DashboardModel.UCFAuditDetailLevel" />
     <EntitySet Name="Logs" EntityType="DashboardModel.Log" />
-    <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
     <EntitySet Name="OnTimeDeliveryTrends" EntityType="DashboardModel.OnTimeDeliveryTrend" />
     <EntitySet Name="OnTimeDeliveryTrendInts" EntityType="DashboardModel.OnTimeDeliveryTrendInt" />
-    <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
     <EntitySet Name="ShipAdjDates" EntityType="DashboardModel.ShipAdjDate" />
     <EntitySet Name="ShippingPlanAdjShipDates" EntityType="DashboardModel.ShippingPlanAdjShipDate" />
     <EntitySet Name="DeliverableReviewers" EntityType="DashboardModel.DeliverableReviewer" />
@@ -95,6 +93,8 @@
     <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
     <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
     <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
+    <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
+    <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -763,31 +763,6 @@
     <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="DateCreated" Precision="3" Type="DateTime" />
   </EntityType>
-  <EntityType Name="FlashReportRollUp">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Nullable="false" Type="Int64" />
-    <Property Name="Year" MaxLength="4" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Month" MaxLength="2" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="DaysInMonth" Type="Int32" />
-    <Property Name="Cwo" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="CWOGoal" Precision="12" Scale="2" Type="Decimal" />
-    <Property Name="Scrap" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="ScrapGoal" Precision="16" Scale="5" Type="Decimal" />
-    <Property Name="ScrapAsPercent" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="PlantCode" MaxLength="4" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="UCFScore" Precision="4" Scale="2" Type="Decimal" />
-    <Property Name="UCFGoal" Precision="10" Scale="2" Type="Decimal" />
-    <Property Name="PlantID" Type="Int32" />
-    <Property Name="PDSales" Precision="18" Scale="2" Type="Decimal" />
-    <Property Name="Sales" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="Margins" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="MarginPct" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="OnTimePercent" Precision="5" Scale="2" Type="Decimal" />
-    <Property Name="OnTime" Precision="38" Scale="4" Type="Decimal" />
-    <Property Name="PastDue" Precision="38" Scale="4" Type="Decimal" />
-  </EntityType>
   <EntityType Name="OnTimeDeliveryTrend">
     <Key>
       <PropertyRef Name="ID" />
@@ -815,31 +790,6 @@
     <Property Name="OnTime" Precision="38" Scale="4" Type="Decimal" />
     <Property Name="PastDue" Nullable="false" Precision="38" Scale="4" Type="Decimal" />
     <Property Name="OnTimePercent" Nullable="false" Precision="5" Scale="2" Type="Decimal" />
-  </EntityType>
-  <EntityType Name="FlashReportRollUpAll">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="PlantCode" />
-      <PropertyRef Name="PlantID" />
-    </Key>
-    <Property Name="ID" Nullable="false" Type="Int64" />
-    <Property Name="Year" MaxLength="4" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Month" MaxLength="2" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="DaysInMonth" Type="Int32" />
-    <Property Name="Cwo" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="CWOGoal" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="Scrap" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="ScrapGoal" Precision="38" Scale="5" Type="Decimal" />
-    <Property Name="ScrapAsPercent" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="PlantCode" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" Type="String" />
-    <Property Name="UCFScore" Precision="5" Scale="2" Type="Decimal" />
-    <Property Name="UCFGoal" Precision="5" Scale="2" Type="Decimal" />
-    <Property Name="PlantID" Nullable="false" Type="Int32" />
-    <Property Name="PDSales" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="Sales" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="Margins" Precision="38" Scale="2" Type="Decimal" />
-    <Property Name="MarginPct" Precision="38" Scale="6" Type="Decimal" />
-    <Property Name="OnTimePercent" Precision="38" Scale="6" Type="Decimal" />
   </EntityType>
   <EntityType Name="ShipAdjDate">
     <Key>
@@ -946,5 +896,57 @@
     <Property Name="DateCompleted" Type="DateTime" Precision="3" />
     <Property Name="TimeReviewed" Type="DateTime" Precision="3" />
     <Property Name="UserID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FlashReportRollUp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="DaysInMonth" Type="Int32" />
+    <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Overtime" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="Decimal" Precision="16" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="UCFScore" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="UCFGoal" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="PDSales" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="OnTime" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="PastDue" Type="Decimal" Precision="38" Scale="4" />
+  </EntityType>
+  <EntityType Name="FlashReportRollUpAll">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="PlantCode" />
+      <PropertyRef Name="PlantID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="DaysInMonth" Type="Int32" />
+    <Property Name="Cwo" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="CWOGoal" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Overtime" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Scrap" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="ScrapGoal" Type="Decimal" Precision="38" Scale="5" />
+    <Property Name="ScrapAsPercent" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="PlantCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="UCFScore" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="UCFGoal" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PlantID" Type="Int32" Nullable="false" />
+    <Property Name="PDSales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Sales" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="OnTimePercent" Type="Decimal" Precision="38" Scale="6" />
   </EntityType>
 </Schema>

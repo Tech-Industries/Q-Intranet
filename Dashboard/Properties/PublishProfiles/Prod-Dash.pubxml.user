@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/Dashboard.dll">
-      <publishTime>07/29/2016 19:51:36</publishTime>
+      <publishTime>08/08/2016 08:29:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/16/2016 08:51:52</publishTime>
@@ -862,13 +862,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Models/DashDB.edmx.diagram">
-      <publishTime>07/28/2016 18:01:23</publishTime>
+      <publishTime>08/02/2016 09:54:18</publishTime>
     </File>
     <File Include="Models/NKCConnect.edmx.diagram">
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Models/OnboardingDB.edmx.diagram">
-      <publishTime>07/29/2016 19:03:09</publishTime>
+      <publishTime>08/05/2016 16:16:56</publishTime>
     </File>
     <File Include="Models/PMMConnect.edmx.diagram">
       <publishTime>06/16/2016 08:51:47</publishTime>
@@ -991,22 +991,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2016 09:11:50</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-helpers.js">
-      <publishTime>07/29/2016 11:10:04</publishTime>
+      <publishTime>08/05/2016 14:35:27</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-bugs.js">
       <publishTime>07/29/2016 14:06:25</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-deliverables.js">
-      <publishTime>07/29/2016 15:12:51</publishTime>
+      <publishTime>08/04/2016 14:40:15</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-home.js">
-      <publishTime>06/20/2016 09:18:20</publishTime>
+      <publishTime>08/02/2016 11:08:28</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-machine-overview.js">
       <publishTime>07/29/2016 14:05:53</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-onboarding.js">
-      <publishTime>07/29/2016 19:41:46</publishTime>
+      <publishTime>08/08/2016 00:36:20</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-operations.js">
       <publishTime>07/29/2016 14:03:04</publishTime>
@@ -2305,10 +2305,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:48</publishTime>
     </File>
     <File Include="Views/Deliverables/_DeliverableDetail.cshtml">
-      <publishTime>07/22/2016 17:00:22</publishTime>
+      <publishTime>08/05/2016 10:16:29</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/29/2016 14:08:11</publishTime>
+      <publishTime>08/02/2016 09:52:32</publishTime>
     </File>
     <File Include="Views/Login/FirstTime.cshtml">
       <publishTime>06/16/2016 08:52:10</publishTime>
@@ -2320,7 +2320,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2016 11:32:13</publishTime>
     </File>
     <File Include="Views/Onboarding/Index.cshtml">
-      <publishTime>07/29/2016 19:42:47</publishTime>
+      <publishTime>08/07/2016 21:31:13</publishTime>
     </File>
     <File Include="Views/Operations/ShippingPlan.cshtml">
       <publishTime>07/18/2016 11:33:32</publishTime>

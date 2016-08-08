@@ -78,10 +78,8 @@ namespace Dashboard.Models
         public virtual DbSet<CWOStage> CWOStages { get; set; }
         public virtual DbSet<UCFAuditDetailLevel> UCFAuditDetailLevels { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
         public virtual DbSet<OnTimeDeliveryTrend> OnTimeDeliveryTrends { get; set; }
         public virtual DbSet<OnTimeDeliveryTrendInt> OnTimeDeliveryTrendInts { get; set; }
-        public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
         public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
         public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
         public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
@@ -90,5 +88,7 @@ namespace Dashboard.Models
         public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
         public virtual DbSet<StagingItem> StagingItems { get; set; }
         public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
+        public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
+        public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
     }
 }

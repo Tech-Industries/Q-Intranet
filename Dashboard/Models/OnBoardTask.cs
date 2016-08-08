@@ -37,5 +37,6 @@ namespace Dashboard.Models
         public string CompletedBy { get; set; }
         public string CurrentStatus { get; set; }
         public string CompletionStatus { get; set; }
+        public Nullable<System.DateTime> RecoveryDate { get; set; }
     }
 }

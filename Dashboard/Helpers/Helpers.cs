@@ -12,6 +12,8 @@ using System.Web.Http.Description;
 using Dashboard.Models;
 using Dashboard.ViewModels;
 using Dashboard.APIControllers;
+using System.Net.Mail;
+using System.Text;
 
 namespace Dashboard.Helpers
 {
@@ -30,6 +32,35 @@ namespace Dashboard.Helpers
             l.DateCreated = DateTime.Now;
             LogController lc = new LogController();
             lc.Post(l);
+        }
+
+        public static void sendEmail(string to, string subject, string body)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Host = "172.31.0.11";
+            client.Port = 366;
+            client.EnableSsl = false;
+            client.Timeout = 20000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = true;
+
+            MailMessage mm = new MailMessage("QAutoMailer@ti-kc.com", to);
+
+
+            mm.Subject = subject;
+            mm.Body = body;
+
+
+
+
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mm.IsBodyHtml = true;
+            client.Send(mm);
+            mm.Dispose();
+            client.Dispose();
+            
+
         }
     }
 }

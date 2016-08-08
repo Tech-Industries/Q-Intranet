@@ -22,7 +22,7 @@
                     <div style="height: 800px; white-space: nowrap;">
                         <div class="full-height-scroll">
                             <div data-bind="foreach: {data: OnboardingParts(), as: 'part' }">
-                                <div class="row onboard-part-item" >
+                                <div class="row onboard-part-item">
                                     <div class="col-md-2">
                                         <div style="float: left">
                                             <div style="width: 120px; height: 20px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
@@ -32,7 +32,8 @@
                                                 <h5 data-bind="text: part.PartDescription"></h5>
                                             </div>
                                             <div style="width: 120px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
-                                                <span data-bind="text: part.FirstArticleJobNumber"></span>
+                                                <span data-bind="if: part.FirstArticleJobNumber == ''"><button class="btn btn-danger btn-xs btn-assign-job" data-bind="attr:{partid: part.RecordNumber, partnumber: part.PartNumber}">Assign Job</button></span>
+                                                <span data-bine="if: part.FirstArticleJobNumber != ''"><span data-bind="text: part.FirstArticleJobNumber"></span></span>
                                             </div>
                                         </div>
                                         <div style="width: 60px; height: 80px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;float: left; padding: 0 5px;">
@@ -102,7 +103,7 @@
                         <br />
                         <div class="input-group">
                             <span class="input-group-addon">Delegate</span>
-                            <select class="form-control" id="selectedDelegate">
+                            <select class="form-control" id="selectedDelegate" data-bind="enable: @ViewBag.RelPer == 18">
                                 <optgroup data-bind="foreach: Users()">
                                     <option data-bind="value: $data.ID, text: $data.FirstName+' '+$data.LastName"></option>
                                 </optgroup>
@@ -112,10 +113,10 @@
                         <button class="btn btn-primary" id="saveChanges">Save</button>
                     </div>
                     <div class="col-md-6" style="border-left: 1px solid black">
-                        <div class="row comment-section">
+                        <div class="row">
                             <div class="col-md-8">
                                 <div id="del-comments-section" class="" style="height: 300px; overflow:auto;">
-                                    <div  @*data-bind="if: UserAccess"*@>
+                                    <div @*data-bind="if: UserAccess"*@>
                                         <div data-bind="if: Comments().length < 1"><h3>No Comments Yet.</h3></div>
                                         <div data-bind="foreach: Comments">
                                             <div class="row comment-item" data-bind="attr: {commentid: $data.ID, userid: $data.UserID}">
@@ -155,7 +156,7 @@
                     </div>
                 </div>
 
-                  
+
             </div>
 
 
@@ -164,6 +165,28 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="menu-avail-jobs" hidden>
+    <h3>Select a Job to assign to <span id="AssigningPartNumber">X</span></h3>
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>Job</th>
+                <th>Suffix</th>
+                <th>DateStart</th>
+                <th>Part</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: AvailJobs()">
+            <tr class="avail-job-item" data-bind="attr: {jobsuf: $data.Job+$data.Suffix}">
+                <td data-bind="text: $data.Job"></td>
+                <td data-bind="text: $data.Suffix"></td>
+                <td data-bind="text: $data.Date_Start"></td>
+                <td data-bind="text: $data.Part"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="hidden">
@@ -182,7 +205,7 @@
         var vm = null;
 
         $(function () {
-
+            var AssignBtn = null;
 
             vm = new OnboardingViewModel();
             ko.applyBindings(vm);
@@ -216,7 +239,7 @@
             });
 
             $(document).on('keydown', '#selectedPerct', function (e) {
-                
+
                 // Allow: backspace, delete, tab, escape, enter and .
                 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
                     // Allow: Ctrl+A
@@ -234,22 +257,63 @@
                 if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                     e.preventDefault();
                 }
-                
+
             });
             $(document).on('keyup', '#selectedPerct', function (e) {
                 if (parseInt($(this).val()) > 100) {
                     $(this).val($(this).val().substr(0, 2));
-                    
+
                 }
             });
 
 
 
+            $(document).on('click', '.btn-assign-job', function (e) {
+                AssignBtn = $(this);
+                var PartID = $(this).attr('partid');
+                var PartNumber = $(this).attr('partnumber');
+                $('#AssigningPartNumber').html(PartNumber);
+                $('#AssigningPartNumber').attr('PartID', PartID);
+                console.log(PartID);
+                vm.LoadAvailJobs(PartID);
+                $('#menu-avail-jobs').hide('slow');
+                $('#menu-avail-jobs').css({ 'top': e.pageY, 'left': e.pageX, 'position': 'absolute', 'border': '1px solid black', 'padding': '5px', 'width': '600px', 'background-color': '#f3f3f3' });
+                $('#menu-avail-jobs').show('slow');
+            });
+
+            $(document).on('dblclick', '.avail-job-item', function () {
+                var Job = $(this).attr('jobsuf');
+                var PartID = $('#AssigningPartNumber').attr('partID');
+                swal({
+                    title: "Assign?",
+                    text: "Are you sure you want to assign this job?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "Yes!",
+                    closeOnConfirm: false
+                },
+                function () {
+                    vm.AssignJob(PartID, Job);
+                    AssignBtn.parent().html(Job);
+                    swal({
+                        title: "Assigned!",
+                        type: "success",
+                        timer: 1000
+                    });
+                });
+            });
 
 
+            $(document).mouseup(function (e) {
+                var container = $("#menu-avail-jobs");
 
-
-
+                if (!container.is(e.target) // if the target of the click isn't the container...
+                    && container.has(e.target).length === 0) // ... nor a descendant of the container
+                {
+                    container.hide();
+                }
+            });
 
 
 

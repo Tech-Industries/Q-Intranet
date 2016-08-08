@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OnBoardingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvailPlanJobs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Job" Type="char" MaxLength="6" />
+          <Property Name="Suffix" Type="char" MaxLength="3" />
+          <Property Name="Date_Start" Type="date" />
+          <Property Name="Part" Type="char" MaxLength="20" />
+          <Property Name="Customer" Type="char" MaxLength="6" />
+          <Property Name="OnBoardPart" Type="bigint" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="RecordNumber" />
@@ -96,6 +108,7 @@
           <Property Name="CompletedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="CompletionStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="RecoveryDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Parameters">
           <Key>
@@ -190,6 +203,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="ResponsibleUser" Type="int" />
         </EntityType>
         <EntityContainer Name="OnBoardingModelStoreContainer">
+          <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OnBoardingPartsToAdd" EntityType="Self.OnBoardingPartsToAdd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardParts" Schema="dbo" store:Type="Tables" />
@@ -303,6 +317,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompletionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecoveryDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Parameter">
           <Key>
@@ -396,6 +411,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
           <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
           <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+          <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
         </EntityContainer>
         <EntityType Name="AuthorizedOnBoardPart">
           <Key>
@@ -405,6 +421,18 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="OnBoardPart" Type="Int64" />
           <Property Name="DelegatedTo" Type="Int32" />
           <Property Name="ResponsibleUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AvailPlanJob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Date_Start" Type="DateTime" Precision="0" />
+          <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="OnBoardPart" Type="Int64" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -482,6 +510,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <EntitySetMapping Name="OnBoardTasks">
             <EntityTypeMapping TypeName="OnBoardingModel.OnBoardTask">
               <MappingFragment StoreEntitySet="OnBoardTasks">
+                <ScalarProperty Name="RecoveryDate" ColumnName="RecoveryDate" />
                 <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
                 <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
                 <ScalarProperty Name="Task" ColumnName="Task" />
@@ -601,6 +630,19 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
                 <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
                 <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AvailPlanJobs">
+            <EntityTypeMapping TypeName="OnBoardingModel.AvailPlanJob">
+              <MappingFragment StoreEntitySet="AvailPlanJobs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

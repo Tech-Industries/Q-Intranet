@@ -320,7 +320,9 @@
                 arr0.forEach(function (i) {
                     arr1.forEach(function (h) {
                         if (i.UserID == h.UserID) {
-                            h.TimeReviewed = formatSqlDateTime(h.TimeReviewed);
+                            if (h.TimeReviewed != '') {
+                                h.TimeReviewed = formatSqlDateTime(h.TimeReviewed);
+                            }
                             exists = true;
                         }
                     });

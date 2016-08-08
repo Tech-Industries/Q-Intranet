@@ -36,7 +36,34 @@ namespace Dashboard.APIControllers
 
             var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
             var h = new Helpers.Helpers();
-            h.NewLogEntry(UID, com.Type, com.TypeID, "Add-Comment", "added a comment: '"+com.CommentText+"'");
+            h.NewLogEntry(UID, com.Type, com.TypeID, "Add-Comment", "added a comment: '" + com.CommentText + "'");
+            if (com.Type == "DeliverableDetail")
+            {
+                User UserFrom = new User();
+                try
+                {
+                    UserFrom = db.Users.Where(x => x.ID == UID).First();
+                }
+                catch
+                {
+                    UserFrom = db.Users.Where(x => x.ID == UID).First();
+                }
+                DeliverableDetail DelDet = db.DeliverableDetails.Where(x => x.ID == com.TypeID).First();
+                Deliverable Del = db.Deliverables.Where(x => x.ID == DelDet.DelID).First();
+                User UserTo = db.Users.Where(x => x.ID == Del.UserID).First();
+                var Date = DelDet.DateDue.ToString().Split(' ')[0];
+                var subject = "Somebody has commented on your Deliverable";
+
+                var body = @"<center><h2>" + UserFrom.FirstName + " " + UserFrom.LastName + " Has commented on your Deliverable</h2></center>";
+                body += @"<center><h3><a href='q.ti-kc.com'>Visit Q.</a></h3></center>";
+                body += @"<br /><br /><br />";
+                body += @"<center><h2>Deliverable: " + Del.Name + "</h2></center>";
+                body += @"<center><h2>Due Date: " + Date + "</h2></center>";
+                if (UserFrom.ID != UserTo.ID)
+                {
+                    Helpers.Helpers.sendEmail(UserTo.Email, subject, body);
+                }
+            }
 
             return Ok(CommentsViewModel.MapFrom(com));
         }
@@ -63,7 +90,8 @@ namespace Dashboard.APIControllers
             upCom.TimeSubmitted = com.TimeSubmitted;
             var lodDescription = "updated a comment's text from '" + upCom.CommentText + "' to '" + com.CommentText + "'";
             var update = false;
-            if (upCom.CommentText != com.CommentText) {
+            if (upCom.CommentText != com.CommentText)
+            {
                 update = true;
             }
 
@@ -83,7 +111,7 @@ namespace Dashboard.APIControllers
             }
 
 
-            
+
 
             //db.Entry(deldet).State = EntityState.Modified;
             //System.Diagnostics.Debug.WriteLine("Modified");
@@ -99,7 +127,8 @@ namespace Dashboard.APIControllers
                     System.Diagnostics.Debug.WriteLine("Catch If");
                     return NotFound();
                 }
-                else {
+                else
+                {
                     System.Diagnostics.Debug.WriteLine("Catch If Else");
                     throw;
                 }
@@ -128,7 +157,7 @@ namespace Dashboard.APIControllers
 
                 var UID = int.Parse(HttpContext.Current.Request.Cookies["authToken"].Value);
                 var h = new Helpers.Helpers();
-                h.NewLogEntry(UID, c.Type, c.TypeID, "Delete-Comment", "deleted comment: "+c.CommentText +".");
+                h.NewLogEntry(UID, c.Type, c.TypeID, "Delete-Comment", "deleted comment: " + c.CommentText + ".");
                 return Ok(CommentsViewModel.MapFrom(c));
             }
 

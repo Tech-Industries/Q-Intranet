@@ -91,6 +91,7 @@
     <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CompletionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RecoveryDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Parameter">
     <Key>
@@ -184,6 +185,7 @@
     <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
     <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
     <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+    <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
   </EntityContainer>
   <EntityType Name="AuthorizedOnBoardPart">
     <Key>
@@ -193,5 +195,17 @@
     <Property Name="OnBoardPart" Type="Int64" />
     <Property Name="DelegatedTo" Type="Int32" />
     <Property Name="ResponsibleUser" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AvailPlanJob">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="Date_Start" Type="DateTime" Precision="0" />
+    <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="OnBoardPart" Type="Int64" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
 </Schema>

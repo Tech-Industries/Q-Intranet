@@ -168,7 +168,16 @@ function formatSqlDateTime(ts) {
         return null;
     }
     else {
-        return ts.split("T")[0] + " @ " + ts.split("T")[1]
+        return ts.split("T")[0] + " @ " + ts.split("T")[1];
+    }
+}
+
+function formatSqlDateTimeToDate(ts) {
+    if (ts == null) {
+        return null;
+    }
+    else {
+        return ts.split("T")[0];
     }
 }
 
@@ -180,6 +189,17 @@ function formatSqlDateTimeToShortDate(ts) {
     return m + "/" + d + "/" + y;
 
 }
+
+function formatSqlDateTimeToFullDate(ts) {
+    var date = ts.split("T")[0];
+    var y = date.substring(0, 4);
+    var m = date.substring(5, 7);
+    var d = date.substring(8, 10);
+    return m + "/" + d + "/" + y;
+
+}
+
+
 
 
 function DateNowFormatted() {
@@ -222,8 +242,8 @@ function getLongDate(date) {
 
     dayOfWeek = d.getDay();
     dayName = getDayName(dayOfWeek);
-    return newTime + ' ' + dayName +' ' + shortMonth + ' ' + day + ', ' + year;
-    
+    return newTime + ' ' + dayName + ' ' + shortMonth + ' ' + day + ', ' + year;
+
 
 }
 
@@ -275,6 +295,27 @@ function incrDay(year, month, day, norp) {
         month = checkZero(month);
         return year + ' ' + month + ' ' + day;
     }
+}
+
+function addDays(year, month, day, incr) {
+    year = parseInt(year);
+    month = parseInt(month);
+    day = parseInt(day);
+    var dim = getDaysInMonth(month, year);
+
+    day += incr;
+    if (day > dim) {
+        day -= dim;
+        month += 1;
+        if (month > 12) {
+            month -= 12;
+            year += 1;
+        }
+
+    }
+    day = checkZero(day);
+    month = checkZero(month);
+    return year + '-' + month + '-' + day+'T00:00:00';
 }
 
 //  _____        _           _____      _        _                 _ 
@@ -413,7 +454,7 @@ function AMPMConversion(time) {
             hour -= 12;
         }
     }
-    return hour.toString() + ':' + minute+' '+ap;
+    return hour.toString() + ':' + minute + ' ' + ap;
 }
 //   _____                                     _       
 //  / ____|                                   | |      
@@ -444,7 +485,7 @@ function addComment(TypeID, UserID, Comment, Type, API, self) {
         item.LastName = $("#user-full-name").html().split(" ")[1];
         item.TimeSubmitted = formatSqlDateTime(item.TimeSubmitted);
         self.Comments.push(item);
-        addNotification(TypeID, Type+'CommentAdd', UserID);
+        addNotification(TypeID, Type + 'CommentAdd', UserID);
 
     });
 
@@ -506,7 +547,7 @@ function addNotification(TypeID, Type, UserID) {
 
 function addLogEntry(UserID, Reference, ReferenceID, Action, Description) {
     var logAPI = $("#LogsLink").attr('href');
-    var sendDataNot = "UserID=" + UserID + "&Reference=" + Reference + "&ReferenceID=" + ReferenceID + "&Action=" + Action + "&Description="+ Description +"&DateCreated=";
+    var sendDataNot = "UserID=" + UserID + "&Reference=" + Reference + "&ReferenceID=" + ReferenceID + "&Action=" + Action + "&Description=" + Description + "&DateCreated=";
     console.log(sendDataNot);
     var submit = $.ajax({ type: 'POST', url: logAPI, data: sendDataNot });
     submit.done(function (data) {

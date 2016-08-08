@@ -20,6 +20,7 @@ namespace Dashboard.Models
         public Nullable<int> DaysInMonth { get; set; }
         public Nullable<decimal> Cwo { get; set; }
         public Nullable<decimal> CWOGoal { get; set; }
+        public Nullable<decimal> Overtime { get; set; }
         public Nullable<decimal> Scrap { get; set; }
         public Nullable<decimal> ScrapGoal { get; set; }
         public Nullable<decimal> ScrapAsPercent { get; set; }

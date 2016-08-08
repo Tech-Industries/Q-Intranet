@@ -22,12 +22,23 @@ namespace Dashboard.APIControllers
     public class OnboardingController : ApiController
     {
         private OnBoardingEntities1 onbdb = new OnBoardingEntities1();
+        private DashboardEntities db = new DashboardEntities();
 
         [Route("api/v1/Onboarding/Authorized/{id:int}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAuthorizedParts(int id)
         {
-            var parts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == id).ToListAsync();
+            var RelPer = db.UserGroups.Where(x => x.UserID == id && x.GroupID == 18);
+            List< AuthorizedOnBoardPart> parts = new List<AuthorizedOnBoardPart>();
+            if (RelPer.Any())
+            {
+                parts = await onbdb.AuthorizedOnBoardParts.ToListAsync();
+            }
+            else
+            {
+                parts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == id).ToListAsync();
+            }
+            
             if (!parts.Any())
             {
                 return NotFound();
@@ -45,6 +56,38 @@ namespace Dashboard.APIControllers
                 return NotFound();
             }
             return (Ok(parts));
+        }
+
+        [Route("api/v1/Onboarding/{id:int}")]
+        [HttpPut]
+        public async Task<IHttpActionResult> PutPart(int id, OnBoardPart part)
+        {
+
+            var timeSubmitted = DateTime.Now;
+            var oldPart = await onbdb.OnBoardParts.FindAsync(id);
+
+            if (oldPart == null || part == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+
+                var entry = onbdb.Entry(oldPart);
+
+                oldPart.FirstArticleJobNumber = part.FirstArticleJobNumber;
+
+
+                //entry.State = EntityState.Modified;
+
+                await onbdb.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+
+            return Ok(oldPart);
         }
 
         [Route("api/v1/Onboarding/Tasks")]
@@ -85,7 +128,7 @@ namespace Dashboard.APIControllers
 
         [Route("api/v1/Onboarding/Tasks/{id:int}")]
         [HttpPut]
-        public async Task<IHttpActionResult> PutProject(int id, OnBoardTask task)
+        public async Task<IHttpActionResult> PutTask(int id, OnBoardTask task)
         {
 
             var timeSubmitted = DateTime.Now;
@@ -99,40 +142,22 @@ namespace Dashboard.APIControllers
             {
 
                 var entry = onbdb.Entry(oldTask);
+                if(oldTask.PercentComplete < 100 && task.PercentComplete == 100)
+                {
+                    oldTask.CompletedOn = timeSubmitted;
+                    oldTask.CompletedBy = task.CompletedBy;
+                }
+                else if(task.PercentComplete < 100)
+                {
+                    oldTask.CompletedOn = null;
+                    oldTask.CompletedBy = null;
+                }
 
                 oldTask.DelegatedTo = task.DelegatedTo;
                 oldTask.CurrentStatus = task.CurrentStatus;
                 oldTask.PercentComplete = Convert.ToDecimal(task.PercentComplete);
-                if(task.PercentComplete == 100)
-                {
-                    if (oldTask.CompletedOn == null)
-                    {
-                        oldTask.CompletedBy = task.CompletedBy;
-                        if (oldTask.DueBy >= timeSubmitted)
-                        {
-                            oldTask.CurrentStatus = "Complete";
-                        }
-                        else
-                        {
-                            oldTask.CurrentStatus = "Completed Late";
-                        }
-                        oldTask.CompletedOn = timeSubmitted;
-                    }
-                }
-                else
-                {
-                    if (oldTask.DueBy >= timeSubmitted)
-                    {
-                        oldTask.CurrentStatus = "Future";
-                    }
-                    else
-                    {
-                        oldTask.CurrentStatus = "Late";
-                    }
+                oldTask.DueBy = task.DueBy;
 
-                    oldTask.CompletedOn = null;
-                    oldTask.CompletedBy = null;
-                }
 
                 //entry.State = EntityState.Modified;
 
@@ -144,6 +169,18 @@ namespace Dashboard.APIControllers
             }
 
             return Ok(oldTask);
+        }
+
+        [Route("api/v1/Onboarding/{id:int}/AvailJobs")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAvailJobsByPartID(int id)
+        {
+            List<AvailPlanJob> Jobs = await onbdb.AvailPlanJobs.Where(x => x.OnBoardPart == id).OrderBy(o => o.Job).ToListAsync();
+            if (!Jobs.Any())
+            {
+                return NotFound();
+            }
+            return (Ok(Jobs));
         }
     }
 }

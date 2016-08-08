@@ -35,5 +35,6 @@ namespace Dashboard.Models
         public virtual DbSet<Z_OnBoardPartJobs> Z_OnBoardPartJobs { get; set; }
         public virtual DbSet<Z_OnBoardPartOSSPO> Z_OnBoardPartOSSPO { get; set; }
         public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
+        public virtual DbSet<AvailPlanJob> AvailPlanJobs { get; set; }
     }
 }

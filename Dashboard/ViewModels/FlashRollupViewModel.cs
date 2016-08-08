@@ -16,6 +16,7 @@ namespace Dashboard.ViewModels
         public int? DaysInMonth { get; set; }
         public decimal? Cwo { get; set; }
         public decimal? CWOGoal { get; set; }
+        public decimal? Overtime { get; set; }
         public decimal? Scrap { get; set; }
         public decimal? ScrapGoal { get; set; }
         public decimal? ScrapAsPercent { get; set; }
@@ -51,6 +52,7 @@ namespace Dashboard.ViewModels
                 DaysInMonth = f.DaysInMonth,
                 Cwo = f.Cwo,
                 CWOGoal = f.CWOGoal,
+                Overtime = f.Overtime,
                 Scrap = f.Scrap,
                 ScrapGoal = f.ScrapGoal,
                 ScrapAsPercent = f.ScrapAsPercent,

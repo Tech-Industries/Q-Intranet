@@ -725,32 +725,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FlashReportRollUps">
-      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
-        <MappingFragment StoreEntitySet="FlashReportRollUp">
-          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
-          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
-          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
-          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
-          <ScalarProperty Name="Margins" ColumnName="Margins" />
-          <ScalarProperty Name="Sales" ColumnName="Sales" />
-          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
-          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
-          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
-          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
-          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
-          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
-          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
-          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
-          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
-          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
-          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
-          <ScalarProperty Name="Month" ColumnName="Month" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OnTimeDeliveryTrends">
       <EntityTypeMapping TypeName="DashboardModel.OnTimeDeliveryTrend">
         <MappingFragment StoreEntitySet="OnTimeDeliveryTrend">
@@ -773,30 +747,6 @@
           <ScalarProperty Name="Month" ColumnName="Month" />
           <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="PlantID" ColumnName="PlantID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FlashReportRollUpAlls">
-      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUpAll">
-        <MappingFragment StoreEntitySet="FlashReportRollUpAll">
-          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
-          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
-          <ScalarProperty Name="Margins" ColumnName="Margins" />
-          <ScalarProperty Name="Sales" ColumnName="Sales" />
-          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
-          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
-          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
-          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
-          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
-          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
-          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
-          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
-          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
-          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
-          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
-          <ScalarProperty Name="Month" ColumnName="Month" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -909,6 +859,58 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
           <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUps">
+      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUp">
+        <MappingFragment StoreEntitySet="FlashReportRollUp">
+          <ScalarProperty Name="PastDue" ColumnName="PastDue" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="Overtime" ColumnName="Overtime" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashReportRollUpAlls">
+      <EntityTypeMapping TypeName="DashboardModel.FlashReportRollUpAll">
+        <MappingFragment StoreEntitySet="FlashReportRollUpAll">
+          <ScalarProperty Name="OnTimePercent" ColumnName="OnTimePercent" />
+          <ScalarProperty Name="MarginPct" ColumnName="MarginPct" />
+          <ScalarProperty Name="Margins" ColumnName="Margins" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="PDSales" ColumnName="PDSales" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="UCFGoal" ColumnName="UCFGoal" />
+          <ScalarProperty Name="UCFScore" ColumnName="UCFScore" />
+          <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+          <ScalarProperty Name="ScrapAsPercent" ColumnName="ScrapAsPercent" />
+          <ScalarProperty Name="ScrapGoal" ColumnName="ScrapGoal" />
+          <ScalarProperty Name="Scrap" ColumnName="Scrap" />
+          <ScalarProperty Name="Overtime" ColumnName="Overtime" />
+          <ScalarProperty Name="CWOGoal" ColumnName="CWOGoal" />
+          <ScalarProperty Name="Cwo" ColumnName="Cwo" />
+          <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

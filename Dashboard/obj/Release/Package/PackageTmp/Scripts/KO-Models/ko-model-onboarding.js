@@ -6,6 +6,7 @@
     var onboardingAPI = $("#OnboardingLink").attr('href');
 
     var CommentsAPI = $("#CommentsLink").attr('href');
+    var AssignBtn = null;
     self.Comments = ko.observableArray([]);
 
     self.isLoading = ko.observable();
@@ -21,6 +22,8 @@
     self.SelectedTask = ko.observable();
 
     self.SelectedTaskPure = ko.observable();
+
+    self.AvailJobs = ko.observableArray([]);
 
 
     self.loadUsers = function () {
@@ -60,12 +63,22 @@
 
 
     self.UpdateTasksForPart = function () {
+        var today = new Date();
+        var Year = today.getFullYear();
+        var Month = checkZero(today.getMonth() + 1);
+        var Day = checkZero(today.getDate());
+        var startDate = Year + '-' + Month + '-' + Day + 'T00:00:00';
+        var rangeDate = addDays(Year, Month, Day, 10);
+
         var part = self.SelectedPart();
         var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + part.RecordNumber + '/Tasks', cache: false });
         loadTasks.done(function (data1) {
             innerStart = data1.length;
             data1.forEach(function (ii) {
-                ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
+                if (ii.DueBy != null) {
+                    ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                }
             });
             var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber })[0];
             self.OnboardingTasks.remove(tasks);
@@ -77,6 +90,7 @@
 
     self.SaveChanges = function () {
         var update = self.SelectedTask();
+        update.CompletedBy = $('#layoutUserID').val();
 
         var save = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/Tasks/' + update.RecordNumber, data: update });
         save.done(function (data) {
@@ -92,13 +106,21 @@
         var tasks = [];
         var outer = 0;
         var inner = 0;
+        var today = new Date();
+
+        var Year = today.getFullYear();
+        var Month = checkZero(today.getMonth() + 1);
+        var Day = checkZero(today.getDate());
+        var startDate = Year + '-' + Month + '-' + Day + 'T00:00:00';
+        var rangeDate = addDays(Year, Month, Day, 10);
+
         self.OnboardingTasks([]);
         var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID });
         loadAuthParts.done(function (authParts) {
 
             var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
             load.success(function (data) {
-                
+
                 if ($('#RelPer').val() == 18) {
                     parts = data;
                 }
@@ -119,7 +141,12 @@
                     loadTasks.done(function (data1) {
                         innerStart = data1.length;
                         data1.forEach(function (ii) {
-                            ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                            ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
+
+
+                            if (ii.DueBy != null) {
+                                ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                            }
                         });
                         if (data1[10].TaskDescription != 'FAI Populated') {
                             data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
@@ -139,50 +166,97 @@
         });
     }
 
+    self.LoadAvailJobs = function (PartID) {
+        self.AvailJobs([]);
+        var load = $.ajax({ type: "GET", url: onboardingAPI + '/' + PartID + '/AvailJobs', cache: false });
+        load.done(function (data) {
+            self.AvailJobs(data);
+        });
+    }
 
+    self.AssignJob = function (PartID, Job) {
+        console.log(PartID + ' ' + Job);
 
-     //self.LoadOnboardingParts = function () {
-     //       var UserID = $('#layoutUserID').val();
-     //       self.isLoading(true)
-     //       var parts = [];
-     //       var tasks = [];
-     //       var outer = 0;
-     //       var inner = 0;
-     //       self.OnboardingTasks([]);
-        
-     //           var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
-     //           load.success(function (data) {
-     //               self.OnboardingParts(data);
-     //               outerStart = data.length;
-     //               data.forEach(function (i) {
-     //                   i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
-     //                   i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+        var update = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
+        update.FirstArticleJobNumber = Job;
 
-     //                   outer += 1;
-     //                   var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
-     //                   loadTasks.done(function (data1) {
-     //                       innerStart = data1.length;
-     //                       data1.forEach(function (ii) {
-     //                           ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
-     //                           ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
-     //                       });
-     //                       if (data1[10].TaskDescription != 'FAI Populated') {
-     //                           data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
-     //                       }
-     //                       self.OnboardingTasks.push(data1);
+        var updatePart = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/' + update.RecordNumber, data: update });
+        updatePart.done(function (data) {
 
-     //                       inner += 1;
-     //                       if (inner == outerStart) {
-     //                           self.isLoading(false)
-     //                       }
-     //                   });
-     //               });
-     //               self.OnboardingParts(data);
-     //           });
-     //           load.fail(function () {
-     //               console.log('test');
-     //           });
-     //       }
+        });
+    }
+
+    self.checkStatus = function (ii, startDate, rangeDate) {
+
+        if (ii.PercentComplete == 100) {
+            if (ii.CompletedOn > ii.DueBy) {
+                return 'Completed Late';
+            }
+            else {
+                return 'Complete';
+            }
+        }
+        else if (ii.PercentComplete > 0 && ii.PercentComplete < 100) {
+            return 'In Progress';
+        }
+        else if (ii.PercentComplete == 0) {
+
+            if (ii.DueBy > rangeDate) {
+                return 'Future';
+            }
+            else if (ii.DueBy >= startDate && ii.DueBy < rangeDate) {
+                console.log(ii.DueBy + ' --------- ' + startDate + ' --------- ' + rangeDate);
+                return 'Upcoming';
+            }
+            else if (ii.DueBy < startDate) {
+                return 'Late';
+            }
+        }
+
+    }
+
+    //self.LoadOnboardingParts = function () {
+    //       var UserID = $('#layoutUserID').val();
+    //       self.isLoading(true)
+    //       var parts = [];
+    //       var tasks = [];
+    //       var outer = 0;
+    //       var inner = 0;
+    //       self.OnboardingTasks([]);
+
+    //           var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
+    //           load.success(function (data) {
+    //               self.OnboardingParts(data);
+    //               outerStart = data.length;
+    //               data.forEach(function (i) {
+    //                   i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
+    //                   i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+
+    //                   outer += 1;
+    //                   var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
+    //                   loadTasks.done(function (data1) {
+    //                       innerStart = data1.length;
+    //                       data1.forEach(function (ii) {
+    //                           ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+    //                           ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
+    //                       });
+    //                       if (data1[10].TaskDescription != 'FAI Populated') {
+    //                           data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
+    //                       }
+    //                       self.OnboardingTasks.push(data1);
+
+    //                       inner += 1;
+    //                       if (inner == outerStart) {
+    //                           self.isLoading(false)
+    //                       }
+    //                   });
+    //               });
+    //               self.OnboardingParts(data);
+    //           });
+    //           load.fail(function () {
+    //               console.log('test');
+    //           });
+    //       }
 
 
     self.loadComments = function () {

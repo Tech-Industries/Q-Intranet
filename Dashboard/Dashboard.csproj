@@ -279,6 +279,9 @@
     <Compile Include="Models\AuthorizedOnBoardPart.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvailPlanJob.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bug.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>

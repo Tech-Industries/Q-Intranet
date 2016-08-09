@@ -10231,7 +10231,7 @@ body.md-skin {
 }
 .onboard-task-item{
     float: left;
-    width: 50px;
+    width: 60px;
     height: 80px;
     border: 1px solid #999999;
     overflow: hidden;
@@ -10266,7 +10266,7 @@ body.md-skin {
 
 .onboard-task-header{
     float: left;
-    width: 50px;
+    width: 60px;
     height: 80px;
     border: 1px solid #999999;
     overflow: hidden;

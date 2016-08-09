@@ -1362,6 +1362,12 @@
     <Content Include="Scripts\plugins\switchery\switchery.js" />
     <Content Include="Scripts\plugins\tinycon\tinycon.min.js" />
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
+    <Content Include="Scripts\plugins\typeahead\bloodhound.js" />
+    <Content Include="Scripts\plugins\typeahead\bloodhound.min.js" />
+    <Content Include="Scripts\plugins\typeahead\typeahead.bundle.js" />
+    <Content Include="Scripts\plugins\typeahead\typeahead.bundle.min.js" />
+    <Content Include="Scripts\plugins\typeahead\typeahead.jquery.js" />
+    <Content Include="Scripts\plugins\typeahead\typeahead.jquery.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
     <Content Include="Scripts\plugins\wow\wow.min.js" />

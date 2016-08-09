@@ -13,9 +13,15 @@
 
     self.Users = ko.observableArray([]);
     self.OnboardingParts = ko.observableArray([]);
+    self.UnfilteredParts = ko.observableArray([]);
     self.OnboardingTasks = ko.observableArray([]);
 
-    self.OnboardingPure = ko.observableArray([]);
+    self.Customers = ko.observable([]);
+    self.Projects = ko.observable([]);
+    self.PartTypes = ko.observable([]);
+    self.PartClasses = ko.observable([]);
+    self.PartNums = ko.observable([]);
+
 
 
     self.SelectedPart = ko.observable();
@@ -77,7 +83,7 @@
             data1.forEach(function (ii) {
                 ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
                 if (ii.DueBy != null) {
-                    ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                    ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                 }
             });
             var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber })[0];
@@ -115,7 +121,7 @@
         var rangeDate = addDays(Year, Month, Day, 10);
 
         self.OnboardingTasks([]);
-        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID });
+        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID, error: function (data) { self.isLoading(false); } });
         loadAuthParts.done(function (authParts) {
 
             var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
@@ -131,10 +137,16 @@
                 }
 
                 self.OnboardingParts(parts);
+                self.UnfilteredParts(parts);
                 outerStart = parts.length;
                 parts.forEach(function (i) {
-                    i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
-                    i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+                    self.Customers().add(i.Customer);
+                    self.Projects().add(i.PackageName);
+                    self.PartTypes().add(i.PartType);
+                    self.PartClasses().add(i.OnBoardClass);
+                    self.PartNums().add(i.PartNumber);
+                    i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
+                    i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
 
                     outer += 1;
                     var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
@@ -145,7 +157,7 @@
 
 
                             if (ii.DueBy != null) {
-                                ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+                                ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                             }
                         });
                         if (data1[10].TaskDescription != 'FAI Populated') {
@@ -160,10 +172,38 @@
                     });
                 });
             });
-            load.fail(function () {
-                console.log('test');
-            });
         });
+    }
+
+    self.FilterParts = function (Customer, Project, PartType, PartClass, PartNum) {
+        var parts = self.UnfilteredParts();
+        if (Customer != null && Customer != '') {
+            parts = $.grep(parts, function (e) { return e.Customer == Customer });
+        }
+
+        if (Project != null && Project != '') {
+            parts = $.grep(parts, function (e) { return e.PackageName == Project });
+        }
+
+        if (PartType != null && PartType != '') {
+            parts = $.grep(parts, function (e) { return e.PartType == PartType });
+        }
+
+        if (PartClass != null && PartClass != '') {
+            parts = $.grep(parts, function (e) { return e.OnBoardClass == PartClass });
+        }
+
+        if (PartNum != null && PartNum != '') {
+            parts = $.grep(parts, function (e) { return e.PartNumber == PartNum });
+        }
+
+
+        self.OnboardingParts(parts);
+        console.log(Project);
+    }
+
+    self.ClearFilters = function () {
+        self.OnboardingParts(self.UnfilteredParts())
     }
 
     self.LoadAvailJobs = function (PartID) {
@@ -229,15 +269,15 @@
     //               self.OnboardingParts(data);
     //               outerStart = data.length;
     //               data.forEach(function (i) {
-    //                   i.DateEntered = formatSqlDateTimeToShortDate(i.DateEntered);
-    //                   i.DatePODue = formatSqlDateTimeToShortDate(i.DatePODue);
+    //                   i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
+    //                   i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
 
     //                   outer += 1;
     //                   var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
     //                   loadTasks.done(function (data1) {
     //                       innerStart = data1.length;
     //                       data1.forEach(function (ii) {
-    //                           ii.DueBy = formatSqlDateTimeToShortDate(ii.DueBy);
+    //                           ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
     //                           ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
     //                       });
     //                       if (data1[10].TaskDescription != 'FAI Populated') {

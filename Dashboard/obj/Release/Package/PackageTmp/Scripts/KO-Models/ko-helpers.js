@@ -168,7 +168,16 @@ function formatSqlDateTime(ts) {
         return null;
     }
     else {
-        return ts.split("T")[0] + " @ " + ts.split("T")[1]
+        return ts.split("T")[0] + " @ " + ts.split("T")[1];
+    }
+}
+
+function formatSqlDateTimeToDate(ts) {
+    if (ts == null) {
+        return null;
+    }
+    else {
+        return ts.split("T")[0];
     }
 }
 
@@ -180,6 +189,17 @@ function formatSqlDateTimeToShortDate(ts) {
     return m + "/" + d + "/" + y;
 
 }
+
+function formatSqlDateTimeToFullDate(ts) {
+    var date = ts.split("T")[0];
+    var y = date.substring(0, 4);
+    var m = date.substring(5, 7);
+    var d = date.substring(8, 10);
+    return m + "/" + d + "/" + y;
+
+}
+
+
 
 
 function DateNowFormatted() {

@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 800px; white-space: nowrap;">
+                    <div style="height: 600px; white-space: nowrap;">
                         <div class="full-height-scroll">
                             <div data-bind="foreach: {data: OnboardingParts(), as: 'part' }">
                                 <div class="row onboard-part-item">
@@ -54,6 +54,7 @@
                                             <div data-bind="foreach: $root.OnboardingTasks()">
                                                 <div data-bind="if: $data[0].OnBoardPart == $parent.RecordNumber">
                                                     <div data-bind="foreach: $data">
+
                                                         <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
                                                             <div data-bind="text: PercentComplete+'%'"></div>
                                                             <div data-bind="text: DueBy"></div>
@@ -65,6 +66,46 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-footer">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="input-group" id="bldCustomer">
+                                <span class="input-group-addon">Customer</span>
+                                <input type="text" class="form-control typeahead" id="fltCustomer" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group" id="bldProject">
+                                <span class="input-group-addon">Project</span>
+                                <input type="text" class="form-control typeahead" id="fltProject" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group" id="bldPartType">
+                                <span class="input-group-addon">Part Type</span>
+                                <input type="text" class="form-control typeahead" id="fltPartType" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group" id="bldPartClass">
+                                <span class="input-group-addon">Part Class</span>
+                                <input type="text" class="form-control" id="fltPartClass" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group" id="bldPartNum">
+                                <span class="input-group-addon">Part Num</span>
+                                <input type="text" class="form-control typeahead" id="fltPartNum" />
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary" id="btnFilter">Filter</button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" id="btnClearFilter">Clear</button>
                         </div>
                     </div>
                 </div>
@@ -107,7 +148,7 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <span class="input-group-addon">Perc. Comp.</span>
-                            <input type="text" class="form-control" id="selectedPerct" maxlength="3" data-bind="value: SelectedTask().PercentComplete" />
+                            <input type="text" class="form-control" id="selectedPerct" maxlength="3" data-bind="value: SelectedTask().PercentComplete, enable: SelectedTask().DelegatedTo == @ViewBag.UID || @ViewBag.RelPer == 18" />
                         </div>
                         <br />
                         <div class="input-group">
@@ -387,6 +428,41 @@
                 });
 
             });
+
+            $(document).on('click', '#btnFilter', function () {
+                var Customer = $('#fltCustomer').val().toUpperCase();
+                var Project = $('#fltProject').val().toUpperCase();
+                var PartType = $('#fltPartType').val().toUpperCase();
+                var PartClass = $('#fltPartClass').val().toUpperCase();
+                var PartNum = $('#fltPartNum').val().toUpperCase();
+
+                vm.FilterParts(Customer, Project, PartType, PartClass, PartNum);
+            });
+
+            $(document).on('click', '#btnClearFilter', function () {
+                $('#fltCustomer').val('');
+                $('#fltProject').val('');
+                $('#fltPartType').val('');
+                $('#fltPartClass').val('');
+                $('#fltPartNum').val('');
+                vm.ClearFilters();
+            });
+
+            // constructs the suggestion engine
+            vm.Customers(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
+            $('#bldCustomer .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'Customers', source: vm.Customers() });
+
+            vm.Projects(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
+            $('#bldProject .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'Projects', source: vm.Projects() });
+
+            vm.PartTypes(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
+            $('#bldPartType .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'PartTypes', source: vm.PartTypes() });
+
+            vm.PartClasses(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
+            $('#bldPartClass .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'PartClasses', source: vm.PartClasses() });
+
+            vm.PartNums(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
+            $('#bldPartNum .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'PartNums', source: vm.PartNums() });
         });
     </script>
 }

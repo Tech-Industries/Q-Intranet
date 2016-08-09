@@ -68,7 +68,11 @@ namespace Dashboard
                 "~/Scripts/knockout.mapping-latest.js",
                 "~/Scripts/KO-Models/ko-helpers.js",
                 "~/Scripts/plugins/idle-timer/idle-timer.min.js",
-                "~/Scripts/plugins/toastr/toastr.min.js"
+                "~/Scripts/plugins/toastr/toastr.min.js",
+                "~/Scripts/plugins/idle-timer/idle-timer.min.js",
+                "~/Scripts/plugins/typeahead/bloodhound.min.js",
+                "~/Scripts/plugins/typeahead/typeahead.jquery.js"
+
 
 
                 ));

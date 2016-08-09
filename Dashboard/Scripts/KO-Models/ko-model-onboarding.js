@@ -13,9 +13,15 @@
 
     self.Users = ko.observableArray([]);
     self.OnboardingParts = ko.observableArray([]);
+    self.UnfilteredParts = ko.observableArray([]);
     self.OnboardingTasks = ko.observableArray([]);
 
-    self.OnboardingPure = ko.observableArray([]);
+    self.Customers = ko.observable([]);
+    self.Projects = ko.observable([]);
+    self.PartTypes = ko.observable([]);
+    self.PartClasses = ko.observable([]);
+    self.PartNums = ko.observable([]);
+
 
 
     self.SelectedPart = ko.observable();
@@ -131,8 +137,14 @@
                 }
 
                 self.OnboardingParts(parts);
+                self.UnfilteredParts(parts);
                 outerStart = parts.length;
                 parts.forEach(function (i) {
+                    self.Customers().add(i.Customer);
+                    self.Projects().add(i.PackageName);
+                    self.PartTypes().add(i.PartType);
+                    self.PartClasses().add(i.OnBoardClass);
+                    self.PartNums().add(i.PartNumber);
                     i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
                     i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
 
@@ -161,6 +173,37 @@
                 });
             });
         });
+    }
+
+    self.FilterParts = function (Customer, Project, PartType, PartClass, PartNum) {
+        var parts = self.UnfilteredParts();
+        if (Customer != null && Customer != '') {
+            parts = $.grep(parts, function (e) { return e.Customer == Customer });
+        }
+
+        if (Project != null && Project != '') {
+            parts = $.grep(parts, function (e) { return e.PackageName == Project });
+        }
+
+        if (PartType != null && PartType != '') {
+            parts = $.grep(parts, function (e) { return e.PartType == PartType });
+        }
+
+        if (PartClass != null && PartClass != '') {
+            parts = $.grep(parts, function (e) { return e.OnBoardClass == PartClass });
+        }
+
+        if (PartNum != null && PartNum != '') {
+            parts = $.grep(parts, function (e) { return e.PartNumber == PartNum });
+        }
+
+
+        self.OnboardingParts(parts);
+        console.log(Project);
+    }
+
+    self.ClearFilters = function () {
+        self.OnboardingParts(self.UnfilteredParts())
     }
 
     self.LoadAvailJobs = function (PartID) {

@@ -31,6 +31,8 @@
 
     self.AvailJobs = ko.observableArray([]);
 
+    self.ArchivedParts = ko.observableArray([]);
+
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: { type: 'Onboarding' } });
@@ -67,6 +69,10 @@
 
     }
 
+    self.SelectPart = function (PartID) {
+        var part = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
+        self.SelectedPart(part);
+    }
 
     self.UpdateTasksForPart = function () {
         var today = new Date();
@@ -82,6 +88,8 @@
             innerStart = data1.length;
             data1.forEach(function (ii) {
                 ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
+                user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegatedTo })[0]
+                ii.DelegatedToName = user.FirstName + ' ' + user.LastName;
                 if (ii.DueBy != null) {
                     ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                 }
@@ -147,6 +155,7 @@
                     self.PartNums().add(i.PartNumber);
                     i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
                     i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
+                    i.DatePOReceived = formatSqlDateTimeToFullDate(i.DatePOReceived);
 
                     outer += 1;
                     var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
@@ -154,8 +163,8 @@
                         innerStart = data1.length;
                         data1.forEach(function (ii) {
                             ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
-
-
+                            user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegatedTo })[0]
+                            ii.DelegatedToName = user.FirstName+' '+user.LastName;
                             if (ii.DueBy != null) {
                                 ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                             }
@@ -172,6 +181,24 @@
                     });
                 });
             });
+        });
+    }
+
+    self.DeletePart = function (PartID) {
+        console.log(PartID);
+        var update = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
+        var updatePart = $.ajax({ type: "DELETE", cache: false, url: onboardingAPI + '/' + update.RecordNumber, data: { id: PartID } });
+        self.OnboardingParts.remove(update);
+    }
+
+    self.ArchivePart = function (PartID) {
+        var update = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
+        update.Archived = true;
+        self.OnboardingParts.remove(update);
+        self.ArchivedParts.push(update);
+        var updatePart = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/' + update.RecordNumber, data: update });
+        updatePart.done(function (data) {
+
         });
     }
 
@@ -199,7 +226,6 @@
 
 
         self.OnboardingParts(parts);
-        console.log(Project);
     }
 
     self.ClearFilters = function () {
@@ -245,7 +271,6 @@
                 return 'Future';
             }
             else if (ii.DueBy >= startDate && ii.DueBy < rangeDate) {
-                console.log(ii.DueBy + ' --------- ' + startDate + ' --------- ' + rangeDate);
                 return 'Upcoming';
             }
             else if (ii.DueBy < startDate) {

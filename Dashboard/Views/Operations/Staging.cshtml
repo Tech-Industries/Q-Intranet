@@ -5,7 +5,69 @@
 
 <h2>Staging</h2>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-2 col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-success pull-right">Monthly</span>*@
+                <h5>Total Open Jobs</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: StagingSnapshot().Total"></span></h1>
+                @*<div class="stat-percent font-bold text-info">N/A% <i class="fa fa-level-up"></i></div>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-danger pull-right">Low value</span>*@
+                <h5>Complete</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: StagingSnapshot().Complete"></span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-danger pull-right">Low value</span>*@
+                <h5>Incomplete</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: StagingSnapshot().Incomplete"></span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-danger pull-right">Low value</span>*@
+                <h5>Missing Tasks / Proceed</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: StagingSnapshot().Missing"></span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                @*<span class="label label-danger pull-right">Low value</span>*@
+                <h5>Hold</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><span data-bind="text: StagingSnapshot().Hold"></span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-4">
+        <button class="btn btn-lg btn-primary" id="metrics-toggle">Metrics</button>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6" id="top-level-list">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h3>List of Jobs</h3>
@@ -18,6 +80,7 @@
                                 <th class="hidden">ID</th>
                                 <th>Status</th>
                                 <th>Job</th>
+                                <th>Suffix</th>
                                 <th>Date Start</th>
                                 <th>Date Due</th>
                                 <th>Steps</th>
@@ -31,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="detail-list">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h3>Detail</h3>
@@ -80,6 +143,16 @@
                 </div>
             </div>*@
     </div>
+    <div class="col-md-12" id="staging-metrics" hidden>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h3>Metrics</h3>
+            </div>
+            <div class="ibox-content" style="height: 600px;">
+                <h1>Coming Soon</h1>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal inmodal fade" id="chkListModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -89,127 +162,141 @@
                 <h4 class="modal-title">Staging Check List</h4>
             </div>
             <div class="modal-body">
-                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job" jobid=""> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
+                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job" detailid=""> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
                 <hr />
-                <div class="row">
-                    <div class="col-md-6" style="border-right: dashed 1px #4155b4">
-                        <div data-bind="foreach: Criteria">
+
+                <div data-bind="if: Checklist().length == 0">
+                    <center><button class="btn btn-lg btn-primary" id="startStagingAudit">Start Audit</button></center>
+                </div>
+                <div data-bind="if: Checklist().length > 0">
+                    <div class="row">
+                        <div class="col-md-6" style="border-right: dashed 1px #4155b4">
+
+                            <div data-bind="foreach: Checklist">
+                                <div class="row" style="height: 70px">
+                                    <div class="col-md-3 col-sm-3">
+                                        @*<div class="checkboxSpecial">
+                                                <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
+                                                <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
+                                            </div>*@
+                                        <select class="form-control selectStatus" data-bind="attr:{auditdetailid: $data.ID}, value: $data.Status">
+                                            <option value="0"></option>
+                                            <option value="On Hold">On Hold</option>
+                                            <!-- ko if: $data.Important == 0 -->
+                                            <option value="Missing But Proceed">Missing But Proceed</option>
+                                            <!-- /ko -->
+                                            <option value="Complete">Complete</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <h3 data-bind="text: $data.Name"></h3>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <span data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="row">
+                                @*<div class="col-md-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Type</span>
+                                            <select class="form-control" id="typeSelect">
+                                                <option value="">Select a Type...</option>
+                                                <option value="Material">Material</option>
+                                                <option value="Equipment">Equipment</option>
+                                            </select>
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-3 col-md-offset-1">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Desc.</span>
+                                        <input type="text" class="form-control" id="descText" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Location</span>
+                                        <select class="form-control" id="locationSelect">
+                                            <option value="">Select a Location...</option>
+                                            <option value="Staging Pallet">Staging Pallet</option>
+                                            <option value="Work Center">Work Center</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-2">
-                                    <div class="checkboxSpecial">
-                                        <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
-                                        <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
-                                    </div>
+                                    <input type="checkbox" id="consumableCheck" />
+                                    <label for="consumableCheck">Consumable</label>
                                 </div>
-                                <div class="col-md-6" style="height: 70px;">
-                                    <h3 class="center-vertically" data-bind="text: $data.Name"></h3>
-                                </div>
-                                <div class="col-md-2" style="height: 70px;">
-                                    <span class="center-vertically" data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
+                                <div class="col-md-1">
+                                    <i class="fa fa-2x fa-plus hover-add" id="addItem"></i>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Type</span>
-                                    <select class="form-control" id="typeSelect">
-                                        <option value="">Select a Type...</option>
-                                        <option value="Material">Material</option>
-                                        <option value="Equipment">Equipment</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Desc.</span>
-                                    <input type="text" class="form-control" id="descText" />
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Location</span>
-                                    <select class="form-control" id="locationSelect">
-                                        <option value="">Select a Location...</option>
-                                        <option value="Staging Pallet">Staging Pallet</option>
-                                        <option value="Work Center">Work Center</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="checkbox" id="consumableCheck" />
-                                <label for="consumableCheck">Consumable</label>
-                            </div>
-                            <div class="col-md-1">
-                                <i class="fa fa-2x fa-plus hover-add" id="addItem"></i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <center><h2>Material</h2></center>
-                                <hr />
-                                <div style="height: 500px;">
-                                    <div class="full-height-scroll">
-                                        <table class="table table-bordered table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th class="hidden">ID</th>
-                                                    <th>Description</th>
-                                                    <th>Location</th>
-                                                    <th>Issuer</th>
-                                                    <th>Date Issued</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody data-bind="foreach: Materials()">
-                                                <tr>
-                                                    <td class="hidden" data-bind="text: $data.ID"></td>
-                                                    <td data-bind="text: $data.Description"></td>
-                                                    <td data-bind="text: $data.Location"></td>
-                                                    <td data-bind="text: $data.IssuerID"></td>
-                                                    <td data-bind="text: $data.DateIssued"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <center><h2>Equipment</h2></center>
-                                <hr />
-                                <div style="height: 500px;">
-                                    <div class="full-height-scroll">
-                                        <table class="table table-bordered table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th class="hidden">ID</th>
-                                                    <th>Description</th>
-                                                    <th>Location</th>
-                                                    <th>Consumable</th>
-                                                    <th>Issuer</th>
-                                                    <th>Date Issued</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody data-bind="foreach: Equipment()">
-                                                <tr>
-                                                    <td class="hidden" data-bind="text: $data.ID"></td>
-                                                    <td data-bind="text: $data.Description"></td>
-                                                    <td data-bind="text: $data.Location"></td>
-                                                    <td data-bind="text: $data.Consumable"></td>
-                                                    <td data-bind="text: $data.IssuerID"></td>
-                                                    <td data-bind="text: $data.DateIssued"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="row">
+                                @*<div class="col-md-6">
+                                        <center><h2>Material</h2></center>
+                                        <hr />
+                                        <div style="height: 500px;">
+                                            <div class="full-height-scroll">
+                                                <table class="table table-bordered table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="hidden">ID</th>
+                                                            <th>Description</th>
+                                                            <th>Location</th>
+                                                            <th>Issuer</th>
+                                                            <th>Date Issued</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-10 col-md-offset-1">
+                                    <center><h2>Equipment</h2></center>
+                                    <hr />
+                                    <div style="height: 500px;">
+                                        <div class="full-height-scroll">
+                                            <table class="table table-bordered table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="hidden">ID</th>
+                                                        <th>Description</th>
+                                                        <th>Location</th>
+                                                        <th>Issuer</th>
+                                                        <th>Date Issued</th>
+                                                        <th>Consumable</th>
+                                                        <th>Date Returned</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: Equipment()">
+                                                    <tr>
+                                                        <td class="hidden" data-bind="text: $data.ID"></td>
+                                                        <td data-bind="text: $data.Description"></td>
+                                                        <td data-bind="text: $data.Location"></td>
+                                                        <td data-bind="text: $data.IssuerID"></td>
+                                                        <td data-bind="text: $data.DateIssued"></td>
+                                                        <td data-bind="text: $data.Consumable"></td>
+                                                        <td data-bind="if: $data.Consumable == true">
+                                                            <span data-bind="if: $data.DateReturned == null"><input type="checkbox" class="chkItemReturned" data-bind="attr:{'itemid' : $data.ID}" /></span>
+                                                            <span data-bind="if: $data.DateReturned != null"><span data-bind="text: $data.DateReturned"></span></span>
+                                                        </td>
+                                                        <td>
+                                                            <i class="fa fa-close hover-rem removeItem" data-bind="attr: {'itemid' : $data.ID}"></i>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -223,25 +310,65 @@
     <script src="~/Scripts/KO-Models/ko-model-operations.js"></script>
 
     <script>
-
+        var vm = null;
         $(function () {
 
-            var vm = new OperationsViewModel();
+            vm = new OperationsViewModel();
             ko.applyBindings(vm);
             vm.LoadStagingTopLevel();
-
+            vm.LoadStagingSnapshot();
+            var SelectedJob = '';
+            var SelectedSuffix = '';
+            var toggle = 0;
 
             var selectedID = "";
-            var selectedJob = "";
+            var selectedDetail = "";
             var selectedSuf = "";
             var selectedSeq = "";
 
+            $('#chkListModal').on('hidden.bs.modal', function (e) {
+                vm.LoadStagingDetail(SelectedJob, SelectedSuffix);
+                console.log(SelectedJob, SelectedSuffix);
+
+                vm.LoadStagingSnapshot();
+            })
+
+            $(document).on('click', '#metrics-toggle', function () {
+                if (toggle == 0) {
+                    $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
+                        $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
+                            $('#staging-metrics').toggle('slide', { direction: 'up' }, '250');
+                        });
+                    });
+                    toggle = 1;
+                }
+                else {
+                    $('#staging-metrics').toggle('slide', { direction: 'up' }, '250', function () {
+                        $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
+                            $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
+
+                            });
+                        });
+                    });
+                    toggle = 0;
+                }
+            });
 
             var table = $('.dtStaging').DataTable({
                 "order": [[3, "asc"], [2, "asc"]],
                 "createdRow": function (row, data, index) {
                     $(row).addClass('staging-item');
                     $('td', row).eq(0).addClass("hidden");
+                    if (data[1] == 'Complete') {
+                        $('td', row).eq(1).css('background-color', 'rgba(63, 191, 63, 0.6)');
+                    }
+                    else if (data[1] == 'Missing Tasks / Proceed') {
+                        $('td', row).eq(1).css('background-color', 'rgba(232, 113, 20, 0.6)');
+                    }
+                    else if (data[1] == 'Hold') {
+                        $('td', row).eq(1).css('background-color', 'rgba(255, 0, 14, 0.6)');
+                    }
+
                 }
             });
 
@@ -250,30 +377,40 @@
                 "createdRow": function (row, data, index) {
                     $(row).addClass('staging-detail-item');
                     $('td', row).eq(0).addClass("hidden");
+                    if (data[1] == 'Complete') {
+                        $('td', row).eq(1).css('background-color', 'rgba(63, 191, 63, 0.6)');
+                    }
+                    else if (data[1] == 'Missing Tasks / Proceed') {
+                        $('td', row).eq(1).css('background-color', 'rgba(232, 113, 20, 0.6)');
+                    }
+                    else if (data[1] == 'Hold') {
+                        $('td', row).eq(1).css('background-color', 'rgba(255, 0, 14, 0.6)');
+                    }
                 }
             });
 
             $(document).on('click', '.staging-item', function () {
-                var Job = $(this).children().next().next().html();
+                SelectedJob = $(this).children().next().next().html();
+                SelectedSuffix = $(this).children().next().next().next().html();
                 $('#staging-checklist').hide('slide', { direction: 'right' }, '250');
-                vm.LoadStagingDetail(Job);
+                vm.LoadStagingDetail(SelectedJob, SelectedSuffix);
             });
 
             $(document).on('click', '.staging-detail-item', function () {
                 selectedID = $(this).children().first().html();
-                selectedJob = $(this).children().next().next().html();
+                selectedDetail = $(this).children().next().next().html();
                 selectedSeq = $(this).children().next().next().next().next().html();
                 selectedWC = $(this).children().last().html();
                 //selectedWC = $('tr.staging-detail-item>td:nth-child(9)').html();
-                $('#selected-job').attr('jobid', selectedID);
-                $('#selected-job').html(selectedJob);
+                $('#selected-job').attr('detailid', selectedID);
+                $('#selected-job').html(selectedDetail);
                 $('#selected-seq').html(selectedSeq);
                 $('#selected-wc').html(selectedWC);
                 ClearItemForm();
                 $('#chkListModal').modal('show');
                 //$('#chkListModal').show('slide', { direction: 'right' }, '250');
                 vm.LoadSelectedStagingItems(selectedID);
-                vm.LoadStagingCriteria();
+                vm.LoadStagingChecklist(selectedID);
             });
 
             $(document).on('click', '.chk-criteria', function () {
@@ -303,29 +440,45 @@
             //    $(this).parent().parent().children().first().html(newDate);
             //});
 
-            $(document).on('change', '#typeSelect', function () {
-                if ($(this).val() == "Material") {
-                    if (!$('#consumableCheck').is(':checked')) {
-                        $('#consumableCheck').click();
-                    }
-                }
-            });
-
             $(document).on('click', '#addItem', function () {
-                var JobID = $('#selected-job').attr('jobid');
-                var Type = $('#typeSelect').val();
+                var DetailID = $('#selected-job').attr('detailid');
+                //var Type = $('#typeSelect').val();
+                var Type = 'Equipment';
                 var Desc = $('#descText').val();
                 var Location = $('#locationSelect').val();
                 var Consumable = $('#consumableCheck').is(':checked');
                 if (Type.length > 0 && Desc.length > 0 && Location.length > 0) {
 
                     $(this).addClass('hidden');
-                    vm.AddItem(JobID, Type, Desc, Location, Consumable);
-                    vm.LoadSelectedStagingItems(JobID);
+                    vm.AddItem(DetailID, Type, Desc, Location, Consumable);
+                    vm.LoadSelectedStagingItems(DetailID);
+                    ClearItemForm();
                 }
-                else {
-                    console.log("Foo");
+            });
+            $(document).on('change', '.chkItemReturned', function () {
+                console.log('changed');
+                if ($(this).is(':checked')) {
+                    var ItemID = $(this).attr('itemid');
+                    vm.ItemReturn(ItemID);
+                    $(this).parent().html("<i class='fa fa-check fa-2x'></i>");
                 }
+            });
+
+            $(document).on('click', '.removeItem', function () {
+                var ItemID = $(this).attr('itemid');
+                vm.RemoveItem(ItemID);
+                console.log(ItemID);
+            });
+
+            $(document).on('click', '#startStagingAudit', function () {
+                vm.StartStagingAudit($('#selected-job').attr('detailid'));
+            });
+
+            $(document).on('change', '.selectStatus', function () {
+                var ID = $(this).attr('auditdetailid');
+                var Status = $(this).val();
+                console.log(Status);
+                vm.UpdateAuditDetail(ID, Status);
             });
         });
 

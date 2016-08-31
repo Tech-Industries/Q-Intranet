@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h5><span id="del-desc"></span></h5> 
+                <h5><span id="del-desc"></span></h5>
             </div>
         </div>
         <div class="row">
@@ -97,11 +97,9 @@
     <center><h5 id="del-description" style="width: 50%"></h5></center>
     <div class="row">
         <div class="col-md-4" data-bind="if: UserAccess">
-            <div data-bind="if: !DDComplete() || @ViewBag.RelPer == 3">
-                <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
-                    <input type="file" class="form-control" id="doc-upload" name="doc-upload" />
-                </form>
-            </div>
+            <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">
+                <input type="file" class="form-control" id="doc-upload" name="doc-upload" />
+            </form>
             @*<h4>File Uploads are temporarily Disables</h4>*@
         </div>
         <div class="row">
@@ -150,7 +148,7 @@
                 <div style="height: 150px;">
                     <div class="full-height-scroll" data-bind="if: UserAccess">
                         <div class="col-md-12" data-bind="foreach: DDReviewers()" style="padding-bottom: 20px;">
-                            <h3 data-bind="attr: {UserID: $data.UserID}, css: $data.TimeReviewed != '' ? 'rev' : 'un-rev'"><span data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small data-bind="text: $data.TimeReviewed"></small> <span class="pull-right" data-bind="if: @ViewBag.UID == $root.Owner()|| @ViewBag.RelPer == 3"><i class="fa fa-close hover-rem remove-reviewer" data-bind="attr: { id: 'remove-reviewer-'+$data.ID}"></i></span><span data-bind="if: $data.TimeReviewed == '' && ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3) && $root.DDComplete()"><button type="button" class="btn btn-xs btn-primary btn-sign-review pull-right"  data-bind="attr: {UserID: $data.UserID}">Sign-Off</button></span></h3>
+                            <h3 data-bind="attr: {UserID: $data.UserID}, css: $data.TimeReviewed != '' ? 'rev' : 'un-rev'"><span data-bind="text: $data.FirstName+' '+$data.LastName"></span> - <small data-bind="text: $data.TimeReviewed"></small> <span class="pull-right" data-bind="if: @ViewBag.UID == $root.Owner()|| @ViewBag.RelPer == 3"><i class="fa fa-close hover-rem remove-reviewer" data-bind="attr: { id: 'remove-reviewer-'+$data.ID}"></i></span><span data-bind="if: $data.TimeReviewed == '' && ($data.UserID == @ViewBag.UID || @ViewBag.RelPer == 3) && $root.DDComplete()"><button type="button" class="btn btn-xs btn-primary btn-sign-review pull-right" data-bind="attr: {UserID: $data.UserID}">Sign-Off</button></span></h3>
                         </div>
                     </div>
                 </div>

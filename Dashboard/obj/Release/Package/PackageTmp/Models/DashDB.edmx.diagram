@@ -5,58 +5,64 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8afd3c441a5447bfa2dc54f9f5f43b51" Name="Diagram1" ZoomLevel="71">
-        <EntityTypeShape EntityType="DashboardModel.Company" PointX="10.75" PointY="0.75" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.Plant" PointX="10.75" PointY="16.75" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.Update" PointX="16.75" PointY="11.75" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DashboardModel.Goal" PointX="16.75" PointY="14.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.OTMonthlyByCompany" PointX="17.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.SalesMonthlyByCompany" PointX="2.75" PointY="17.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.SalesDailyByCompany" PointX="17.75" PointY="3.75" Width="2.125" />
-        <EntityTypeShape EntityType="DashboardModel.SalesStage" PointX="12.75" PointY="17.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ScrapMonthlyByPlant" PointX="17.75" PointY="7.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.CWODailyByPlant" PointX="18.75" PointY="10.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ScrapDailyByPlant" PointX="18.75" PointY="14.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ScrapStage" PointX="14.75" PointY="18.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Group" PointX="16.75" PointY="18.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.UserGroup" PointX="18.75" PointY="18.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.User" PointX="19.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Deliverable" PointX="19.75" PointY="7.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableReview" PointX="0.75" PointY="20.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Company" PointX="2.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Plant" PointX="2.75" PointY="3.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Update" PointX="4.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DashboardModel.Goal" PointX="4.75" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.OTMonthlyByCompany" PointX="6.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.SalesMonthlyByCompany" PointX="0.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.SalesDailyByCompany" PointX="6.75" PointY="3.75" Width="2.125" />
+        <EntityTypeShape EntityType="DashboardModel.SalesStage" PointX="2.75" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapMonthlyByPlant" PointX="4.75" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.CWODailyByPlant" PointX="6.75" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapDailyByPlant" PointX="8.75" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ScrapStage" PointX="9.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Group" PointX="10.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.UserGroup" PointX="10.75" PointY="9.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.User" PointX="11.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Deliverable" PointX="11.75" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableReview" PointX="4.75" PointY="11.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" PointX="0.75" PointY="0.75" Width="1.5" />
         <AssociationConnector Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableComment" PointX="2.75" PointY="20.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" PointX="20.75" PointY="3.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ProjectTask" PointX="8.75" PointY="16.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ProjectAssignee" PointX="6.75" PointY="20.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Project" PointX="15.75" PointY="7.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableStatusByUserID" PointX="2.75" PointY="0.75" Width="2.875" />
-        <EntityTypeShape EntityType="DashboardModel.PastDueDeliverable" PointX="2.75" PointY="4.75" Width="2.375" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" PointX="5.75" PointY="4.75" Width="2.625" />
-        <EntityTypeShape EntityType="DashboardModel.BugTag" PointX="6.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Price" PointX="8.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.IncentiveRollupByPlant" PointX="0.75" PointY="9.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Bug" PointX="2.75" PointY="9.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ProjectsTopLevel" PointX="9.75" PointY="3.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.BugsTopLevel" PointX="4.75" PointY="9.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.PrevMaint" PointX="6.75" PointY="9.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Meetings" PointX="9.75" PointY="7.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Page" PointX="0.75" PointY="4.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Notification" PointX="8.75" PointY="10.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.CWOStage" PointX="10.75" PointY="10.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Log" PointX="11.75" PointY="3.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrend" PointX="12.75" PointY="7.75" Width="2.25" />
-        <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrendInt" PointX="12.75" PointY="11.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ShipAdjDate" PointX="13.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.ShippingPlanAdjShipDate" PointX="2.75" PointY="13.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Comment" PointX="4.75" PointY="14.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableReviewer" PointX="15.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.StagingCriteria" Width="1.5" PointX="21.375" PointY="14.75" />
-        <EntityTypeShape EntityType="DashboardModel.StagingDetail" Width="1.5" PointX="9.375" PointY="20.75" />
-        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="2.25" PointX="21.375" PointY="10.75" />
-        <EntityTypeShape EntityType="DashboardModel.StagingItem" Width="1.5" PointX="21.375" PointY="17.75" />
-        <EntityTypeShape EntityType="DashboardModel.ReviewablesByUser" Width="2.375" PointX="17.375" PointY="21.75" />
-        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="3" PointX="20.375" PointY="21.75" />
-        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="3" PointX="22.375" PointY="21.75" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableComment" PointX="6.75" PointY="11.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" PointX="12.75" PointY="6.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectTask" PointX="8.75" PointY="12.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectAssignee" PointX="12.75" PointY="9.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Project" PointX="10.75" PointY="12.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableStatusByUserID" PointX="12.75" PointY="12.75" Width="2.875" />
+        <EntityTypeShape EntityType="DashboardModel.PastDueDeliverable" PointX="13.75" PointY="0.75" Width="2.375" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" PointX="0.75" PointY="14.75" Width="2.625" />
+        <EntityTypeShape EntityType="DashboardModel.BugTag" PointX="4.75" PointY="14.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Price" PointX="14.75" PointY="5.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.IncentiveRollupByPlant" PointX="16.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Bug" PointX="14.75" PointY="8.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ProjectsTopLevel" PointX="16.75" PointY="5.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.BugsTopLevel" PointX="6.75" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.PrevMaint" PointX="8.75" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Meetings" PointX="16.75" PointY="9.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Page" PointX="10.75" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Notification" PointX="16.75" PointY="12.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.CWOStage" PointX="12.75" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.Log" PointX="14.75" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrend" PointX="16.75" PointY="16.75" Width="2.25" />
+        <EntityTypeShape EntityType="DashboardModel.OnTimeDeliveryTrendInt" PointX="18.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ShipAdjDate" PointX="18.75" PointY="4.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.ShippingPlanAdjShipDate" PointX="18.75" PointY="9.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableReviewer" PointX="0.75" PointY="19.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.StagingCriteria" Width="1.5" PointX="2.75" PointY="19.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingDetail" Width="1.5" PointX="19.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="2.25" PointX="19.75" PointY="19.75" />
+        <EntityTypeShape EntityType="DashboardModel.ReviewablesByUser" Width="2.375" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="3" PointX="20.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="3" PointX="14.75" PointY="20.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingAudit" Width="2.375" PointX="5.375" PointY="20.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingItem" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingAuditDetail" Width="1.5" PointX="8.75" PointY="21.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingCheckList" Width="1.5" PointX="0.75" PointY="22.75" />
+        <EntityTypeShape EntityType="DashboardModel.Comment" Width="1.5" PointX="11.375" PointY="22.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingDetailAuditStatu" Width="1.5" PointX="22.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingTopLevelStatu" Width="1.5" PointX="3.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingSnapshot" Width="1.5" PointX="23.375" PointY="0.75" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

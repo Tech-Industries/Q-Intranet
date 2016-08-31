@@ -8,7 +8,9 @@
     var stagingAPI = operationsAPI + '/' + 'staging';
     var stagingDetailAPI = operationsAPI + '/' + 'stagingdetail';
     var stagingCriteriaAPI = operationsAPI + '/' + 'stagingcriteria';
+    var stagingAuditAPI = operationsAPI + '/' + 'stagingaudit';
     var stagingItemsAPI = operationsAPI + '/' + 'stagingitems';
+    var stagingSnapshotAPI = operationsAPI + '/' + 'stagingsnapshot';
 
     self.Users = ko.observableArray([]);
     self.UpcomingShipments = ko.observableArray([]);
@@ -18,13 +20,17 @@
     self.StagingDetail = ko.observableArray([]);
 
     self.Criteria = ko.observableArray([]);
+    self.Checklist = ko.observableArray([]);
 
     self.PastDueSales = ko.observable();
     self.AdjShipDollars = ko.observable();
     self.AdjShipDollarsInt = ko.observable();
 
-    self.Materials = ko.observableArray();
     self.Equipment = ko.observableArray();
+
+    self.StagingSnapshot = ko.observableArray();
+
+
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
@@ -44,7 +50,7 @@
 
     self.LoadUpcomingShipments = function () {
         self.isLoading(true);
-        var load = $.ajax({ type: "GET", url: shippingAPI, cache: false});
+        var load = $.ajax({ type: "GET", url: shippingAPI, cache: false });
         load.done(function (data) {
             adjDol = 0;
             pastDol = 0;
@@ -67,10 +73,10 @@
                 formatToShortDate(item.AdjShipDate.split('T')[0]),
                 item.DateID
                 ]).draw();
-                
+
                 if (item.AdjShipDate != '1900-01-01T00:00:00') {
                     adjDol += item.Sales;
-                    
+
                 }
                 if (item.DateDue.split('T')[0] < GetDate()) {
                     pastDol += item.Sales;
@@ -79,7 +85,7 @@
                 if (count == start) {
                     self.isLoading(false);
                 }
-                
+
             });
             self.AdjShipDollarsInt(adjDol);
             self.AdjShipDollars(formatMoney(adjDol));
@@ -94,8 +100,8 @@
     self.UpdateAdjShipDate = function (ID, DateID, newDate) {
         var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
 
-        var u = { ID: parseInt(DateID), OrderNo: t.OrderNo, AdjShipDate: formatShortDate(newDate), OrderLine: t.OrderLine, DateDue: t.DateDue.split('T')[0] };
-        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine + "&DateDue=" + t.DateDue.split('T')[0];
+        var u = { ID: parseInt(DateID), OrderNo: t.OrderNo, AdjShipDate: formatShortDate(newDate), OrderLine: t.OrderLine };
+        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine;
         var update = $.ajax({ type: "PUT", url: shippingAPI + "/" + DateID, cache: false, data: u });
         update.done(function (data) {
         });
@@ -103,9 +109,9 @@
 
     self.AddAdjShipDate = function (ID, newDate, obj, sale) {
         var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
-        
+
         var newDateID = 0;
-        var sendData = "OrderNo=" + t.OrderNo+ "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine+ "&DateDue=" + t.DateDue.split('T')[0];
+        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine + "&DateDue=" + t.DateDue.split('T')[0];
         var add = $.ajax({ type: "POST", cache: false, url: shippingAPI, data: sendData });
         add.success(function (data) {
             newDateID = data.ID;
@@ -114,7 +120,7 @@
 
         console.log(self.AdjShipDollarsInt());
         sale = parseFloat(sale);
-        self.AdjShipDollarsInt(self.AdjShipDollarsInt() +  sale);
+        self.AdjShipDollarsInt(self.AdjShipDollarsInt() + sale);
         console.log(self.AdjShipDollarsInt());
         self.AdjShipDollars(formatMoney(self.AdjShipDollarsInt()));
 
@@ -123,13 +129,14 @@
 
 
     self.LoadStagingTopLevel = function () {
-        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: {DaysOut: 14} });
+        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: { DaysOut: 14 } });
         load.done(function (data) {
             $.each(data, function (i, item) {
                 $('.dtStaging').DataTable().row.add([
                 item.ID,
-                '0',
+                item.Status,
                 item.Job,
+                item.Suffix,
                 formatToShortDate(item.DateStart.split('T')[0]),
                 formatToShortDate(item.DateStageDue.split('T')[0]),
                 item.Steps,
@@ -144,24 +151,28 @@
         });
     }
 
-    self.LoadStagingDetail= function (Job) {
-        var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job } });
+    self.LoadStagingDetail = function (Job, Suffix) {
+        console.log(Suffix);
+        if (Suffix.length < 1) {
+            Suffix = '';
+        }
+        var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job, Suffix: Suffix} });
         load.done(function (data) {
             $('.dtStagingDetail').DataTable().clear().draw();
             $.each(data, function (i, item) {
                 $('.dtStagingDetail').DataTable().row.add([
                 item.ID,
-                '0',
+                item.Status,
                 item.Job,
                 item.Suffix,
                 item.Seq,
-                formatToShortDate(item.DATE_START.split('T')[0]),
+                formatToShortDate(item.DATE_START),
                 item.PARTNUM,
                 item.DESCRIPTION,
                 item.WC
                 ]).draw();
             });
-            
+
             self.StagingDetail(data);
         });
         load.fail(function () {
@@ -169,39 +180,79 @@
         });
     }
 
-    self.LoadStagingCriteria = function (job) {
-        var load = $.ajax({ type: "GET", url: stagingCriteriaAPI, cache: false});
+    self.LoadStagingChecklist = function (id) {
+        self.Checklist([]);
+        var load = $.ajax({ type: "GET", url: stagingAuditAPI + '/' + id + '/checklist', cache: false, data: id });
         load.done(function (data) {
-            
-            self.Criteria(data);
+            self.Checklist(data);
         });
     }
 
-    self.LoadSelectedStagingItems = function (JobID) {
-        var load = $.ajax({ type: "GET", url: stagingItemsAPI, cache: false, data: {JobID: JobID} });
+    self.LoadSelectedStagingItems = function (StagingDetailID) {
+        var load = $.ajax({ type: "GET", url: stagingItemsAPI + '/' + StagingDetailID, cache: false, data: { StagingDetailID: StagingDetailID } });
         load.done(function (data) {
-            self.Materials($.grep(data, function (e) { return e.Type == 'Material' }));
-            self.Equipment($.grep(data, function (e) { return e.Type == 'Equipment' }));
+            self.Equipment(data);
         });
         load.fail(function () {
-            self.Materials([]);
             self.Equipment([]);
         });
     }
 
-    self.AddItem = function (JobID, Type, Description, Location, Consumable) {
+    self.AddItem = function (StagingDetailID, Type, Description, Location, Consumable) {
         var UserID = parseInt($('#layoutUserID').val());
-        var sendData = "JobID=" + JobID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID+ "&Consumable=" + Consumable;
+        var sendData = "StagingDetailID=" + StagingDetailID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID + "&Consumable=" + Consumable;
         var add = $.ajax({ type: "POST", cache: false, url: stagingItemsAPI, data: sendData });
         add.success(function (data) {
             console.log(data);
-            self.LoadSelectedStagingItems();
+            self.LoadSelectedStagingItems(StagingDetailID);
         });
         $('#addItem').removeClass('hidden');
     }
 
-    self.RemoveItem = function (ID) {
+    self.RemoveItem = function (ItemID) {
+        console.log('please remove');
+        var rem = $.ajax({ type: 'DELETE', cache: false, url: stagingItemsAPI + '/' + ItemID, data: ItemID });
+        rem.done(function () {
+            self.Equipment.remove($.grep(self.Equipment(), function (e) { return e.ID == ItemID })[0]);
+        });
+    }
 
+    self.StartStagingAudit = function (DetailID) {
+        console.log(DetailID);
+        var Job = $.grep(self.StagingDetail(), function (e) { return e.ID == DetailID })[0].Job;
+        console.log(Job);
+        var DateDue = $.grep(self.StagingTopLevel(), function (e) { return e.Job == Job })[0].DateStageDue;
+        var sendData = "StagingDetailID=" + DetailID + "&DateDue=" + DateDue;
+
+        console.log(sendData);
+        var addAudit = $.ajax({ type: "POST", cache: false, url: stagingAuditAPI, data: sendData });
+        addAudit.done(function () {
+            self.LoadStagingChecklist(DetailID);
+        });
+    }
+
+    self.UpdateAuditDetail = function (ID, Status) {
+        var sendData = "ID=" + ID + "&Status=" + Status;
+        var update = $.ajax({ type: "PUT", cache: false, url: stagingAuditAPI + "/detail/" + ID, data: sendData });
+        update.done(function (data) {
+            console.log('updated');
+        });
+    }
+
+
+    self.ItemReturn = function (ItemID) {
+        var u = $.grep(self.Equipment(), function (e) { return e.ID == ItemID })[0];
+        var update = $.ajax({ type: "PUT", cache: false, url: stagingItemsAPI + '/' + ItemID, data: u });
+        update.done(function (data) {
+        });
+
+    }
+
+    self.LoadStagingSnapshot = function () {
+        var load = $.ajax({ type: "GET", url: stagingSnapshotAPI, cache: false});
+        load.done(function (data) {
+            self.StagingSnapshot(data);
+        });
     }
 
 }

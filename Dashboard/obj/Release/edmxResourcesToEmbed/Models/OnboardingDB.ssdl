@@ -75,6 +75,7 @@
     <Property Name="DateComplete" Type="datetime" />
     <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
     <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
+    <Property Name="Archived" Type="bit" />
   </EntityType>
   <EntityType Name="OnBoardTasks">
     <Key>
@@ -191,11 +192,13 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
   <EntityType Name="AuthorizedOnBoardParts">
     <Key>
       <PropertyRef Name="ID" />
+      <PropertyRef Name="ResponsibleUser" />
     </Key>
     <Property Name="ID" Type="bigint" Nullable="false" />
     <Property Name="OnBoardPart" Type="bigint" />
     <Property Name="DelegatedTo" Type="int" />
-    <Property Name="ResponsibleUser" Type="int" />
+    <Property Name="ResponsibleUser" Type="int" Nullable="false" />
+    <Property Name="DatePODue" Type="datetime" />
   </EntityType>
   <EntityContainer Name="OnBoardingModelStoreContainer">
     <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
@@ -213,7 +216,8 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     [AuthorizedOnBoardParts].[ID] AS [ID], 
     [AuthorizedOnBoardParts].[OnBoardPart] AS [OnBoardPart], 
     [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo], 
-    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser]
+    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser], 
+    [AuthorizedOnBoardParts].[DatePODue] AS [DatePODue]
     FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

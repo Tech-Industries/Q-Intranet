@@ -12,16 +12,13 @@ namespace Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StagingItem
+    public partial class StagingSnapshot
     {
-        public int ID { get; set; }
-        public Nullable<int> StagingDetailID { get; set; }
-        public string Type { get; set; }
-        public string Description { get; set; }
-        public string Location { get; set; }
-        public Nullable<bool> Consumable { get; set; }
-        public Nullable<int> IssuerID { get; set; }
-        public Nullable<System.DateTime> DateIssued { get; set; }
-        public Nullable<System.DateTime> DateReturned { get; set; }
+        public long ID { get; set; }
+        public Nullable<int> Complete { get; set; }
+        public Nullable<int> Total { get; set; }
+        public Nullable<int> Incomplete { get; set; }
+        public Nullable<int> Missing { get; set; }
+        public Nullable<int> Hold { get; set; }
     }
 }

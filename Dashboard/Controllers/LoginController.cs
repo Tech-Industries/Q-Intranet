@@ -56,6 +56,7 @@ namespace Dashboard.Controllers
             // APIControllers.LoginController LC = new APIControllers.LoginController();
             //SearchResultCollection results = null;
             List<string> paths = new List<string>();
+            paths.Add("LDAP://orizonaero.local");
             paths.Add("LDAP://besttool.local");
             paths.Add("LDAP://ti-kc.local");
             paths.Add("LDAP://192.168.100.244");

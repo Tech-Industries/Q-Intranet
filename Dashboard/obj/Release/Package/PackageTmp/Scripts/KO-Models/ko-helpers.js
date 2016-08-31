@@ -117,10 +117,16 @@ function formatShortDate(date) {
     return m + "/" + d + "/" + y;
 }
 function formatToShortDate(date) {
-    var y = date.split('-')[0];
-    var m = date.split('-')[1];
-    var d = date.split('-')[2];
-    return m + "/" + d + "/" + y;
+    if (date != null) {
+        date = date.split('T')[0];
+        var y = date.split('-')[0];
+        var m = date.split('-')[1];
+        var d = date.split('-')[2];
+        return m + "/" + d + "/" + y;
+    }
+    else {
+        return '';
+    }
 }
 
 function getDaysInMonth(month, year) {

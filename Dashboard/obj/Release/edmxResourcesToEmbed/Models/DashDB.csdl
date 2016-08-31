@@ -57,7 +57,6 @@
     <EntitySet Name="PastDueDeliverables" EntityType="DashboardModel.PastDueDeliverable" />
     <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="DashboardModel.DeliverablesDueInNextThirtyDay" />
     <EntitySet Name="BugTags" EntityType="DashboardModel.BugTag" />
-    <EntitySet Name="Comments" EntityType="DashboardModel.Comment" />
     <EntitySet Name="UCFCategories" EntityType="DashboardModel.UCFCategory" />
     <EntitySet Name="UCFChallenges" EntityType="DashboardModel.UCFChallenge" />
     <EntitySet Name="UCFAudits" EntityType="DashboardModel.UCFAudit" />
@@ -91,10 +90,17 @@
     <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
     <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
     <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
-    <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
     <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
     <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
     <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
+    <EntitySet Name="StagingAudits" EntityType="DashboardModel.StagingAudit" />
+    <EntitySet Name="StagingItems" EntityType="DashboardModel.StagingItem" />
+    <EntitySet Name="StagingAuditDetails" EntityType="DashboardModel.StagingAuditDetail" />
+    <EntitySet Name="StagingCheckLists" EntityType="DashboardModel.StagingCheckList" />
+    <EntitySet Name="Comments" EntityType="DashboardModel.Comment" />
+    <EntitySet Name="StagingDetailAuditStatus" EntityType="DashboardModel.StagingDetailAuditStatu" />
+    <EntitySet Name="StagingTopLevelStatus" EntityType="DashboardModel.StagingTopLevelStatu" />
+    <EntitySet Name="StagingSnapshots" EntityType="DashboardModel.StagingSnapshot" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -415,17 +421,6 @@
     <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
     <Property Name="BugID" Type="Int32" />
     <Property Name="Tag" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
-  </EntityType>
-  <EntityType Name="Comment">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="TypeID" Nullable="false" Type="Int32" />
-    <Property Name="UserID" Nullable="false" Type="Int32" />
-    <Property Name="TimeSubmitted" Precision="3" Type="DateTime" />
-    <Property Name="CommentText" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Type" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
   </EntityType>
   <EntityType Name="UCFCategory">
     <Key>
@@ -865,20 +860,6 @@
     <Property Name="DateStageDue" Type="DateTime" Precision="0" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
-  <EntityType Name="StagingItem">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Consumable" Type="Boolean" />
-    <Property Name="IssuerID" Type="Int32" />
-    <Property Name="DateIssued" Type="DateTime" Precision="3" />
-    <Property Name="DateReturned" Type="DateTime" Precision="3" />
-    <Property Name="JobID" Type="Int32" />
-  </EntityType>
   <EntityType Name="ReviewablesByUser">
     <Key>
       <PropertyRef Name="ID" />
@@ -948,5 +929,118 @@
     <Property Name="Margins" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="MarginPct" Type="Decimal" Precision="38" Scale="6" />
     <Property Name="OnTimePercent" Type="Decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="StagingAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StagingDetailID" Type="Int32" />
+    <Property Name="DateDue" Type="DateTime" Precision="3" />
+    <Property Name="DateClosed" Type="DateTime" Precision="3" />
+    <Property Name="DateReopened" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StagingItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StagingDetailID" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Consumable" Type="Boolean" />
+    <Property Name="IssuerID" Type="Int32" />
+    <Property Name="DateIssued" Type="DateTime" Precision="3" />
+    <Property Name="DateReturned" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="StagingAuditDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StagingAuditID" Type="Int32" />
+    <Property Name="StagingCriteriaID" Type="Int32" />
+    <Property Name="OwnerID" Type="Int32" />
+    <Property Name="Important" Type="Boolean" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="StagingCheckList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="StagingAuditID" Type="Int32" />
+    <Property Name="StagingDetailID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="Owner" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerID" Type="Int32" />
+    <Property Name="Important" Type="Boolean" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DateDue" Type="DateTime" Precision="3" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="DateTime" Precision="3" />
+    <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StagingDetailAuditStatu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="Seq" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="PARTNUM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="WC" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="DATE_START" Type="DateTime" Precision="0" />
+    <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Missing" Type="Int32" />
+    <Property Name="Hold" Type="Int32" />
+    <Property Name="Complete" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="23" FixedLength="false" Unicode="true" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="StagingTopLevelStatu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="Steps" Type="Int32" />
+    <Property Name="DateStart" Type="DateTime" Precision="0" />
+    <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="DateStageDue" Type="DateTime" Precision="0" />
+    <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+    <Property Name="Hold" Type="Int32" />
+    <Property Name="Missing" Type="Int32" />
+    <Property Name="Complete" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="23" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StagingSnapshot">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Complete" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="Incomplete" Type="Int32" />
+    <Property Name="Missing" Type="Int32" />
+    <Property Name="Hold" Type="Int32" />
   </EntityType>
 </Schema>

@@ -28,42 +28,6 @@
     <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="OnBoardPart">
-    <Key>
-      <PropertyRef Name="RecordNumber" />
-    </Key>
-    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateEntered" Type="DateTime" Precision="3" />
-    <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
-    <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
-    <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
-    <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
-    <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
-    <Property Name="DatePODue" Type="DateTime" Precision="3" />
-    <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
-    <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
-    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="DateComplete" Type="DateTime" Precision="3" />
-    <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="OnBoardTask">
     <Key>
       <PropertyRef Name="RecordNumber" />
@@ -177,25 +141,16 @@
   <EntityContainer Name="OnBoardingEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="OnBoardingPartsToAdds" EntityType="Self.OnBoardingPartsToAdd" />
-    <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardPart" />
     <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTask" />
     <EntitySet Name="Parameters" EntityType="Self.Parameter" />
     <EntitySet Name="PartMasters" EntityType="Self.PartMaster" />
     <EntitySet Name="SystemLogs" EntityType="Self.SystemLog" />
     <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
     <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
-    <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
     <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
+    <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+    <EntitySet Name="OnBoardParts" EntityType="OnBoardingModel.OnBoardPart" />
   </EntityContainer>
-  <EntityType Name="AuthorizedOnBoardPart">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="OnBoardPart" Type="Int64" />
-    <Property Name="DelegatedTo" Type="Int32" />
-    <Property Name="ResponsibleUser" Type="Int32" />
-  </EntityType>
   <EntityType Name="AvailPlanJob">
     <Key>
       <PropertyRef Name="ID" />
@@ -207,5 +162,53 @@
     <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
     <Property Name="OnBoardPart" Type="Int64" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="AuthorizedOnBoardPart">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ResponsibleUser" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="OnBoardPart" Type="Int64" />
+    <Property Name="DelegatedTo" Type="Int32" />
+    <Property Name="ResponsibleUser" Type="Int32" Nullable="false" />
+    <Property Name="DatePODue" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OnBoardPart">
+    <Key>
+      <PropertyRef Name="RecordNumber" />
+    </Key>
+    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Precision="3" />
+    <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
+    <Property Name="DatePODue" Type="DateTime" Precision="3" />
+    <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
+    <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
+    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="DateComplete" Type="DateTime" Precision="3" />
+    <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Archived" Type="Boolean" />
   </EntityType>
 </Schema>

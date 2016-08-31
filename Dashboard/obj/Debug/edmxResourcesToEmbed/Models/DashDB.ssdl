@@ -32,7 +32,7 @@
     <Property Name="TypeID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="TimeSubmitted" Type="datetime" />
-    <Property Name="CommentText" Type="nvarchar" MaxLength="500" />
+    <Property Name="CommentText" Type="nvarchar(max)" />
     <Property Name="Type" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Companies">
@@ -305,7 +305,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Day" Type="varchar" MaxLength="2" />
     <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
     <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesMonthlyByCompany">
     <Key>
@@ -315,7 +315,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="int" />
     <Property Name="Month" Type="int" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesStage">
     <Key>
@@ -346,7 +346,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
     <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
     <Property Name="OnTime" Type="bit" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapDailyByPlant">
     <Key>
@@ -358,7 +358,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapMonthlyByPlant">
     <Key>
@@ -369,7 +369,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapStage">
     <Key>
@@ -391,7 +391,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ShippingPlanAdjShipDates">
     <Key>
@@ -517,6 +517,29 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="SupervisorID" Type="int" />
   </EntityType>
+  <EntityType Name="StagingAudit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StagingDetailID" Type="int" />
+    <Property Name="DateDue" Type="datetime" />
+    <Property Name="DateClosed" Type="datetime" />
+    <Property Name="DateReopened" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StagingAuditDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StagingAuditID" Type="int" />
+    <Property Name="StagingCriteriaID" Type="int" />
+    <Property Name="OwnerID" Type="int" />
+    <Property Name="Important" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="DateCompleted" Type="datetime" />
+  </EntityType>
   <EntityType Name="StagingCriteria">
     <Key>
       <PropertyRef Name="ID" />
@@ -546,6 +569,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StagingDetailID" Type="int" />
     <Property Name="Type" Type="nvarchar" MaxLength="20" />
     <Property Name="Description" Type="nvarchar" MaxLength="254" />
     <Property Name="Location" Type="nvarchar" MaxLength="20" />
@@ -553,7 +577,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="IssuerID" Type="int" />
     <Property Name="DateIssued" Type="datetime" />
     <Property Name="DateReturned" Type="datetime" />
-    <Property Name="JobID" Type="int" />
   </EntityType>
   <EntityType Name="StagingTopLevel">
     <Key>
@@ -904,6 +927,79 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     <Property Name="Score" Type="decimal" Precision="38" Scale="2" />
     <Property Name="ChallengeID" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingCheckList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StagingCheckList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="StagingAuditID" Type="int" />
+    <Property Name="StagingDetailID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="254" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="61" />
+    <Property Name="OwnerID" Type="int" />
+    <Property Name="Important" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="DateDue" Type="datetime" />
+    <Property Name="DateCompleted" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingDetailAuditStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StagingDetailAuditStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="Seq" Type="char" MaxLength="6" />
+    <Property Name="PARTNUM" Type="char" MaxLength="20" />
+    <Property Name="DESCRIPTION" Type="char" MaxLength="30" />
+    <Property Name="WC" Type="char" MaxLength="20" />
+    <Property Name="DATE_START" Type="date" />
+    <Property Name="DATE_CLOSED" Type="date" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Missing" Type="int" />
+    <Property Name="Hold" Type="int" />
+    <Property Name="Complete" Type="int" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="23" />
+    <Property Name="DateCompleted" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingSnapshot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StagingSnapshot">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Complete" Type="int" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Incomplete" Type="int" />
+    <Property Name="Missing" Type="int" />
+    <Property Name="Hold" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StagingTopLevelStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="char" MaxLength="6" />
+    <Property Name="Suffix" Type="char" MaxLength="3" />
+    <Property Name="Steps" Type="int" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="PartNum" Type="char" MaxLength="20" />
+    <Property Name="Description" Type="char" MaxLength="30" />
+    <Property Name="DateStageDue" Type="date" />
+    <Property Name="DATE_CLOSED" Type="date" />
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="DateCompleted" Type="datetime" />
+    <Property Name="Hold" Type="int" />
+    <Property Name="Missing" Type="int" />
+    <Property Name="Complete" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="23" />
+  </EntityType>
   <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
     <End Role="DeliverableDocuments" Type="Self.DeliverableDocuments" Multiplicity="1" />
     <End Role="DeliverableDocuments1" Type="Self.DeliverableDocuments" Multiplicity="0..1" />
@@ -958,6 +1054,8 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StagingAudit" EntityType="Self.StagingAudit" Schema="Operations" store:Type="Tables" />
+    <EntitySet Name="StagingAuditDetail" EntityType="Self.StagingAuditDetail" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingDetail" EntityType="Self.StagingDetail" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingItems" EntityType="Self.StagingItems" Schema="Operations" store:Type="Tables" />
@@ -1262,6 +1360,67 @@ warning 6002: The table/view 'Dashboard.dbo.UCFPreviousScoresByChallenge' does n
     [UCFPreviousScoresByChallenge].[Score] AS [Score], 
     [UCFPreviousScoresByChallenge].[ChallengeID] AS [ChallengeID]
     FROM [dbo].[UCFPreviousScoresByChallenge] AS [UCFPreviousScoresByChallenge]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StagingCheckList" EntityType="Self.StagingCheckList" store:Type="Views" store:Schema="Operations">
+      <DefiningQuery>SELECT 
+    [StagingCheckList].[ID] AS [ID], 
+    [StagingCheckList].[StagingAuditID] AS [StagingAuditID], 
+    [StagingCheckList].[StagingDetailID] AS [StagingDetailID], 
+    [StagingCheckList].[Name] AS [Name], 
+    [StagingCheckList].[Owner] AS [Owner], 
+    [StagingCheckList].[OwnerID] AS [OwnerID], 
+    [StagingCheckList].[Important] AS [Important], 
+    [StagingCheckList].[Status] AS [Status], 
+    [StagingCheckList].[DateDue] AS [DateDue], 
+    [StagingCheckList].[DateCompleted] AS [DateCompleted]
+    FROM [Operations].[StagingCheckList] AS [StagingCheckList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StagingDetailAuditStatus" EntityType="Self.StagingDetailAuditStatus" store:Type="Views" store:Schema="Operations">
+      <DefiningQuery>SELECT 
+    [StagingDetailAuditStatus].[Job] AS [Job], 
+    [StagingDetailAuditStatus].[Suffix] AS [Suffix], 
+    [StagingDetailAuditStatus].[Seq] AS [Seq], 
+    [StagingDetailAuditStatus].[PARTNUM] AS [PARTNUM], 
+    [StagingDetailAuditStatus].[DESCRIPTION] AS [DESCRIPTION], 
+    [StagingDetailAuditStatus].[WC] AS [WC], 
+    [StagingDetailAuditStatus].[DATE_START] AS [DATE_START], 
+    [StagingDetailAuditStatus].[DATE_CLOSED] AS [DATE_CLOSED], 
+    [StagingDetailAuditStatus].[ID] AS [ID], 
+    [StagingDetailAuditStatus].[Missing] AS [Missing], 
+    [StagingDetailAuditStatus].[Hold] AS [Hold], 
+    [StagingDetailAuditStatus].[Complete] AS [Complete], 
+    [StagingDetailAuditStatus].[Total] AS [Total], 
+    [StagingDetailAuditStatus].[Status] AS [Status], 
+    [StagingDetailAuditStatus].[DateCompleted] AS [DateCompleted]
+    FROM [Operations].[StagingDetailAuditStatus] AS [StagingDetailAuditStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StagingSnapshot" EntityType="Self.StagingSnapshot" store:Type="Views" store:Schema="Operations">
+      <DefiningQuery>SELECT 
+    [StagingSnapshot].[ID] AS [ID], 
+    [StagingSnapshot].[Complete] AS [Complete], 
+    [StagingSnapshot].[Total] AS [Total], 
+    [StagingSnapshot].[Incomplete] AS [Incomplete], 
+    [StagingSnapshot].[Missing] AS [Missing], 
+    [StagingSnapshot].[Hold] AS [Hold]
+    FROM [Operations].[StagingSnapshot] AS [StagingSnapshot]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StagingTopLevelStatus" EntityType="Self.StagingTopLevelStatus" store:Type="Views" store:Schema="Operations">
+      <DefiningQuery>SELECT 
+    [StagingTopLevelStatus].[Job] AS [Job], 
+    [StagingTopLevelStatus].[Suffix] AS [Suffix], 
+    [StagingTopLevelStatus].[Steps] AS [Steps], 
+    [StagingTopLevelStatus].[DateStart] AS [DateStart], 
+    [StagingTopLevelStatus].[PartNum] AS [PartNum], 
+    [StagingTopLevelStatus].[Description] AS [Description], 
+    [StagingTopLevelStatus].[DateStageDue] AS [DateStageDue], 
+    [StagingTopLevelStatus].[DATE_CLOSED] AS [DATE_CLOSED], 
+    [StagingTopLevelStatus].[ID] AS [ID], 
+    [StagingTopLevelStatus].[DateCompleted] AS [DateCompleted], 
+    [StagingTopLevelStatus].[Hold] AS [Hold], 
+    [StagingTopLevelStatus].[Missing] AS [Missing], 
+    [StagingTopLevelStatus].[Complete] AS [Complete], 
+    [StagingTopLevelStatus].[Status] AS [Status]
+    FROM [Operations].[StagingTopLevelStatus] AS [StagingTopLevelStatus]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="Self.FK_DeliverableDocuments_DeliverableDocuments">
       <End Role="DeliverableDocuments" EntitySet="DeliverableDocuments" />

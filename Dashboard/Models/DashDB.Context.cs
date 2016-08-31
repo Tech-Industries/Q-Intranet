@@ -52,7 +52,6 @@ namespace Dashboard.Models
         public virtual DbSet<PastDueDeliverable> PastDueDeliverables { get; set; }
         public virtual DbSet<DeliverablesDueInNextThirtyDay> DeliverablesDueInNextThirtyDays { get; set; }
         public virtual DbSet<BugTag> BugTags { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<UCFCategory> UCFCategories { get; set; }
         public virtual DbSet<UCFChallenge> UCFChallenges { get; set; }
         public virtual DbSet<UCFAudit> UCFAudits { get; set; }
@@ -86,9 +85,16 @@ namespace Dashboard.Models
         public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
         public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
-        public virtual DbSet<StagingItem> StagingItems { get; set; }
         public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
         public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
         public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
+        public virtual DbSet<StagingAudit> StagingAudits { get; set; }
+        public virtual DbSet<StagingItem> StagingItems { get; set; }
+        public virtual DbSet<StagingAuditDetail> StagingAuditDetails { get; set; }
+        public virtual DbSet<StagingCheckList> StagingCheckLists { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<StagingDetailAuditStatu> StagingDetailAuditStatus { get; set; }
+        public virtual DbSet<StagingTopLevelStatu> StagingTopLevelStatus { get; set; }
+        public virtual DbSet<StagingSnapshot> StagingSnapshots { get; set; }
     }
 }

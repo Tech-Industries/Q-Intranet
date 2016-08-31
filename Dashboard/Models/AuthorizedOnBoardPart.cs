@@ -17,6 +17,7 @@ namespace Dashboard.Models
         public long ID { get; set; }
         public Nullable<long> OnBoardPart { get; set; }
         public Nullable<int> DelegatedTo { get; set; }
-        public Nullable<int> ResponsibleUser { get; set; }
+        public int ResponsibleUser { get; set; }
+        public Nullable<System.DateTime> DatePODue { get; set; }
     }
 }

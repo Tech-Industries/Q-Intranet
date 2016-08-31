@@ -32,11 +32,11 @@ namespace Dashboard.APIControllers
             List< AuthorizedOnBoardPart> parts = new List<AuthorizedOnBoardPart>();
             if (RelPer.Any())
             {
-                parts = await onbdb.AuthorizedOnBoardParts.ToListAsync();
+                parts = await onbdb.AuthorizedOnBoardParts.OrderBy(o => o.DatePODue).ToListAsync();
             }
             else
             {
-                parts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == id).ToListAsync();
+                parts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == id).OrderBy(o => o.DatePODue).ToListAsync();
             }
             
             if (!parts.Any())
@@ -50,7 +50,7 @@ namespace Dashboard.APIControllers
         [HttpGet]
         public async Task<IHttpActionResult> GetParts()
         {
-            var parts = await onbdb.OnBoardParts.ToListAsync();
+            var parts = await onbdb.OnBoardParts.OrderBy(o => o.DatePODue).Where(x => x.Archived != true).ToListAsync();
             if (!parts.Any())
             {
                 return NotFound();
@@ -66,6 +66,8 @@ namespace Dashboard.APIControllers
             var timeSubmitted = DateTime.Now;
             var oldPart = await onbdb.OnBoardParts.FindAsync(id);
 
+            
+
             if (oldPart == null || part == null)
             {
                 return NotFound();
@@ -74,7 +76,7 @@ namespace Dashboard.APIControllers
             {
 
                 var entry = onbdb.Entry(oldPart);
-
+                oldPart.Archived = part.Archived;
                 oldPart.FirstArticleJobNumber = part.FirstArticleJobNumber;
 
 
@@ -88,6 +90,24 @@ namespace Dashboard.APIControllers
             }
 
             return Ok(oldPart);
+        }
+
+
+
+        [Route("api/v1/Onboarding/{id:int}")]
+        [HttpDelete]
+         public async Task<IHttpActionResult> DeletePart(int id)
+        {
+            try
+            {
+                onbdb.OnBoardParts.Remove(await onbdb.OnBoardParts.FindAsync(id));
+                await onbdb.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
         [Route("api/v1/Onboarding/Tasks")]

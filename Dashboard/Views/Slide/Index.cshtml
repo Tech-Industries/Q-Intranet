@@ -106,40 +106,6 @@
     </div>
 </div>
 
-@*<div class="row slide" id="slide-6">
-        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
-            <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
-        </div>
-        <div class="col-md-12" style="height: 100vh;">
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>We need <em>All</em> Employees to Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <span style="color: #c0392b">Employee Survey</span><br /> no later than <span style="color: #c0392b">Friday</span> July 22<sup>nd</sup>.<br /><br /> Access this by selecting the "Surveys July 2016" link on the GUI Station.</span></span></h1></center>
-            <br />
-        </div>
-    </div>
-
-    <div class="row slide" id="slide-6">
-        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
-            <center><h1 style="font-weight: bold; color: #000"><i class="fa fa-flag"></i> Fourth Of July <i class="fa fa-flag"></i></h1></center>
-        </div>
-        <div class="col-md-12" style="height: 100vh;">
-            <br /><br /><br /><br /><br /><br />
-            <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;"><span>The plant will be closed the following days in observance of Independance Day</span></span></h1></center>
-            <center><h1 style="font-size: 40px; font-weight: bold;"><span style="color: #34495e;"><span>Saturday July 2, 2016</span></span></h1></center>
-            <center><h1 style="font-size: 40px; font-weight: bold;"><span style="color: #34495e;"><span>Sunday July 3, 2016</span></span></h1></center>
-            <center><h1 style="font-size: 40px; font-weight: bold;"><span style="color: #34495e;"><span>Monday July 4, 2016</span></span></h1></center>
-            <br />
-            <center><h1 style="font-size: 35px; font-weight: bold;"><span style="color: #34495e;"><span>Due to delivery schedules, should any departments be working, those employees will be notified by their supervisors.</span></span></h1></center>
-            <br />
-            <center><h1 style="font-size: 35px; font-weight: bold;"><span style="color: #34495e;"><span>All normal working schedules will resume on Tuesday, July 5, 2016</span></span></h1></center>
-            <br />
-            <center><h1 style="font-size: 35px; font-weight: bold; padding: 0 30px;"><span style="color: #34495e;"><span>Please remember that company policy requires employees who have completed their probationary period work a full shift prior to and a full shift immediately after the holiday in order to receive holiday pay.  </span></span></h1></center>
-            <br />
-            <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;"><span>Have a safe and enjoyable holiday!</span></span></h1></center>
-        </div>
-    </div>*@
-
-
-
 <div class="row slide" id="slide-6">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
         <center><h1 style="font-weight: bold; color: #000">All-Employee Meeting!</h1></center>
@@ -155,6 +121,27 @@
         <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>
     </div>
 </div>
+
+<div class="row slide" id="slide-6">
+        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+            <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
+        </div>
+        <div class="col-md-12" style="height: 100vh;">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>We need <em>All</em> Employees to Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <span style="color: #c0392b">Employee Survey</span><br /> no later than <span style="color: #c0392b">Friday</span> July 22<sup>nd</sup>.<br /><br /> Access this by selecting the "Surveys July 2016" link on the GUI Station.</span></span></h1></center>
+            <br />
+        </div>
+    </div>
+
+    <div class="row slide" id="slide-7">
+        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+            <center><h1 style="font-weight: bold; color: #000">Attention All Employees</h1></center>
+        </div>
+        <div class="col-md-12" style="height: 100vh;">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">We need all employees to update their dependent information in Ultipro ASAP. Thank you!</h1></center>
+        </div>
+    </div>
 
 <div class="modal" id="setting-modal">
     <div class="modal-dialog modal-md">
@@ -197,7 +184,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Month:</span>
                                     <select class="form-control" id="monthSelect">
-                                        <option value="07">07</option>
+                                        <option value="08">08</option>
                                     </select>
                                 </div>
                             </div>
@@ -244,6 +231,11 @@
                 location.reload();
             }, 43200000);
 
+            $(document).bind('mousedown', '.onboard-task-item', function (e) {
+                if (e.button == 3) {
+                    console.log('right-clicked');
+                }
+            });
 
             $(document).on("idle.idleTimer", function (even, elem, obj) {
                 if (paused == false) {
@@ -557,7 +549,7 @@
 
 
         var current = 1;
-        var slides = 6;
+        var slides = 7;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

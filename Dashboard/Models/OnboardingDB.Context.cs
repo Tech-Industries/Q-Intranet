@@ -27,14 +27,14 @@ namespace Dashboard.Models
     
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<OnBoardingPartsToAdd> OnBoardingPartsToAdds { get; set; }
-        public virtual DbSet<OnBoardPart> OnBoardParts { get; set; }
         public virtual DbSet<OnBoardTask> OnBoardTasks { get; set; }
         public virtual DbSet<Parameter> Parameters { get; set; }
         public virtual DbSet<PartMaster> PartMasters { get; set; }
         public virtual DbSet<SystemLog> SystemLogs { get; set; }
         public virtual DbSet<Z_OnBoardPartJobs> Z_OnBoardPartJobs { get; set; }
         public virtual DbSet<Z_OnBoardPartOSSPO> Z_OnBoardPartOSSPO { get; set; }
-        public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
         public virtual DbSet<AvailPlanJob> AvailPlanJobs { get; set; }
+        public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
+        public virtual DbSet<OnBoardPart> OnBoardParts { get; set; }
     }
 }

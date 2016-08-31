@@ -444,16 +444,34 @@
     <Compile Include="Models\ShippingPlanAdjShipDate.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StagingAudit.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingAuditDetail.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingCheckList.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StagingCriteria.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StagingDetail.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StagingDetailAuditStatu.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StagingItem.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StagingSnapshot.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StagingTopLevel.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingTopLevelStatu.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemLog.cs">

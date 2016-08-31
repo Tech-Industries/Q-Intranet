@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <div class="row">
     <div class="col-lg-12">
         <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom: 0;">
@@ -10,6 +9,9 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Onboarding</h5>
+                    <div class="ibox-tools">
+                        <button class="btn btn-primary btn-sm" id="archive-toggle">Archive</button>
+                    </div>
                 </div>
                 <div class="ibox-content">
                     <div data-bind="if: OnboardingParts().length == 0">
@@ -28,23 +30,26 @@
                                 <div class="row onboard-part-item">
                                     <div class="col-md-2">
                                         <div style="float: left">
-                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                            <div style="width: 220px; height: 20px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                                 <h5 data-bind="text: part.PartNumber"></h5>
                                             </div>
-                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
+                                            <div style="width: 220px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
                                                 <h5 data-bind="text: part.PartDescription"></h5>
                                             </div>
-                                            <div style="width: 120px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
+                                            <div style="width: 220px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
                                                 <span data-bind="if: part.FirstArticleJobNumber == null || part.FirstArticleJobNumber == ''"><button class="btn btn-danger btn-xs btn-assign-job" data-bind="attr:{partid: part.RecordNumber, partnumber: part.PartNumber}">Assign Job</button></span>
                                                 <span data-bine="if: part.FirstArticleJobNumber != ''"><span data-bind="text: part.FirstArticleJobNumber"></span></span>
                                             </div>
+                                            <div style="width: 220px; height: 20px; text-overflow: ellipsis;white-space: nowrap; overflow: hidden;">
+                                                <button class="btn btn-primary btn-xs part-detail" data-bind="attr:{'partid': part.RecordNumber}">Open</button>
+                                            </div>
                                         </div>
-                                        <div style="width: 60px; height: 80px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;float: left; padding: 0 5px;">
-                                            <h6 data-bind="text: part.DateEntered"></h6>
-                                            <h6 data-bind="text: part.DatePODue"></h6>
-                                            <h6 data-bind="text: part.PartType"></h6>
-                                            <h6 data-bind="text: part.OnBoardClass"></h6>
-                                        </div>
+                                        @*<div style="width: 60px; height: 80px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;float: left; padding: 0 5px;">
+                                                <h6 data-bind="text: part.DateEntered"></h6>
+                                                <h6 data-bind="text: part.DatePODue"></h6>
+                                                <h6 data-bind="text: part.PartType"></h6>
+                                                <h6 data-bind="text: part.OnBoardClass"></h6>
+                                            </div>*@
 
 
 
@@ -58,6 +63,7 @@
                                                         <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
                                                             <div data-bind="text: PercentComplete+'%'"></div>
                                                             <div data-bind="text: DueBy"></div>
+                                                            <div data-bind="text: DelegatedToName"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,7 +120,59 @@
     </div>
 
 </div>
+<div class="modal inmodal fade" id="onboarding-part-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" data-bind="if: SelectedPart()">
+            <div class="modal-header">
+                <h2 data-bind="text: SelectedPart().PartNumber"></h2>
+                <h4 data-bind="text: SelectedPart().PartDescription"></h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><label>Company: </label> <span data-bind="text: SelectedPart().Company"></span></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><label>Date Due: </label> <span data-bind="text: SelectedPart().DatePODue"></span></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><label>Date PO: </label> <span data-bind="text: SelectedPart().DatePOReceived"></span></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><label>Job Number: </label> <span data-bind="text: SelectedPart().FirstArticleJobNumber"></span></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><label>Package: </label> <span data-bind="text: SelectedPart().PackageName"></span></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><label>Part Type: </label> <span data-bind="text: SelectedPart().PartType"></span></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><label>Class: </label> <span data-bind="text: SelectedPart().OnBoardClass"></span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left delete-part">Delete</button>
+                <button type="button" class="btn btn-primary archive-part">Archive</button>
+                
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal inmodal fade" id="onboarding-task-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -261,6 +319,48 @@
             ko.applyBindings(vm);
             vm.loadUsers();
             vm.LoadOnboardingParts();
+            
+            //Delete part click event
+            $(document).on('click', '.delete-part', function () {
+                swal({
+                    title: "Are you sure you want to DELETE this Part?",
+                    text: "You will be unable to recover it.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "Yes!",
+                    closeOnConfirm: false
+                },
+                function () {
+                    vm.DeletePart(vm.SelectedPart().RecordNumber);
+                    swal({
+                        title: "Deleted!",
+                        type: "success",
+                        timer: 1000
+                    });
+                });
+            });
+
+            //Archive part click event
+            $(document).on('click', '.archive-part', function () {
+                swal({
+                    title: "Are you sure you want to ARCHIVE this Part?",
+                    text: "It will be found under the History tab.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "Yes!",
+                    closeOnConfirm: false
+                },
+                function () {
+                    vm.ArchivePart(vm.SelectedPart().RecordNumber);
+                    swal({
+                        title: "Archived!",
+                        type: "success",
+                        timer: 1000
+                    });
+                });
+            });
 
             $(document).on('click', '.onboard-task-item', function () {
                 var TaskID = $(this).attr('taskid');
@@ -317,7 +417,12 @@
                 }
             });
 
-
+            $(document).on('click', '.part-detail', function (e) {
+                var id = $(this).attr('partid');
+                console.log(id);
+                vm.SelectPart(id);
+                $('#onboarding-part-modal').modal('show');
+            });
 
             $(document).on('click', '.btn-assign-job', function (e) {
                 AssignBtn = $(this);

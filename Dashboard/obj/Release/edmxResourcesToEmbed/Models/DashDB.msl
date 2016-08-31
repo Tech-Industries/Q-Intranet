@@ -359,18 +359,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="DashboardModel.Comment">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
-          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UCFCategories">
       <EntityTypeMapping TypeName="DashboardModel.UCFCategory">
         <MappingFragment StoreEntitySet="UCFCategories">
@@ -831,21 +819,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StagingItems">
-      <EntityTypeMapping TypeName="DashboardModel.StagingItem">
-        <MappingFragment StoreEntitySet="StagingItems">
-          <ScalarProperty Name="JobID" ColumnName="JobID" />
-          <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
-          <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
-          <ScalarProperty Name="IssuerID" ColumnName="IssuerID" />
-          <ScalarProperty Name="Consumable" ColumnName="Consumable" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReviewablesByUsers">
       <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
         <MappingFragment StoreEntitySet="ReviewablesByUser">
@@ -911,6 +884,127 @@
           <ScalarProperty Name="DaysInMonth" ColumnName="DaysInMonth" />
           <ScalarProperty Name="Month" ColumnName="Month" />
           <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingAudits">
+      <EntityTypeMapping TypeName="DashboardModel.StagingAudit">
+        <MappingFragment StoreEntitySet="StagingAudit">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="DateReopened" ColumnName="DateReopened" />
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="StagingDetailID" ColumnName="StagingDetailID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingItems">
+      <EntityTypeMapping TypeName="DashboardModel.StagingItem">
+        <MappingFragment StoreEntitySet="StagingItems">
+          <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
+          <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+          <ScalarProperty Name="IssuerID" ColumnName="IssuerID" />
+          <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StagingDetailID" ColumnName="StagingDetailID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingAuditDetails">
+      <EntityTypeMapping TypeName="DashboardModel.StagingAuditDetail">
+        <MappingFragment StoreEntitySet="StagingAuditDetail">
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Important" ColumnName="Important" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="StagingCriteriaID" ColumnName="StagingCriteriaID" />
+          <ScalarProperty Name="StagingAuditID" ColumnName="StagingAuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingCheckLists">
+      <EntityTypeMapping TypeName="DashboardModel.StagingCheckList">
+        <MappingFragment StoreEntitySet="StagingCheckList">
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Important" ColumnName="Important" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StagingDetailID" ColumnName="StagingDetailID" />
+          <ScalarProperty Name="StagingAuditID" ColumnName="StagingAuditID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="DashboardModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingDetailAuditStatus">
+      <EntityTypeMapping TypeName="DashboardModel.StagingDetailAuditStatu">
+        <MappingFragment StoreEntitySet="StagingDetailAuditStatus">
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Hold" ColumnName="Hold" />
+          <ScalarProperty Name="Missing" ColumnName="Missing" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+          <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
+          <ScalarProperty Name="WC" ColumnName="WC" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PARTNUM" ColumnName="PARTNUM" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingTopLevelStatus">
+      <EntityTypeMapping TypeName="DashboardModel.StagingTopLevelStatu">
+        <MappingFragment StoreEntitySet="StagingTopLevelStatus">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Missing" ColumnName="Missing" />
+          <ScalarProperty Name="Hold" ColumnName="Hold" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
+          <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingSnapshots">
+      <EntityTypeMapping TypeName="DashboardModel.StagingSnapshot">
+        <MappingFragment StoreEntitySet="StagingSnapshot">
+          <ScalarProperty Name="Hold" ColumnName="Hold" />
+          <ScalarProperty Name="Missing" ColumnName="Missing" />
+          <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

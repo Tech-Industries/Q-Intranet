@@ -28,7 +28,7 @@
                                                 <th>Username</th>
                                                 <th>Email</th>
                                                 <th></th>
-                                            </th>
+                                            </tr>
                                         </thead>
                                         <tbody data-bind="foreach: $root.Users">
                                             <tr data-bind="click: $root.loadUserDetail.bind($data, $data.ID)">
@@ -83,7 +83,7 @@
                         </div>
 
                     </div>
-                    <div id="tab-2" class="tab-pane">
+                    <div id="tab-2" class="tab-pane" style="height: 600px;">
                         <div style="height:90%;">
                             <div class="full-height-scroll" id="tblGroups">
                                 <div class="table-responsive">

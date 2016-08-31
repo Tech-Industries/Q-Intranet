@@ -80,6 +80,7 @@
           <Property Name="DateComplete" Type="datetime" />
           <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
+          <Property Name="Archived" Type="bit" />
         </EntityType>
         <EntityType Name="OnBoardTasks">
           <Key>
@@ -196,11 +197,13 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
         <EntityType Name="AuthorizedOnBoardParts">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="ResponsibleUser" />
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="OnBoardPart" Type="bigint" />
           <Property Name="DelegatedTo" Type="int" />
-          <Property Name="ResponsibleUser" Type="int" />
+          <Property Name="ResponsibleUser" Type="int" Nullable="false" />
+          <Property Name="DatePODue" Type="datetime" />
         </EntityType>
         <EntityContainer Name="OnBoardingModelStoreContainer">
           <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
@@ -218,7 +221,8 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     [AuthorizedOnBoardParts].[ID] AS [ID], 
     [AuthorizedOnBoardParts].[OnBoardPart] AS [OnBoardPart], 
     [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo], 
-    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser]
+    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser], 
+    [AuthorizedOnBoardParts].[DatePODue] AS [DatePODue]
     FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -253,42 +257,6 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="DateRequestedToAdd" Type="DateTime" Precision="0" />
           <Property Name="DateAdded" Type="DateTime" Precision="0" />
           <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OnBoardPart">
-          <Key>
-            <PropertyRef Name="RecordNumber" />
-          </Key>
-          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateEntered" Type="DateTime" Precision="3" />
-          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
-          <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
-          <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
-          <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
-          <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
-          <Property Name="DatePODue" Type="DateTime" Precision="3" />
-          <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
-          <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
-          <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DateComplete" Type="DateTime" Precision="3" />
-          <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OnBoardTask">
           <Key>
@@ -403,25 +371,16 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
         <EntityContainer Name="OnBoardingEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="OnBoardingPartsToAdds" EntityType="Self.OnBoardingPartsToAdd" />
-          <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardPart" />
           <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTask" />
           <EntitySet Name="Parameters" EntityType="Self.Parameter" />
           <EntitySet Name="PartMasters" EntityType="Self.PartMaster" />
           <EntitySet Name="SystemLogs" EntityType="Self.SystemLog" />
           <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
           <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
-          <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
           <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
+          <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+          <EntitySet Name="OnBoardParts" EntityType="OnBoardingModel.OnBoardPart" />
         </EntityContainer>
-        <EntityType Name="AuthorizedOnBoardPart">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="OnBoardPart" Type="Int64" />
-          <Property Name="DelegatedTo" Type="Int32" />
-          <Property Name="ResponsibleUser" Type="Int32" />
-        </EntityType>
         <EntityType Name="AvailPlanJob">
           <Key>
             <PropertyRef Name="ID" />
@@ -433,6 +392,54 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
           <Property Name="OnBoardPart" Type="Int64" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="AuthorizedOnBoardPart">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ResponsibleUser" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="OnBoardPart" Type="Int64" />
+          <Property Name="DelegatedTo" Type="Int32" />
+          <Property Name="ResponsibleUser" Type="Int32" Nullable="false" />
+          <Property Name="DatePODue" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OnBoardPart">
+          <Key>
+            <PropertyRef Name="RecordNumber" />
+          </Key>
+          <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" />
+          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
+          <Property Name="DatePODue" Type="DateTime" Precision="3" />
+          <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
+          <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
+          <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DateComplete" Type="DateTime" Precision="3" />
+          <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Archived" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -467,43 +474,6 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
                 <ScalarProperty Name="DateRequestedToAdd" ColumnName="DateRequestedToAdd" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
                 <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OnBoardParts">
-            <EntityTypeMapping TypeName="OnBoardingModel.OnBoardPart">
-              <MappingFragment StoreEntitySet="OnBoardParts">
-                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
-                <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
-                <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
-                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
-                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="PartType" ColumnName="PartType" />
-                <ScalarProperty Name="OnBoardClass" ColumnName="OnBoardClass" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="QtyPerShipSet" ColumnName="QtyPerShipSet" />
-                <ScalarProperty Name="PriceEach" ColumnName="PriceEach" />
-                <ScalarProperty Name="EstimatedMachineHours" ColumnName="EstimatedMachineHours" />
-                <ScalarProperty Name="EstimatedMaterial" ColumnName="EstimatedMaterial" />
-                <ScalarProperty Name="EstimatedLaborDollars" ColumnName="EstimatedLaborDollars" />
-                <ScalarProperty Name="EstimatedOutsideCost" ColumnName="EstimatedOutsideCost" />
-                <ScalarProperty Name="FirstArticleJobNumber" ColumnName="FirstArticleJobNumber" />
-                <ScalarProperty Name="FirstArticleJobScheduleDate" ColumnName="FirstArticleJobScheduleDate" />
-                <ScalarProperty Name="ProductionJobNumber" ColumnName="ProductionJobNumber" />
-                <ScalarProperty Name="ProductionJobScheduleDate" ColumnName="ProductionJobScheduleDate" />
-                <ScalarProperty Name="DatePOReceived" ColumnName="DatePOReceived" />
-                <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
-                <ScalarProperty Name="DatePOCommitted" ColumnName="DatePOCommitted" />
-                <ScalarProperty Name="DateScheduledRun" ColumnName="DateScheduledRun" />
-                <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
-                <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
-                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
-                <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -623,16 +593,6 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AuthorizedOnBoardParts">
-            <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
-              <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
-                <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
-                <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
-                <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AvailPlanJobs">
             <EntityTypeMapping TypeName="OnBoardingModel.AvailPlanJob">
               <MappingFragment StoreEntitySet="AvailPlanJobs">
@@ -643,6 +603,55 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
                 <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="Job" ColumnName="Job" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorizedOnBoardParts">
+            <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
+              <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
+                <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
+                <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+                <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+                <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnBoardParts">
+            <EntityTypeMapping TypeName="OnBoardingModel.OnBoardPart">
+              <MappingFragment StoreEntitySet="OnBoardParts">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+                <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+                <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
+                <ScalarProperty Name="DateScheduledRun" ColumnName="DateScheduledRun" />
+                <ScalarProperty Name="DatePOCommitted" ColumnName="DatePOCommitted" />
+                <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
+                <ScalarProperty Name="DatePOReceived" ColumnName="DatePOReceived" />
+                <ScalarProperty Name="ProductionJobScheduleDate" ColumnName="ProductionJobScheduleDate" />
+                <ScalarProperty Name="ProductionJobNumber" ColumnName="ProductionJobNumber" />
+                <ScalarProperty Name="FirstArticleJobScheduleDate" ColumnName="FirstArticleJobScheduleDate" />
+                <ScalarProperty Name="FirstArticleJobNumber" ColumnName="FirstArticleJobNumber" />
+                <ScalarProperty Name="EstimatedOutsideCost" ColumnName="EstimatedOutsideCost" />
+                <ScalarProperty Name="EstimatedLaborDollars" ColumnName="EstimatedLaborDollars" />
+                <ScalarProperty Name="EstimatedMaterial" ColumnName="EstimatedMaterial" />
+                <ScalarProperty Name="EstimatedMachineHours" ColumnName="EstimatedMachineHours" />
+                <ScalarProperty Name="PriceEach" ColumnName="PriceEach" />
+                <ScalarProperty Name="QtyPerShipSet" ColumnName="QtyPerShipSet" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="OnBoardClass" ColumnName="OnBoardClass" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

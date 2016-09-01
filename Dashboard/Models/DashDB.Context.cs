@@ -96,5 +96,6 @@ namespace Dashboard.Models
         public virtual DbSet<StagingDetailAuditStatu> StagingDetailAuditStatus { get; set; }
         public virtual DbSet<StagingTopLevelStatu> StagingTopLevelStatus { get; set; }
         public virtual DbSet<StagingSnapshot> StagingSnapshots { get; set; }
+        public virtual DbSet<Opportunity> Opportunities { get; set; }
     }
 }

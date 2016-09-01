@@ -380,6 +380,9 @@
     <Compile Include="Models\OnTimeDeliveryTrendInt.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Opportunity.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -1440,6 +1443,7 @@
     <Content Include="Views\Operations\Staging.cshtml" />
     <Content Include="Views\Operations\ShippingPlan.cshtml" />
     <Content Include="Views\Onboarding\Index.cshtml" />
+    <Content Include="Views\Operations\Opportunities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

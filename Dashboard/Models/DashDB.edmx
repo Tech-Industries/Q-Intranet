@@ -264,6 +264,26 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
           <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ProductLineTemp">
+          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
+          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
+          <Property Name="LINE" Type="char" MaxLength="3" />
+          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
+          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
+          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
+          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
+          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
+          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
+          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
+          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
+          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
+          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
+          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
+        </EntityType>-->
         <EntityType Name="ProjectAssignees">
           <Key>
             <PropertyRef Name="ID" />
@@ -521,6 +541,15 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="LastName" Type="nvarchar" MaxLength="30" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="SupervisorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Opportunities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateDue" Type="date" />
         </EntityType>
         <EntityType Name="StagingAudit">
           <Key>
@@ -1061,6 +1090,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Opportunities" EntityType="Self.Opportunities" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingAudit" EntityType="Self.StagingAudit" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingAuditDetail" EntityType="Self.StagingAuditDetail" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
@@ -1539,6 +1569,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="StagingDetailAuditStatus" EntityType="DashboardModel.StagingDetailAuditStatu" />
           <EntitySet Name="StagingTopLevelStatus" EntityType="DashboardModel.StagingTopLevelStatu" />
           <EntitySet Name="StagingSnapshots" EntityType="DashboardModel.StagingSnapshot" />
+          <EntitySet Name="Opportunities" EntityType="DashboardModel.Opportunity" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -2480,6 +2511,15 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <Property Name="Incomplete" Type="Int32" />
           <Property Name="Missing" Type="Int32" />
           <Property Name="Hold" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Opportunity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateDue" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3491,6 +3531,16 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
                 <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opportunities">
+            <EntityTypeMapping TypeName="DashboardModel.Opportunity">
+              <MappingFragment StoreEntitySet="Opportunities">
+                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

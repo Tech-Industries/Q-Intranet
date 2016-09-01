@@ -22,6 +22,87 @@ namespace Dashboard.APIControllers
     {
         private DashboardEntities db = new DashboardEntities();
 
+        #region Opportunities
+        [Route("api/v1/operations/opportunities")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetOpportunities()
+        {
+
+            var opps = await db.Opportunities.ToListAsync();
+            if (!opps.Any())
+            {
+                return NotFound();
+            }
+            return Ok(opps);
+        }
+
+        [Route("api/v1/operations/opportunities/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetOpportunity(int id)
+        {
+
+            var opps = await db.Opportunities.FindAsync(id);
+            if (opps == null)
+            {
+                return NotFound();
+            }
+            return Ok(opps);
+        }
+
+        [Route("api/v1/operations/opportunities")]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostOpportunities(Opportunity o)
+        {
+            db.Opportunities.Add(o);
+            await db.SaveChangesAsync();
+
+            return Ok(o);
+        }
+
+        [Route("api/v1/operations/opportunities/{id:int}")]
+        [HttpPut]
+        public async Task<IHttpActionResult> PutOpportunities(int id, Opportunity o)
+        {
+            Opportunity oldOp = await db.Opportunities.FindAsync(id);
+
+
+            if (oldOp == null || o == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var entry = db.Entry(oldOp);
+
+                oldOp = o;
+
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+
+            return Ok(oldOp);
+        }
+
+        [Route("api/v1/operations/opportunities/{id:int}")]
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteOpportunity(int id)
+        {
+            try
+            {
+                db.Opportunities.Remove(await db.Opportunities.FindAsync(id));
+                await db.SaveChangesAsync();
+            }
+            catch
+            {
+                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+            return Ok();
+        }
+        #endregion
+
         #region Shipping
 
         [Route("api/v1/operations/shipping")]

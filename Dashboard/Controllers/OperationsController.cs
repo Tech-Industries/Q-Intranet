@@ -55,5 +55,27 @@ namespace Dashboard.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
+
+        public ActionResult Opportunities()
+        {
+            if (CheckUserAuth.Check())
+            {
+                AnonDBChecks anon = new AnonDBChecks();
+                bool eval = anon.CheckForGroup(groupID: 25);
+                if (eval)
+                {
+                    ViewBag.UID = Response.Cookies["authToken"].Value;
+                    return View();
+                }
+                else
+                {
+                    return this.RedirectToAction("Opportunities", "Operations");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
     }
 }

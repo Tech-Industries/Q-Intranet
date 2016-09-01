@@ -58,7 +58,8 @@
                 <a><i class="fa fa-cube "></i> <span class="nav-label">Operations</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="@Html.IsSelected(action: "Staging")">@Html.ActionLink("Staging", "Staging", "Operations").IfAuth(groupID: 16)</li>
-                    <li class="@Html.IsSelected(action: "ShippingPlan")">@Html.ActionLink("Shipping Plan", "ShippingPlan", "Operations").IfAuth(groupID: 14)</>
+                    <li class="@Html.IsSelected(action: "ShippingPlan")">@Html.ActionLink("Shipping Plan", "ShippingPlan", "Operations").IfAuth(groupID: 14)</li>
+                    <li class="@Html.IsSelected(action: "Opportunities")">@Html.ActionLink("Opportunities", "Opportunities", "Operations").IfAuth(groupID: 25)</li>
                 </ul>
             </li>
             @*<li class="@Html.IsSelected(controller: "Operations") @Html.IsAuth(groupID: 15)">

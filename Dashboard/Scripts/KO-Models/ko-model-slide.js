@@ -134,8 +134,8 @@
     }
 
     self.loadMeeting = function () {
-        plantid = 1;
-        var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { PlantID: plantid, Type: 'Meeting' } });
+        PlantID = $('#plantSelect option:selected').attr('plantid');
+        var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { PlantID: PlantID, Type: 'Meeting' } });
         load.done(function (data) {
             d = data[0];
             var array = $.map(data, function (item) {
@@ -155,7 +155,7 @@
     }
 
     self.loadIncentives = function () {
-        plantid = 1;
+        PlantID = $('#plantSelect option:selected').attr('plantid');
         year = $("#yearSelect").val();
         month = $("#monthSelect").val();
         var days = getDaysInMonth(parseInt(month), parseInt(year));
@@ -167,7 +167,7 @@
             curr = true;
         }
 
-        var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { ID: plantid, Year: year, Month: month } });
+        var load = $.ajax({ type: "GET", url: slideAPI, cache: false, data: { ID: PlantID, Year: year, Month: month } });
         load.done(function (data) {
             if (curr) {
                 currGoal = (data[0].CWOGoal / days) * currDay;
@@ -251,8 +251,6 @@
                     Day: item.Day,
                     Sales: item.Sales,
                     MarginAmt: item.MarginAmt
-
-
                 };
             });
 

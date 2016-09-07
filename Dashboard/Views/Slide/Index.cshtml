@@ -139,7 +139,8 @@
         </div>
         <div class="col-md-12" style="height: 100vh;">
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">We need all employees to update their dependent information in Ultipro ASAP. Thank you!</h1></center>
+            @*<center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">We need all employees to update their dependent information in Ultipro ASAP. Thank you!</h1></center>*@
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">Mandatory Safety Meeting tomorrow, 9/7/16 @@ 3:00 p.m.</h1></center>
         </div>
     </div>
 
@@ -184,7 +185,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Month:</span>
                                     <select class="form-control" id="monthSelect">
-                                        <option value="08">08</option>
+                                        <option value="09">09</option>
                                     </select>
                                 </div>
                             </div>
@@ -221,7 +222,7 @@
                 var ypoint = ydata[ydata.length - 1];
                 console.log(chart.xAxis[0].translate(xpoint) + " - " + chart.yAxis[0].translate(ypoint));
             }
-            
+
             refInterval = setInterval(function () {
                 vm.CheckRefreshFlag();
             }, 5000);
@@ -234,6 +235,10 @@
                 if (e.button == 3) {
                     console.log('right-clicked');
                 }
+            });
+
+            $(document).change('.plantSelect', function () {
+                vm.loadData();
             });
 
             $(document).on("idle.idleTimer", function (even, elem, obj) {

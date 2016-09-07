@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="OnBoardingModel.Z_OnBoardPartOSSPO" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OnBoardingModel.AvailPlanJob" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="OnBoardingModel.AuthorizedOnBoardPart" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="OnBoardingModel.OnBoardPart" Width="1.5" PointX="8" PointY="1.25" />
+        <EntityTypeShape EntityType="OnBoardingModel.OnBoardPart" Width="1.5" PointX="8.25" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -101,6 +101,7 @@
     <EntitySet Name="StagingDetailAuditStatus" EntityType="DashboardModel.StagingDetailAuditStatu" />
     <EntitySet Name="StagingTopLevelStatus" EntityType="DashboardModel.StagingTopLevelStatu" />
     <EntitySet Name="StagingSnapshots" EntityType="DashboardModel.StagingSnapshot" />
+    <EntitySet Name="Opportunities" EntityType="DashboardModel.Opportunity" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -1042,5 +1043,14 @@
     <Property Name="Incomplete" Type="Int32" />
     <Property Name="Missing" Type="Int32" />
     <Property Name="Hold" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Opportunity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateDue" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>

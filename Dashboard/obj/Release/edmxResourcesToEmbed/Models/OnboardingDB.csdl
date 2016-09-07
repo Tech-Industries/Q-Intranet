@@ -210,5 +210,6 @@
     <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Archived" Type="Boolean" />
+    <Property Name="DateRecovery" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>

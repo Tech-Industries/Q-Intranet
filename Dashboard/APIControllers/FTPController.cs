@@ -88,7 +88,7 @@ namespace Dashboard.APIControllers
         private FtpWebRequest ftpRequest = null;
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
-        private int bufferSize = 2048;
+        private int bufferSize = 4096;
 
         /* Construct Object */
         public ftpCont(string hostIP, string userName, string password) { host = hostIP; user = userName; pass = password; }

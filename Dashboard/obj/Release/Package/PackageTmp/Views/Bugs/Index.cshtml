@@ -370,6 +370,7 @@
 
         $(document).on('click', '#submit-new-comment', function () {
             vm.addComment();
+            $('#txt-new-comment').val('');
         });
         $(document).on('click', '.edit-comment', function () {
             var e = $(this);//.parent().parent().parent();

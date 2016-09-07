@@ -209,7 +209,6 @@
             vm.loadData();
             var loadDataInterval = setInterval(function () {
                 vm.loadData();
-                console.log('test');
                 
 
             }, 300000);
@@ -222,7 +221,7 @@
                 var ypoint = ydata[ydata.length - 1];
                 console.log(chart.xAxis[0].translate(xpoint) + " - " + chart.yAxis[0].translate(ypoint));
             }
-            
+
             refInterval = setInterval(function () {
                 vm.CheckRefreshFlag();
             }, 5000);
@@ -235,6 +234,10 @@
                 if (e.button == 3) {
                     console.log('right-clicked');
                 }
+            });
+
+            $(document).change('.plantSelect', function () {
+                vm.loadData();
             });
 
             $(document).on("idle.idleTimer", function (even, elem, obj) {

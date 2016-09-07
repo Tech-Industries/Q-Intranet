@@ -81,7 +81,10 @@
           <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
           <Property Name="Archived" Type="bit" />
+          <Property Name="DateRecovery" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.OnBoardPartsBackup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OnBoardTasks">
           <Key>
             <PropertyRef Name="RecordNumber" />
@@ -440,6 +443,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Archived" Type="Boolean" />
+          <Property Name="DateRecovery" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -620,6 +624,7 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
           <EntitySetMapping Name="OnBoardParts">
             <EntityTypeMapping TypeName="OnBoardingModel.OnBoardPart">
               <MappingFragment StoreEntitySet="OnBoardParts">
+                <ScalarProperty Name="DateRecovery" ColumnName="DateRecovery" />
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
                 <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />

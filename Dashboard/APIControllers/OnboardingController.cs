@@ -177,6 +177,7 @@ namespace Dashboard.APIControllers
                 oldTask.CurrentStatus = task.CurrentStatus;
                 oldTask.PercentComplete = Convert.ToDecimal(task.PercentComplete);
                 oldTask.DueBy = task.DueBy;
+                oldTask.RecoveryDate = task.RecoveryDate;
 
 
                 //entry.State = EntityState.Modified;

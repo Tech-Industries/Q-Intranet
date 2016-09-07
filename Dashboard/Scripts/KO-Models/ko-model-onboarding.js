@@ -93,6 +93,10 @@
                 if (ii.DueBy != null) {
                     ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                 }
+
+                if (ii.RecoveryDate!= null) {
+                    ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
+                }
             });
             var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber })[0];
             self.OnboardingTasks.remove(tasks);
@@ -131,7 +135,7 @@
         self.OnboardingTasks([]);
         var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID, error: function (data) { self.isLoading(false); } });
         loadAuthParts.done(function (authParts) {
-
+            console.log(authParts);
             var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
             load.success(function (data) {
 
@@ -140,7 +144,8 @@
                 }
                 else {
                     for (x = 0; x < authParts.length; x++) {
-                        parts.push($.grep(data, function (e) { return e.RecordNumber == authParts[x].OnBoardPart })[0])
+                        
+                        parts.push($.grep(data, function (e) { console.log(e.RecordNumber + ' / ' + authParts[x].ID); return e.RecordNumber == authParts[x].ID})[0])
                     }
                 }
 
@@ -167,6 +172,9 @@
                             ii.DelegatedToName = user.FirstName+' '+user.LastName;
                             if (ii.DueBy != null) {
                                 ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
+                            }
+                            if (ii.RecoveryDate != null) {
+                                ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
                             }
                         });
                         if (data1[10].TaskDescription != 'FAI Populated') {
@@ -254,8 +262,17 @@
 
     self.checkStatus = function (ii, startDate, rangeDate) {
 
+        var dateCompare = null;
+
+        if (ii.RecoveryDate == null || ii.RecoveryDate == '') {
+            dateCompare = ii.DueBy;
+        }
+        else {
+            dateCompare = ii.RecoveryDate;
+        }
+
         if (ii.PercentComplete == 100) {
-            if (ii.CompletedOn > ii.DueBy) {
+            if (ii.CompletedOn > dateCompare) {
                 return 'Completed Late';
             }
             else {
@@ -267,13 +284,13 @@
         }
         else if (ii.PercentComplete == 0) {
 
-            if (ii.DueBy > rangeDate) {
+            if (dateCompare > rangeDate) {
                 return 'Future';
             }
-            else if (ii.DueBy >= startDate && ii.DueBy < rangeDate) {
+            else if (dateCompare >= startDate && dateCompare < rangeDate) {
                 return 'Upcoming';
             }
-            else if (ii.DueBy < startDate) {
+            else if (dateCompare < startDate) {
                 return 'Late';
             }
         }

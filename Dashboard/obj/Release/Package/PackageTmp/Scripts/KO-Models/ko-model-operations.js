@@ -11,6 +11,7 @@
     var stagingAuditAPI = operationsAPI + '/' + 'stagingaudit';
     var stagingItemsAPI = operationsAPI + '/' + 'stagingitems';
     var stagingSnapshotAPI = operationsAPI + '/' + 'stagingsnapshot';
+    var opportunitiesAPI = operationsAPI + '/' + 'opportunities';
 
     self.Users = ko.observableArray([]);
     self.UpcomingShipments = ko.observableArray([]);
@@ -30,7 +31,31 @@
 
     self.StagingSnapshot = ko.observableArray();
 
+    self.Opportunities = ko.observableArray([]);
 
+    self.LoadOpportunities = function () {
+        var load = $.ajax({ type: "GET", url: opportunitiesAPI, cache: false, data: {} });
+        load.done(function (data) {
+            self.Opportunities(data);
+        });
+    }
+
+    self.DeleteOpportunity = function (id) {
+        var rem = $.ajax({ type: 'DELETE', cache: false, url: opportunitiesAPI + '/' + id, data: id });
+        rem.done(function () {
+            self.Opportunities.remove($.grep(self.Opportunities(), function (e) { return e.ID == id })[0]);
+        });
+    }
+
+    self.AddOpportunity = function () {
+        if ($('#PackageName').val().length > 0) {
+            sendData = $('#add-opp-form').serialize();
+            var add = $.ajax({ type: "POST", cache: false, url: opportunitiesAPI, data: sendData });
+            add.success(function (data) {
+                self.Opportunities.push(data);
+            });
+        }
+    }
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: {} });
@@ -156,7 +181,7 @@
         if (Suffix.length < 1) {
             Suffix = '';
         }
-        var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job, Suffix: Suffix} });
+        var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job, Suffix: Suffix } });
         load.done(function (data) {
             $('.dtStagingDetail').DataTable().clear().draw();
             $.each(data, function (i, item) {
@@ -249,7 +274,7 @@
     }
 
     self.LoadStagingSnapshot = function () {
-        var load = $.ajax({ type: "GET", url: stagingSnapshotAPI, cache: false});
+        var load = $.ajax({ type: "GET", url: stagingSnapshotAPI, cache: false });
         load.done(function (data) {
             self.StagingSnapshot(data);
         });

@@ -62,7 +62,7 @@
 
                                                         <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
                                                             <div data-bind="text: PercentComplete+'%'"></div>
-                                                            <div data-bind="text: DueBy"></div>
+                                                            <div data-bind="text: RecoveryDate == '' || RecoveryDate == null ? DueBy : RecoveryDate, enable: DelegatedTo == @ViewBag.UID || @ViewBag.RelPer == 18"></div>
                                                             <div data-bind="text: DelegatedToName"></div>
                                                         </div>
                                                     </div>
@@ -188,11 +188,23 @@
                     </div>
                     <div class="col-md-4">
                         <center><h2 id="select-task-description" data-bind="text: SelectedTask().TaskDescription"></h2></center>
+                        
                         <center>
-                            <div class="input-group" style="width: 200px">
-                                <span class="input-group-addon">Due</span>
-                                <input type="text" class="form-control" id="TaskDue" data-provide="datepicker" data-bind="enable: SelectedPart().FirstArticleJobNumber == '' || SelectedPart().FirstArticleJobNumber == null, value: SelectedTask().DueBy" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group" style="width: 200px">
+                                        <span class="input-group-addon">Due</span>
+                                        <input type="text" class="form-control" id="TaskDue" data-provide="datepicker" data-bind="enable: SelectedPart().FirstArticleJobNumber == '' || SelectedPart().FirstArticleJobNumber == null, value: SelectedTask().DueBy" />
 
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group" style="width: 200px">
+                                        <span class="input-group-addon">Recovery</span>
+                                        <input type="text" class="form-control" id="TaskRecovery" data-provide="datepicker" data-bind="value: SelectedTask().RecoveryDate" />
+
+                                    </div>
+                                </div>
                             </div>
                         </center>
                     </div>
@@ -373,6 +385,7 @@
 
             $(document).on('click', '#saveChanges', function () {
                 vm.SelectedTask().DueBy = $('#TaskDue').val();
+                vm.SelectedTask().RecoveryDate = $('#TaskRecovery').val();
                 vm.SaveChanges();
             });
 

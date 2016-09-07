@@ -63,6 +63,7 @@
         <EntityTypeShape EntityType="DashboardModel.StagingDetailAuditStatu" Width="1.5" PointX="22.375" PointY="14.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingTopLevelStatu" Width="1.5" PointX="3.375" PointY="23.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingSnapshot" Width="1.5" PointX="23.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DashboardModel.Opportunity" Width="1.5" PointX="5.375" PointY="23.75" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

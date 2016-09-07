@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Opportunities";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Opportunities</h5>
+                <div class="ibox-tools">
+                    <button class="btn btn-sm btn-primary" id="add-opp-btn">Add</button>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Customer</th>
+                            <th>Date Due</th>
+                        </tr>
+
+                    </thead>
+                    <tbody data-bind="foreach: Opportunities()">
+                        <tr>
+                            <td data-bind="text: $data.PackageName"></td>
+                            <td data-bind="text: $data.Customer"></td>
+                            <td data-bind="text: $data.DateDue"></td>
+                            <td><i class="fa fa-close hover-rem delete-opp" data-bind="attr:{'oppid':$data.ID}"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="add-opp-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" data-bind="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <form name="add-opp-form" id="add-opp-form">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Name</span>
+                                <input type="text" class="form-control" name="PackageName" id="PackageName" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Customer</span>
+                                <input type="text" class="form-control" name="Customer" id="Customer" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="input-group date" data-provide="datepicker">
+                                <span class="input-group-addon">Date Due</span>
+                                <input type="text" class="form-control" id="DateDue" name="DateDue" placeholder="" readonly>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-8">
+                        <button class="btn btn-primary" id="submit-opp-btn" data-bind="click: AddOpportunity()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/KO-Models/ko-model-operations.js"></script>
+
+    <script>
+
+        $(function () {
+
+            var vm = new OperationsViewModel();
+            ko.applyBindings(vm);
+            vm.LoadOpportunities();
+
+            $(document).on('click', '#add-opp-btn', function (e) {
+                $('#add-opp-modal').modal('show');
+            });
+
+            $(document).on('click', '.delete-opp', function (e) {
+                OppID = $(this).attr('oppid');
+                console.log(OppID);
+                swal({
+                    title: "Are you sure you want to DELETE this Opportunity?",
+                    text: "You will be unable to recover it.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "Yes!",
+                    closeOnConfirm: false
+                },
+               function () {
+                   vm.DeleteOpportunity(OppID);
+                   swal({
+                       title: "Deleted!",
+                       type: "success",
+                       timer: 1000
+                   });
+               });
+            });
+        });
+    </script>
+}

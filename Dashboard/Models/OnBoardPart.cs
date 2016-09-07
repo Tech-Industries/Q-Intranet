@@ -46,5 +46,6 @@ namespace Dashboard.Models
         public string SalesOrderNumber { get; set; }
         public string SalesOrderLine { get; set; }
         public Nullable<bool> Archived { get; set; }
+        public Nullable<System.DateTime> DateRecovery { get; set; }
     }
 }

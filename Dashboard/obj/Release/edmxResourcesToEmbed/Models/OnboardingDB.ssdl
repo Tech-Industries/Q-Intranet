@@ -76,7 +76,10 @@
     <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
     <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
     <Property Name="Archived" Type="bit" />
+    <Property Name="DateRecovery" Type="date" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.OnBoardPartsBackup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OnBoardTasks">
     <Key>
       <PropertyRef Name="RecordNumber" />

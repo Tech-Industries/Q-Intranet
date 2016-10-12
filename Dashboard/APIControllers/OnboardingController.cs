@@ -29,21 +29,40 @@ namespace Dashboard.APIControllers
         public async Task<IHttpActionResult> GetAuthorizedParts(int id)
         {
             var RelPer = db.UserGroups.Where(x => x.UserID == id && x.GroupID == 18);
-            List< AuthorizedOnBoardPart> parts = new List<AuthorizedOnBoardPart>();
+            string sid = id.ToString();
+
+            List<AuthorizedOnBoardPart> authParts = new List<AuthorizedOnBoardPart>();
+            List<OnBoardPart> parts = new List<OnBoardPart>();
+
+
+            //authParts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == "90").OrderBy(o => o.DatePODue).ToListAsync();
+            //if (!authParts.Any())
+            //{
+            //    return NotFound();
+            //}
+            //return (Ok(authParts));
+
+
             if (RelPer.Any())
             {
-                parts = await onbdb.AuthorizedOnBoardParts.OrderBy(o => o.DatePODue).ToListAsync();
+                parts = await onbdb.OnBoardParts.OrderBy(o => o.DatePODue).Where(x => x.Archived != true).ToListAsync();
+                if (!parts.Any())
+                {
+                    return NotFound();
+                }
+                return (Ok(parts));
             }
             else
             {
-                parts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == id).OrderBy(o => o.DatePODue).ToListAsync();
+                authParts = await onbdb.AuthorizedOnBoardParts.Where(x => x.DelegatedTo == sid && x.Archived != true).OrderBy(o => o.DatePODue).ToListAsync();
+                if (!authParts.Any())
+                {
+                    return NotFound();
+                }
+                return (Ok(authParts));
             }
-            
-            if (!parts.Any())
-            {
-                return NotFound();
-            }
-            return (Ok(parts));
+
+
         }
 
         [Route("api/v1/Onboarding")]
@@ -66,7 +85,7 @@ namespace Dashboard.APIControllers
             var timeSubmitted = DateTime.Now;
             var oldPart = await onbdb.OnBoardParts.FindAsync(id);
 
-            
+
 
             if (oldPart == null || part == null)
             {
@@ -96,7 +115,7 @@ namespace Dashboard.APIControllers
 
         [Route("api/v1/Onboarding/{id:int}")]
         [HttpDelete]
-         public async Task<IHttpActionResult> DeletePart(int id)
+        public async Task<IHttpActionResult> DeletePart(int id)
         {
             try
             {
@@ -162,12 +181,12 @@ namespace Dashboard.APIControllers
             {
 
                 var entry = onbdb.Entry(oldTask);
-                if(oldTask.PercentComplete < 100 && task.PercentComplete == 100)
+                if (oldTask.PercentComplete < 100 && task.PercentComplete == 100)
                 {
                     oldTask.CompletedOn = timeSubmitted;
                     oldTask.CompletedBy = task.CompletedBy;
                 }
-                else if(task.PercentComplete < 100)
+                else if (task.PercentComplete < 100)
                 {
                     oldTask.CompletedOn = null;
                     oldTask.CompletedBy = null;

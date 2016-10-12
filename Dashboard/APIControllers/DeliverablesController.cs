@@ -153,7 +153,7 @@ namespace Dashboard.APIControllers
         {
 
 
-            return Ok(await DeliverablesViewModel.MapFromAsync(db.Deliverables.Where(x => x.UserID == UserID).ToList()));
+            return Ok(await DeliverablesViewModel.MapFromAsync(db.Deliverables.Where(x => x.UserID == UserID && x.Archived != true).ToList()));
 
 
         }
@@ -168,7 +168,7 @@ namespace Dashboard.APIControllers
             int year = Year;
             int month = int.Parse(curM);
             int day = int.Parse(curD);
-
+            var dateOuter = new DateTime();
 
             if (Frequency == "Weekly")
             {
@@ -177,6 +177,7 @@ namespace Dashboard.APIControllers
                 month = int.Parse(dateParts[1]);
                 day = int.Parse(dateParts[2]);
 
+                dateOuter = new DateTime(year, month, day).AddDays(6);
                 //return db.Deliverables.Join(db.DeliverableDetails, d => d.ID, dd => dd.DelID, (d, dd) => new { d, dd }).Where(x => x.d.ID == DelID && x.dd.DateDue >= new DateTime(year, month, day)).Select( x=> new {x.dd.DateDue, x.dd.DateCompleted, x.dd.ID}).First();
 
 
@@ -187,7 +188,7 @@ namespace Dashboard.APIControllers
                 year = int.Parse(dateParts[0]);
                 month = int.Parse(dateParts[1]);
                 day = int.Parse(dateParts[2]);
-
+                dateOuter = new DateTime(year, month, day).AddDays(13);
                 //return db.Deliverables.Join(db.DeliverableDetails, d => d.ID, dd => dd.DelID, (d, dd) => new { d, dd }).Where(x => x.d.ID == DelID && x.dd.DateDue >= new DateTime(year, month, day)).Select( x=> new {x.dd.DateDue, x.dd.DateCompleted, x.dd.ID}).First();
 
 
@@ -197,6 +198,7 @@ namespace Dashboard.APIControllers
                 month = int.Parse(Period);
                 day = 1;
                 System.Diagnostics.Debug.WriteLine("period = " + Period + " | date = " + year + "-" + month + "-" + day);
+                dateOuter = new DateTime(year, month, day).AddMonths(1).AddDays(-1);
             }
             else if (Frequency == "Quarterly")
             {
@@ -216,6 +218,7 @@ namespace Dashboard.APIControllers
                         month = 11;
                         break;
                 }
+                dateOuter = new DateTime(year, month, day).AddMonths(3).AddDays(-1);
             }
             else if (Frequency == "Semi-Annual")
             {
@@ -229,13 +232,15 @@ namespace Dashboard.APIControllers
                         month = 7;
                         break;
                 }
+                dateOuter = new DateTime(year, month, day).AddMonths(6).AddDays(-1);
             }
             else if (Frequency == "Annual")
             {
                 day = 1;
                 month = 1;
+                dateOuter = new DateTime(year, month, day).AddMonths(12).AddDays(-1);
             }
-            return db.DeliverableDetails.Join(db.Deliverables, dd => dd.DelID, d => d.ID, (dd, d) => new { dd, d }).Where(x => x.dd.DelID == DelID && x.dd.DateDue >= new DateTime(year, month, day)).Select(x => new {x.dd.DateCompleted, x.dd.DateDue, x.dd.DelID, x.dd.ID, x.d.UserID }).First();
+            return db.DeliverableDetails.Join(db.Deliverables, dd => dd.DelID, d => d.ID, (dd, d) => new { dd, d }).Where(x => x.dd.DelID == DelID && x.dd.DateDue <= dateOuter && x.dd.DateDue >= new DateTime(year, month, day)).Select(x => new {x.dd.DateCompleted, x.dd.DateDue, x.dd.DelID, x.dd.ID, x.d.UserID }).First();
         }
 
 

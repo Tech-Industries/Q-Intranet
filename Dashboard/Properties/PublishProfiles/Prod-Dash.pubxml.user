@@ -9,6 +9,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>\\172.31.1.152\c$\inetpub\wwwroot\Dashboard</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="APIControllers/DeliverableDetailController.cs">
+      <publishTime>07/20/2016 10:21:18</publishTime>
+    </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
@@ -76,7 +79,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/Dashboard.dll">
-      <publishTime>09/02/2016 15:32:45</publishTime>
+      <publishTime>10/11/2016 13:32:04</publishTime>
+    </File>
+    <File Include="bin/de/MigraDoc.DocumentObjectModel.resources.dll">
+      <publishTime>03/06/2012 15:09:12</publishTime>
+    </File>
+    <File Include="bin/de/MigraDoc.Rendering.resources.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
+    <File Include="bin/de/MigraDoc.RtfRendering.resources.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
+    <File Include="bin/de/PdfSharp.Charting.resources.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
+    <File Include="bin/de/PdfSharp.resources.dll">
+      <publishTime>03/06/2012 15:09:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/16/2016 08:51:52</publishTime>
@@ -126,6 +144,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>06/16/2016 08:51:57</publishTime>
     </File>
+    <File Include="bin/MigraDoc.DocumentObjectModel.dll">
+      <publishTime>03/06/2012 15:09:12</publishTime>
+    </File>
+    <File Include="bin/MigraDoc.Rendering.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
+    <File Include="bin/MigraDoc.RtfRendering.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>06/13/2016 23:06:14</publishTime>
     </File>
@@ -134,6 +161,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>06/16/2016 08:51:57</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.Charting.dll">
+      <publishTime>03/06/2012 15:09:14</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.dll">
+      <publishTime>03/06/2012 15:09:12</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/13/2016 05:31:22</publishTime>
@@ -362,6 +395,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/font-awesome/scss/_variables.scss">
       <publishTime>05/13/2016 10:44:26</publishTime>
+    </File>
+    <File Include="Content/img/nameAnnouncment.png">
+      <publishTime>09/12/2016 08:41:34</publishTime>
     </File>
     <File Include="Content/img/Orizon_logo_black.png">
       <publishTime>06/20/2016 14:29:10</publishTime>
@@ -733,7 +769,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>08/09/2016 09:42:51</publishTime>
+      <publishTime>09/13/2016 14:41:38</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>06/16/2016 08:51:46</publishTime>
@@ -835,7 +871,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>06/16/2016 08:51:49</publishTime>
+      <publishTime>10/06/2016 14:00:42</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.ttf">
       <publishTime>06/16/2016 08:51:49</publishTime>
@@ -862,13 +898,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Models/DashDB.edmx.diagram">
-      <publishTime>08/31/2016 16:34:36</publishTime>
+      <publishTime>10/07/2016 16:09:42</publishTime>
     </File>
     <File Include="Models/NKCConnect.edmx.diagram">
       <publishTime>06/16/2016 08:51:46</publishTime>
     </File>
     <File Include="Models/OnboardingDB.edmx.diagram">
-      <publishTime>09/02/2016 15:09:14</publishTime>
+      <publishTime>09/07/2016 13:14:54</publishTime>
     </File>
     <File Include="Models/PMMConnect.edmx.diagram">
       <publishTime>06/16/2016 08:51:47</publishTime>
@@ -997,19 +1033,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/29/2016 14:06:25</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-deliverables.js">
-      <publishTime>08/04/2016 14:40:15</publishTime>
+      <publishTime>10/05/2016 14:43:37</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-home.js">
-      <publishTime>08/02/2016 11:08:28</publishTime>
+      <publishTime>09/06/2016 17:21:09</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-machine-overview.js">
       <publishTime>07/29/2016 14:05:53</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-onboarding.js">
-      <publishTime>09/02/2016 17:13:42</publishTime>
+      <publishTime>09/07/2016 13:39:56</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-operations.js">
-      <publishTime>09/01/2016 12:45:39</publishTime>
+      <publishTime>09/13/2016 10:29:29</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-prevmaint.js">
       <publishTime>07/29/2016 14:05:24</publishTime>
@@ -1018,13 +1054,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/29/2016 14:04:12</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-slide.js">
-      <publishTime>09/01/2016 13:39:26</publishTime>
+      <publishTime>09/06/2016 17:29:56</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-ultra.js">
       <publishTime>07/29/2016 14:04:44</publishTime>
     </File>
     <File Include="Scripts/KO-Models/ko-model-users.js">
       <publishTime>07/29/2016 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/KO-Models/ko-model-utility.js">
+      <publishTime>10/10/2016 09:08:22</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>06/16/2016 08:51:47</publishTime>
@@ -2314,7 +2353,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/02/2016 11:38:49</publishTime>
     </File>
     <File Include="Views/Deliverables/Index.cshtml">
-      <publishTime>07/28/2016 17:44:12</publishTime>
+      <publishTime>10/05/2016 14:23:48</publishTime>
     </File>
     <File Include="Views/Deliverables/ReportMetrics.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>
@@ -2323,10 +2362,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:48</publishTime>
     </File>
     <File Include="Views/Deliverables/_DeliverableDetail.cshtml">
-      <publishTime>08/22/2016 09:09:14</publishTime>
+      <publishTime>10/05/2016 14:44:24</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>08/02/2016 09:52:32</publishTime>
+      <publishTime>09/06/2016 17:18:38</publishTime>
     </File>
     <File Include="Views/Login/FirstTime.cshtml">
       <publishTime>06/16/2016 08:52:10</publishTime>
@@ -2338,7 +2377,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2016 11:32:13</publishTime>
     </File>
     <File Include="Views/Onboarding/Index.cshtml">
-      <publishTime>09/02/2016 15:31:53</publishTime>
+      <publishTime>10/05/2016 09:10:36</publishTime>
     </File>
     <File Include="Views/Operations/Opportunities.cshtml">
       <publishTime>09/01/2016 09:29:29</publishTime>
@@ -2347,7 +2386,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2016 14:42:25</publishTime>
     </File>
     <File Include="Views/Operations/Staging.cshtml">
-      <publishTime>08/19/2016 08:38:52</publishTime>
+      <publishTime>10/11/2016 08:53:12</publishTime>
+    </File>
+    <File Include="Views/Operations/StagingPrint.cshtml">
+      <publishTime>09/12/2016 17:38:08</publishTime>
     </File>
     <File Include="Views/PrevMaint.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>
@@ -2374,13 +2416,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:51:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/30/2016 10:22:42</publishTime>
+      <publishTime>10/11/2016 13:29:04</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>
     </File>
     <File Include="Views/Shared/_Navigation.cshtml">
-      <publishTime>08/31/2016 17:21:02</publishTime>
+      <publishTime>10/07/2016 11:09:51</publishTime>
     </File>
     <File Include="Views/Shared/_RightSidebar.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>
@@ -2395,13 +2437,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2016 08:52:10</publishTime>
     </File>
     <File Include="Views/Slide/Index.cshtml">
-      <publishTime>09/06/2016 15:19:00</publishTime>
+      <publishTime>09/12/2016 08:45:43</publishTime>
     </File>
     <File Include="Views/Ultra/Admin.cshtml">
       <publishTime>06/16/2016 08:51:48</publishTime>
     </File>
     <File Include="Views/Ultra/Index.cshtml">
       <publishTime>07/25/2016 18:01:22</publishTime>
+    </File>
+    <File Include="Views/Utility/Employees.cshtml">
+      <publishTime>10/10/2016 09:06:50</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>06/16/2016 08:51:48</publishTime>

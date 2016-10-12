@@ -20,12 +20,10 @@
         <EntityTypeShape EntityType="DashboardModel.Group" PointX="10.75" PointY="6.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.UserGroup" PointX="10.75" PointY="9.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.User" PointX="11.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.Deliverable" PointX="11.75" PointY="3.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableReview" PointX="4.75" PointY="11.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" PointX="0.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" PointX="22.875" PointY="19.75" Width="2" />
         <AssociationConnector Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableComment" PointX="6.75" PointY="11.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" PointX="12.75" PointY="6.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.ProjectTask" PointX="8.75" PointY="12.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.ProjectAssignee" PointX="12.75" PointY="9.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.Project" PointX="10.75" PointY="12.75" Width="1.5" />
@@ -51,7 +49,6 @@
         <EntityTypeShape EntityType="DashboardModel.DeliverableReviewer" PointX="0.75" PointY="19.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.StagingCriteria" Width="1.5" PointX="2.75" PointY="19.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingDetail" Width="1.5" PointX="19.75" PointY="15.75" />
-        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="2.25" PointX="19.75" PointY="19.75" />
         <EntityTypeShape EntityType="DashboardModel.ReviewablesByUser" Width="2.375" PointX="20.75" PointY="4.75" />
         <EntityTypeShape EntityType="DashboardModel.FlashReportRollUp" Width="3" PointX="20.75" PointY="8.75" />
         <EntityTypeShape EntityType="DashboardModel.FlashReportRollUpAll" Width="3" PointX="14.75" PointY="20.75" />
@@ -64,6 +61,10 @@
         <EntityTypeShape EntityType="DashboardModel.StagingTopLevelStatu" Width="1.5" PointX="3.375" PointY="23.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingSnapshot" Width="1.5" PointX="23.375" PointY="0.75" />
         <EntityTypeShape EntityType="DashboardModel.Opportunity" Width="1.5" PointX="5.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DashboardModel.Deliverable" Width="1.5" PointX="18.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" Width="2.125" PointX="20.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="1.5" PointX="20.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DashboardModel.ADInfo" Width="1.5" PointX="23.375" PointY="23.75" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

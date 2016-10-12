@@ -27,25 +27,30 @@
                 <h5><span id="del-desc"></span></h5>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h5>Date Due - <span id="del-due-date" data-bind="text: DDDateDue()"></span></h5>
-            </div>
+        <div data-bind="if: DDDateDue() == ''">
+            <h2>No Detail Found For Period</h2>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h5>
-                    Date Completed -
-                    <span data-bind="if: DDComplete()">
-                        <span data-bind="text: DDDateCompleted()"></span>
-                        <span data-bind="if:(DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
-                            - <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button>
+        <div data-bind="if: DDDateDue() != ''">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Date Due - <span id="del-due-date" data-bind="text: DDDateDue()"></span></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>
+                        Date Completed -
+                        <span data-bind="if: DDComplete()">
+                            <span data-bind="text: DDDateCompleted()"></span>
+                            <span data-bind="if:(DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
+                                - <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button>
+                            </span>
                         </span>
-                    </span>
-                    <span data-bind="if: !DDComplete() && (DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
-                        <button type="button" class="btn btn-xs btn-success btn-complete-del">Complete</button>
-                    </span>
-                </h5>
+                        <span data-bind="if: !DDComplete() && (DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
+                            <button type="button" class="btn btn-xs btn-success btn-complete-del">Complete</button>
+                        </span>
+                    </h5>
+                </div>
             </div>
         </div>
     </div>
@@ -93,8 +98,8 @@
         </div>
     </div>
 </div>
-<div>
-    <center><h5 id="del-description" style="width: 50%"></h5></center>
+<center><h5 id="del-description" style="width: 50%"></h5></center>
+<div data-bind="if: DDDateDue() != ''">
     <div class="row">
         <div class="col-md-4" data-bind="if: UserAccess">
             <form action="" id="frm-doc-up" method="post" enctype="multipart/form-data">

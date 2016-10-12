@@ -94,7 +94,7 @@
                     ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                 }
 
-                if (ii.RecoveryDate!= null) {
+                if (ii.RecoveryDate != null) {
                     ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
                 }
             });
@@ -133,59 +133,47 @@
         var rangeDate = addDays(Year, Month, Day, 10);
 
         self.OnboardingTasks([]);
-        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID, error: function (data) { self.isLoading(false); } });
+        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID, data: { id: UserID }, error: function (data) { self.isLoading(false); } });
         loadAuthParts.done(function (authParts) {
+            parts = authParts;
 
-            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
-            load.success(function (data) {
+            self.OnboardingParts(parts);
+            self.UnfilteredParts(parts);
+            outerStart = parts.length;
+            parts.forEach(function (i) {
+                self.Customers().add(i.Customer);
+                self.Projects().add(i.PackageName);
+                self.PartTypes().add(i.PartType);
+                self.PartClasses().add(i.OnBoardClass);
+                self.PartNums().add(i.PartNumber);
+                i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
+                i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
+                i.DatePOReceived = formatSqlDateTimeToFullDate(i.DatePOReceived);
 
-                if ($('#RelPer').val() == 18) {
-                    parts = data;
-                }
-                else {
-                    for (x = 0; x < authParts.length; x++) {
-                        parts.push($.grep(data, function (e) { return e.RecordNumber == authParts[x].OnBoardPart })[0])
-                    }
-                }
-
-                self.OnboardingParts(parts);
-                self.UnfilteredParts(parts);
-                outerStart = parts.length;
-                parts.forEach(function (i) {
-                    self.Customers().add(i.Customer);
-                    self.Projects().add(i.PackageName);
-                    self.PartTypes().add(i.PartType);
-                    self.PartClasses().add(i.OnBoardClass);
-                    self.PartNums().add(i.PartNumber);
-                    i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
-                    i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
-                    i.DatePOReceived = formatSqlDateTimeToFullDate(i.DatePOReceived);
-
-                    outer += 1;
-                    var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
-                    loadTasks.done(function (data1) {
-                        innerStart = data1.length;
-                        data1.forEach(function (ii) {
-                            ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
-                            user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegatedTo })[0]
-                            ii.DelegatedToName = user.FirstName+' '+user.LastName;
-                            if (ii.DueBy != null) {
-                                ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
-                            }
-                            if (ii.RecoveryDate != null) {
-                                ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
-                            }
-                        });
-                        if (data1[10].TaskDescription != 'FAI Populated') {
-                            data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
+                outer += 1;
+                var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
+                loadTasks.done(function (data1) {
+                    innerStart = data1.length;
+                    data1.forEach(function (ii) {
+                        ii.CurrentStatus = self.checkStatus(ii, startDate, rangeDate);
+                        user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegatedTo })[0]
+                        ii.DelegatedToName = user.FirstName + ' ' + user.LastName;
+                        if (ii.DueBy != null) {
+                            ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
                         }
-                        self.OnboardingTasks.push(data1);
-
-                        inner += 1;
-                        if (inner == outerStart) {
-                            self.isLoading(false)
+                        if (ii.RecoveryDate != null) {
+                            ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
                         }
                     });
+                    if (data1[10].TaskDescription != 'FAI Populated') {
+                        data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
+                    }
+                    self.OnboardingTasks.push(data1);
+
+                    inner += 1;
+                    if (inner == outerStart) {
+                        self.isLoading(false)
+                    }
                 });
             });
         });
@@ -286,10 +274,10 @@
             if (dateCompare > rangeDate) {
                 return 'Future';
             }
-            else if (ii.DueBy >= startDate && ii.DueBy < rangeDate) {
+            else if (dateCompare >= startDate && dateCompare < rangeDate) {
                 return 'Upcoming';
             }
-            else if (ii.DueBy < startDate) {
+            else if (dateCompare < startDate) {
                 return 'Late';
             }
         }

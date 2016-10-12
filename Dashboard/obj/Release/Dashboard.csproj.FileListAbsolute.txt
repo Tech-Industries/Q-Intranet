@@ -321,3 +321,13 @@ C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\roslyn\System.IO.File
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\roslyn\vbc.exe.config
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\roslyn\vbc.rsp
 C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\Orizon.Web.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\MigraDoc.DocumentObjectModel.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\MigraDoc.Rendering.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\MigraDoc.RtfRendering.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\PdfSharp.Charting.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\PdfSharp.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\de\MigraDoc.DocumentObjectModel.resources.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\de\MigraDoc.Rendering.resources.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\de\MigraDoc.RtfRendering.resources.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\de\PdfSharp.resources.dll
+C:\Users\jpowell\Documents\GitHub\Q-Intranet\Dashboard\bin\de\PdfSharp.Charting.resources.dll

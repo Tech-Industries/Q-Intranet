@@ -301,6 +301,9 @@
                     height: '100%'
                 })
             });
+            load.fail(function (data) {
+                self.DDDateDue('');
+            });
         }
     }
 

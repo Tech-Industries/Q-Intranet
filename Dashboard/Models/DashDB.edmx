@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="thumbnailPhoto" Type="varbinary" MaxLength="4000" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="4000" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Title" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Email" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="4000" />
+          <Property Name="OfficeNumber" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Company" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bugs">
           <Key>
             <PropertyRef Name="ID" />
@@ -58,7 +73,7 @@
           <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="Month" Type="varchar" MaxLength="2" />
           <Property Name="Day" Type="varchar" MaxLength="2" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -109,6 +124,9 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
           <Property Name="DateDue" Type="date" />
           <Property Name="DateCompleted" Type="datetime" />
           <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="DelegatedTo" Type="int" />
+          <Property Name="DateDelegated" Type="datetime" />
+          <Property Name="DelegatedReason" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="DeliverableDocuments">
           <Key>
@@ -151,6 +169,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
           <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
           <Property Name="UserID" Type="int" />
           <Property Name="FirstDueDate" Type="date" />
+          <Property Name="Archived" Type="bit" />
         </EntityType>
         <EntityType Name="Goals">
           <Key>
@@ -217,7 +236,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
           <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
           <Property Name="Year" Type="varchar" MaxLength="4" />
           <Property Name="Month" Type="nvarchar" MaxLength="3" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Pages">
           <Key>
@@ -264,26 +283,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
           <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
           <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ProductLineTemp">
-          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="LINE" Type="char" MaxLength="3" />
-          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
-          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
-          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
-          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
-          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
-          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
-          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
-          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
-        </EntityType>-->
         <EntityType Name="ProjectAssignees">
           <Key>
             <PropertyRef Name="ID" />
@@ -330,7 +329,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Day" Type="varchar" MaxLength="2" />
           <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
           <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="SalesMonthlyByCompany">
           <Key>
@@ -340,7 +339,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
           <Property Name="Year" Type="int" />
           <Property Name="Month" Type="int" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="SalesStage">
           <Key>
@@ -371,7 +370,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
           <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
           <Property Name="OnTime" Type="bit" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ScrapDailyByPlant">
           <Key>
@@ -383,7 +382,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Year" Type="varchar" MaxLength="4" />
           <Property Name="Month" Type="varchar" MaxLength="2" />
           <Property Name="Day" Type="varchar" MaxLength="2" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ScrapMonthlyByPlant">
           <Key>
@@ -394,7 +393,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
           <Property Name="Year" Type="varchar" MaxLength="4" />
           <Property Name="Month" Type="varchar" MaxLength="2" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ScrapStage">
           <Key>
@@ -416,7 +415,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Year" Type="varchar" MaxLength="4" />
           <Property Name="Month" Type="varchar" MaxLength="2" />
           <Property Name="Day" Type="varchar" MaxLength="2" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ShippingPlanAdjShipDates">
           <Key>
@@ -542,6 +541,26 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="SupervisorID" Type="int" />
         </EntityType>
+        <EntityType Name="ZipDownloadLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentID" Type="int" />
+          <Property Name="Downloader" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateDownloaded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ZipFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZipName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Location" Type="nvarchar" MaxLength="150" />
+          <Property Name="Token" Type="nvarchar" MaxLength="100" />
+          <Property Name="Expiration" Type="datetime" />
+          <Property Name="Uploader" Type="int" />
+        </EntityType>
         <EntityType Name="Opportunities">
           <Key>
             <PropertyRef Name="ID" />
@@ -624,6 +643,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
           <Property Name="Description" Type="char" MaxLength="30" />
           <Property Name="DateStageDue" Type="date" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateClosed" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1003,6 +1023,23 @@ warning 6002: The table/view 'Dashboard.Operations.StagingDetailAuditStatus' doe
           <Property Name="DateCompleted" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingMonthlySnapShot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StagingMonthlySnapShot">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OnTime" />
+            <PropertyRef Name="Late" />
+            <PropertyRef Name="UnStaged" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="OnTime" Type="int" Nullable="false" />
+          <Property Name="Late" Type="int" Nullable="false" />
+          <Property Name="TotalStaged" Type="int" />
+          <Property Name="UnStaged" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Month" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.Operations.StagingSnapshot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="StagingSnapshot">
           <Key>
@@ -1049,6 +1086,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DashboardModelStoreContainer">
+          <EntitySet Name="ADInfo" EntityType="Self.ADInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
@@ -1090,6 +1128,8 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZipDownloadLog" EntityType="Self.ZipDownloadLog" Schema="Documents" store:Type="Tables" />
+          <EntitySet Name="ZipFiles" EntityType="Self.ZipFiles" Schema="Documents" store:Type="Tables" />
           <EntitySet Name="Opportunities" EntityType="Self.Opportunities" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingAudit" EntityType="Self.StagingAudit" Schema="Operations" store:Type="Tables" />
           <EntitySet Name="StagingAuditDetail" EntityType="Self.StagingAuditDetail" Schema="Operations" store:Type="Tables" />
@@ -1431,6 +1471,17 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     [StagingDetailAuditStatus].[DateCompleted] AS [DateCompleted]
     FROM [Operations].[StagingDetailAuditStatus] AS [StagingDetailAuditStatus]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="StagingMonthlySnapShot" EntityType="Self.StagingMonthlySnapShot" store:Type="Views" store:Schema="Operations">
+            <DefiningQuery>SELECT 
+    [StagingMonthlySnapShot].[ID] AS [ID], 
+    [StagingMonthlySnapShot].[OnTime] AS [OnTime], 
+    [StagingMonthlySnapShot].[Late] AS [Late], 
+    [StagingMonthlySnapShot].[TotalStaged] AS [TotalStaged], 
+    [StagingMonthlySnapShot].[UnStaged] AS [UnStaged], 
+    [StagingMonthlySnapShot].[Year] AS [Year], 
+    [StagingMonthlySnapShot].[Month] AS [Month]
+    FROM [Operations].[StagingMonthlySnapShot] AS [StagingMonthlySnapShot]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="StagingSnapshot" EntityType="Self.StagingSnapshot" store:Type="Views" store:Schema="Operations">
             <DefiningQuery>SELECT 
     [StagingSnapshot].[ID] AS [ID], 
@@ -1509,7 +1560,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="Groups" EntityType="DashboardModel.Group" />
           <EntitySet Name="UserGroups" EntityType="DashboardModel.UserGroup" />
           <EntitySet Name="Users" EntityType="DashboardModel.User" />
-          <EntitySet Name="Deliverables" EntityType="DashboardModel.Deliverable" />
           <EntitySet Name="DeliverableReviews" EntityType="DashboardModel.DeliverableReview" />
           <EntitySet Name="DeliverableDocuments" EntityType="DashboardModel.DeliverableDocument" />
           <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments">
@@ -1517,7 +1567,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
             <End EntitySet="DeliverableDocuments" Role="DeliverableDocument1" />
           </AssociationSet>
           <EntitySet Name="DeliverableComments" EntityType="DashboardModel.DeliverableComment" />
-          <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
           <EntitySet Name="ProjectTasks" EntityType="DashboardModel.ProjectTask" />
           <EntitySet Name="ProjectAssignees" EntityType="DashboardModel.ProjectAssignee" />
           <EntitySet Name="Projects" EntityType="DashboardModel.Project" />
@@ -1557,7 +1606,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="DeliverableReviewers" EntityType="DashboardModel.DeliverableReviewer" />
           <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
           <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
-          <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
           <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
           <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
           <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
@@ -1570,6 +1618,13 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <EntitySet Name="StagingTopLevelStatus" EntityType="DashboardModel.StagingTopLevelStatu" />
           <EntitySet Name="StagingSnapshots" EntityType="DashboardModel.StagingSnapshot" />
           <EntitySet Name="Opportunities" EntityType="DashboardModel.Opportunity" />
+          <EntitySet Name="Deliverables" EntityType="DashboardModel.Deliverable" />
+          <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
+          <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
+          <EntitySet Name="ADInfo" EntityType="DashboardModel.ADInfo" />
+          <EntitySet Name="ZipDownloadLog" EntityType="DashboardModel.ZipDownloadLog" />
+          <EntitySet Name="ZipFiles" EntityType="DashboardModel.ZipFiles" />
+          <EntitySet Name="StagingMonthlySnapShot" EntityType="DashboardModel.StagingMonthlySnapShot" />
           </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -1732,17 +1787,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <Property Name="Email" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
           <Property Name="SupervisorID" Type="Int32" />
         </EntityType>
-        <EntityType Name="Deliverable">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Name" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Description" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Frequency" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="FirstDueDate" Precision="0" Type="DateTime" />
-        </EntityType>
         <EntityType Name="DeliverableReview">
           <Key>
             <PropertyRef Name="ID" />
@@ -1788,16 +1832,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <Property Name="UserID" Nullable="false" Type="Int32" />
           <Property Name="TimeSubmitted" Precision="3" Type="DateTime" />
           <Property Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
-        </EntityType>
-        <EntityType Name="DeliverableDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="DelID" Nullable="false" Type="Int32" />
-          <Property Name="DateDue" Precision="0" Type="DateTime" />
-          <Property Name="DateCompleted" Precision="3" Type="DateTime" />
-          <Property Name="Notes" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
         </EntityType>
         <EntityType Name="ProjectTask">
           <Key>
@@ -2316,19 +2350,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
-        <EntityType Name="StagingTopLevel">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="Steps" Type="Int32" />
-          <Property Name="DateStart" Type="DateTime" Precision="0" />
-          <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="DateStageDue" Type="DateTime" Precision="0" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="ReviewablesByUser">
           <Key>
             <PropertyRef Name="ID" />
@@ -2520,6 +2541,95 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
           <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateDue" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Deliverable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Frequency" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FirstDueDate" Type="DateTime" Precision="0" />
+          <Property Name="Archived" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DeliverableDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DelID" Type="Int32" Nullable="false" />
+          <Property Name="DateDue" Type="DateTime" Precision="0" />
+          <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DelegatedTo" Type="Int32" />
+          <Property Name="DateDelegated" Type="DateTime" Precision="3" />
+          <Property Name="DelegatedReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StagingTopLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Steps" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="DateStageDue" Type="DateTime" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateClosed" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ADInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="thumbnailPhoto" Type="Binary" MaxLength="4000" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeNumber" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ZipDownloadLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentID" Type="Int32" />
+          <Property Name="Downloader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateDownloaded" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ZipFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Expiration" Type="DateTime" Precision="3" />
+          <Property Name="Uploader" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StagingMonthlySnapShot">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OnTime" />
+            <PropertyRef Name="Late" />
+            <PropertyRef Name="UnStaged" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="OnTime" Type="Int32" Nullable="false" />
+          <Property Name="Late" Type="Int32" Nullable="false" />
+          <Property Name="TotalStaged" Type="Int32" />
+          <Property Name="UnStaged" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2728,18 +2838,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Deliverables">
-            <EntityTypeMapping TypeName="DashboardModel.Deliverable">
-              <MappingFragment StoreEntitySet="Deliverables">
-                <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DeliverableReviews">
             <EntityTypeMapping TypeName="DashboardModel.DeliverableReview">
               <MappingFragment StoreEntitySet="DeliverableReviews">
@@ -2771,17 +2869,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
                 <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeliverableDetails">
-            <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
-              <MappingFragment StoreEntitySet="DeliverableDetail">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
-                <ScalarProperty Name="DelID" ColumnName="DelID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3331,20 +3418,6 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StagingTopLevels">
-            <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
-              <MappingFragment StoreEntitySet="StagingTopLevel">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="Steps" ColumnName="Steps" />
-                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
-                <ScalarProperty Name="Job" ColumnName="Job" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReviewablesByUsers">
             <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
               <MappingFragment StoreEntitySet="ReviewablesByUser">
@@ -3545,6 +3618,99 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Deliverables">
+            <EntityTypeMapping TypeName="DashboardModel.Deliverable">
+              <MappingFragment StoreEntitySet="Deliverables">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliverableDetails">
+            <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
+              <MappingFragment StoreEntitySet="DeliverableDetail">
+                <ScalarProperty Name="DelegatedReason" ColumnName="DelegatedReason" />
+                <ScalarProperty Name="DateDelegated" ColumnName="DateDelegated" />
+                <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+                <ScalarProperty Name="DelID" ColumnName="DelID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StagingTopLevels">
+            <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
+              <MappingFragment StoreEntitySet="StagingTopLevel">
+                <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Steps" ColumnName="Steps" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADInfo">
+            <EntityTypeMapping TypeName="DashboardModel.ADInfo">
+              <MappingFragment StoreEntitySet="ADInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="thumbnailPhoto" ColumnName="thumbnailPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZipDownloadLog">
+            <EntityTypeMapping TypeName="DashboardModel.ZipDownloadLog">
+              <MappingFragment StoreEntitySet="ZipDownloadLog">
+                <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+                <ScalarProperty Name="Downloader" ColumnName="Downloader" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZipFiles">
+            <EntityTypeMapping TypeName="DashboardModel.ZipFiles">
+              <MappingFragment StoreEntitySet="ZipFiles">
+                <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ZipName" ColumnName="ZipName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StagingMonthlySnapShot">
+            <EntityTypeMapping TypeName="DashboardModel.StagingMonthlySnapShot">
+              <MappingFragment StoreEntitySet="StagingMonthlySnapShot">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="UnStaged" ColumnName="UnStaged" />
+                <ScalarProperty Name="TotalStaged" ColumnName="TotalStaged" />
+                <ScalarProperty Name="Late" ColumnName="Late" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3559,7 +3725,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

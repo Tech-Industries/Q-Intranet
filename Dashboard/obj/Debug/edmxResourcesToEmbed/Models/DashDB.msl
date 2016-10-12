@@ -202,18 +202,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Deliverables">
-      <EntityTypeMapping TypeName="DashboardModel.Deliverable">
-        <MappingFragment StoreEntitySet="Deliverables">
-          <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DeliverableReviews">
       <EntityTypeMapping TypeName="DashboardModel.DeliverableReview">
         <MappingFragment StoreEntitySet="DeliverableReviews">
@@ -245,17 +233,6 @@
           <ScalarProperty Name="TimeSubmitted" ColumnName="TimeSubmitted" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="DelDetID" ColumnName="DelDetID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DeliverableDetails">
-      <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
-        <MappingFragment StoreEntitySet="DeliverableDetail">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
-          <ScalarProperty Name="DelID" ColumnName="DelID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -805,20 +782,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StagingTopLevels">
-      <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
-        <MappingFragment StoreEntitySet="StagingTopLevel">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
-          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-          <ScalarProperty Name="Steps" ColumnName="Steps" />
-          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
-          <ScalarProperty Name="Job" ColumnName="Job" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReviewablesByUsers">
       <EntityTypeMapping TypeName="DashboardModel.ReviewablesByUser">
         <MappingFragment StoreEntitySet="ReviewablesByUser">
@@ -1015,6 +978,99 @@
           <ScalarProperty Name="DateDue" ColumnName="DateDue" />
           <ScalarProperty Name="Customer" ColumnName="Customer" />
           <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deliverables">
+      <EntityTypeMapping TypeName="DashboardModel.Deliverable">
+        <MappingFragment StoreEntitySet="Deliverables">
+          <ScalarProperty Name="Archived" ColumnName="Archived" />
+          <ScalarProperty Name="FirstDueDate" ColumnName="FirstDueDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableDetails">
+      <EntityTypeMapping TypeName="DashboardModel.DeliverableDetail">
+        <MappingFragment StoreEntitySet="DeliverableDetail">
+          <ScalarProperty Name="DelegatedReason" ColumnName="DelegatedReason" />
+          <ScalarProperty Name="DateDelegated" ColumnName="DateDelegated" />
+          <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingTopLevels">
+      <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
+        <MappingFragment StoreEntitySet="StagingTopLevel">
+          <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADInfo">
+      <EntityTypeMapping TypeName="DashboardModel.ADInfo">
+        <MappingFragment StoreEntitySet="ADInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Manager" ColumnName="Manager" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="thumbnailPhoto" ColumnName="thumbnailPhoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZipDownloadLog">
+      <EntityTypeMapping TypeName="DashboardModel.ZipDownloadLog">
+        <MappingFragment StoreEntitySet="ZipDownloadLog">
+          <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+          <ScalarProperty Name="Downloader" ColumnName="Downloader" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZipFiles">
+      <EntityTypeMapping TypeName="DashboardModel.ZipFiles">
+        <MappingFragment StoreEntitySet="ZipFiles">
+          <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+          <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ZipName" ColumnName="ZipName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingMonthlySnapShot">
+      <EntityTypeMapping TypeName="DashboardModel.StagingMonthlySnapShot">
+        <MappingFragment StoreEntitySet="StagingMonthlySnapShot">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="UnStaged" ColumnName="UnStaged" />
+          <ScalarProperty Name="TotalStaged" ColumnName="TotalStaged" />
+          <ScalarProperty Name="Late" ColumnName="Late" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

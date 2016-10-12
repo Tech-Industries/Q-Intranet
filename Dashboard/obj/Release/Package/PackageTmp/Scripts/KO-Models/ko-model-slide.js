@@ -251,8 +251,6 @@
                     Day: item.Day,
                     Sales: item.Sales,
                     MarginAmt: item.MarginAmt
-
-
                 };
             });
 

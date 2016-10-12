@@ -41,7 +41,6 @@
     <EntitySet Name="Groups" EntityType="DashboardModel.Group" />
     <EntitySet Name="UserGroups" EntityType="DashboardModel.UserGroup" />
     <EntitySet Name="Users" EntityType="DashboardModel.User" />
-    <EntitySet Name="Deliverables" EntityType="DashboardModel.Deliverable" />
     <EntitySet Name="DeliverableReviews" EntityType="DashboardModel.DeliverableReview" />
     <EntitySet Name="DeliverableDocuments" EntityType="DashboardModel.DeliverableDocument" />
     <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments">
@@ -49,7 +48,6 @@
       <End EntitySet="DeliverableDocuments" Role="DeliverableDocument1" />
     </AssociationSet>
     <EntitySet Name="DeliverableComments" EntityType="DashboardModel.DeliverableComment" />
-    <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
     <EntitySet Name="ProjectTasks" EntityType="DashboardModel.ProjectTask" />
     <EntitySet Name="ProjectAssignees" EntityType="DashboardModel.ProjectAssignee" />
     <EntitySet Name="Projects" EntityType="DashboardModel.Project" />
@@ -89,7 +87,6 @@
     <EntitySet Name="DeliverableReviewers" EntityType="DashboardModel.DeliverableReviewer" />
     <EntitySet Name="StagingCriterias" EntityType="DashboardModel.StagingCriteria" />
     <EntitySet Name="StagingDetails" EntityType="DashboardModel.StagingDetail" />
-    <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
     <EntitySet Name="ReviewablesByUsers" EntityType="DashboardModel.ReviewablesByUser" />
     <EntitySet Name="FlashReportRollUps" EntityType="DashboardModel.FlashReportRollUp" />
     <EntitySet Name="FlashReportRollUpAlls" EntityType="DashboardModel.FlashReportRollUpAll" />
@@ -102,6 +99,13 @@
     <EntitySet Name="StagingTopLevelStatus" EntityType="DashboardModel.StagingTopLevelStatu" />
     <EntitySet Name="StagingSnapshots" EntityType="DashboardModel.StagingSnapshot" />
     <EntitySet Name="Opportunities" EntityType="DashboardModel.Opportunity" />
+    <EntitySet Name="Deliverables" EntityType="DashboardModel.Deliverable" />
+    <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
+    <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
+    <EntitySet Name="ADInfo" EntityType="DashboardModel.ADInfo" />
+    <EntitySet Name="ZipDownloadLog" EntityType="DashboardModel.ZipDownloadLog" />
+    <EntitySet Name="ZipFiles" EntityType="DashboardModel.ZipFiles" />
+    <EntitySet Name="StagingMonthlySnapShot" EntityType="DashboardModel.StagingMonthlySnapShot" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -264,17 +268,6 @@
     <Property Name="Email" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="SupervisorID" Type="Int32" />
   </EntityType>
-  <EntityType Name="Deliverable">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="Name" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Description" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Frequency" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="FirstDueDate" Precision="0" Type="DateTime" />
-  </EntityType>
   <EntityType Name="DeliverableReview">
     <Key>
       <PropertyRef Name="ID" />
@@ -320,16 +313,6 @@
     <Property Name="UserID" Nullable="false" Type="Int32" />
     <Property Name="TimeSubmitted" Precision="3" Type="DateTime" />
     <Property Name="Comment" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
-  </EntityType>
-  <EntityType Name="DeliverableDetail">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="DelID" Nullable="false" Type="Int32" />
-    <Property Name="DateDue" Precision="0" Type="DateTime" />
-    <Property Name="DateCompleted" Precision="3" Type="DateTime" />
-    <Property Name="Notes" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
   </EntityType>
   <EntityType Name="ProjectTask">
     <Key>
@@ -848,19 +831,6 @@
     <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
-  <EntityType Name="StagingTopLevel">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-    <Property Name="Steps" Type="Int32" />
-    <Property Name="DateStart" Type="DateTime" Precision="0" />
-    <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="DateStageDue" Type="DateTime" Precision="0" />
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
   <EntityType Name="ReviewablesByUser">
     <Key>
       <PropertyRef Name="ID" />
@@ -1052,5 +1022,94 @@
     <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DateDue" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Deliverable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Frequency" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="FirstDueDate" Type="DateTime" Precision="0" />
+    <Property Name="Archived" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DeliverableDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DelID" Type="Int32" Nullable="false" />
+    <Property Name="DateDue" Type="DateTime" Precision="0" />
+    <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DelegatedTo" Type="Int32" />
+    <Property Name="DateDelegated" Type="DateTime" Precision="3" />
+    <Property Name="DelegatedReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StagingTopLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="Steps" Type="Int32" />
+    <Property Name="DateStart" Type="DateTime" Precision="0" />
+    <Property Name="PartNum" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="DateStageDue" Type="DateTime" Precision="0" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateClosed" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="ADInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="thumbnailPhoto" Type="Binary" MaxLength="4000" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Manager" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="OfficeNumber" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="ZipDownloadLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="Downloader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateDownloaded" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ZipFiles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ZipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Expiration" Type="DateTime" Precision="3" />
+    <Property Name="Uploader" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StagingMonthlySnapShot">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="OnTime" />
+      <PropertyRef Name="Late" />
+      <PropertyRef Name="UnStaged" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="OnTime" Type="Int32" Nullable="false" />
+    <Property Name="Late" Type="Int32" Nullable="false" />
+    <Property Name="TotalStaged" Type="Int32" />
+    <Property Name="UnStaged" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
   </EntityType>
 </Schema>

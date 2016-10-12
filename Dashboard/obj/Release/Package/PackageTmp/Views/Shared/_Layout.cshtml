@@ -90,6 +90,7 @@
             @Html.ActionLink("click me", "Notifications", "api", null, new { id = "NotificationsLink" });
             @Html.ActionLink("click me", "operations", "api/v1", null, new { id = "OperationsLink" });
             @Html.ActionLink("click me", "Onboarding", "api/v1", null, new { id = "OnboardingLink" });
+            @Html.ActionLink("click me", "Utility", "api/v1", null, new { id = "UtilityLink" });
             @Html.ActionLink("click me", "Log", "api", null, new { id = "LogsLink" });
 
         </div>
@@ -236,7 +237,7 @@
     <div data-bind="if: isLoading()">
         <div id="is-loading">
             <div id="is-loading-inner" class="center-vertically">
-                <center class="center-vertically"><i class="fa fa-circle-o-notch fa-spin"></i> Loading ...</center>
+                <center class="center-vertically"><i class="fa fa-cog fa-spin"></i> Loading ...</center>
             </div>
         </div>
     </div>

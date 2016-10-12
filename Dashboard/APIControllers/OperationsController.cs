@@ -13,6 +13,11 @@ using Dashboard.Models;
 using Dashboard.ViewModels;
 using System.Web;
 using System.Web.Http.Results;
+using PdfSharp;
+using MigraDoc.DocumentObjectModel;
+using PdfSharp.Pdf;
+using MigraDoc.Rendering;
+using System.Diagnostics;
 
 namespace Dashboard.APIControllers
 {
@@ -23,6 +28,7 @@ namespace Dashboard.APIControllers
         private DashboardEntities db = new DashboardEntities();
 
         #region Opportunities
+
         [Route("api/v1/operations/opportunities")]
         [HttpGet]
         public async Task<IHttpActionResult> GetOpportunities()
@@ -158,14 +164,30 @@ namespace Dashboard.APIControllers
 
         #endregion
 
+        static Document CreateDocument(string body)
+        {
+            Document document = new Document();
+
+            Section section = document.AddSection();
+
+            Paragraph paragraph = section.AddParagraph();
+
+            paragraph.Format.Font.Color = Color.FromCmyk(100, 30, 20, 50);
+
+            paragraph.AddFormattedText(body);
+
+            return document;
+        }
+
         #region Staging
+        
 
         [Route("api/v1/operations/staging")]
         [HttpGet]
         public async Task<IHttpActionResult> GetStaging(int DaysOut = 14)
         {
             var dateComp = DateTime.Now.AddDays(DaysOut).Date;
-            var stagDets = await db.StagingTopLevelStatus.Where(x => x.DateStageDue <= dateComp).OrderBy(o => o.Job).ToListAsync();
+            var stagDets = await db.StagingTopLevelStatus.Where(x => x.DateStageDue <= dateComp && x.Suffix != "" && x.DATE_CLOSED.ToString() == "1900-01-01" ).OrderBy(o => o.Job).ToListAsync();
             if (!stagDets.Any())
             {
                 return NotFound();

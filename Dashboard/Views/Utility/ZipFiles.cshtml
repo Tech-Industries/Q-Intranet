@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "ZipFiles";
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h3>Directories</h3>
+            </div>
+            <div class="ibox-content" style="height: 600px;">
+                <div data-bind="foreach: Directories()">
+                    <div>
+                        <span data-bind="foreach: new Array(Level)">
+                            <i class="fa fa-caret-right"></i>
+                        </span>
+                        <i class="fa fa-folder-open"></i>
+                        <span data-bind="text: Name"></span>
+                    </div>
+                    |
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/KO-Models/ko-model-utility.js"></script>
+
+    <script>
+        var vm = null;
+
+        $(function () {
+
+            vm = new UtilityViewModel();
+            ko.applyBindings(vm);
+            vm.LoadZipFiles();
+
+            $(document).on('click', '#reload-data', function () {
+                vm.LoadADInfo();
+            });
+        });
+    </script>
+}

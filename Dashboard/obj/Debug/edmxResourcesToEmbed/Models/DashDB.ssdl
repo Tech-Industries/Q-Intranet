@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="thumbnailPhoto" Type="varbinary" MaxLength="4000" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Title" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Email" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Manager" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="4000" />
+    <Property Name="OfficeNumber" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Company" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="Bugs">
     <Key>
       <PropertyRef Name="ID" />
@@ -53,7 +68,7 @@
     <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -104,6 +119,9 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="DateDue" Type="date" />
     <Property Name="DateCompleted" Type="datetime" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="DelegatedTo" Type="int" />
+    <Property Name="DateDelegated" Type="datetime" />
+    <Property Name="DelegatedReason" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="DeliverableDocuments">
     <Key>
@@ -146,6 +164,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
     <Property Name="UserID" Type="int" />
     <Property Name="FirstDueDate" Type="date" />
+    <Property Name="Archived" Type="bit" />
   </EntityType>
   <EntityType Name="Goals">
     <Key>
@@ -212,7 +231,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="nvarchar" MaxLength="3" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Pages">
     <Key>
@@ -259,26 +278,6 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="38" Scale="6" />
     <Property Name="FlagOpen" Type="varchar" MaxLength="5" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ProductLineTemp">
-          <Property Name="KEY_DATA" Type="char" MaxLength="9" />
-          <Property Name="PRODUCT_LINE" Type="char" MaxLength="2" />
-          <Property Name="LINE" Type="char" MaxLength="3" />
-          <Property Name="PRODUCT_LINE_DESC" Type="char" MaxLength="10" />
-          <Property Name="PRODUCT_LINE_NAME" Type="char" MaxLength="30" />
-          <Property Name="F_DECIMAL" Type="numeric" Precision="5" Scale="4" />
-          <Property Name="SALES_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="PURCHASING_ACCOUNT" Type="char" MaxLength="15" />
-          <Property Name="ACCT_REST" Type="char" MaxLength="5" />
-          <Property Name="PULL_FROM_STOCK" Type="char" MaxLength="1" />
-          <Property Name="APPLY_MATL_OVHD" Type="char" MaxLength="1" />
-          <Property Name="MFG_PART_AUTO_WO" Type="char" MaxLength="1" />
-          <Property Name="NESTING_INTERFACE" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_PO_RCPTS" Type="char" MaxLength="1" />
-          <Property Name="ISSUE_LOT_COST_STD" Type="char" MaxLength="1" />
-          <Property Name="NO_VAR_WIP_TO_FG" Type="char" MaxLength="1" />
-        </EntityType>-->
   <EntityType Name="ProjectAssignees">
     <Key>
       <PropertyRef Name="ID" />
@@ -325,7 +324,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Day" Type="varchar" MaxLength="2" />
     <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
     <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="SalesMonthlyByCompany">
     <Key>
@@ -335,7 +334,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="int" />
     <Property Name="Month" Type="int" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="SalesStage">
     <Key>
@@ -366,7 +365,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
     <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
     <Property Name="OnTime" Type="bit" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapDailyByPlant">
     <Key>
@@ -378,7 +377,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapMonthlyByPlant">
     <Key>
@@ -389,7 +388,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ScrapStage">
     <Key>
@@ -411,7 +410,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="ShippingPlanAdjShipDates">
     <Key>
@@ -537,6 +536,26 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="SupervisorID" Type="int" />
   </EntityType>
+  <EntityType Name="ZipDownloadLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="Downloader" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateDownloaded" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ZipFiles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ZipName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Location" Type="nvarchar" MaxLength="150" />
+    <Property Name="Token" Type="nvarchar" MaxLength="100" />
+    <Property Name="Expiration" Type="datetime" />
+    <Property Name="Uploader" Type="int" />
+  </EntityType>
   <EntityType Name="Opportunities">
     <Key>
       <PropertyRef Name="ID" />
@@ -619,6 +638,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Description" Type="char" MaxLength="30" />
     <Property Name="DateStageDue" Type="date" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateClosed" Type="date" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -996,6 +1016,23 @@ warning 6002: The table/view 'Dashboard.Operations.StagingDetailAuditStatus' doe
     <Property Name="DateCompleted" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.Operations.StagingMonthlySnapShot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StagingMonthlySnapShot">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="OnTime" />
+      <PropertyRef Name="Late" />
+      <PropertyRef Name="UnStaged" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="OnTime" Type="int" Nullable="false" />
+    <Property Name="Late" Type="int" Nullable="false" />
+    <Property Name="TotalStaged" Type="int" />
+    <Property Name="UnStaged" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.Operations.StagingSnapshot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="StagingSnapshot">
     <Key>
@@ -1042,6 +1079,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="ADInfo" EntityType="Self.ADInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
@@ -1083,6 +1121,8 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ZipDownloadLog" EntityType="Self.ZipDownloadLog" Schema="Documents" store:Type="Tables" />
+    <EntitySet Name="ZipFiles" EntityType="Self.ZipFiles" Schema="Documents" store:Type="Tables" />
     <EntitySet Name="Opportunities" EntityType="Self.Opportunities" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingAudit" EntityType="Self.StagingAudit" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingAuditDetail" EntityType="Self.StagingAuditDetail" Schema="Operations" store:Type="Tables" />
@@ -1423,6 +1463,17 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     [StagingDetailAuditStatus].[Status] AS [Status], 
     [StagingDetailAuditStatus].[DateCompleted] AS [DateCompleted]
     FROM [Operations].[StagingDetailAuditStatus] AS [StagingDetailAuditStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StagingMonthlySnapShot" EntityType="Self.StagingMonthlySnapShot" store:Type="Views" store:Schema="Operations">
+      <DefiningQuery>SELECT 
+    [StagingMonthlySnapShot].[ID] AS [ID], 
+    [StagingMonthlySnapShot].[OnTime] AS [OnTime], 
+    [StagingMonthlySnapShot].[Late] AS [Late], 
+    [StagingMonthlySnapShot].[TotalStaged] AS [TotalStaged], 
+    [StagingMonthlySnapShot].[UnStaged] AS [UnStaged], 
+    [StagingMonthlySnapShot].[Year] AS [Year], 
+    [StagingMonthlySnapShot].[Month] AS [Month]
+    FROM [Operations].[StagingMonthlySnapShot] AS [StagingMonthlySnapShot]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="StagingSnapshot" EntityType="Self.StagingSnapshot" store:Type="Views" store:Schema="Operations">
       <DefiningQuery>SELECT 

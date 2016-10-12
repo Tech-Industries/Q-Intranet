@@ -22,5 +22,6 @@ namespace Dashboard.Models
         public string Description { get; set; }
         public Nullable<System.DateTime> DateStageDue { get; set; }
         public int ID { get; set; }
+        public Nullable<System.DateTime> DateClosed { get; set; }
     }
 }

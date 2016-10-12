@@ -20,5 +20,6 @@ namespace Dashboard.Models
         public string Frequency { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> FirstDueDate { get; set; }
+        public Nullable<bool> Archived { get; set; }
     }
 }

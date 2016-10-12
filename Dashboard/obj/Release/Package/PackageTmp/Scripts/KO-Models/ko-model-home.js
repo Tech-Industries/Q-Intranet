@@ -252,13 +252,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm === month && dayIncr < dd - 1) {
+                if (mm == month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm === month && dayIncr > dd - 1) {
+                else if (mm == month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm !== month) {
+                if (mm != month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
 
@@ -326,13 +326,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm === month && dayIncr < dd - 1) {
+                if (mm == month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm === month && dayIncr > dd - 1) {
+                else if (mm == month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm !== month) {
+                if (mm != month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
             }
@@ -651,13 +651,13 @@
             }
             while (dayIncr < daysInMonth) {
                 dayIncr += 1;
-                if (mm === month && dayIncr < dd - 1) {
+                if (mm == month && dayIncr < dd - 1) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
-                else if (mm === month && dayIncr > dd - 1) {
+                else if (mm == month && dayIncr > dd - 1) {
                     newData.push(null);
                 }
-                if (mm !== month) {
+                if (mm != month) {
                     newData.push(Math.round(accum * 100) / 100);
                 }
 

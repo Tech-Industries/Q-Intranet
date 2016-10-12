@@ -160,17 +160,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AuthorizedOnBoardParts">
-      <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
-        <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
-          <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
-          <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
-          <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
-          <ScalarProperty Name="OnBoardPart" ColumnName="OnBoardPart" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OnBoardParts">
       <EntityTypeMapping TypeName="OnBoardingModel.OnBoardPart">
         <MappingFragment StoreEntitySet="OnBoardParts">
@@ -207,6 +196,47 @@
           <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
           <ScalarProperty Name="Company" ColumnName="Company" />
           <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorizedOnBoardParts">
+      <EntityTypeMapping TypeName="OnBoardingModel.AuthorizedOnBoardPart">
+        <MappingFragment StoreEntitySet="AuthorizedOnBoardParts">
+          <ScalarProperty Name="DelegatedTo" ColumnName="DelegatedTo" />
+          <ScalarProperty Name="DateRecovery" ColumnName="DateRecovery" />
+          <ScalarProperty Name="Archived" ColumnName="Archived" />
+          <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
+          <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+          <ScalarProperty Name="DateComplete" ColumnName="DateComplete" />
+          <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
+          <ScalarProperty Name="DateScheduledRun" ColumnName="DateScheduledRun" />
+          <ScalarProperty Name="DatePOCommitted" ColumnName="DatePOCommitted" />
+          <ScalarProperty Name="DatePODue" ColumnName="DatePODue" />
+          <ScalarProperty Name="DatePOReceived" ColumnName="DatePOReceived" />
+          <ScalarProperty Name="ProductionJobScheduleDate" ColumnName="ProductionJobScheduleDate" />
+          <ScalarProperty Name="ProductionJobNumber" ColumnName="ProductionJobNumber" />
+          <ScalarProperty Name="FirstArticleJobScheduleDate" ColumnName="FirstArticleJobScheduleDate" />
+          <ScalarProperty Name="FirstArticleJobNumber" ColumnName="FirstArticleJobNumber" />
+          <ScalarProperty Name="EstimatedOutsideCost" ColumnName="EstimatedOutsideCost" />
+          <ScalarProperty Name="EstimatedLaborDollars" ColumnName="EstimatedLaborDollars" />
+          <ScalarProperty Name="EstimatedMaterial" ColumnName="EstimatedMaterial" />
+          <ScalarProperty Name="EstimatedMachineHours" ColumnName="EstimatedMachineHours" />
+          <ScalarProperty Name="PriceEach" ColumnName="PriceEach" />
+          <ScalarProperty Name="QtyPerShipSet" ColumnName="QtyPerShipSet" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="OnBoardClass" ColumnName="OnBoardClass" />
+          <ScalarProperty Name="PartType" ColumnName="PartType" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="RecordNumber" ColumnName="RecordNumber" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DashboardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="thumbnailPhoto" Type="varbinary" MaxLength="4000" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Title" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Email" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Manager" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="4000" />
+    <Property Name="OfficeNumber" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Company" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="Bugs">
     <Key>
       <PropertyRef Name="ID" />
@@ -104,6 +119,9 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="DateDue" Type="date" />
     <Property Name="DateCompleted" Type="datetime" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="DelegatedTo" Type="int" />
+    <Property Name="DateDelegated" Type="datetime" />
+    <Property Name="DelegatedReason" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="DeliverableDocuments">
     <Key>
@@ -146,6 +164,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="Frequency" Type="nvarchar" MaxLength="20" />
     <Property Name="UserID" Type="int" />
     <Property Name="FirstDueDate" Type="date" />
+    <Property Name="Archived" Type="bit" />
   </EntityType>
   <EntityType Name="Goals">
     <Key>
@@ -619,6 +638,7 @@ warning 6013: The table/view 'Dashboard.dbo.ProductLineTemp' does not have a pri
     <Property Name="Description" Type="char" MaxLength="30" />
     <Property Name="DateStageDue" Type="date" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateClosed" Type="date" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1042,6 +1062,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DashboardModelStoreContainer">
+    <EntitySet Name="ADInfo" EntityType="Self.ADInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />

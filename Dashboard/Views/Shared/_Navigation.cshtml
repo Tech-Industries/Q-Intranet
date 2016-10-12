@@ -78,6 +78,13 @@
                     <li class="@Html.IsSelected(action: "Users")">@Html.ActionLink("Users", "Users", "Admin").IfAuth(groupID: 1)</li>
                 </ul>
             </li>
+            <li class="@Html.IsSelected(controller: "Utility")">
+                <a href="@Url.Action("Index", "Utility")"><i class="fa fa-lightbulb-o"></i> <span class="nav-label">Utilities</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Phone List", "Employees", "Utility")</li>
+                    <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("ZipFiles", "ZipFiles", "Utility").IfAuth(groupID: 26)</li>
+                </ul>
+            </li>
             <li class="@Html.IsSelected(controller: "Slide")">
                 <a href="@Url.Action("Index", "Slide")"><i class="fa fa-film"></i> <span class="nav-label">Slide Show </span></a>
             </li>

@@ -54,6 +54,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -61,6 +70,12 @@
     <Reference Include="Orizon.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OrizonWeb.1.0.11\lib\net452\Orizon.Web.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -186,6 +201,7 @@
     <Compile Include="APIControllers\NotificationsController.cs" />
     <Compile Include="APIControllers\FlashController.cs" />
     <Compile Include="APIControllers\OnboardingController.cs" />
+    <Compile Include="APIControllers\UtilityController.cs" />
     <Compile Include="APIControllers\PageController.cs" />
     <Compile Include="APIControllers\PrevMaintController.cs" />
     <Compile Include="APIControllers\SlideController.cs" />
@@ -266,6 +282,7 @@
     <Compile Include="Controllers\OperationsController.cs" />
     <Compile Include="Controllers\OnboardingController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\SlideController.cs" />
     <Compile Include="Controllers\UltraController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -276,6 +293,9 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ADInfo.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuthorizedOnBoardPart.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
@@ -290,6 +310,11 @@
     </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Company.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Company.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentMachineState.cs">
       <DependentUpon>NKCConnect.tt</DependentUpon>
@@ -468,6 +493,9 @@
     <Compile Include="Models\StagingItem.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StagingMonthlySnapShot.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StagingSnapshot.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -592,6 +620,12 @@
     <Compile Include="Models\UserGroup.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ZipDownloadLog.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZipFiles.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Z_OnBoardPartJobs.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
@@ -637,6 +671,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\nameAnnouncment.png" />
     <Content Include="Content\img\Orizon_logo_black.png" />
     <Content Include="Content\img\Orizon_logo_fullcolor.png" />
     <Content Include="Content\img\Orizon_logo_grey.png" />
@@ -965,6 +1000,7 @@
     <Content Include="Scripts\KO-Models\deliverablesform.js" />
     <Content Include="Scripts\KO-Models\ko-model-onboarding.js" />
     <Content Include="Scripts\KO-Models\ko-model-prevmaint.js" />
+    <Content Include="Scripts\KO-Models\ko-model-utility.js" />
     <Content Include="Scripts\KO-Models\ko-model-slide.js" />
     <Content Include="Scripts\KO-Models\ko-model-ultra.js" />
     <Content Include="Scripts\KO-Models\ko-model-deliverables.js" />
@@ -1444,6 +1480,9 @@
     <Content Include="Views\Operations\ShippingPlan.cshtml" />
     <Content Include="Views\Onboarding\Index.cshtml" />
     <Content Include="Views\Operations\Opportunities.cshtml" />
+    <Content Include="Views\Operations\StagingPrint.cshtml" />
+    <Content Include="Views\Utility\Employees.cshtml" />
+    <Content Include="Views\Utility\ZipFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

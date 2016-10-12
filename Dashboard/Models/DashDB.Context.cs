@@ -40,11 +40,9 @@ namespace Dashboard.Models
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Deliverable> Deliverables { get; set; }
         public virtual DbSet<DeliverableReview> DeliverableReviews { get; set; }
         public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
         public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
-        public virtual DbSet<DeliverableDetail> DeliverableDetails { get; set; }
         public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
         public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
@@ -84,7 +82,6 @@ namespace Dashboard.Models
         public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
         public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
-        public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
         public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
         public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
         public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
@@ -97,5 +94,12 @@ namespace Dashboard.Models
         public virtual DbSet<StagingTopLevelStatu> StagingTopLevelStatus { get; set; }
         public virtual DbSet<StagingSnapshot> StagingSnapshots { get; set; }
         public virtual DbSet<Opportunity> Opportunities { get; set; }
+        public virtual DbSet<Deliverable> Deliverables { get; set; }
+        public virtual DbSet<DeliverableDetail> DeliverableDetails { get; set; }
+        public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
+        public virtual DbSet<ADInfo> ADInfo { get; set; }
+        public virtual DbSet<ZipDownloadLog> ZipDownloadLog { get; set; }
+        public virtual DbSet<ZipFiles> ZipFiles { get; set; }
+        public virtual DbSet<StagingMonthlySnapShot> StagingMonthlySnapShot { get; set; }
     }
 }

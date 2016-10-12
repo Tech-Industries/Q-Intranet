@@ -8,7 +8,7 @@
 
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Onboarding</h5>
+                    <h5>Onboarding - <span data-bind="text: OnboardingParts().length"></span> Parts Found</h5>
                     <div class="ibox-tools">
                         <button class="btn btn-primary btn-sm" id="archive-toggle">Archive</button>
                     </div>
@@ -59,10 +59,9 @@
                                             <div data-bind="foreach: $root.OnboardingTasks()">
                                                 <div data-bind="if: $data[0].OnBoardPart == $parent.RecordNumber">
                                                     <div data-bind="foreach: $data">
-
                                                         <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
                                                             <div data-bind="text: PercentComplete+'%'"></div>
-                                                            <div data-bind="text: RecoveryDate == '' || RecoveryDate == null ? DueBy : RecoveryDate"></div>
+                                                            <div data-bind="text: RecoveryDate == '' || RecoveryDate == null ? DueBy : RecoveryDate, enable: DelegatedTo == @ViewBag.UID || @ViewBag.RelPer == 18"></div>
                                                             <div data-bind="text: DelegatedToName"></div>
                                                         </div>
                                                     </div>
@@ -223,7 +222,7 @@
                         <br />
                         <div class="input-group">
                             <span class="input-group-addon">Delegate</span>
-                            <select class="form-control" id="selectedDelegate" data-bind="enable: @ViewBag.RelPer == 18">
+                            <select class="form-control" id="selectedDelegate" data-bind="enable: @ViewBag.RelPer == 18 || @ViewBag.UID == SelectedTask().ResponsibleUser">
                                 <optgroup data-bind="foreach: Users()">
                                     <option data-bind="value: $data.ID, text: $data.FirstName+' '+$data.LastName"></option>
                                 </optgroup>

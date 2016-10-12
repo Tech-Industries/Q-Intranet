@@ -154,15 +154,15 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="chkListModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal inmodal fade print-this" id="chkListModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Staging Check List</h4>
             </div>
-            <div class="modal-body">
-                <div class="row"><div class="col-md-3"><h2> Job: <span id="selected-job" detailid=""> </span></h2></div>  <div class="col-md-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div></div>
+            <div class="modal-body" id="print-this">
+                <div class="row"><div class="col-md-3 col-sm-3 col-xs-3"><h2> Job: <span id="selected-job" detailid=""> </span></h2></div>  <div class="col-md-3 col-sm-3 col-xs-3"><h2>Seq: <span id="selected-seq"></span> </h2></div> <div class="col-md-3 col-sm-3 col-xs-3"><h2>Work Center: <span id="selected-wc"></span> </h2></div><div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-primary print-hide print-check-list">Print</button></div></div>
                 <hr />
 
                 <div data-bind="if: Checklist().length == 0">
@@ -170,16 +170,16 @@
                 </div>
                 <div data-bind="if: Checklist().length > 0">
                     <div class="row">
-                        <div class="col-md-6" style="border-right: dashed 1px #4155b4">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="border-right: dashed 1px #4155b4">
 
                             <div data-bind="foreach: Checklist">
                                 <div class="row" style="height: 70px">
-                                    <div class="col-md-3 col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
                                         @*<div class="checkboxSpecial">
                                                 <input type="checkbox" value="1" class="chk-criteria" data-bind="attr:{ id: 'chk-criteria-'+$data.ID}" name="" />
                                                 <label data-bind="attr:{ for: 'chk-criteria-'+$data.ID}"></label>
                                             </div>*@
-                                        <select class="form-control selectStatus" data-bind="attr:{auditdetailid: $data.ID}, value: $data.Status">
+                                        <select class="form-control selectStatus print-hide" data-bind="attr:{auditdetailid: $data.ID}, value: $data.Status">
                                             <option value="0"></option>
                                             <option value="On Hold">On Hold</option>
                                             <!-- ko if: $data.Important == 0 -->
@@ -187,18 +187,19 @@
                                             <!-- /ko -->
                                             <option value="Complete">Complete</option>
                                         </select>
+                                        <span class="screen-hide" data-bind="text: $data.Status"></span>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <h3 data-bind="text: $data.Name"></h3>
                                     </div>
-                                    <div class="col-md-2 col-sm-2">
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
                                         <span data-bind="if: $data.Important == 1"><i class="fa fa-asterisk"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row  print-hide">
                                 @*<div class="col-md-3">
                                         <div class="input-group">
                                             <span class="input-group-addon">Type</span>
@@ -282,7 +283,7 @@
                                                             <span data-bind="if: $data.DateReturned == null"><input type="checkbox" class="chkItemReturned" data-bind="attr:{'itemid' : $data.ID}" /></span>
                                                             <span data-bind="if: $data.DateReturned != null"><span data-bind="text: $data.DateReturned"></span></span>
                                                         </td>
-                                                        <td>
+                                                        <td class="print-hide">
                                                             <i class="fa fa-close hover-rem removeItem" data-bind="attr: {'itemid' : $data.ID}"></i>
                                                         </td>
                                                     </tr>
@@ -311,6 +312,31 @@
 
     <script>
         var vm = null;
+
+        $(document).on('click', ".print-check-list", function () {
+            printElement("print-this");
+
+        });
+
+        function printElement(div) {
+            // Create and insert new print section
+            var elem = document.getElementById(div);
+            var domClone = elem.cloneNode(true);
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            $printSection.appendChild(domClone);
+            document.body.insertBefore($printSection, document.body.firstChild);
+
+            window.print();
+
+            // Clean up print section for future use
+            var oldElem = document.getElementById("printSection");
+            if (oldElem != null) { oldElem.parentNode.removeChild(oldElem); }
+            //oldElem.remove() not supported by IE
+
+            return true;
+        }
+
         $(function () {
 
             vm = new OperationsViewModel();
@@ -331,7 +357,9 @@
                 console.log(SelectedJob, SelectedSuffix);
 
                 vm.LoadStagingSnapshot();
-            })
+            });
+
+            
 
             $(document).on('click', '#metrics-toggle', function () {
                 if (toggle == 0) {
@@ -355,7 +383,7 @@
             });
 
             var table = $('.dtStaging').DataTable({
-                "order": [[3, "asc"], [2, "asc"]],
+                "order": [[5, "asc"]],
                 "createdRow": function (row, data, index) {
                     $(row).addClass('staging-item');
                     $('td', row).eq(0).addClass("hidden");

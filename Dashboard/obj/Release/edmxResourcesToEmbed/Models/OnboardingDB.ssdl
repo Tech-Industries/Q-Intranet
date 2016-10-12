@@ -78,8 +78,6 @@
     <Property Name="Archived" Type="bit" />
     <Property Name="DateRecovery" Type="date" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'OnBoarding.dbo.OnBoardPartsBackup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OnBoardTasks">
     <Key>
       <PropertyRef Name="RecordNumber" />
@@ -195,13 +193,42 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
   <EntityType Name="AuthorizedOnBoardParts">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="ResponsibleUser" />
     </Key>
     <Property Name="ID" Type="bigint" Nullable="false" />
-    <Property Name="OnBoardPart" Type="bigint" />
-    <Property Name="DelegatedTo" Type="int" />
-    <Property Name="ResponsibleUser" Type="int" Nullable="false" />
+    <Property Name="RecordNumber" Type="bigint" />
+    <Property Name="Company" Type="nvarchar" MaxLength="5" />
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="PartDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateEntered" Type="datetime" />
+    <Property Name="EnteredBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="PartType" Type="nvarchar" MaxLength="32" />
+    <Property Name="OnBoardClass" Type="nvarchar" MaxLength="32" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+    <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Priority" Type="nchar" MaxLength="10" />
+    <Property Name="QtyPerShipSet" Type="numeric" Precision="9" Scale="2" />
+    <Property Name="PriceEach" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="EstimatedMachineHours" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="EstimatedMaterial" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="EstimatedLaborDollars" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="EstimatedOutsideCost" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="FirstArticleJobNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstArticleJobScheduleDate" Type="datetime" />
+    <Property Name="ProductionJobNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="ProductionJobScheduleDate" Type="datetime" />
+    <Property Name="DatePOReceived" Type="datetime" />
     <Property Name="DatePODue" Type="datetime" />
+    <Property Name="DatePOCommitted" Type="datetime" />
+    <Property Name="DateScheduledRun" Type="datetime" />
+    <Property Name="PercentComplete" Type="numeric" Precision="5" Scale="2" />
+    <Property Name="DateComplete" Type="datetime" />
+    <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="10" />
+    <Property Name="SalesOrderLine" Type="nvarchar" MaxLength="10" />
+    <Property Name="Archived" Type="bit" />
+    <Property Name="DateRecovery" Type="date" />
+    <Property Name="DelegatedTo" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityContainer Name="OnBoardingModelStoreContainer">
     <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
@@ -217,10 +244,40 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     <EntitySet Name="AuthorizedOnBoardParts" EntityType="Self.AuthorizedOnBoardParts" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [AuthorizedOnBoardParts].[ID] AS [ID], 
-    [AuthorizedOnBoardParts].[OnBoardPart] AS [OnBoardPart], 
-    [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo], 
-    [AuthorizedOnBoardParts].[ResponsibleUser] AS [ResponsibleUser], 
-    [AuthorizedOnBoardParts].[DatePODue] AS [DatePODue]
+    [AuthorizedOnBoardParts].[RecordNumber] AS [RecordNumber], 
+    [AuthorizedOnBoardParts].[Company] AS [Company], 
+    [AuthorizedOnBoardParts].[PartNumber] AS [PartNumber], 
+    [AuthorizedOnBoardParts].[PartDescription] AS [PartDescription], 
+    [AuthorizedOnBoardParts].[DateEntered] AS [DateEntered], 
+    [AuthorizedOnBoardParts].[EnteredBy] AS [EnteredBy], 
+    [AuthorizedOnBoardParts].[DateUpdated] AS [DateUpdated], 
+    [AuthorizedOnBoardParts].[UpdatedBy] AS [UpdatedBy], 
+    [AuthorizedOnBoardParts].[PartType] AS [PartType], 
+    [AuthorizedOnBoardParts].[OnBoardClass] AS [OnBoardClass], 
+    [AuthorizedOnBoardParts].[Customer] AS [Customer], 
+    [AuthorizedOnBoardParts].[PackageName] AS [PackageName], 
+    [AuthorizedOnBoardParts].[Priority] AS [Priority], 
+    [AuthorizedOnBoardParts].[QtyPerShipSet] AS [QtyPerShipSet], 
+    [AuthorizedOnBoardParts].[PriceEach] AS [PriceEach], 
+    [AuthorizedOnBoardParts].[EstimatedMachineHours] AS [EstimatedMachineHours], 
+    [AuthorizedOnBoardParts].[EstimatedMaterial] AS [EstimatedMaterial], 
+    [AuthorizedOnBoardParts].[EstimatedLaborDollars] AS [EstimatedLaborDollars], 
+    [AuthorizedOnBoardParts].[EstimatedOutsideCost] AS [EstimatedOutsideCost], 
+    [AuthorizedOnBoardParts].[FirstArticleJobNumber] AS [FirstArticleJobNumber], 
+    [AuthorizedOnBoardParts].[FirstArticleJobScheduleDate] AS [FirstArticleJobScheduleDate], 
+    [AuthorizedOnBoardParts].[ProductionJobNumber] AS [ProductionJobNumber], 
+    [AuthorizedOnBoardParts].[ProductionJobScheduleDate] AS [ProductionJobScheduleDate], 
+    [AuthorizedOnBoardParts].[DatePOReceived] AS [DatePOReceived], 
+    [AuthorizedOnBoardParts].[DatePODue] AS [DatePODue], 
+    [AuthorizedOnBoardParts].[DatePOCommitted] AS [DatePOCommitted], 
+    [AuthorizedOnBoardParts].[DateScheduledRun] AS [DateScheduledRun], 
+    [AuthorizedOnBoardParts].[PercentComplete] AS [PercentComplete], 
+    [AuthorizedOnBoardParts].[DateComplete] AS [DateComplete], 
+    [AuthorizedOnBoardParts].[SalesOrderNumber] AS [SalesOrderNumber], 
+    [AuthorizedOnBoardParts].[SalesOrderLine] AS [SalesOrderLine], 
+    [AuthorizedOnBoardParts].[Archived] AS [Archived], 
+    [AuthorizedOnBoardParts].[DateRecovery] AS [DateRecovery], 
+    [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo]
     FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

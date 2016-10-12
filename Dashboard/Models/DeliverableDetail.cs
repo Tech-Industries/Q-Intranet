@@ -19,5 +19,8 @@ namespace Dashboard.Models
         public Nullable<System.DateTime> DateDue { get; set; }
         public Nullable<System.DateTime> DateCompleted { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> DelegatedTo { get; set; }
+        public Nullable<System.DateTime> DateDelegated { get; set; }
+        public string DelegatedReason { get; set; }
     }
 }

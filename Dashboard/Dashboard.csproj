@@ -84,6 +84,7 @@
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -308,6 +309,9 @@
     <Compile Include="Models\BugsTopLevel.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calendar.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -497,6 +501,9 @@
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StagingSnapshot.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StagingSnapshotTrend.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StagingTopLevel.cs">

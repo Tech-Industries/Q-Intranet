@@ -28,5 +28,6 @@ namespace Dashboard.Models
         public Nullable<int> Missing { get; set; }
         public Nullable<int> Complete { get; set; }
         public string Status { get; set; }
+        public Nullable<int> PlantID { get; set; }
     }
 }

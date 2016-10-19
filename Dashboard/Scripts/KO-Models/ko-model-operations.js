@@ -12,6 +12,7 @@
     var stagingItemsAPI = operationsAPI + '/' + 'stagingitems';
     var stagingSnapshotAPI = operationsAPI + '/' + 'stagingsnapshot';
     var opportunitiesAPI = operationsAPI + '/' + 'opportunities';
+    var utilitiesAPI = $("#UtilityLink").attr('href');
 
     self.Users = ko.observableArray([]);
     self.UpcomingShipments = ko.observableArray([]);
@@ -27,10 +28,13 @@
     self.AdjShipDollars = ko.observable();
     self.AdjShipDollarsInt = ko.observable();
 
-    self.Equipment = ko.observableArray();
+    self.Equipment = ko.observableArray([]);
 
-    self.StagingSnapshot = ko.observableArray();
-
+    self.StagingSnapshot = ko.observableArray([]);
+    self.Total = ko.observableArray([]);
+    self.Missing = ko.observableArray([]);
+    self.Goal = ko.observableArray([]);
+    self.StagingSnapshotCats = ko.observableArray([]);
     self.Opportunities = ko.observableArray([]);
 
     self.LoadOpportunities = function () {
@@ -152,6 +156,7 @@
         return newDateID;
     }
 
+    
 
     self.LoadStagingTopLevel = function () {
         var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: { DaysOut: 14 } });
@@ -279,5 +284,44 @@
             self.StagingSnapshot(data);
         });
     }
+
+    self.LoadStagingSnapshotTrend = function () {
+        self.Total([]);
+        self.Missing([]);
+        var Period = $('#periodSelect').val();
+        var load = $.ajax({ type: "GET", url: stagingSnapshotAPI + '/trend', cache: false, data: { Period: Period } });
+        load.done(function (data) {
+            var total = [];
+            var missing = [];
+            for (x = 0; x < data.length; x++) {
+                total.push(data[x].Total)
+                missing.push(data[x].Missing)
+            }
+            self.Total(total);
+            self.Missing(missing);
+        });
+    }
+
+    self.LoadSnapShotCats = function () {
+        var Period = $('#periodSelect').val();
+        var load = $.ajax({ type: "GET", url: utilitiesAPI+'/calendar', cache: false, data: { Period: Period, Type: 'Daily' } });
+        load.done(function (data) {
+            var array = [];
+            var goal = [];
+            for (x = 0; x < data.length; x++) {
+                array.push(data[x].Date.split('T')[0])
+                goal.push(5);
+            }
+            self.Goal(goal);
+            self.StagingSnapshotCats(array);
+        });
+    }
+
+    self.LoadStagingMetrics = function () {
+        self.LoadSnapShotCats();
+        self.LoadStagingSnapshotTrend();
+    }
+
+   
 
 }

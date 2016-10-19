@@ -6,9 +6,12 @@
     self.Employees = ko.observableArray([]);
     self.isLoading = ko.observable(false);
 
+    self.Directories = ko.observableArray([]);
+    self.DirectoriesClean = ko.observableArray([]);
+
     self.LoadADInfo = function () {
         self.isLoading(true);
-        var load = $.ajax({ type: "GET", cache: false, url: utilityAPI+'/adinfo' });
+        var load = $.ajax({ type: "GET", cache: false, url: utilityAPI + '/adinfo' });
         load.success(function (data) {
             self.Employees(data);
             $.each(data, function (i, item) {
@@ -25,6 +28,35 @@
         });
         load.always(function (data) {
             self.isLoading(false);
+        });
+    }
+
+
+    self.LoadFileStructure = function () {
+        self.isLoading(true);
+        var load = $.ajax({ type: "GET", cache: false, url: utilityAPI + '/zipfiles/filestructure' });
+        load.success(function (data) {
+            console.log(data);
+            self.Directories(data);
+
+        });
+        load.always(function (data) {
+            self.isLoading(false);
+        });
+    }
+
+    self.LoadZipFiles = function () {
+        self.LoadFileStructure();
+    };
+
+    self.GenerateZipFile = function (directory) {
+        var load = $.ajax({ type: "GET", cache: false, url: utilityAPI + '/zipfiles/generatezip', data: { directory: directory } });
+        load.success(function (data) {
+            console.log(data);
+            $('#confirm').prop("disabled", false);
+            $('#load-spinner').hide();
+            $('#zip-code').text(data);
+            $('#zip-code').show();
         });
     }
 

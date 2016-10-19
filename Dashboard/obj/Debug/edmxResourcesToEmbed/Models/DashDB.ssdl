@@ -39,6 +39,40 @@
     <Property Name="BugID" Type="int" />
     <Property Name="Tag" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Day" Type="tinyint" Nullable="false" />
+    <Property Name="DaySuffix" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Weekday" Type="tinyint" Nullable="false" />
+    <Property Name="WeekDayName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsWeekend" Type="bit" Nullable="false" />
+    <Property Name="IsHoliday" Type="bit" Nullable="false" />
+    <Property Name="HolidayText" Type="varchar" MaxLength="64" />
+    <Property Name="DOWInMonth" Type="tinyint" Nullable="false" />
+    <Property Name="DayOfYear" Type="smallint" Nullable="false" />
+    <Property Name="WeekOfMonth" Type="tinyint" Nullable="false" />
+    <Property Name="WeekOfYear" Type="tinyint" Nullable="false" />
+    <Property Name="ISOWeekOfYear" Type="tinyint" Nullable="false" />
+    <Property Name="Month" Type="tinyint" Nullable="false" />
+    <Property Name="MonthName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Quarter" Type="tinyint" Nullable="false" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="MonthYear" Type="char" MaxLength="7" Nullable="false" />
+    <Property Name="FirstDayOfMonth" Type="date" Nullable="false" />
+    <Property Name="LastDayOfMonth" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfQuarter" Type="date" Nullable="false" />
+    <Property Name="LastDayOfQuarter" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfYear" Type="date" Nullable="false" />
+    <Property Name="LastDayOfYear" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfNextMonth" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfNextYear" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="Comments">
     <Key>
       <PropertyRef Name="ID" />
@@ -68,7 +102,7 @@
     <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -231,7 +265,7 @@ warning 6002: The table/view 'Dashboard.dbo.CWOStage' does not have a primary ke
     <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="nvarchar" MaxLength="3" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Pages">
     <Key>
@@ -324,7 +358,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Day" Type="varchar" MaxLength="2" />
     <Property Name="Sales" Type="numeric" Precision="38" Scale="2" />
     <Property Name="MarginAmt" Type="numeric" Precision="38" Scale="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesMonthlyByCompany">
     <Key>
@@ -334,7 +368,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="int" />
     <Property Name="Month" Type="int" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesStage">
     <Key>
@@ -365,7 +399,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Price" Type="numeric" Precision="16" Scale="6" />
     <Property Name="Cost" Type="numeric" Precision="30" Scale="10" />
     <Property Name="OnTime" Type="bit" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapDailyByPlant">
     <Key>
@@ -377,7 +411,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapMonthlyByPlant">
     <Key>
@@ -388,7 +422,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Amount" Type="numeric" Precision="38" Scale="2" />
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ScrapStage">
     <Key>
@@ -410,7 +444,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="Year" Type="varchar" MaxLength="4" />
     <Property Name="Month" Type="varchar" MaxLength="2" />
     <Property Name="Day" Type="varchar" MaxLength="2" />
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="ShippingPlanAdjShipDates">
     <Key>
@@ -611,6 +645,8 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="DATE_START" Type="date" />
     <Property Name="DATE_CLOSED" Type="date" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="FLAG_WO_PRTD" Type="bit" />
   </EntityType>
   <EntityType Name="StagingItems">
     <Key>
@@ -626,6 +662,22 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="DateIssued" Type="datetime" />
     <Property Name="DateReturned" Type="datetime" />
   </EntityType>
+  <EntityType Name="StagingSnapshotTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Complete" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Incomplete" Type="int" Nullable="false" />
+    <Property Name="Missing" Type="int" Nullable="false" />
+    <Property Name="Hold" Type="int" Nullable="false" />
+    <Property Name="UnReleased" Type="int" Nullable="false" />
+    <Property Name="DatePulled" Type="date" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="PlantID" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="StagingTopLevel">
     <Key>
       <PropertyRef Name="ID" />
@@ -639,6 +691,7 @@ warning 6002: The table/view 'Dashboard.dbo.Prices' does not have a primary key 
     <Property Name="DateStageDue" Type="date" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DateClosed" Type="date" />
+    <Property Name="PlantID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1039,11 +1092,12 @@ warning 6002: The table/view 'Dashboard.Operations.StagingSnapshot' does not hav
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="bigint" Nullable="false" />
-    <Property Name="Complete" Type="int" />
-    <Property Name="Total" Type="int" />
-    <Property Name="Incomplete" Type="int" />
-    <Property Name="Missing" Type="int" />
-    <Property Name="Hold" Type="int" />
+    <Property Name="Complete" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Incomplete" Type="int" Nullable="false" />
+    <Property Name="Missing" Type="int" Nullable="false" />
+    <Property Name="Hold" Type="int" Nullable="false" />
+    <Property Name="PlantID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1051,6 +1105,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     <Key>
       <PropertyRef Name="ID" />
     </Key>
+    <Property Name="PlantID" Type="int" />
     <Property Name="Job" Type="char" MaxLength="6" />
     <Property Name="Suffix" Type="char" MaxLength="3" />
     <Property Name="Steps" Type="int" />
@@ -1082,6 +1137,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     <EntitySet Name="ADInfo" EntityType="Self.ADInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BugTags" EntityType="Self.BugTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CWODailyByPlant" EntityType="Self.CWODailyByPlant" Schema="dbo" store:Type="Tables" />
@@ -1129,6 +1185,7 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     <EntitySet Name="StagingCriteria" EntityType="Self.StagingCriteria" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingDetail" EntityType="Self.StagingDetail" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingItems" EntityType="Self.StagingItems" Schema="Operations" store:Type="Tables" />
+    <EntitySet Name="StagingSnapshotTrend" EntityType="Self.StagingSnapshotTrend" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="StagingTopLevel" EntityType="Self.StagingTopLevel" Schema="Operations" store:Type="Tables" />
     <EntitySet Name="CWOStage" EntityType="Self.CWOStage" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -1482,11 +1539,13 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     [StagingSnapshot].[Total] AS [Total], 
     [StagingSnapshot].[Incomplete] AS [Incomplete], 
     [StagingSnapshot].[Missing] AS [Missing], 
-    [StagingSnapshot].[Hold] AS [Hold]
+    [StagingSnapshot].[Hold] AS [Hold], 
+    [StagingSnapshot].[PlantID] AS [PlantID]
     FROM [Operations].[StagingSnapshot] AS [StagingSnapshot]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="StagingTopLevelStatus" EntityType="Self.StagingTopLevelStatus" store:Type="Views" store:Schema="Operations">
       <DefiningQuery>SELECT 
+    [StagingTopLevelStatus].[PlantID] AS [PlantID], 
     [StagingTopLevelStatus].[Job] AS [Job], 
     [StagingTopLevelStatus].[Suffix] AS [Suffix], 
     [StagingTopLevelStatus].[Steps] AS [Steps], 

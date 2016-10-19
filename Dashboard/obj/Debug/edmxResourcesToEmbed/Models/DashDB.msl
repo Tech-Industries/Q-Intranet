@@ -770,6 +770,8 @@
     <EntitySetMapping Name="StagingDetails">
       <EntityTypeMapping TypeName="DashboardModel.StagingDetail">
         <MappingFragment StoreEntitySet="StagingDetail">
+          <ScalarProperty Name="FLAG_WO_PRTD" ColumnName="FLAG_WO_PRTD" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="DATE_CLOSED" ColumnName="DATE_CLOSED" />
           <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
@@ -943,6 +945,7 @@
     <EntitySetMapping Name="StagingTopLevelStatus">
       <EntityTypeMapping TypeName="DashboardModel.StagingTopLevelStatu">
         <MappingFragment StoreEntitySet="StagingTopLevelStatus">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Complete" ColumnName="Complete" />
           <ScalarProperty Name="Missing" ColumnName="Missing" />
@@ -963,6 +966,7 @@
     <EntitySetMapping Name="StagingSnapshots">
       <EntityTypeMapping TypeName="DashboardModel.StagingSnapshot">
         <MappingFragment StoreEntitySet="StagingSnapshot">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
           <ScalarProperty Name="Hold" ColumnName="Hold" />
           <ScalarProperty Name="Missing" ColumnName="Missing" />
           <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
@@ -1012,6 +1016,7 @@
     <EntitySetMapping Name="StagingTopLevels">
       <EntityTypeMapping TypeName="DashboardModel.StagingTopLevel">
         <MappingFragment StoreEntitySet="StagingTopLevel">
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
           <ScalarProperty Name="DateClosed" ColumnName="DateClosed" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="DateStageDue" ColumnName="DateStageDue" />
@@ -1072,6 +1077,58 @@
           <ScalarProperty Name="Late" ColumnName="Late" />
           <ScalarProperty Name="OnTime" ColumnName="OnTime" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingSnapshotTrend">
+      <EntityTypeMapping TypeName="DashboardModel.StagingSnapshotTrend">
+        <MappingFragment StoreEntitySet="StagingSnapshotTrend">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="DatePulled" ColumnName="DatePulled" />
+          <ScalarProperty Name="UnReleased" ColumnName="UnReleased" />
+          <ScalarProperty Name="Hold" ColumnName="Hold" />
+          <ScalarProperty Name="Missing" ColumnName="Missing" />
+          <ScalarProperty Name="Incomplete" ColumnName="Incomplete" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendar">
+      <EntityTypeMapping TypeName="DashboardModel.Calendar">
+        <MappingFragment StoreEntitySet="Calendar">
+          <ScalarProperty Name="FirstDayOfNextYear" ColumnName="FirstDayOfNextYear" />
+          <ScalarProperty Name="FirstDayOfNextMonth" ColumnName="FirstDayOfNextMonth" />
+          <ScalarProperty Name="LastDayOfYear" ColumnName="LastDayOfYear" />
+          <ScalarProperty Name="FirstDayOfYear" ColumnName="FirstDayOfYear" />
+          <ScalarProperty Name="LastDayOfQuarter" ColumnName="LastDayOfQuarter" />
+          <ScalarProperty Name="FirstDayOfQuarter" ColumnName="FirstDayOfQuarter" />
+          <ScalarProperty Name="LastDayOfMonth" ColumnName="LastDayOfMonth" />
+          <ScalarProperty Name="FirstDayOfMonth" ColumnName="FirstDayOfMonth" />
+          <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+          <ScalarProperty Name="MMYYYY" ColumnName="MMYYYY" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="ISOWeekOfYear" ColumnName="ISOWeekOfYear" />
+          <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+          <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+          <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+          <ScalarProperty Name="DOWInMonth" ColumnName="DOWInMonth" />
+          <ScalarProperty Name="HolidayText" ColumnName="HolidayText" />
+          <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
+          <ScalarProperty Name="IsWeekend" ColumnName="IsWeekend" />
+          <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+          <ScalarProperty Name="Weekday" ColumnName="Weekday" />
+          <ScalarProperty Name="DaySuffix" ColumnName="DaySuffix" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DateKey" ColumnName="DateKey" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

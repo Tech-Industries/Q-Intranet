@@ -49,4 +49,15 @@
         self.LoadFileStructure();
     };
 
+    self.GenerateZipFile = function (directory) {
+        var load = $.ajax({ type: "GET", cache: false, url: utilityAPI + '/zipfiles/generatezip', data: { directory: directory } });
+        load.success(function (data) {
+            console.log(data);
+            $('#confirm').prop("disabled", false);
+            $('#load-spinner').hide();
+            $('#zip-code').text(data);
+            $('#zip-code').show();
+        });
+    }
+
 }

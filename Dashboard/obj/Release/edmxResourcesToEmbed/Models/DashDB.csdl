@@ -103,6 +103,9 @@
     <EntitySet Name="DeliverableDetails" EntityType="DashboardModel.DeliverableDetail" />
     <EntitySet Name="StagingTopLevels" EntityType="DashboardModel.StagingTopLevel" />
     <EntitySet Name="ADInfo" EntityType="DashboardModel.ADInfo" />
+    <EntitySet Name="ZipDownloadLog" EntityType="DashboardModel.ZipDownloadLog" />
+    <EntitySet Name="ZipFiles" EntityType="DashboardModel.ZipFiles" />
+    <EntitySet Name="StagingMonthlySnapShot" EntityType="DashboardModel.StagingMonthlySnapShot" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -1073,5 +1076,40 @@
     <Property Name="OfficeNumber" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="Company" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="ZipDownloadLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="Downloader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateDownloaded" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ZipFiles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ZipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Expiration" Type="DateTime" Precision="3" />
+    <Property Name="Uploader" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StagingMonthlySnapShot">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="OnTime" />
+      <PropertyRef Name="Late" />
+      <PropertyRef Name="UnStaged" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="OnTime" Type="Int32" Nullable="false" />
+    <Property Name="Late" Type="Int32" Nullable="false" />
+    <Property Name="TotalStaged" Type="Int32" />
+    <Property Name="UnStaged" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
   </EntityType>
 </Schema>

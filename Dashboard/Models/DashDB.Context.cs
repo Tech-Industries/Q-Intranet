@@ -101,5 +101,7 @@ namespace Dashboard.Models
         public virtual DbSet<ZipDownloadLog> ZipDownloadLog { get; set; }
         public virtual DbSet<ZipFiles> ZipFiles { get; set; }
         public virtual DbSet<StagingMonthlySnapShot> StagingMonthlySnapShot { get; set; }
+        public virtual DbSet<StagingSnapshotTrend> StagingSnapshotTrend { get; set; }
+        public virtual DbSet<Calendar> Calendar { get; set; }
     }
 }

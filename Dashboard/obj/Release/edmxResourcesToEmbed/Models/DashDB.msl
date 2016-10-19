@@ -1040,5 +1040,40 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ZipDownloadLog">
+      <EntityTypeMapping TypeName="DashboardModel.ZipDownloadLog">
+        <MappingFragment StoreEntitySet="ZipDownloadLog">
+          <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+          <ScalarProperty Name="Downloader" ColumnName="Downloader" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZipFiles">
+      <EntityTypeMapping TypeName="DashboardModel.ZipFiles">
+        <MappingFragment StoreEntitySet="ZipFiles">
+          <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+          <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ZipName" ColumnName="ZipName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StagingMonthlySnapShot">
+      <EntityTypeMapping TypeName="DashboardModel.StagingMonthlySnapShot">
+        <MappingFragment StoreEntitySet="StagingMonthlySnapShot">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="UnStaged" ColumnName="UnStaged" />
+          <ScalarProperty Name="TotalStaged" ColumnName="TotalStaged" />
+          <ScalarProperty Name="Late" ColumnName="Late" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

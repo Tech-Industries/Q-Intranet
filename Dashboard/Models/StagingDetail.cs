@@ -23,5 +23,7 @@ namespace Dashboard.Models
         public Nullable<System.DateTime> DATE_START { get; set; }
         public Nullable<System.DateTime> DATE_CLOSED { get; set; }
         public int ID { get; set; }
+        public Nullable<int> PlantID { get; set; }
+        public Nullable<bool> FLAG_WO_PRTD { get; set; }
     }
 }

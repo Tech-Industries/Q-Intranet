@@ -391,7 +391,28 @@ namespace Dashboard.APIControllers
             return Ok(stagItems[0]);
         }
 
+        [Route("api/v1/operations/stagingsnapshot/trend")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetStagingSnapshotTrend(string Period)
+        {
+            int Year = DateTime.Now.Year;
+            int Month = DateTime.Now.Month;
+            try { 
+            Year = int.Parse(Period.Split('-')[0]);
+            Month = int.Parse(Period.Split('-')[1]);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+            var stagItems = await db.StagingSnapshotTrend.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.DatePulled).ToListAsync();
+            if (!stagItems.Any())
+            {
+                return NotFound();
+            }
+            return Ok(stagItems);
 
+        }
 
 
 

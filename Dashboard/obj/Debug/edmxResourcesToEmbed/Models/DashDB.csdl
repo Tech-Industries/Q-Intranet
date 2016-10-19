@@ -106,6 +106,8 @@
     <EntitySet Name="ZipDownloadLog" EntityType="DashboardModel.ZipDownloadLog" />
     <EntitySet Name="ZipFiles" EntityType="DashboardModel.ZipFiles" />
     <EntitySet Name="StagingMonthlySnapShot" EntityType="DashboardModel.StagingMonthlySnapShot" />
+    <EntitySet Name="StagingSnapshotTrend" EntityType="DashboardModel.StagingSnapshotTrend" />
+    <EntitySet Name="Calendar" EntityType="DashboardModel.Calendar" />
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -830,6 +832,8 @@
     <Property Name="DATE_START" Type="DateTime" Precision="0" />
     <Property Name="DATE_CLOSED" Type="DateTime" Precision="0" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="FLAG_WO_PRTD" Type="Boolean" />
   </EntityType>
   <EntityType Name="ReviewablesByUser">
     <Key>
@@ -1002,17 +1006,19 @@
     <Property Name="Missing" Type="Int32" />
     <Property Name="Complete" Type="Int32" />
     <Property Name="Status" Type="String" MaxLength="23" FixedLength="false" Unicode="true" />
+    <Property Name="PlantID" Type="Int32" />
   </EntityType>
   <EntityType Name="StagingSnapshot">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Complete" Type="Int32" />
-    <Property Name="Total" Type="Int32" />
-    <Property Name="Incomplete" Type="Int32" />
-    <Property Name="Missing" Type="Int32" />
-    <Property Name="Hold" Type="Int32" />
+    <Property Name="Complete" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="Incomplete" Type="Int32" Nullable="false" />
+    <Property Name="Missing" Type="Int32" Nullable="false" />
+    <Property Name="Hold" Type="Int32" Nullable="false" />
+    <Property Name="PlantID" Type="Int32" />
   </EntityType>
   <EntityType Name="Opportunity">
     <Key>
@@ -1061,6 +1067,7 @@
     <Property Name="DateStageDue" Type="DateTime" Precision="0" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DateClosed" Type="DateTime" Precision="0" />
+    <Property Name="PlantID" Type="Int32" />
   </EntityType>
   <EntityType Name="ADInfo">
     <Key>
@@ -1111,5 +1118,55 @@
     <Property Name="UnStaged" Type="Int32" Nullable="false" />
     <Property Name="Year" Type="Int32" />
     <Property Name="Month" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StagingSnapshotTrend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Complete" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="Incomplete" Type="Int32" Nullable="false" />
+    <Property Name="Missing" Type="Int32" Nullable="false" />
+    <Property Name="Hold" Type="Int32" Nullable="false" />
+    <Property Name="UnReleased" Type="Int32" Nullable="false" />
+    <Property Name="DatePulled" Type="DateTime" Precision="0" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="PlantID" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Day" Type="Byte" Nullable="false" />
+    <Property Name="DaySuffix" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Weekday" Type="Byte" Nullable="false" />
+    <Property Name="WeekDayName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsWeekend" Type="Boolean" Nullable="false" />
+    <Property Name="IsHoliday" Type="Boolean" Nullable="false" />
+    <Property Name="HolidayText" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="DOWInMonth" Type="Byte" Nullable="false" />
+    <Property Name="DayOfYear" Type="Int16" Nullable="false" />
+    <Property Name="WeekOfMonth" Type="Byte" Nullable="false" />
+    <Property Name="WeekOfYear" Type="Byte" Nullable="false" />
+    <Property Name="ISOWeekOfYear" Type="Byte" Nullable="false" />
+    <Property Name="Month" Type="Byte" Nullable="false" />
+    <Property Name="MonthName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="Byte" Nullable="false" />
+    <Property Name="QuarterName" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="MMYYYY" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfNextMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfNextYear" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
 </Schema>

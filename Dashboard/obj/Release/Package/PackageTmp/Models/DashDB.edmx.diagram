@@ -65,6 +65,9 @@
         <EntityTypeShape EntityType="DashboardModel.DeliverableDetail" Width="2.125" PointX="20.375" PointY="23.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingTopLevel" Width="1.5" PointX="20.375" PointY="19.75" />
         <EntityTypeShape EntityType="DashboardModel.ADInfo" Width="1.5" PointX="23.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DashboardModel.ZipDownloadLog" Width="1.5" PointX="24.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DashboardModel.ZipFiles" Width="1.5" PointX="24.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingMonthlySnapShot" Width="1.5" PointX="24.375" PointY="9.75" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

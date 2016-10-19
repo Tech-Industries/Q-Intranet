@@ -19,6 +19,7 @@ using PdfSharp.Pdf;
 using MigraDoc.Rendering;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 
 namespace Dashboard.APIControllers
 {
@@ -141,8 +142,44 @@ namespace Dashboard.APIControllers
 
             return Ok(subDirs);
         }
+
+        [Route("api/v1/utility/zipfiles/generatezip")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetZipFile(string directory)
+        {
+            string zipID = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            new List<string> { "-", "=", "/", "\\", "+" }.ForEach(m => zipID = zipID.Replace(m, ""));
+            string startPath = @"c:\example\start";
+            string zipPath = @"c:\example\result.zip";
+            string extractPath = @"c:\example\extract";
+            
+            string Destination = @"\\crp-utl01.orizonaero.local\FTP\ZipArchive\" + zipID + ".zip";
+            ZipFile.CreateFromDirectory(directory, Destination);
+            System.Threading.Thread.Sleep(1000);
+            return Ok(Destination);
+        }
         #endregion
-        
+
+        #region Calendar
+        [Route("api/v1/utility/calendar")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetCalendarDates(string Period, string Type)
+        {
+            int Year = int.Parse(Period.Split('-')[0]);
+            int Month = int.Parse(Period.Split('-')[1]);
+            if (Type == "Daily")
+            {
+                var Dates = await db.Calendar.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.Date).ToListAsync();
+                return Ok(Dates);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+        #endregion
+
         private List<Folder> subDirs = new List<Folder>();
         private void DirSearch(string sDir)
         {

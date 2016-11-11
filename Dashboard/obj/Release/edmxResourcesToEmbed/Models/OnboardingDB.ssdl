@@ -189,6 +189,21 @@
     <Property Name="OSSPOReceiveDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.ActualCompCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ActualCompCount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Task" Type="bigint" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Day" Type="int" />
+    <Property Name="CompletedOn" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="AuthorizedOnBoardParts">
     <Key>
@@ -230,6 +245,21 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     <Property Name="DateRecovery" Type="date" />
     <Property Name="DelegatedTo" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.ExpectedDueCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ExpectedDueCount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Task" Type="bigint" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="Day" Type="int" />
+    <Property Name="DueBy" Type="datetime" />
+  </EntityType>
   <EntityContainer Name="OnBoardingModelStoreContainer">
     <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -241,6 +271,18 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartJobs" EntityType="Self.Z-OnBoardPartJobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartOSSPO" EntityType="Self.Z-OnBoardPartOSSPO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActualCompCount" EntityType="Self.ActualCompCount" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ActualCompCount].[ID] AS [ID], 
+    [ActualCompCount].[Total] AS [Total], 
+    [ActualCompCount].[PackageName] AS [PackageName], 
+    [ActualCompCount].[Task] AS [Task], 
+    [ActualCompCount].[Year] AS [Year], 
+    [ActualCompCount].[Month] AS [Month], 
+    [ActualCompCount].[Day] AS [Day], 
+    [ActualCompCount].[CompletedOn] AS [CompletedOn]
+    FROM [dbo].[ActualCompCount] AS [ActualCompCount]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="AuthorizedOnBoardParts" EntityType="Self.AuthorizedOnBoardParts" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [AuthorizedOnBoardParts].[ID] AS [ID], 
@@ -279,6 +321,18 @@ warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not ha
     [AuthorizedOnBoardParts].[DateRecovery] AS [DateRecovery], 
     [AuthorizedOnBoardParts].[DelegatedTo] AS [DelegatedTo]
     FROM [dbo].[AuthorizedOnBoardParts] AS [AuthorizedOnBoardParts]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ExpectedDueCount" EntityType="Self.ExpectedDueCount" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ExpectedDueCount].[ID] AS [ID], 
+    [ExpectedDueCount].[Total] AS [Total], 
+    [ExpectedDueCount].[PackageName] AS [PackageName], 
+    [ExpectedDueCount].[Task] AS [Task], 
+    [ExpectedDueCount].[Year] AS [Year], 
+    [ExpectedDueCount].[Month] AS [Month], 
+    [ExpectedDueCount].[Day] AS [Day], 
+    [ExpectedDueCount].[DueBy] AS [DueBy]
+    FROM [dbo].[ExpectedDueCount] AS [ExpectedDueCount]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

@@ -3,7 +3,13 @@
     ViewBag.Title = "Index";
 }
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-2 col-sm-4 col-lg-offset-10 col-sm-offset-8">
+        <button class="btn btn-lg btn-primary" id="metrics-toggle">Metrics</button>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12" id="onboard-list">
         <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom: 0;">
 
             <div class="ibox">
@@ -56,14 +62,12 @@
                                     </div>
                                     <div class="col-md-10" style="white-space: nowrap; overflow: hidden">
                                         <div class="onboard-tasks">
-                                            <div data-bind="foreach: $root.OnboardingTasks()">
-                                                <div data-bind="if: $data[0].OnBoardPart == $parent.RecordNumber">
-                                                    <div data-bind="foreach: $data">
-                                                        <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
-                                                            <div data-bind="text: PercentComplete+'%'"></div>
-                                                            <div data-bind="text: RecoveryDate == '' || RecoveryDate == null ? DueBy : RecoveryDate, enable: DelegatedTo == @ViewBag.UID || @ViewBag.RelPer == 18"></div>
-                                                            <div data-bind="text: DelegatedToName"></div>
-                                                        </div>
+                                            <div data-bind="foreach: $root.GetFilteredOnboardingTasks($data)">
+                                                <div data-bind="foreach: $data">
+                                                    <div class="onboard-task-item no-select" data-bind="attr: {taskid: $data.RecordNumber, partid: $data.OnBoardPart}, css: {'onboard-task-complete' : CurrentStatus == 'Complete', 'onboard-task-complete-late' : CurrentStatus == 'Completed Late', 'onboard-task-late' : CurrentStatus == 'Late', 'onboard-task-upcoming' : CurrentStatus == 'Upcoming', 'onboard-task-in-progress' : CurrentStatus == 'In Progress', 'onboard-task-in-null' : CurrentStatus == '', 'blink blink-orange': DueBy == null && CompletedOn == null}">
+                                                        <div data-bind="text: PercentComplete+'%'"></div>
+                                                        <div data-bind="text: RecoveryDate == '' || RecoveryDate == null ? DueBy : RecoveryDate, enable: DelegatedTo == @ViewBag.UID || @ViewBag.RelPer == 18"></div>
+                                                        <div data-bind="text: DelegatedToName"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,45 +77,78 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ibox-footer">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group" id="bldCustomer">
+                                    <span class="input-group-addon">Customer</span>
+                                    <input type="text" class="form-control typeahead" id="fltCustomer" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group bldProject">
+                                    <span class="input-group-addon">Project</span>
+                                    <input type="text" class="form-control typeahead" id="fltProject" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group" id="bldPartType">
+                                    <span class="input-group-addon">Part Type</span>
+                                    <input type="text" class="form-control typeahead" id="fltPartType" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group" id="bldPartClass">
+                                    <span class="input-group-addon">Part Class</span>
+                                    <input type="text" class="form-control" id="fltPartClass" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group" id="bldPartNum">
+                                    <span class="input-group-addon">Part Num</span>
+                                    <input type="text" class="form-control typeahead" id="fltPartNum" />
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-primary" id="btnFilter">Filter</button>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-danger" id="btnClearFilter">Clear</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="ibox-footer">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="input-group" id="bldCustomer">
-                                <span class="input-group-addon">Customer</span>
-                                <input type="text" class="form-control typeahead" id="fltCustomer" />
-                            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" id="onboard-metrics" hidden>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Onboarding Metrics</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1">
+                        <div class="input-group bldProject">
+                            <span class="input-group-addon">Project</span>
+                            <input type="text" class="form-control typeahead" id="fltProjectburn" />
                         </div>
-                        <div class="col-md-2">
-                            <div class="input-group" id="bldProject">
-                                <span class="input-group-addon">Project</span>
-                                <input type="text" class="form-control typeahead" id="fltProject" />
-                            </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                Task
+                            </span>
+                            <select id="task-select" class="form-control" data-bind="foreach:{data: OnboardingTasks()[0]}">
+                                <option data-bind="value: $data.Task, text: $data.TaskDescription"></option>
+                            </select>
                         </div>
-                        <div class="col-md-2">
-                            <div class="input-group" id="bldPartType">
-                                <span class="input-group-addon">Part Type</span>
-                                <input type="text" class="form-control typeahead" id="fltPartType" />
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group" id="bldPartClass">
-                                <span class="input-group-addon">Part Class</span>
-                                <input type="text" class="form-control" id="fltPartClass" />
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group" id="bldPartNum">
-                                <span class="input-group-addon">Part Num</span>
-                                <input type="text" class="form-control typeahead" id="fltPartNum" />
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <button class="btn btn-primary" id="btnFilter">Filter</button>
-                        </div>
-                        <div class="col-md-1">
-                            <button class="btn btn-danger" id="btnClearFilter">Clear</button>
-                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="load-burndown">Go</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="" id="onboard-burndown-chart" style="height: 480px;"></div>
                     </div>
                 </div>
             </div>
@@ -166,7 +203,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger pull-left delete-part">Delete</button>
                 <button type="button" class="btn btn-primary archive-part">Archive</button>
-                
+
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -187,7 +224,7 @@
                     </div>
                     <div class="col-md-4">
                         <center><h2 id="select-task-description" data-bind="text: SelectedTask().TaskDescription"></h2></center>
-                        
+
                         <center>
                             <div class="row">
                                 <div class="col-md-6">
@@ -324,13 +361,14 @@
         var vm = null;
 
         $(function () {
+            var toggle = 0;
             var AssignBtn = null;
 
             vm = new OnboardingViewModel();
             ko.applyBindings(vm);
             vm.loadUsers();
             vm.LoadOnboardingParts();
-            
+
             //Delete part click event
             $(document).on('click', '.delete-part', function () {
                 swal({
@@ -350,6 +388,90 @@
                         timer: 1000
                     });
                 });
+            });
+
+            $(document).on('click', '#metrics-toggle', function () {
+                if (toggle == 0) {
+                    $(this).text('Back');
+                    $('#onboard-list').toggle('slide', { direction: 'right' }, '250', function () {
+                        $('#onboard-metrics').toggle('slide', { direction: 'up' }, '250', function () {
+                            BurndownChart.reflow();
+                        });
+                    });
+                    toggle = 1;
+                    vm.LoadBurndown();
+                }
+                else {
+                    $(this).text('Metrics');
+                    $('#onboard-metrics').toggle('slide', { direction: 'up' }, '250', function () {
+                        $('#onboard-list').toggle('slide', { direction: 'left' }, '250', function () {
+                        });
+                    });
+                    toggle = 0;
+                }
+            });
+
+            BurndownChart = $('#onboard-burndown-chart').highcharts({
+                chart: {
+                    //events: {
+                    //    load: function () {
+                    //        this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 10, '80%', '70%')
+                    //            .add();
+                    //    }
+                    //},
+                },
+                title: {
+                    text: 'Task Burndown',
+                    x: -20 //center
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45,
+                        step: 6
+                    }
+                },
+                yAxis: {
+
+                    title: {
+                        text: ''
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
+
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 3
+                    }
+                },
+                series: [{
+                    name: 'Expected',
+                    data: [],
+                    color: '#27ae60'
+                }, {
+                    name: 'Actual',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
+
+            vm.BurnCats.subscribe(function (val) {
+                BurndownChart.xAxis[0].setCategories(val, true);
+            });
+            vm.BurnExpected.subscribe(function (val) {
+                BurndownChart.series[0].setData(val, true);
+            });
+            vm.BurnActual.subscribe(function (val) {
+                BurndownChart.series[1].setData(val, true);
             });
 
             //Archive part click event
@@ -570,7 +692,7 @@
             $('#bldCustomer .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'Customers', source: vm.Customers() });
 
             vm.Projects(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
-            $('#bldProject .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'Projects', source: vm.Projects() });
+            $('.bldProject .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'Projects', source: vm.Projects() });
 
             vm.PartTypes(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
             $('#bldPartType .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'PartTypes', source: vm.PartTypes() });
@@ -580,6 +702,11 @@
 
             vm.PartNums(new Bloodhound({ datumTokenizer: Bloodhound.tokenizers.whitespace, queryTokenizer: Bloodhound.tokenizers.whitespace, }));
             $('#bldPartNum .typeahead').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'PartNums', source: vm.PartNums() });
+
+            $(document).on('click', '#load-burndown', function () {
+                vm.LoadBurndown();
+            });
+
         });
     </script>
 }

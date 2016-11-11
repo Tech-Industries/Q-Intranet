@@ -20,7 +20,7 @@
                 item.FirstName,
                 item.LastName,
                 item.Title,
-                item.Email,
+                "<a href='mailto:"+item.Email+"'>"+item.Email+"</a>",
                 item.OfficeNumber,
                 item.Mobile
                 ]).draw();

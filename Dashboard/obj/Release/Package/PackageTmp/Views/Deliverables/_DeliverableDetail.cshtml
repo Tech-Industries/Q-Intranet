@@ -43,7 +43,13 @@
                         <span data-bind="if: DDComplete()">
                             <span data-bind="text: DDDateCompleted()"></span>
                             <span data-bind="if:(DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">
-                                - <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button>
+                                - <button type="button" class="btn btn-xs btn-danger btn-uncomplete-del">Reopen</button> 
+                                <span data-bind="if:@ViewBag.RelPer == 3"><button type="button" class="btn btn-xs btn-warning btn-del-date-override">Override</button> 
+                                    <span class="input-group date" data-provide="datepicker" id="date-override-picker" style="width: 200px; display: none;">
+                                        <span class="input-group-addon">Date:</span>
+                                        <input type="text" class="form-control" id="date-override" name="date-override" placeholder="Date Override" readonly>
+                                    </span>
+                                </span>
                             </span>
                         </span>
                         <span data-bind="if: !DDComplete() && (DelOwnerID() == @ViewBag.UID || @ViewBag.RelPer == 3) && UserAccess()">

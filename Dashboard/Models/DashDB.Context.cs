@@ -41,7 +41,6 @@ namespace Dashboard.Models
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<DeliverableReview> DeliverableReviews { get; set; }
-        public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
         public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
         public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
         public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
@@ -103,5 +102,7 @@ namespace Dashboard.Models
         public virtual DbSet<StagingMonthlySnapShot> StagingMonthlySnapShot { get; set; }
         public virtual DbSet<StagingSnapshotTrend> StagingSnapshotTrend { get; set; }
         public virtual DbSet<Calendar> Calendar { get; set; }
+        public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
+        public virtual DbSet<DelDetDocsByUser> DelDetDocsByUsers { get; set; }
     }
 }

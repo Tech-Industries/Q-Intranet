@@ -712,6 +712,25 @@ warning 6002: The table/view 'Dashboard.dbo.BugsTopLevel' does not have a primar
     <Property Name="Tags" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Dashboard.dbo.DelDetDocsByUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DelDetDocsByUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelDetID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="DelDetID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="datetime" />
+    <Property Name="Path" Type="nvarchar" MaxLength="200" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+    <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Dashboard.dbo.DeliverablesDueInNextThirtyDays' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="DeliverablesDueInNextThirtyDays">
     <Key>
@@ -1231,6 +1250,20 @@ warning 6002: The table/view 'Dashboard.Operations.StagingTopLevelStatus' does n
     [BugsTopLevel].[DateClosed] AS [DateClosed], 
     [BugsTopLevel].[Tags] AS [Tags]
     FROM [dbo].[BugsTopLevel] AS [BugsTopLevel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DelDetDocsByUser" EntityType="Self.DelDetDocsByUser" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DelDetDocsByUser].[ID] AS [ID], 
+    [DelDetDocsByUser].[DelDetID] AS [DelDetID], 
+    [DelDetDocsByUser].[UserID] AS [UserID], 
+    [DelDetDocsByUser].[TimeSubmitted] AS [TimeSubmitted], 
+    [DelDetDocsByUser].[Path] AS [Path], 
+    [DelDetDocsByUser].[Title] AS [Title], 
+    [DelDetDocsByUser].[Type] AS [Type], 
+    [DelDetDocsByUser].[Location] AS [Location], 
+    [DelDetDocsByUser].[FirstName] AS [FirstName], 
+    [DelDetDocsByUser].[LastName] AS [LastName]
+    FROM [dbo].[DelDetDocsByUser] AS [DelDetDocsByUser]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="DeliverablesDueInNextThirtyDays" EntityType="Self.DeliverablesDueInNextThirtyDays" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

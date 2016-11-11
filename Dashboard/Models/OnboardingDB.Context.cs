@@ -36,5 +36,7 @@ namespace Dashboard.Models
         public virtual DbSet<AvailPlanJob> AvailPlanJobs { get; set; }
         public virtual DbSet<OnBoardPart> OnBoardParts { get; set; }
         public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
+        public virtual DbSet<ActualCompCount> ActualCompCounts { get; set; }
+        public virtual DbSet<ExpectedDueCount> ExpectedDueCounts { get; set; }
     }
 }

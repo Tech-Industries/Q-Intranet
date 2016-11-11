@@ -16,6 +16,7 @@ using System.Web.Http.Results;
 using Dashboard.Models;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Dashboard.APIControllers
 {
@@ -29,6 +30,7 @@ namespace Dashboard.APIControllers
         public async Task<IHttpActionResult> GetAuthorizedParts(int id)
         {
             var RelPer = db.UserGroups.Where(x => x.UserID == id && x.GroupID == 18);
+            var Mod = db.UserGroups.Where(x => x.UserID == id && x.GroupID == 19);
             string sid = id.ToString();
 
             List<AuthorizedOnBoardPart> authParts = new List<AuthorizedOnBoardPart>();
@@ -44,6 +46,15 @@ namespace Dashboard.APIControllers
 
 
             if (RelPer.Any())
+            {
+                parts = await onbdb.OnBoardParts.OrderBy(o => o.DatePODue).Where(x => x.Archived != true).ToListAsync();
+                if (!parts.Any())
+                {
+                    return NotFound();
+                }
+                return (Ok(parts));
+            }
+            else if (Mod.Any())
             {
                 parts = await onbdb.OnBoardParts.OrderBy(o => o.DatePODue).Where(x => x.Archived != true).ToListAsync();
                 if (!parts.Any())
@@ -221,6 +232,73 @@ namespace Dashboard.APIControllers
                 return NotFound();
             }
             return (Ok(Jobs));
+        }
+
+        [Route("api/v1/Onboarding/metrics/burndown")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetOnboardingBurndown(string Program = null, int Task = 0)
+        {
+            if (Task == 0)
+            {
+                return BadRequest();
+            }
+
+            var expec = await onbdb.ExpectedDueCounts.Where(x => x.PackageName == Program && x.Task == Task).OrderBy(o => o.DueBy).ToListAsync();
+            var actual = await onbdb.ActualCompCounts.Where(x => x.PackageName == Program && x.Task == Task).OrderBy(o => o.CompletedOn).ToListAsync();
+            if (!expec.Any())
+            {
+                return NotFound();
+            }
+
+            DateTime? startDate = expec.First().DueBy;
+            DateTime? endDate = expec.Last().DueBy;
+            int? totalDue = expec.Sum(item => item.Total);
+            int? totalComp = actual.Sum(item => item.Total);
+
+            if (endDate < actual.Last().CompletedOn)
+            {
+                endDate = actual.Last().CompletedOn;
+            }
+            if (totalDue > totalComp)
+            {
+
+                if (endDate < DateTime.Now.Date)
+                {
+                    endDate = DateTime.Now.Date;
+                }
+            }
+
+            var dates = await db.Calendar.Where(x => x.Date >= startDate && x.Date <= endDate).ToListAsync();
+            var sendData = new List<BurnItem>();
+
+            foreach (var d in dates)
+            {
+                int? sumDue = 0;
+                int? sumAct = 0;
+
+                foreach (var e in expec)
+                {
+                    if (e.DueBy >= d.Date)
+                    {
+                        Debug.WriteLine(e.Total.ToString());
+                        sumDue += e.Total;
+                    }
+                }
+
+                foreach (var a in actual) { if (a.CompletedOn <= d.Date) { sumAct += a.Total; } }
+                sendData.Add(new BurnItem { Date = d.Date, Expected = sumDue, Actual = totalDue - sumAct });
+            }
+
+
+
+
+            return Ok(sendData);
+        }
+        public class BurnItem
+        {
+            public DateTime Date { get; set; }
+            public int? Expected { get; set; }
+            public int? Actual { get; set; }
         }
     }
 }

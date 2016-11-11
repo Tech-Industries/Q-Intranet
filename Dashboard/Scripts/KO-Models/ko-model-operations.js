@@ -33,6 +33,7 @@
     self.StagingSnapshot = ko.observableArray([]);
     self.Total = ko.observableArray([]);
     self.Missing = ko.observableArray([]);
+    self.Incomplete = ko.observableArray([]);
     self.Goal = ko.observableArray([]);
     self.StagingSnapshotCats = ko.observableArray([]);
     self.Opportunities = ko.observableArray([]);
@@ -124,6 +125,16 @@
         load.fail(function () {
             console.log('test');
         });
+    }
+
+    self.FilterShippingResults = function(filter){
+        var today = new Date(Date);
+        var range = new Date(Date);
+        if (filter == 'This') { range.setDate(range.getDate() + 30); }
+        else if (filter = 'Next') { today.add(1, 'month'); range.add(2, 'months'); }
+        else if (filter = 'Two') { today.add(2, 'month'); range.add(3, 'months'); }
+        console.log(today);
+        console.log(range);
     }
 
     self.UpdateAdjShipDate = function (ID, DateID, newDate) {
@@ -288,17 +299,21 @@
     self.LoadStagingSnapshotTrend = function () {
         self.Total([]);
         self.Missing([]);
+        self.Incomplete([]);
         var Period = $('#periodSelect').val();
         var load = $.ajax({ type: "GET", url: stagingSnapshotAPI + '/trend', cache: false, data: { Period: Period } });
         load.done(function (data) {
             var total = [];
             var missing = [];
+            var incomplete = [];
             for (x = 0; x < data.length; x++) {
                 total.push(data[x].Total)
                 missing.push(data[x].Missing)
+                incomplete.push(data[x].Incomplete);
             }
             self.Total(total);
             self.Missing(missing);
+            self.Incomplete(incomplete);
         });
     }
 

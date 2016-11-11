@@ -215,7 +215,7 @@ namespace Dashboard.APIControllers
                         month = 7;
                         break;
                     case "Q4":
-                        month = 11;
+                        month = 10;
                         break;
                 }
                 dateOuter = new DateTime(year, month, day).AddMonths(3).AddDays(-1);
@@ -381,6 +381,51 @@ namespace Dashboard.APIControllers
             return Ok(DeliverablesViewModel.MapFrom(del));
         }
 
+
+        [Route("api/deliverables/detail/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDeliverableDetail(int id)
+        {
+            DeliverableDetail oldDet = await db.DeliverableDetails.FindAsync(id);
+
+
+            if (oldDet == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(oldDet);
+        }
+
+        [Route("api/deliverables/detail/{id:int}")]
+        [HttpPut]
+        public async Task<IHttpActionResult> PutDeliverableDetail(int id, DeliverableDetail deldet)
+        {
+            DeliverableDetail oldDet = db.DeliverableDetails.Find(id);
+
+
+            if (oldDet == null || deldet == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var entry = db.Entry(oldDet);
+                var date = deldet.DateCompleted;
+
+                oldDet.DateCompleted = deldet.DateCompleted;
+
+
+
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+
+            return Ok(oldDet);
+        }
 
     }
 }

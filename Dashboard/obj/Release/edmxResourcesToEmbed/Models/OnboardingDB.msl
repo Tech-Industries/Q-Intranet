@@ -240,5 +240,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ActualCompCounts">
+      <EntityTypeMapping TypeName="OnBoardingModel.ActualCompCount">
+        <MappingFragment StoreEntitySet="ActualCompCount">
+          <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpectedDueCounts">
+      <EntityTypeMapping TypeName="OnBoardingModel.ExpectedDueCount">
+        <MappingFragment StoreEntitySet="ExpectedDueCount">
+          <ScalarProperty Name="DueBy" ColumnName="DueBy" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

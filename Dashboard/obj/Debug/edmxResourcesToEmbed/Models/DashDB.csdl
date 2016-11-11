@@ -42,11 +42,6 @@
     <EntitySet Name="UserGroups" EntityType="DashboardModel.UserGroup" />
     <EntitySet Name="Users" EntityType="DashboardModel.User" />
     <EntitySet Name="DeliverableReviews" EntityType="DashboardModel.DeliverableReview" />
-    <EntitySet Name="DeliverableDocuments" EntityType="DashboardModel.DeliverableDocument" />
-    <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments">
-      <End EntitySet="DeliverableDocuments" Role="DeliverableDocument" />
-      <End EntitySet="DeliverableDocuments" Role="DeliverableDocument1" />
-    </AssociationSet>
     <EntitySet Name="DeliverableComments" EntityType="DashboardModel.DeliverableComment" />
     <EntitySet Name="ProjectTasks" EntityType="DashboardModel.ProjectTask" />
     <EntitySet Name="ProjectAssignees" EntityType="DashboardModel.ProjectAssignee" />
@@ -108,6 +103,12 @@
     <EntitySet Name="StagingMonthlySnapShot" EntityType="DashboardModel.StagingMonthlySnapShot" />
     <EntitySet Name="StagingSnapshotTrend" EntityType="DashboardModel.StagingSnapshotTrend" />
     <EntitySet Name="Calendar" EntityType="DashboardModel.Calendar" />
+    <EntitySet Name="DeliverableDocuments" EntityType="DashboardModel.DeliverableDocument" />
+    <EntitySet Name="DelDetDocsByUsers" EntityType="DashboardModel.DelDetDocsByUser" />
+    <AssociationSet Name="FK_DeliverableDocuments_DeliverableDocuments" Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments">
+      <End Role="DeliverableDocument" EntitySet="DeliverableDocuments" />
+      <End Role="DeliverableDocument1" EntitySet="DeliverableDocuments" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Goal">
     <Key>
@@ -279,33 +280,6 @@
     <Property Name="UserID" Type="Int32" />
     <Property Name="TimeReviewed" Precision="3" Type="DateTime" />
   </EntityType>
-  <EntityType Name="DeliverableDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="DelDetID" Nullable="false" Type="Int32" />
-    <Property Name="Title" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Type" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="UserID" Nullable="false" Type="Int32" />
-    <Property Name="Location" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="Path" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="TimeSubmitted" Precision="3" Type="DateTime" />
-    <NavigationProperty Name="DeliverableDocuments1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument" ToRole="DeliverableDocument1" />
-    <NavigationProperty Name="DeliverableDocument1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument1" ToRole="DeliverableDocument" />
-  </EntityType>
-  <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
-    <End Type="DashboardModel.DeliverableDocument" Multiplicity="1" Role="DeliverableDocument" />
-    <End Type="DashboardModel.DeliverableDocument" Multiplicity="0..1" Role="DeliverableDocument1" />
-    <ReferentialConstraint>
-      <Principal Role="DeliverableDocument">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="DeliverableDocument1">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="DeliverableComment">
     <Key>
       <PropertyRef Name="ID" />
@@ -1169,4 +1143,48 @@
     <Property Name="FirstDayOfNextMonth" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="FirstDayOfNextYear" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
+  <EntityType Name="DeliverableDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DelDetID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TimeSubmitted" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DeliverableDocuments1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument" ToRole="DeliverableDocument1" />
+    <NavigationProperty Name="DeliverableDocument1" Relationship="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" FromRole="DeliverableDocument1" ToRole="DeliverableDocument" />
+  </EntityType>
+  <EntityType Name="DelDetDocsByUser">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DelDetID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DelDetID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="TimeSubmitted" Type="DateTime" Precision="3" />
+    <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_DeliverableDocuments_DeliverableDocuments">
+    <End Type="DashboardModel.DeliverableDocument" Role="DeliverableDocument" Multiplicity="1" />
+    <End Type="DashboardModel.DeliverableDocument" Role="DeliverableDocument1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableDocument">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeliverableDocument1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

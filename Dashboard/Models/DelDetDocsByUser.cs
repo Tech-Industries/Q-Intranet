@@ -12,13 +12,17 @@ namespace Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class DelDetDocsByUser
     {
         public int ID { get; set; }
-        public int TypeID { get; set; }
+        public int DelDetID { get; set; }
         public int UserID { get; set; }
         public Nullable<System.DateTime> TimeSubmitted { get; set; }
-        public string CommentText { get; set; }
+        public string Path { get; set; }
+        public string Title { get; set; }
         public string Type { get; set; }
+        public string Location { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

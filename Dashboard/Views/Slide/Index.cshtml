@@ -106,7 +106,9 @@
     </div>
 </div>
 
-@*<div class="row slide" id="slide-6">
+
+
+<div class="row slide" id="slide-6">
     <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
         <center><h1 style="font-weight: bold; color: #000">All-Employee Meeting!</h1></center>
     </div>
@@ -121,32 +123,37 @@
         <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>
     </div>
 </div>
+@*
 
-<div class="row slide" id="slide-6">
-    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
-        <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
+        <div class="row slide" id="slide-6">
+        <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+            <center><h1 style="font-weight: bold; color: #000">Attention All Employees</h1></center>
+        </div>
+        <div class="col-md-12" style="height: 100vh;">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">Open Enrollment Meetings Monday 10/24/2016</h1></center>
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">Attendance is required!</h1></center>
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">1<sup>st</sup> Shift: 12:00 p.m.</h1></center>
+            <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">2<sup>nd</sup> Shift: 3:30 p.m.</h1></center>
+        </div>
     </div>
-    <div class="col-md-12" style="height: 100vh;">
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>We need <em>All</em> Employees to Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <span style="color: #c0392b">Employee Survey</span><br /> no later than <span style="color: #c0392b">Friday</span> July 22<sup>nd</sup>.<br /><br /> Access this by selecting the "Surveys July 2016" link on the GUI Station.</span></span></h1></center>
-        <br />
-    </div>
-</div>
 
-<div class="row slide" id="slide-7">
-    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
-        <center><h1 style="font-weight: bold; color: #000">Attention All Employees</h1></center>
-    </div>
-    <div class="col-md-12" style="height: 100vh;">
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">We need all employees to update their dependent information in Ultipro ASAP. Thank you!</h1></center>
-        <center><h1 style="font-weight: bold; font-size: 80px; color: #c0392b;">Mandatory Safety Meeting tomorrow, 9/7/16 @@ 3:00 p.m.</h1></center>
-    </div>
-</div>
+        <div class="row slide" id="slide-6">
+            <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+                <center><h1 style="font-weight: bold; color: #000">Employee Survey</h1></center>
+            </div>
+            <div class="col-md-12" style="height: 100vh;">
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <center><h1 style="font-size: 80px; font-weight: bold;"><span style="color: #34495e;"><span>We need <em>All</em> Employees to Visit the <span style="color: #c0392b">breakroom kiosk</span> to take a brief <span style="color: #c0392b">Employee Survey</span><br /> no later than <span style="color: #c0392b">Friday</span> July 22<sup>nd</sup>.<br /><br /> Access this by selecting the "Surveys July 2016" link on the GUI Station.</span></span></h1></center>
+                <br />
+            </div>
+        </div>
 
-<div class="row slide" id="slide-8">
-    <img src="~/Content/img/nameAnnouncment.png" />
-</div>*@
+
+
+        <div class="row slide" id="slide-8">
+            <img src="~/Content/img/nameAnnouncment.png" />
+        </div>*@
 
 <div class="modal" id="setting-modal">
     <div class="modal-dialog modal-md">
@@ -189,7 +196,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Month:</span>
                                     <select class="form-control" id="monthSelect">
-                                        <option value="09">09</option>
+                                        <option value="10">10</option>
                                     </select>
                                 </div>
                             </div>
@@ -557,7 +564,7 @@
 
 
         var current = 1;
-        var slides = 5;
+        var slides = 6;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

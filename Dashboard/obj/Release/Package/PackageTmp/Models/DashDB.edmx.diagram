@@ -21,8 +21,6 @@
         <EntityTypeShape EntityType="DashboardModel.UserGroup" PointX="10.75" PointY="9.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.User" PointX="11.75" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableReview" PointX="4.75" PointY="11.75" Width="1.5" />
-        <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" PointX="22.875" PointY="19.75" Width="2" />
-        <AssociationConnector Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" />
         <EntityTypeShape EntityType="DashboardModel.DeliverableComment" PointX="6.75" PointY="11.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.ProjectTask" PointX="8.75" PointY="12.75" Width="1.5" />
         <EntityTypeShape EntityType="DashboardModel.ProjectAssignee" PointX="12.75" PointY="9.75" Width="1.5" />
@@ -68,6 +66,11 @@
         <EntityTypeShape EntityType="DashboardModel.ZipDownloadLog" Width="1.5" PointX="24.375" PointY="3.75" />
         <EntityTypeShape EntityType="DashboardModel.ZipFiles" Width="1.5" PointX="24.375" PointY="6.75" />
         <EntityTypeShape EntityType="DashboardModel.StagingMonthlySnapShot" Width="1.5" PointX="24.375" PointY="9.75" />
+        <EntityTypeShape EntityType="DashboardModel.StagingSnapshotTrend" Width="1.5" PointX="24.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DashboardModel.Calendar" Width="1.5" PointX="7.375" PointY="25.75" />
+        <EntityTypeShape EntityType="DashboardModel.DeliverableDocument" Width="1.5" PointX="22.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DashboardModel.DelDetDocsByUser" Width="1.5" PointX="24.375" PointY="17.75" />
+        <AssociationConnector Association="DashboardModel.FK_DeliverableDocuments_DeliverableDocuments" />
       </Diagram>
       <Diagram DiagramId="f8e6427dee41443ca3b433e4450f753a" Name="Diagram2" >
         </Diagram>

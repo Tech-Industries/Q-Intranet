@@ -294,6 +294,9 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActualCompCount.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ADInfo.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -340,6 +343,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\DelDetDocsByUser.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Deliverable.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -357,6 +363,9 @@
     </Compile>
     <Compile Include="Models\DeliverableStatusByUserID.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExpectedDueCount.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FlashReportRollUp.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -412,6 +421,7 @@
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrizonDev\Tables\Users.cs" />
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -1498,6 +1508,7 @@
     <Folder Include="Content\patterns\font-awesome\less\" />
     <Folder Include="Content\patterns\font-awesome\scss\" />
     <Folder Include="Content\patterns\themes\base\" />
+    <Folder Include="Models\OrizonDev\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

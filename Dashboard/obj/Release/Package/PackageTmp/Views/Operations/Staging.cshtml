@@ -149,7 +149,50 @@
                 <h3>Metrics</h3>
             </div>
             <div class="ibox-content" style="height: 600px;">
-                <h1>Coming Soon</h1>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-1">
+                        <div class="input-group">
+                            <span class="input-group-addon">Period</span>
+                            <select class="form-control  change-bind" id="periodSelect" data-bind="event: {change: $root.LoadStagingMetrics()}">
+
+                                @{
+                                    int currentYear = DateTime.Now.Year;
+                                    int currentMonth = DateTime.Now.Month;
+                                    int incr = 0;
+                                    string currentMonthStr = "";
+                                    while (incr <= 2)
+                                    {
+                                        while (currentMonth > 0)
+                                        {
+                                            if (currentMonth < 10)
+                                            {
+                                                currentMonthStr = "0" + currentMonth.ToString();
+                                                <option value="@(currentYear - incr)-@(currentMonthStr)">@(currentYear - incr)-@(currentMonthStr)</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@(currentYear - incr)-@(currentMonth)">@(currentYear - incr)-@(currentMonth)</option>
+                                            }
+
+                                            @(currentMonth -= 1)
+                                        }
+
+                                        @(incr += 1)
+                                        @(currentMonth = 12);
+                                    }
+
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="" id="staging-trend-chart" style="height: 480px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -312,6 +355,7 @@
 
     <script>
         var vm = null;
+        var stagingTrendChart;
 
         $(document).on('click', ".print-check-list", function () {
             printElement("print-this");
@@ -363,14 +407,18 @@
 
             $(document).on('click', '#metrics-toggle', function () {
                 if (toggle == 0) {
+                    $(this).text('Back');
                     $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
                         $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
                             $('#staging-metrics').toggle('slide', { direction: 'up' }, '250');
+                            stagingTrendChart.reflow()
                         });
                     });
                     toggle = 1;
+                    vm.LoadStagingSnapshotTrend();
                 }
                 else {
+                    $(this).text('Metrics');
                     $('#staging-metrics').toggle('slide', { direction: 'up' }, '250', function () {
                         $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
                             $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
@@ -508,6 +556,85 @@
                 console.log(Status);
                 vm.UpdateAuditDetail(ID, Status);
             });
+
+            stagingTrendChart = $('#staging-trend-chart').highcharts({
+                chart: {
+                    events: {
+                        load: function () {
+                            this.renderer.image("/Content/img/Orizon_logo_grey.png", 100, 10, '80%', '70%')
+                                .add();
+                        }
+                    },
+                },
+                title: {
+                    text: 'Staging Trend',
+                    x: -20 //center
+                },
+                xAxis: {
+                    max: 31,
+                    labels: {
+                        rotation: -45,
+                        step: 4
+                    }
+                },
+                yAxis: {
+                    
+                    title: {
+                        text: ''
+                    },
+                    min: 0
+                },
+                tooltip: {                    
+                    shared: true,
+                    reversed: true
+                },
+                legend: {
+                    reversed: true
+
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false
+                        },
+                        lineWidth: 3
+                    }
+                },
+                series: [{
+                    name: 'Total Jobs',
+                    data: [],
+                    color: '#2980b9'
+                }, {
+                    name: 'Goal',
+                    data: [],
+                    color: '#f1c40f'
+                }, {
+                    name: 'Missing Tasks',
+                    data: [],
+                    color: '#27ae60'
+                }, {
+                    name: 'Incomplete',
+                    data: [],
+                    color: 'rgba(217, 104, 0, 0.80)'
+                }]
+            }).highcharts();
+
+            vm.StagingSnapshotCats.subscribe(function (val) {
+                stagingTrendChart.xAxis[0].setCategories(val, true);
+            });
+            vm.Total.subscribe(function (val) {
+                stagingTrendChart.series[0].setData(val, true);
+            });
+            vm.Goal.subscribe(function (val) {
+                stagingTrendChart.series[1].setData(val, true);
+            });
+            vm.Missing.subscribe(function (val) {
+                stagingTrendChart.series[2].setData(val, true);
+            });
+            vm.Incomplete.subscribe(function (val) {
+                stagingTrendChart.series[3].setData(val, true);
+            });
+
         });
 
         function ClearItemForm() {

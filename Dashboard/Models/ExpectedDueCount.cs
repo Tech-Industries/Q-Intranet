@@ -12,13 +12,15 @@ namespace Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class ExpectedDueCount
     {
-        public int ID { get; set; }
-        public int TypeID { get; set; }
-        public int UserID { get; set; }
-        public Nullable<System.DateTime> TimeSubmitted { get; set; }
-        public string CommentText { get; set; }
-        public string Type { get; set; }
+        public long ID { get; set; }
+        public Nullable<int> Total { get; set; }
+        public string PackageName { get; set; }
+        public Nullable<long> Task { get; set; }
+        public Nullable<int> Year { get; set; }
+        public Nullable<int> Month { get; set; }
+        public Nullable<int> Day { get; set; }
+        public Nullable<System.DateTime> DueBy { get; set; }
     }
 }

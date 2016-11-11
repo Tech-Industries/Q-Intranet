@@ -404,7 +404,7 @@ function findPeriodVal(Frequency, DateDue) {
         if (month <= 6) {
             value = "S1";
         }
-        else if (mont <= 12) {
+        else if (month <= 12) {
             value = "S2";
         }
     }

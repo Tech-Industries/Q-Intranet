@@ -34,6 +34,8 @@
     self.DelDetID = ko.observable();
     self.DDComplete = ko.observable(false);
 
+    self.DelDetail = ko.observableArray([]);
+
     self.Comments = ko.observableArray([]);
     self.DDDocuments = ko.observableArray([]);
     self.DDReviewers = ko.observableArray([]);
@@ -106,6 +108,26 @@
 
 
         }
+    }
+
+    self.DateOverride = function (date) {
+
+        console.log(vm.SelectedDD());
+        self.SelectedDD().DateCompleted = formatShortDate(date) + 'T00:00:00';
+        var sendData = "ID=" + self.SelectedDD().ID+ "&DelID="+self.SelectedDD().DelID+"&DateDue="+self.SelectedDD().DateDue+"&DateCompleted=" + formatShortDate(date);
+        console.log(vm.SelectedDD());
+        self.DDDateCompleted(formatShortDate(date));
+        var load = $.ajax({ type: "GET", url: deliverablesAPI + '/detail/' + self.SelectedDD().ID, cache: false, data: { id: self.SelectedDD().ID} });
+        load.done(function (data) {
+            data.DateCompleted = formatShortDate(date);
+            var update = $.ajax({ type: "PUT", url: deliverablesAPI + '/detail/' + self.SelectedDD().ID, cache: false, data: data  });
+            update.done(function (updata) {
+                console.log(updata);
+                vm.DDDateCompleted(formatSqlDateTime(updata.DateCompleted));
+                self.loadDelStatusChart();
+            });
+            
+        });
     }
 
     self.addDelReviewer = function (UserID) {
@@ -308,7 +330,7 @@
     }
 
     self.loadDelDetReviews = function () {
-        var DelDetID = $("#DelDetID").val();
+        var DelDetID = self.DelDetID();
         var DelID = $("#DelID").val();
         var loadReqReviewed = $.ajax({ type: "GET", url: deliverableReviewersAPI, cache: false, data: { DelID: DelID } });
         var exists = false;
@@ -350,7 +372,7 @@
     }
 
     self.addDelDetReview = function (UserID) {
-        var DelDetID = $("#DelDetID").val();
+        var DelDetID = self.DelDetID();
         var TimeReviewed = DateNowFormatted();
 
         var DDReview = "DelDetID: " + DelDetID + ", UserID: " + UserID + ", TimeReviewed: " + TimeReviewed;
@@ -359,6 +381,7 @@
         addReview.done(function (item) {
             return TimeReviewed;
         });
+        self.loadDelDetReviews();
     }
 
 
@@ -399,7 +422,7 @@
 
     self.loadDelDetDocuments = function () {
         self.DDDocuments([]);
-        var DelDetID = $("#DelDetID").val();
+        var DelDetID = self.DelDetID();
         var load = $.ajax({ type: "GET", url: deliverablesAPI, cache: false, data: { ID: DelDetID, DataPull: "Documents" } });
         load.done(function (data) {
             data.forEach(function (item) {
@@ -460,16 +483,18 @@
 
     self.addDelDetDocument = function () {
         var formData = new FormData($('#frm-doc-up')[0]);
-        console.log(formData.toString());
+        //console.log(formData.toString());
         var uploadLink = $('#UploadFileLink').attr('href');
         for (var i = 0, len = document.getElementById('doc-upload').files.length; i < len; i++) {
             formData.append("doc-upload" + (i + 1), document.getElementById('doc-upload').files[i]);
         }
+        console.log('test1');
         $.ajax({
             url: uploadLink + '/', //Html.Action("Deliverables", "UploadFile"),
             type: 'Post',
             beforeSend: function () { },
             success: function (result) {
+                console.log('test2');
                 console.log(result);
                 var ftpAPI = $("#FTPLink").attr('href');
 
@@ -483,6 +508,7 @@
                     console.log('test')
                 }
                 else {
+                    console.log('test3');
                     var remoteFile = "/Deliverables/" + user + "/" + freq + "/" + delNam + "/" + dueDate + "/" + fileName;
                     remoteFile = remoteFile.replace(" ", "%20");
                     var data = "remoteFile=" + remoteFile + "&localFile=" + result;
@@ -497,12 +523,13 @@
                             var time = DateNowFormatted();
                             var sendData = "DelDetID=" + delDetID + "&Title=" + title + "&Type=" + type + "&UserID=" + userID + "&Location=" + loc + "&Path=" + path + "&TimeSubmitted=" + time;
                             var deliverableDocumentsAPI = $("#deliverableDocumentsLink").attr('href');
+                            console.log(sendData);
                             $.ajax({
                                 method: 'POST',
                                 url: deliverableDocumentsAPI,
                                 cache: false,
                                 data: sendData,
-                                success: function () { self.loadDelDetDocuments(); }
+                                success: function () { self.loadDelDetDocuments(); console.log('test4');}
                             });
                         }
                     });
@@ -517,12 +544,12 @@
     }
 
     self.loadComments = function () {
-        var TypeID = $("#DelDetID").val();
+        var TypeID = self.DelDetID();
         loadComments(TypeID, 'DeliverableDetail', CommentsAPI, self)
     };
 
     self.addComment = function () {
-        var TypeID = $("#DelDetID").val();
+        var TypeID = self.DelDetID();
         var UserID = $("#UserID").val();
         var Comment = $("#txt-new-comment").val();
         if (Comment.length > 0) {

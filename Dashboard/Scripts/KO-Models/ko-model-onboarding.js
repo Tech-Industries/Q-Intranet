@@ -18,6 +18,7 @@
 
     self.Customers = ko.observable([]);
     self.Projects = ko.observable([]);
+    self.ProjectsSelect = ko.observable([]);
     self.PartTypes = ko.observable([]);
     self.PartClasses = ko.observable([]);
     self.PartNums = ko.observable([]);
@@ -33,6 +34,14 @@
 
     self.ArchivedParts = ko.observableArray([]);
 
+    self.BurnCats = ko.observableArray([]);
+    self.BurnExpected = ko.observableArray([]);
+    self.BurnActual = ko.observableArray([]);
+
+    self.GetFilteredOnboardingTasks = function (part) {
+        
+        return $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber});
+    }
 
     self.loadUsers = function () {
         var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: { type: 'Onboarding' } });
@@ -284,48 +293,14 @@
 
     }
 
-    //self.LoadOnboardingParts = function () {
-    //       var UserID = $('#layoutUserID').val();
-    //       self.isLoading(true)
-    //       var parts = [];
-    //       var tasks = [];
-    //       var outer = 0;
-    //       var inner = 0;
-    //       self.OnboardingTasks([]);
+    //self.LoadPr = function () {
 
-    //           var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI });
-    //           load.success(function (data) {
-    //               self.OnboardingParts(data);
-    //               outerStart = data.length;
-    //               data.forEach(function (i) {
-    //                   i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
-    //                   i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
-
-    //                   outer += 1;
-    //                   var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.RecordNumber + '/Tasks', cache: false });
-    //                   loadTasks.done(function (data1) {
-    //                       innerStart = data1.length;
-    //                       data1.forEach(function (ii) {
-    //                           ii.DueBy = formatSqlDateTimeToFullDate(ii.DueBy);
-    //                           ii.PercentComplete = formatPercent(ii.PercentComplete, 1);
-    //                       });
-    //                       if (data1[10].TaskDescription != 'FAI Populated') {
-    //                           data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DueBy: 0, CurrentStatus: '', ActualCompletionHours: 0, StandardCompletionHours: 0 })
-    //                       }
-    //                       self.OnboardingTasks.push(data1);
-
-    //                       inner += 1;
-    //                       if (inner == outerStart) {
-    //                           self.isLoading(false)
-    //                       }
-    //                   });
-    //               });
-    //               self.OnboardingParts(data);
-    //           });
-    //           load.fail(function () {
-    //               console.log('test');
-    //           });
-    //       }
+    //    var projects = [];
+    //    var load = $.ajax({ type: "GET", url: onboardingAPI + '/projects', cache: false });
+    //    load.done(function (data) {
+    //        console.log(data);
+    //    });
+    //}
 
 
     self.loadComments = function () {
@@ -463,6 +438,35 @@
 
     self.RemoveItem = function (ID) {
 
+    }
+
+    self.LoadBurndown = function () {
+        self.BurnCats([]);
+        self.BurnActual([]);
+        self.BurnExpected([]);
+
+        var Program = $('#fltProjectburn').val();
+        var Task = $('#task-select').val();
+        console.log(Program);
+        console.log(Task);
+        if (Program != '' && Task != '') {
+            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/metrics/burndown', data: { Program: Program, Task, Task } });
+            load.done(function (data) {
+                var cats = [];
+                var act = [];
+                var exp = [];
+                for (i = 0; i < data.length; i++) {
+                    cats.push(data[i].Date.split('T')[0]);
+                    act.push(data[i].Actual);
+                    exp.push(data[i].Expected);
+                    console.log(data[i].Date + ' (' + data[i].Expected + '/' + data[i].Actual + ')');
+                }
+                self.BurnCats(cats);
+                self.BurnExpected(exp);
+                self.BurnActual(act);
+
+            });
+        }
     }
 
 }

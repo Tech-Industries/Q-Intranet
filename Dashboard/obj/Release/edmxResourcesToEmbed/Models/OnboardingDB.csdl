@@ -150,6 +150,8 @@
     <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
     <EntitySet Name="OnBoardParts" EntityType="OnBoardingModel.OnBoardPart" />
     <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+    <EntitySet Name="ActualCompCounts" EntityType="OnBoardingModel.ActualCompCount" />
+    <EntitySet Name="ExpectedDueCounts" EntityType="OnBoardingModel.ExpectedDueCount" />
   </EntityContainer>
   <EntityType Name="AvailPlanJob">
     <Key>
@@ -240,5 +242,31 @@
     <Property Name="Archived" Type="Boolean" />
     <Property Name="DateRecovery" Type="DateTime" Precision="0" />
     <Property Name="DelegatedTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ActualCompCount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Task" Type="Int64" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Day" Type="Int32" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ExpectedDueCount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Task" Type="Int64" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Day" Type="Int32" />
+    <Property Name="DueBy" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

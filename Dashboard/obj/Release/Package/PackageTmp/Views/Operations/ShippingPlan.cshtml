@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-    <div>Test</div>
     <div class="col-lg-3 col-sm-6">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -39,6 +38,21 @@
                 <h1 class="no-margins"><span data-bind="text: AdjShipDollars()"></span> </h1>
                 @*<div class="stat-percent font-bold text-danger">N/A% <i class="fa fa-level-down"></i></div>
                     <small>In first month</small>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Month Filter</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="btn-group" role="group" aria-label="Basic example" id="month-filter-group">
+                    <button type="button" class="btn mnth-fltr-btn btn-primary">Clear</button>
+                    <button type="button" class="btn mnth-fltr-btn">This</button>
+                    <button type="button" class="btn mnth-fltr-btn">Next</button>
+                    <button type="button" class="btn mnth-fltr-btn">Two</button>
+                </div>
             </div>
         </div>
     </div>
@@ -124,6 +138,12 @@
                     //vm.UpdateAdjShipDate(ID, DateID, newDate);
                 }
                 $(this).parent().parent().children().first().html(newDate);
+            });
+
+            $(document).on('click', '.mnth-fltr-btn', function () {
+                $(this).siblings().removeClass('btn-primary');
+                $(this).addClass('btn-primary');
+                vm.FilterShippingResults($(this).html());
             });
         });
     </script>

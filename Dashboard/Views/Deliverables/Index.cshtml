@@ -310,7 +310,7 @@
 <div id="hidden-inputs" class="hidden">
     <input type="text" id="freq" name="freq" />
     <input type="text" id="DelID" name="DelID" />
-    <input type="text" id="DelDetID" name="DelDetID" data-bind="value: DelDetID()" />
+    <input type="text" id="DelDetID" name="DelDetID" data-bind="value: DelDetID" />
     <input type="text" id="UserID" name="UserID" value="@{if (Request.Cookies["authToken"] != null) { Write(Request.Cookies["authToken"].Value); } else { Write("0"); } }" />
     <input type="text" id="RelPer" name="RelPer" value="@ViewBag.RelPer" />
 
@@ -363,6 +363,15 @@
         $(document).on('click', '.remove-reviewer', function () {
             var RevID = $(this).attr('id').split('-')[2];
             vm.removeReviewer(RevID);
+        });
+
+        $(document).on('click', '.btn-del-date-override', function () {
+            $('#date-override-picker').toggle('slide', { direction: 'up' }, '150');
+        });
+
+        $(document).on('change', '#date-override', function () {
+            var date = $(this).val();
+            vm.DateOverride(date);
         });
 
         $(document).on('click', '#report-metrics', function () {

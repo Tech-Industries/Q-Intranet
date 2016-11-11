@@ -178,6 +178,26 @@ namespace Dashboard.APIControllers
             }
 
         }
+
+        [Route("api/v1/utility/calendar/range")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetCalendarDatesInRange(string start, string end)
+        {
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
+            try
+            {
+                startDate = DateTime.Parse(start);
+                endDate = DateTime.Parse(end);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+            var Dates = await db.Calendar.Where(x => x.Date >= startDate && x.Date <= endDate).OrderBy(o => o.Date).ToListAsync();
+            return Ok(Dates);
+
+        }
         #endregion
 
         private List<Folder> subDirs = new List<Folder>();

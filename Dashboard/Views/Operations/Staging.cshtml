@@ -407,6 +407,7 @@
 
             $(document).on('click', '#metrics-toggle', function () {
                 if (toggle == 0) {
+                    $(this).text('Back');
                     $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
                         $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
                             $('#staging-metrics').toggle('slide', { direction: 'up' }, '250');
@@ -417,6 +418,7 @@
                     vm.LoadStagingSnapshotTrend();
                 }
                 else {
+                    $(this).text('Metrics');
                     $('#staging-metrics').toggle('slide', { direction: 'up' }, '250', function () {
                         $('#top-level-list').toggle('slide', { direction: 'left' }, '250', function () {
                             $('#detail-list').toggle('slide', { direction: 'right' }, '250', function () {
@@ -601,13 +603,17 @@
                 series: [{
                     name: 'Total Jobs',
                     data: [],
-                    color: '#27ae60'
+                    color: '#2980b9'
                 }, {
                     name: 'Goal',
                     data: [],
                     color: '#f1c40f'
                 }, {
                     name: 'Missing Tasks',
+                    data: [],
+                    color: '#27ae60'
+                }, {
+                    name: 'Incomplete',
                     data: [],
                     color: 'rgba(217, 104, 0, 0.80)'
                 }]
@@ -624,6 +630,9 @@
             });
             vm.Missing.subscribe(function (val) {
                 stagingTrendChart.series[2].setData(val, true);
+            });
+            vm.Incomplete.subscribe(function (val) {
+                stagingTrendChart.series[3].setData(val, true);
             });
 
         });

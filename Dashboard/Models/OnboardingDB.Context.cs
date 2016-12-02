@@ -25,18 +25,20 @@ namespace Dashboard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<AvailPlanJob> AvailPlanJobs { get; set; }
+        public virtual DbSet<Calendar> Calendars { get; set; }
+        public virtual DbSet<CalendarTemp> CalendarTemps { get; set; }
         public virtual DbSet<OnBoardingPartsToAdd> OnBoardingPartsToAdds { get; set; }
-        public virtual DbSet<OnBoardTask> OnBoardTasks { get; set; }
-        public virtual DbSet<Parameter> Parameters { get; set; }
         public virtual DbSet<PartMaster> PartMasters { get; set; }
         public virtual DbSet<SystemLog> SystemLogs { get; set; }
         public virtual DbSet<Z_OnBoardPartJobs> Z_OnBoardPartJobs { get; set; }
         public virtual DbSet<Z_OnBoardPartOSSPO> Z_OnBoardPartOSSPO { get; set; }
-        public virtual DbSet<AvailPlanJob> AvailPlanJobs { get; set; }
-        public virtual DbSet<OnBoardPart> OnBoardParts { get; set; }
+        public virtual DbSet<PartsByJobFound> PartsByJobFounds { get; set; }
         public virtual DbSet<AuthorizedOnBoardPart> AuthorizedOnBoardParts { get; set; }
-        public virtual DbSet<ActualCompCount> ActualCompCounts { get; set; }
+        public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<OnBoardPart> OnBoardParts { get; set; }
+        public virtual DbSet<OnBoardTask> OnBoardTasks { get; set; }
         public virtual DbSet<ExpectedDueCount> ExpectedDueCounts { get; set; }
+        public virtual DbSet<ActualCompCount> ActualCompCounts { get; set; }
     }
 }

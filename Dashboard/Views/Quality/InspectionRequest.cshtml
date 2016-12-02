@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Inspection Request";
+    Layout = "~/Views/Shared/_SlideLayout.cshtml";
+}
+
+<div class="jumbotron" style="background-color: rgba(255, 71, 1, 0.90);">
+    <h1>Make a Call for Inspection</h1>
+    @*<a href="inspectionSheet.php"><input type="button" class="btn-flat grey" style="float: right; position: relative; bottom: 100px;" value="Inspection Sheet" /></a>*@
+</div>
+
+<div class='row'>
+    <div class='col-md-3 col-md-offset-1'>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Call Form</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-wrapper">
+                    <div class="input-group">
+                        <span class="input-group-addon">Name</span>
+                        <select name="user" class='form-control' id="seluser" style="width: 100%;" required data-bind="foreach: Names()">
+                            <option data-bind="value: $data, text: $data"></option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon">Job</span>
+                        <select name="job" class='form-control' id="seljob" required data-bind="foreach: Jobs()">
+                            <option data-bind="value: $data.Job, text: $data.Job"></option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon">Suffix</span>
+                        <select name="suffix" class="form-control" id='selsuffix' required data-bind="foreach: Suffix()">
+                            <option data-bind="value: $data.Suffix, text: $data.Suffix"></option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon">Seq</span>
+                        <select name="seq" class="form-control" id="selseq" required data-bind="foreach: Seq()">
+                            <option data-bind="value: $data.Seq, text: $data.Seq+' - '+$data.Description"></option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon">Type</span>
+                        <select name='type' class='form-control' id="seltype" required data-bind="foreach: InspectionTypes()">
+                            <option data-bind="value: $data.ID, text: $data.Type"></option>
+                        </select>
+                    </div>
+                    <br />
+                    <input type="submit" class="btn btn-primary" value="Submit Call" />
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div id="selVal"></div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class='col-md-6 col-md-offset-1'>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Last 5 Calls</h3>
+            </div>
+            <div class="panel-body">
+                <table class='table' id='prevCalls' name='prevCalls'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Suffix</th>
+                            <th>Seq</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- scripts for this page -->
+
+
+@section Scripts{
+    <script src="~/Scripts/KO-Models/ko-model-quality.js"></script>
+
+
+    <script>
+
+        var vm = null;
+
+        $(function () {
+            var toggle = 0;
+            var AssignBtn = null;
+
+            vm = new QualityViewModel();
+            ko.applyBindings(vm);
+            vm.loadData();
+
+            $(document).on('change', '#seljob', function () {
+                var job = $(this).val();
+                console.log(job);
+                vm.loadSuffix(job);
+            });
+
+            $(document).on('change', '#selsuffix', function () {
+                var job = $('#seljob').val();
+                var suffix = $(this).val();
+                console.log(job+'-'+suffix);
+                vm.loadSeq(job, suffix);
+            });
+
+        });
+    </script>
+
+
+}

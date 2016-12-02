@@ -405,7 +405,7 @@ namespace Dashboard.APIControllers
             {
                 return BadRequest(e.ToString());
             }
-            var stagItems = await db.StagingSnapshotTrend.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.DatePulled).ToListAsync();
+            var stagItems = await db.StagingSnapshotTrends.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.DatePulled).ToListAsync();
             if (!stagItems.Any())
             {
                 return NotFound();

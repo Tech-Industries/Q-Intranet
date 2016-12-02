@@ -17,12 +17,26 @@
     <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="Int32" />
     <Property Name="M_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="N_NUMBER" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="TIME_CHANGED" Type="DateTime" Precision="3" />
+    <Property Name="LENGTH_IN_STATUS" Type="Int32" />
+    <Property Name="SPEED" Type="Int32" />
+    <Property Name="FEED_RATE" Type="Int32" />
+    <Property Name="FEED_RATE_OVERRIDE" Type="Int32" />
   </EntityType>
   <EntityContainer Name="NKCCONNECTEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" />
-    <EntitySet Name="TimeInStateByMachines" EntityType="NKCCONNECTModel.TimeInStateByMachine" />
     <EntitySet Name="CurrentMachineStates" EntityType="NKCCONNECTModel.CurrentMachineState" />
+    <EntitySet Name="TimeInStateByMachines" EntityType="NKCCONNECTModel.TimeInStateByMachine" />
   </EntityContainer>
+  <EntityType Name="CurrentMachineState">
+    <Key>
+      <PropertyRef Name="RESOURCE_ID" />
+    </Key>
+    <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="TimeInStateByMachine">
     <Key>
       <PropertyRef Name="ID" />
@@ -43,14 +57,5 @@
     <Property Name="Date2" Type="DateTime" Precision="0" />
     <Property Name="Date3" Type="DateTime" Precision="0" />
     <Property Name="Date4" Type="DateTime" Precision="0" />
-  </EntityType>
-  <EntityType Name="CurrentMachineState">
-    <Key>
-      <PropertyRef Name="RESOURCE_ID" />
-    </Key>
-    <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

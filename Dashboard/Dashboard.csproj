@@ -283,6 +283,7 @@
     <Compile Include="Controllers\OperationsController.cs" />
     <Compile Include="Controllers\OnboardingController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\QualityController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\SlideController.cs" />
     <Compile Include="Controllers\UltraController.cs" />
@@ -306,6 +307,12 @@
     <Compile Include="Models\AvailPlanJob.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BacklogPartsList.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BT_SPTransactions.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bug.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -314,6 +321,9 @@
     </Compile>
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarTemp.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -327,21 +337,21 @@
       <DependentUpon>NKCConnect.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CURRENT_MACHINE_INFORMATION.cs">
-      <DependentUpon>PMMConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>OnboardingDB.tt</DependentUpon>
+      <DependentUpon>NKCConnect.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CWODailyByPlant.cs">
-      <DependentUpon>DashDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CWOStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DashDB.Designer.cs">
       <DependentUpon>DashDB.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\DefectCategory.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DefectSubCategory.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DelDetDocsByUser.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -364,6 +374,18 @@
     <Compile Include="Models\DeliverableStatusByUserID.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeliverableView.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DistinctJob.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DistinctSuffix.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeMaster.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ExpectedDueCount.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
@@ -382,7 +404,28 @@
     <Compile Include="Models\IncentiveRollupByPlant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Meetings.cs">
+    <Compile Include="Models\Inspection.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InspectionDefect.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InspectionType.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobOperation.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Machine.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MachineStateChange.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MachineStateCurrent.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Meeting.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
@@ -412,32 +455,65 @@
     <Compile Include="Models\OnBoardTask.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OnTimeDelivery.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OnTimeDeliveryTrend.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OnTimeDeliveryTrendInt.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OpenSequence.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Opportunity.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderLinesAll.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrizonDev\Tables\Users.cs" />
     <Compile Include="Models\OTMonthlyByCompany.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Parameter.cs">
+    <Compile Include="Models\OTStage.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OTStageFour.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Package.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartFamilyXRef.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PartMaster.cs">
       <DependentUpon>OnboardingDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartsByJobFound.cs">
+      <DependentUpon>OnboardingDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PastDueDeliverable.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PastDueDeliverablesByReviewer.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PastDueSalesTrend.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Plant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PrevMaint.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrevMaintCost.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrevMaintTemp.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Price.cs">
@@ -459,6 +535,9 @@
     <Compile Include="Models\ProjectTask.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RevieablesByUserPastDue.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReviewablesByUser.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
@@ -474,16 +553,25 @@
     <Compile Include="Models\ScrapDailyByPlant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScrapMonthlyByCompany.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScrapMonthlyByPlant.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ScrapStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScrapStageTemp.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShipAdjDate.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShippingPlanAdjShipDate.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingPlanStage.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StagingAudit.cs">
@@ -587,7 +675,7 @@
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TimeInStateByMachine.cs">
-      <DependentUpon>NKCConnect.tt</DependentUpon>
+      <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BugTag.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
@@ -637,10 +725,13 @@
     <Compile Include="Models\UserGroup.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkCenter.cs">
+      <DependentUpon>DashDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ZipDownloadLog.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZipFiles.cs">
+    <Compile Include="Models\ZipFile.cs">
       <DependentUpon>DashDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Z_OnBoardPartJobs.cs">
@@ -1017,6 +1108,7 @@
     <Content Include="Scripts\KO-Models\deliverablesform.js" />
     <Content Include="Scripts\KO-Models\ko-model-onboarding.js" />
     <Content Include="Scripts\KO-Models\ko-model-prevmaint.js" />
+    <Content Include="Scripts\KO-Models\ko-model-quality.js" />
     <Content Include="Scripts\KO-Models\ko-model-utility.js" />
     <Content Include="Scripts\KO-Models\ko-model-slide.js" />
     <Content Include="Scripts\KO-Models\ko-model-ultra.js" />
@@ -1500,6 +1592,9 @@
     <Content Include="Views\Operations\StagingPrint.cshtml" />
     <Content Include="Views\Utility\Employees.cshtml" />
     <Content Include="Views\Utility\ZipFiles.cshtml" />
+    <Content Include="Views\Quality\Index.cshtml" />
+    <Content Include="Views\Quality\InspectionSheet.cshtml" />
+    <Content Include="Views\Quality\InspectionRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

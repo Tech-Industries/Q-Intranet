@@ -36,7 +36,7 @@ namespace Dashboard.APIControllers
         public async Task<IHttpActionResult> GetADInfo()
         {
 
-            var ADInfo = await db.ADInfo.ToListAsync();
+            var ADInfo = await db.ADInfoes.ToListAsync();
             if (!ADInfo.Any())
             {
                 return NotFound();
@@ -154,7 +154,7 @@ namespace Dashboard.APIControllers
             string extractPath = @"c:\example\extract";
             
             string Destination = @"\\crp-utl01.orizonaero.local\FTP\ZipArchive\" + zipID + ".zip";
-            ZipFile.CreateFromDirectory(directory, Destination);
+            System.IO.Compression.ZipFile.CreateFromDirectory(directory, Destination);
             System.Threading.Thread.Sleep(1000);
             return Ok(Destination);
         }
@@ -169,7 +169,7 @@ namespace Dashboard.APIControllers
             int Month = int.Parse(Period.Split('-')[1]);
             if (Type == "Daily")
             {
-                var Dates = await db.Calendar.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.Date).ToListAsync();
+                var Dates = await db.Calendars.Where(x => x.Year == Year && x.Month == Month).OrderBy(o => o.Date).ToListAsync();
                 return Ok(Dates);
             }
             else
@@ -194,7 +194,7 @@ namespace Dashboard.APIControllers
             {
                 return BadRequest(e.ToString());
             }
-            var Dates = await db.Calendar.Where(x => x.Date >= startDate && x.Date <= endDate).OrderBy(o => o.Date).ToListAsync();
+            var Dates = await db.Calendars.Where(x => x.Date >= startDate && x.Date <= endDate).OrderBy(o => o.Date).ToListAsync();
             return Ok(Dates);
 
         }

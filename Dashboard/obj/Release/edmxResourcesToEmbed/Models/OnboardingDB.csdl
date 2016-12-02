@@ -1,21 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OnBoardingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Customer">
+  <EntityContainer Name="OnBoardingEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
+    <EntitySet Name="Calendars" EntityType="OnBoardingModel.Calendar" />
+    <EntitySet Name="CalendarTemps" EntityType="OnBoardingModel.CalendarTemp" />
+    <EntitySet Name="OnBoardingPartsToAdds" EntityType="OnBoardingModel.OnBoardingPartsToAdd" />
+    <EntitySet Name="PartMasters" EntityType="OnBoardingModel.PartMaster" />
+    <EntitySet Name="SystemLogs" EntityType="OnBoardingModel.SystemLog" />
+    <EntitySet Name="Z_OnBoardPartJobs" EntityType="OnBoardingModel.Z_OnBoardPartJobs" />
+    <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="OnBoardingModel.Z_OnBoardPartOSSPO" />
+    <EntitySet Name="PartsByJobFounds" EntityType="OnBoardingModel.PartsByJobFound" />
+    <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
+    <EntitySet Name="Packages" EntityType="OnBoardingModel.Package" />
+    <EntitySet Name="OnBoardParts" EntityType="OnBoardingModel.OnBoardPart" />
+    <EntitySet Name="OnBoardTasks" EntityType="OnBoardingModel.OnBoardTask" />
+    <EntitySet Name="ExpectedDueCounts" EntityType="OnBoardingModel.ExpectedDueCount" />
+    <EntitySet Name="ActualCompCounts" EntityType="OnBoardingModel.ActualCompCount" />
+  </EntityContainer>
+  <EntityType Name="AvailPlanJob">
     <Key>
-      <PropertyRef Name="RecordNumber" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="Date_Start" Type="DateTime" Precision="0" />
+    <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="OnBoardPart" Type="Int64" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Day" Type="Byte" Nullable="false" />
+    <Property Name="DaySuffix" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Weekday" Type="Byte" Nullable="false" />
+    <Property Name="WeekDayName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsWeekend" Type="Boolean" Nullable="false" />
+    <Property Name="IsHoliday" Type="Boolean" Nullable="false" />
+    <Property Name="HolidayText" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="DOWInMonth" Type="Byte" Nullable="false" />
+    <Property Name="DayOfYear" Type="Int16" Nullable="false" />
+    <Property Name="WeekOfMonth" Type="Byte" Nullable="false" />
+    <Property Name="WeekOfYear" Type="Byte" Nullable="false" />
+    <Property Name="ISOWeekOfYear" Type="Byte" Nullable="false" />
+    <Property Name="Month" Type="Byte" Nullable="false" />
+    <Property Name="MonthName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="Byte" Nullable="false" />
+    <Property Name="QuarterName" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="MMYYYY" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfNextMonth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FirstDayOfNextYear" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="CalendarTemp">
+    <Key>
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="day" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="month" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="FirstOfMonth" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+    <Property Name="MonthName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="week" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ISOweek" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="DayOfWeek" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="quarter" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="year" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="FirstOfYear" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+    <Property Name="Style112" Type="String" MaxLength="8" FixedLength="true" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Style101" Type="String" MaxLength="10" FixedLength="true" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="OnBoardingPartsToAdd">
     <Key>
@@ -28,57 +92,13 @@
     <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="OnBoardTask">
-    <Key>
-      <PropertyRef Name="RecordNumber" />
-    </Key>
-    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OnBoardPart" Type="Int64" />
-    <Property Name="Task" Type="Int64" />
-    <Property Name="TaskDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TaskSequence" Type="Int32" />
-    <Property Name="ChildOfTask" Type="Int64" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="CreatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-    <Property Name="Weight" Type="Decimal" Precision="9" Scale="2" />
-    <Property Name="Complexity" Type="Int32" />
-    <Property Name="StandardCompletionHours" Type="Decimal" Precision="9" Scale="2" />
-    <Property Name="ActualCompletionHours" Type="Decimal" Precision="9" Scale="2" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ResponsibleUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="DelegatedTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="DueBy" Type="DateTime" Precision="3" />
-    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
-    <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CompletionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="RecoveryDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="Parameter">
-    <Key>
-      <PropertyRef Name="RecordNumber" />
-    </Key>
-    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProgramID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ParameterID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ParameterSequence" Type="Int32" Nullable="false" />
-    <Property Name="ParamN1" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="ParamN2" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="ParamS1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="ParamS2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="ParamS3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="ParamS4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="PartMaster">
     <Key>
       <PropertyRef Name="RecordNumber" />
     </Key>
     <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Company" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="PartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DateEntered" Type="DateTime" Precision="3" />
     <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -138,70 +158,13 @@
     <Property Name="OSSPOStartDate" Type="DateTime" Precision="3" />
     <Property Name="OSSPOReceiveDate" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityContainer Name="OnBoardingEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Customers" EntityType="Self.Customer" />
-    <EntitySet Name="OnBoardingPartsToAdds" EntityType="Self.OnBoardingPartsToAdd" />
-    <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTask" />
-    <EntitySet Name="Parameters" EntityType="Self.Parameter" />
-    <EntitySet Name="PartMasters" EntityType="Self.PartMaster" />
-    <EntitySet Name="SystemLogs" EntityType="Self.SystemLog" />
-    <EntitySet Name="Z_OnBoardPartJobs" EntityType="Self.Z_OnBoardPartJobs" />
-    <EntitySet Name="Z_OnBoardPartOSSPO" EntityType="Self.Z_OnBoardPartOSSPO" />
-    <EntitySet Name="AvailPlanJobs" EntityType="OnBoardingModel.AvailPlanJob" />
-    <EntitySet Name="OnBoardParts" EntityType="OnBoardingModel.OnBoardPart" />
-    <EntitySet Name="AuthorizedOnBoardParts" EntityType="OnBoardingModel.AuthorizedOnBoardPart" />
-    <EntitySet Name="ActualCompCounts" EntityType="OnBoardingModel.ActualCompCount" />
-    <EntitySet Name="ExpectedDueCounts" EntityType="OnBoardingModel.ExpectedDueCount" />
-  </EntityContainer>
-  <EntityType Name="AvailPlanJob">
+  <EntityType Name="PartsByJobFound">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="JobFound" />
     </Key>
-    <Property Name="Job" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-    <Property Name="Suffix" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-    <Property Name="Date_Start" Type="DateTime" Precision="0" />
-    <Property Name="Part" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="Customer" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-    <Property Name="OnBoardPart" Type="Int64" />
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
-  <EntityType Name="OnBoardPart">
-    <Key>
-      <PropertyRef Name="RecordNumber" />
-    </Key>
-    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateEntered" Type="DateTime" Precision="3" />
-    <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
-    <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
-    <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
-    <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
-    <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
-    <Property Name="DatePODue" Type="DateTime" Precision="3" />
-    <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
-    <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
-    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="DateComplete" Type="DateTime" Precision="3" />
-    <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Archived" Type="Boolean" />
-    <Property Name="DateRecovery" Type="DateTime" Precision="0" />
+    <Property Name="JobFound" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="SourceInspDue" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="AuthorizedOnBoardPart">
     <Key>
@@ -243,18 +206,80 @@
     <Property Name="DateRecovery" Type="DateTime" Precision="0" />
     <Property Name="DelegatedTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="ActualCompCount">
+  <EntityType Name="Package">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Total" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OnBoardPart">
+    <Key>
+      <PropertyRef Name="RecordNumber" />
+    </Key>
+    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PartDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Precision="3" />
+    <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PartType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="OnBoardClass" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="QtyPerShipSet" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="PriceEach" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="EstimatedMachineHours" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedMaterial" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedLaborDollars" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="EstimatedOutsideCost" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="FirstArticleJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FirstArticleJobScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="ProductionJobNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ProductionJobScheduleDate" Type="DateTime" Precision="3" />
+    <Property Name="DatePOReceived" Type="DateTime" Precision="3" />
+    <Property Name="DatePODue" Type="DateTime" Precision="3" />
+    <Property Name="DatePOCommitted" Type="DateTime" Precision="3" />
+    <Property Name="DateScheduledRun" Type="DateTime" Precision="3" />
+    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="DateComplete" Type="DateTime" Precision="3" />
+    <Property Name="SalesOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SalesOrderLine" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Archived" Type="Boolean" />
+    <Property Name="DateRecovery" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="OnBoardTask">
+    <Key>
+      <PropertyRef Name="RecordNumber" />
+    </Key>
+    <Property Name="RecordNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OnBoardPart" Type="Int64" />
     <Property Name="Task" Type="Int64" />
-    <Property Name="Year" Type="Int32" />
-    <Property Name="Month" Type="Int32" />
-    <Property Name="Day" Type="Int32" />
+    <Property Name="TaskDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskSequence" Type="Int32" />
+    <Property Name="ChildOfTask" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Weight" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="Complexity" Type="Int32" />
+    <Property Name="StandardCompletionHours" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="ActualCompletionHours" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ResponsibleUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DelegatedTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PercentComplete" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="DueBy" Type="DateTime" Precision="3" />
     <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+    <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompletionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RecoveryDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="ExpectedDueCount">
     <Key>
@@ -267,6 +292,20 @@
     <Property Name="Year" Type="Int32" />
     <Property Name="Month" Type="Int32" />
     <Property Name="Day" Type="Int32" />
+    <Property Name="DueBy" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ActualCompCount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Task" Type="Int64" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Day" Type="Int32" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
     <Property Name="DueBy" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

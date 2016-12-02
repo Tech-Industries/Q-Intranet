@@ -27,7 +27,7 @@ namespace Dashboard.APIControllers
         {
             if(Type == "Meeting")
             {
-                return db.Meetings1.Where(x => x.PlantID == PlantID);
+                return db.Meetings.Where(x => x.PlantID == PlantID);
             }
             else
             {

@@ -22,5 +22,6 @@ namespace Dashboard.Models
         public Nullable<int> Month { get; set; }
         public Nullable<int> Day { get; set; }
         public Nullable<System.DateTime> CompletedOn { get; set; }
+        public Nullable<System.DateTime> DueBy { get; set; }
     }
 }

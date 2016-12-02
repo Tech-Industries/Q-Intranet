@@ -17,6 +17,11 @@
     <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="int" />
     <Property Name="M_NUMBER" Type="varchar" MaxLength="10" />
     <Property Name="N_NUMBER" Type="varchar" MaxLength="25" />
+    <Property Name="TIME_CHANGED" Type="datetime" />
+    <Property Name="LENGTH_IN_STATUS" Type="int" />
+    <Property Name="SPEED" Type="int" />
+    <Property Name="FEED_RATE" Type="int" />
+    <Property Name="FEED_RATE_OVERRIDE" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'NKCCONNECT.dbo.CurrentMachineState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

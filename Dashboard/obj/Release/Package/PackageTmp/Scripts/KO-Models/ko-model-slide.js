@@ -68,8 +68,10 @@
 
     self.loadOnTimeDeliveryTrend = function () {
         var ID = $('#plantSelect option:selected').attr('plantid');
-        Year = $("#yearSelect").val();
-        Month = $("#monthSelect").val();
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
+
+        console.log(ID + ' - ' + Year + ' - ' + Month);
         Range = 11;
         var load = $.ajax({ type: "GET", url: flashAPI, cache: false, data: { PlantID: ID, Year: Year, Month: Month, Range: Range } });
         load.done(function (data) {
@@ -109,10 +111,10 @@
 
     self.loadUCFSlide = function () {
         PlantID = $('#plantSelect option:selected').attr('plantid');
-        Year = $('#yearSelect').val();
-        Month = $('#monthSelect').val();
+        var Year = $("#periodSelect").val().split('-')[0];
+        var Month = $("#periodSelect").val().split('-')[1];
 
-        var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { PlantID: 3, Year: Year, Month: '05' } });
+        var load = $.ajax({ type: "GET", url: UCFAuditsAPI, cache: false, data: { PlantID: PlantID, Year: Year, Month: Month } });
         load.done(function (data) {
             if (data.length > 0) {
                 var t = $.grep(data, function (e) { return e.AreaName == 'Facility' })[0];
@@ -156,8 +158,8 @@
 
     self.loadIncentives = function () {
         PlantID = $('#plantSelect option:selected').attr('plantid');
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         var days = getDaysInMonth(parseInt(month), parseInt(year));
         var currYear = new Date().getFullYear();
         var currMonth = new Date().getMonth() + 1;
@@ -234,8 +236,8 @@
 
     self.loadSales = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -312,8 +314,8 @@
 
     self.loadScrap = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -380,8 +382,8 @@
 
     self.loadSalesGoals = function () {
         nameContain = $("#plantSelect").val();
-        month = $("#monthSelect").val();
-        year = $("#yearSelect").val();
+        month = $("#periodSelect").val().toString().split('-')[1];
+        year = $("#periodSelect").val().toString().split('-')[0];
         var scrapMod = 0;
         if (nameContain == 'BEST') {
             scrapMod = .015;
@@ -605,8 +607,8 @@
 
     self.loadCWO = function () {
         nameContain = $("#plantSelect").val();
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         if (nameContain == null) {
             nameContain = "All";
         }
@@ -674,8 +676,8 @@
 
     self.loadScrapMTD = function () {
 
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         nameContain = $("#plantSelect").val();
         var load = $.ajax({ type: "GET", url: qualityAPI, cache: false, data: { fType: 'Snapshot', nameContain: nameContain, year: year, month: month } });
         load.done(function (data) {
@@ -699,8 +701,8 @@
 
     self.loadOTMTD = function () {
 
-        year = $("#yearSelect").val();
-        month = $("#monthSelect").val();
+        year = $("#periodSelect").val().toString().split('-')[0];
+        month = $("#periodSelect").val().toString().split('-')[1];
         nameContain = $("#plantSelect").val();
         var load = $.ajax({ type: "GET", url: financeAPI, cache: false, data: { fType: "Overtime", nameContain: nameContain, year: year, month: month } });
         load.done(function (data) {

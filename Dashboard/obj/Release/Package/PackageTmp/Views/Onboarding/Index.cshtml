@@ -129,9 +129,18 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1">
-                        <div class="input-group bldProject">
+                        @*<div class="input-group bldProject">
+                                <span class="input-group-addon">Project</span>
+                                <input type="text" class="form-control typeahead" id="fltProjectburn" />
+                            </div>*@
+                        <div class="input-group">
                             <span class="input-group-addon">Project</span>
-                            <input type="text" class="form-control typeahead" id="fltProjectburn" />
+                            <select id="fltProjectBurn" class="form-control">
+                                <option value="All">All</option>
+                                <optgroup data-bind="foreach: Packages()">
+                                    <option data-bind="val: $data.PackageName, text: $data.PackageName"></option>
+                                </optgroup>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -143,6 +152,21 @@
                                 <option data-bind="value: $data.Task, text: $data.TaskDescription"></option>
                             </select>
                         </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group date" data-provide="datepicker">
+                            <span class="input-group-addon">Start Date</span>
+                            <input type="text" class="form-control" id="fltStartDateBurn" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group date" data-provide="datepicker">
+                            <span class="input-group-addon">End Date</span>
+                            <input type="text" class="form-control" id="fltEndDateBurn" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-warning" id="fltClear">Clear</button>
                     </div>
                     <button class="btn btn-primary" id="load-burndown">Go</button>
                 </div>
@@ -196,7 +220,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
 
@@ -357,7 +380,6 @@
 
     <script>
 
-
         var vm = null;
 
         $(function () {
@@ -368,6 +390,7 @@
             ko.applyBindings(vm);
             vm.loadUsers();
             vm.LoadOnboardingParts();
+            vm.LoadPackages();
 
             //Delete part click event
             $(document).on('click', '.delete-part', function () {
@@ -388,6 +411,12 @@
                         timer: 1000
                     });
                 });
+            });
+
+            $('#fltClear').click(function () {
+                console.log('text');
+                $('#fltStartDateBurn').val('');
+                $('#fltEndDateBurn').val('');
             });
 
             $(document).on('click', '#metrics-toggle', function () {
@@ -709,4 +738,10 @@
 
         });
     </script>
+
 }
+
+
+
+
+

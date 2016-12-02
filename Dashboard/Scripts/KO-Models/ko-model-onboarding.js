@@ -1,4 +1,5 @@
-﻿function OnboardingViewModel() {
+﻿
+function OnboardingViewModel() {
     var self = this;
     var usersAPI = $("#usersLink").attr('href');
     var groupsAPI = $("#groupsLink").attr('href');
@@ -38,9 +39,11 @@
     self.BurnExpected = ko.observableArray([]);
     self.BurnActual = ko.observableArray([]);
 
+    self.Packages = ko.observableArray([]);
+
     self.GetFilteredOnboardingTasks = function (part) {
-        
-        return $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber});
+
+        return $.grep(self.OnboardingTasks(), function (e) { return e[0].OnBoardPart == part.RecordNumber });
     }
 
     self.loadUsers = function () {
@@ -293,14 +296,14 @@
 
     }
 
-    //self.LoadPr = function () {
+    self.LoadPackages = function () {
 
-    //    var projects = [];
-    //    var load = $.ajax({ type: "GET", url: onboardingAPI + '/projects', cache: false });
-    //    load.done(function (data) {
-    //        console.log(data);
-    //    });
-    //}
+        var packages = [];
+        var load = $.ajax({ type: "GET", url: onboardingAPI + '/packages', cache: false });
+        load.done(function (data) {
+            self.Packages(data);
+        });
+    }
 
 
     self.loadComments = function () {
@@ -445,12 +448,17 @@
         self.BurnActual([]);
         self.BurnExpected([]);
 
-        var Program = $('#fltProjectburn').val();
+        var Program = $('#fltProjectBurn').val();
         var Task = $('#task-select').val();
+        var startDate = $('#fltStartDateBurn').val();
+        var endDate = $('#fltEndDateBurn').val();
         console.log(Program);
         console.log(Task);
+        console.log(startDate);
+        console.log(endDate);
         if (Program != '' && Task != '') {
-            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/metrics/burndown', data: { Program: Program, Task, Task } });
+            //var load = $.ajax({ type: "GET", url: onboardingAPI+ '/metrics/burndown', cache: false, data: { Program: Program, Task: Task } });
+            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/metrics/burndown', data: { Program: Program, Task: Task, startDate: startDate, endDate: endDate } });
             load.done(function (data) {
                 var cats = [];
                 var act = [];
@@ -470,3 +478,488 @@
     }
 
 }
+
+
+//function OnboardingViewModel() {
+//    var self = this;
+//    var usersAPI = $("#usersLink").attr('href');
+//    var groupsAPI = $("#groupsLink").attr('href');
+//    var userGroupsAPI = $("#userGroupsLink").attr('href');
+//    var onboardingAPI = $("#OnboardingLink").attr('href');
+
+//    var CommentsAPI = $("#CommentsLink").attr('href');
+//    var AssignBtn = null;
+//    self.Comments = ko.observableArray([]);
+
+//    self.isLoading = ko.observable();
+
+//    self.Users = ko.observableArray([]);
+//    self.OnboardingParts = ko.observableArray([]);
+//    self.UnfilteredParts = ko.observableArray([]);
+//    self.OnboardingTasks = ko.observableArray([]);
+
+//    self.Customers = ko.observable([]);
+//    self.Projects = ko.observable([]);
+//    self.ProjectsSelect = ko.observable([]);
+//    self.PartTypes = ko.observable([]);
+//    self.PartClasses = ko.observable([]);
+//    self.PartNums = ko.observable([]);
+
+
+
+//    self.SelectedPart = ko.observable();
+//    self.SelectedTask = ko.observable();
+
+//    self.SelectedTaskPure = ko.observable();
+
+//    self.AvailJobs = ko.observableArray([]);
+
+//    self.ArchivedParts = ko.observableArray([]);
+
+//    self.BurnCats = ko.observableArray([]);
+//    self.BurnExpected = ko.observableArray([]);
+//    self.BurnActual = ko.observableArray([]);
+
+//    self.GetFilteredOnboardingTasks = function (part) {
+//        //console.log(part);
+//        return $.grep(self.OnboardingTasks(), function (e) { return e[0].OnboardPartID == part.ID});
+//    }
+
+//    self.loadUsers = function () {
+//        var load = $.ajax({ type: "GET", url: usersAPI, cache: false, data: { type: 'Onboarding' } });
+//        load.done(function (data) {
+//            var array = $.map(data, function (item) {
+//                return {
+//                    ID: item.ID,
+//                    UserName: item.UserName,
+//                    FirstName: item.FirstName,
+//                    LastName: item.LastName,
+//                    Email: item.Email
+//                }
+//            });
+//            self.Users(array);
+//            console.log(data);
+//        });
+//    }
+
+//    var P = function (part, tasks) {
+//        this.part = part;
+//        this.tasks = ko.observableArray([]);
+
+//    }
+//    self.Parts = ko.observableArray([]);
+
+//    self.SelectTask = function (TaskID, PartID) {
+//        console.log(TaskID);
+//        console.log(PartID);
+//        var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnboardPartID == PartID })[0];
+//        console.log(tasks);
+//        var task = $.grep(tasks, function (e) { return e.ID == TaskID })[0];
+//        console.log(task);
+//        var part = $.grep(self.OnboardingParts(), function (e) { return e.ID == PartID })[0];
+//        console.log(part);
+//        self.SelectedPart(part);
+//        self.SelectedTask(task);
+
+//        $('#selectedDelegate').val(task.DelegateUserID);
+
+//    }
+
+//    self.SelectPart = function (PartID) {
+//        var part = $.grep(self.OnboardingParts(), function (e) { return e.ID == PartID })[0];
+//        self.SelectedPart(part);
+//    }
+
+//    self.UpdateTasksForPart = function () {
+//        var today = new Date();
+//        var Year = today.getFullYear();
+//        var Month = checkZero(today.getMonth() + 1);
+//        var Day = checkZero(today.getDate());
+//        var startDate = Year + '-' + Month + '-' + Day + 'T00:00:00';
+//        var rangeDate = addDays(Year, Month, Day, 10);
+
+//        var part = self.SelectedPart();
+//        var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + part.ID + '/Tasks', cache: false });
+//        loadTasks.done(function (data1) {
+//            innerStart = data1.length;
+//            data1.forEach(function (ii) {
+//                ii.Status = self.checkStatus(ii, startDate, rangeDate);
+//                user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegateUserID })[0]
+//                ii.DelegatedToName = user.FirstName + ' ' + user.LastName;
+//                if (ii.DateDue != null) {
+//                    ii.DateDue = formatSqlDateTimeToFullDate(ii.DateDue);
+//                }
+
+//                if (ii.DateRecovery != null) {
+//                    ii.DateRecovery = formatSqlDateTimeToFullDate(ii.DateRecovery);
+//                }
+//            });
+//            var tasks = $.grep(self.OnboardingTasks(), function (e) { return e[0].OnboardPartID == part.ID})[0];
+//            self.OnboardingTasks.remove(tasks);
+//            self.OnboardingTasks.push(data1);
+//        });
+
+
+//    }
+
+//    self.SaveChanges = function () {
+//        var update = self.SelectedTask();
+//        update.CompletedUserID = $('#layoutUserID').val();
+
+//        var save = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/Tasks/' + update.ID, data: update });
+//        save.done(function (data) {
+
+//            self.UpdateTasksForPart();
+//        });
+//    }
+
+//    self.LoadOnboardingParts = function () {
+//        var UserID = $('#layoutUserID').val();
+//        self.isLoading(true)
+//        var parts = [];
+//        var tasks = [];
+//        var outer = 0;
+//        var inner = 0;
+//        var today = new Date();
+
+//        var Year = today.getFullYear();
+//        var Month = checkZero(today.getMonth() + 1);
+//        var Day = checkZero(today.getDate());
+//        var startDate = Year + '-' + Month + '-' + Day + 'T00:00:00';
+//        var rangeDate = addDays(Year, Month, Day, 10);
+
+//        self.OnboardingTasks([]);
+//        var loadAuthParts = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/Authorized/' + UserID, data: { id: UserID }, error: function (data) { self.isLoading(false); } });
+//        loadAuthParts.done(function (authParts) {
+//            parts = authParts;
+
+//            self.OnboardingParts(parts);
+//            self.UnfilteredParts(parts);
+//            outerStart = parts.length;
+//            parts.forEach(function (i) {
+//                self.Customers().add(i.Customer);
+//                self.Projects().add(i.PackageName);
+//                self.PartTypes().add(i.PartType);
+//                self.PartClasses().add(i.PartClass);
+//                self.PartNums().add(i.PartNumber);
+//                i.DateEntered = formatSqlDateTimeToFullDate(i.DateEntered);
+//                i.DatePODue = formatSqlDateTimeToFullDate(i.DatePODue);
+//                i.DatePOReceived = formatSqlDateTimeToFullDate(i.DatePOReceived);
+
+//                outer += 1;
+//                var loadTasks = $.ajax({ type: "GET", url: onboardingAPI + '/' + i.ID + '/Tasks', cache: false });
+//                loadTasks.done(function (data1) {
+//                    innerStart = data1.length;
+//                    data1.forEach(function (ii) {
+//                        ii.Status = self.checkStatus(ii, startDate, rangeDate);
+//                        user = $.grep(self.Users(), function (e) { return e.ID == ii.DelegateUserID })[0]
+//                        ii.DelegatedToName = user.FirstName + ' ' + user.LastName;
+//                        if (ii.DateDue != null) {
+//                            ii.DateDue = formatSqlDateTimeToFullDate(ii.DateDue);
+//                        }
+//                        if (ii.RecoveryDate != null) {
+//                            ii.RecoveryDate = formatSqlDateTimeToFullDate(ii.RecoveryDate);
+//                        }
+//                    });
+//                    if (data1[10].TaskDescription != 'FAI Populated') {
+//                        data1.splice(10, 0, { TaskDescription: "FAI Populated", PercentComplete: '0.0%', DateDue: 0, Status: '', ActualHours: 0, EstimatedHours: 0 })
+//                    }
+//                    self.OnboardingTasks.push(data1);
+
+//                    inner += 1;
+//                    if (inner == outerStart) {
+//                        self.isLoading(false)
+//                    }
+//                });
+//            });
+//        });
+//    }
+
+//    self.DeletePart = function (PartID) {
+//        console.log(PartID);
+//        var update = $.grep(self.OnboardingParts(), function (e) { return e.ID == PartID })[0];
+//        var updatePart = $.ajax({ type: "DELETE", cache: false, url: onboardingAPI + '/' + update.ID, data: { id: PartID } });
+//        self.OnboardingParts.remove(update);
+//    }
+
+//    self.ArchivePart = function (PartID) {
+//        var update = $.grep(self.OnboardingParts(), function (e) { return e.ID == PartID })[0];
+//        update.Archived = true;
+//        self.OnboardingParts.remove(update);
+//        self.ArchivedParts.push(update);
+//        var updatePart = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/' + update.ID, data: update });
+//        updatePart.done(function (data) {
+
+//        });
+//    }
+
+//    self.FilterParts = function (Customer, Project, PartType, PartClass, PartNum) {
+//        var parts = self.UnfilteredParts();
+//        if (Customer != null && Customer != '') {
+//            parts = $.grep(parts, function (e) { return e.Customer == Customer });
+//        }
+
+//        if (Project != null && Project != '') {
+//            parts = $.grep(parts, function (e) { return e.PackageName == Project });
+//        }
+
+//        if (PartType != null && PartType != '') {
+//            parts = $.grep(parts, function (e) { return e.PartType == PartType });
+//        }
+
+//        if (PartClass != null && PartClass != '') {
+//            parts = $.grep(parts, function (e) { return e.PartClass == PartClass });
+//        }
+
+//        if (PartNum != null && PartNum != '') {
+//            parts = $.grep(parts, function (e) { return e.PartNumber == PartNum });
+//        }
+
+
+//        self.OnboardingParts(parts);
+//    }
+
+//    self.ClearFilters = function () {
+//        self.OnboardingParts(self.UnfilteredParts())
+//    }
+
+//    self.LoadAvailJobs = function (PartID) {
+//        self.AvailJobs([]);
+//        var load = $.ajax({ type: "GET", url: onboardingAPI + '/' + PartID + '/AvailJobs', cache: false });
+//        load.done(function (data) {
+//            self.AvailJobs(data);
+//        });
+//    }
+
+//    self.AssignJob = function (PartID, Job) {
+//        console.log(PartID + ' ' + Job);
+
+//        var update = $.grep(self.OnboardingParts(), function (e) { return e.RecordNumber == PartID })[0];
+//        update.FirstArticleJobNumber = Job;
+
+//        var updatePart = $.ajax({ type: "PUT", cache: false, url: onboardingAPI + '/' + update.ID, data: update });
+//        updatePart.done(function (data) {
+
+//        });
+//    }
+
+//    self.checkStatus = function (ii, startDate, rangeDate) {
+
+//        var dateCompare = null;
+
+//        if (ii.DateRecovery == null || ii.DateRecovery == '') {
+//            dateCompare = ii.DateDue;
+//        }
+//        else {
+//            dateCompare = ii.DateRecovery;
+//        }
+
+//        if (ii.PercentComplete == 100) {
+//            if (ii.DateComplete > dateCompare) {
+//                return 'Completed Late';
+//            }
+//            else {
+//                return 'Complete';
+//            }
+//        }
+//        else if (ii.PercentComplete > 0 && ii.PercentComplete < 100) {
+//            return 'In Progress';
+//        }
+//        else if (ii.PercentComplete == 0) {
+
+//            if (dateCompare > rangeDate) {
+//                return 'Future';
+//            }
+//            else if (dateCompare >= startDate && dateCompare < rangeDate) {
+//                return 'Upcoming';
+//            }
+//            else if (dateCompare < startDate) {
+//                return 'Late';
+//            }
+//        }
+
+//    }
+
+//    //self.LoadPr = function () {
+
+//    //    var projects = [];
+//    //    var load = $.ajax({ type: "GET", url: onboardingAPI + '/projects', cache: false });
+//    //    load.done(function (data) {
+//    //        console.log(data);
+//    //    });
+//    //}
+
+
+//    self.loadComments = function () {
+//        var TypeID = self.SelectedTask().ID;
+//        console.log(TypeID);
+//        loadComments(TypeID, 'OnboardingTasks', CommentsAPI, self)
+//    };
+
+//    self.addComment = function () {
+//        var TypeID = self.SelectedTask().ID;
+//        var UserID = $('#layoutUserID').val();
+//        var Comment = $("#txt-new-comment").val();
+//        if (Comment.length > 0) {
+//            addComment(TypeID, UserID, Comment, "OnboardingTasks", CommentsAPI, self);
+//            $("#txt-new-comment").val('');
+
+//        }
+
+//    }
+//    self.updateComment = function (ID, TimeSubmitted, Comment) {
+//        updateComment(ID, TimeSubmitted, Comment, self.Comments(), CommentsAPI);
+//    }
+//    self.removeComment = function (ID) {
+//        removeComment(ID, CommentsAPI, self);
+//    }
+
+//    self.UpdateAdjShipDate = function (ID, DateID, newDate) {
+//        var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
+
+//        var u = { ID: parseInt(DateID), OrderNo: t.OrderNo, AdjShipDate: formatShortDate(newDate), OrderLine: t.OrderLine, DateDue: t.DateDue.split('T')[0] };
+//        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine + "&DateDue=" + t.DateDue.split('T')[0];
+//        var update = $.ajax({ type: "PUT", url: shippingAPI + "/" + DateID, cache: false, data: u });
+//        update.done(function (data) {
+//        });
+//    }
+
+//    self.AddAdjShipDate = function (ID, newDate, obj, sale) {
+//        var t = $.grep(self.UpcomingShipments(), function (e) { return e.ID == ID })[0];
+
+//        var newDateID = 0;
+//        var sendData = "OrderNo=" + t.OrderNo + "&AdjShipDate=" + formatShortDate(newDate) + "&OrderLine=" + t.OrderLine + "&DateDue=" + t.DateDue.split('T')[0];
+//        var add = $.ajax({ type: "POST", cache: false, url: shippingAPI, data: sendData });
+//        add.success(function (data) {
+//            newDateID = data.ID;
+//            $(obj).parent().parent().parent().children().last().html(newDateID);
+//        });
+
+//        console.log(self.AdjShipDollarsInt());
+//        sale = parseFloat(sale);
+//        self.AdjShipDollarsInt(self.AdjShipDollarsInt() + sale);
+//        console.log(self.AdjShipDollarsInt());
+//        self.AdjShipDollars(formatMoney(self.AdjShipDollarsInt()));
+
+//        return newDateID;
+//    }
+
+
+//    self.LoadStagingTopLevel = function () {
+//        var load = $.ajax({ type: "GET", url: stagingAPI, cache: false, data: { DaysOut: 14 } });
+//        load.done(function (data) {
+//            $.each(data, function (i, item) {
+//                $('.dtStaging').DataTable().row.add([
+//                item.ID,
+//                '0',
+//                item.Job,
+//                formatToShortDate(item.DateStart.split('T')[0]),
+//                formatToShortDate(item.DateStageDue.split('T')[0]),
+//                item.Steps,
+//                item.PartNum,
+//                item.Description
+//                ]).draw();
+//            });
+//            self.StagingTopLevel(data);
+//        });
+//        load.fail(function () {
+//            console.log('test');
+//        });
+//    }
+
+//    self.LoadStagingDetail = function (Job) {
+//        var load = $.ajax({ type: "GET", url: stagingDetailAPI, cache: false, data: { Job: Job } });
+//        load.done(function (data) {
+//            $('.dtStagingDetail').DataTable().clear().draw();
+//            $.each(data, function (i, item) {
+//                $('.dtStagingDetail').DataTable().row.add([
+//                item.ID,
+//                '0',
+//                item.Job,
+//                item.Suffix,
+//                item.Seq,
+//                formatToShortDate(item.DATE_START.split('T')[0]),
+//                item.PARTNUM,
+//                item.DESCRIPTION,
+//                item.WC
+//                ]).draw();
+//            });
+
+//            self.StagingDetail(data);
+//        });
+//        load.fail(function () {
+//            console.log('test');
+//        });
+//    }
+
+//    self.LoadStagingCriteria = function (job) {
+//        var load = $.ajax({ type: "GET", url: stagingCriteriaAPI, cache: false });
+//        load.done(function (data) {
+
+//            self.Criteria(data);
+//        });
+//    }
+
+//    self.LoadSelectedStagingItems = function (JobID) {
+//        var load = $.ajax({ type: "GET", url: stagingItemsAPI, cache: false, data: { JobID: JobID } });
+//        load.done(function (data) {
+//            self.Materials($.grep(data, function (e) { return e.Type == 'Material' }));
+//            self.Equipment($.grep(data, function (e) { return e.Type == 'Equipment' }));
+//        });
+//        load.fail(function () {
+//            self.Materials([]);
+//            self.Equipment([]);
+//        });
+//    }
+
+//    self.AddItem = function (JobID, Type, Description, Location, Consumable) {
+//        var UserID = parseInt($('#layoutUserID').val());
+//        var sendData = "JobID=" + JobID + "&Type=" + Type + "&Description=" + Description + "&Location=" + Location + "&IssuerID=" + UserID + "&Consumable=" + Consumable;
+//        var add = $.ajax({ type: "POST", cache: false, url: stagingItemsAPI, data: sendData });
+//        add.success(function (data) {
+//            console.log(data);
+//            self.LoadSelectedStagingItems();
+//        });
+//        $('#addItem').removeClass('hidden');
+//    }
+
+//    self.RemoveItem = function (ID) {
+
+//    }
+
+//    self.LoadBurndown = function () {
+//        self.BurnCats([]);
+//        self.BurnActual([]);
+//        self.BurnExpected([]);
+
+//        var Program = $('#fltProjectburn').val();
+//        var Task = $('#task-select').val();
+//        console.log(Program);
+//        console.log(Task);
+//        if (Program != '' && Task != '') {
+//            //var load = $.ajax({ type: "GET", url: onboardingAPI+ '/metrics/burndown', cache: false, data: { Program: Program, Task: Task } });
+//            var load = $.ajax({ type: "GET", cache: false, url: onboardingAPI + '/metrics/burndown', data: { Program: Program, Task: Task } });
+//            load.done(function (data) {
+//                var cats = [];
+//                var act = [];
+//                var exp = [];
+//                for (i = 0; i < data.length; i++) {
+//                    cats.push(data[i].Date.split('T')[0]);
+//                    act.push(data[i].Actual);
+//                    exp.push(data[i].Expected);
+//                    console.log(data[i].Date + ' (' + data[i].Expected + '/' + data[i].Actual + ')');
+//                }
+//                self.BurnCats(cats);
+//                self.BurnExpected(exp);
+//                self.BurnActual(act);
+
+//            });
+//        }
+//    }
+
+//}
+
+
+
+
+

@@ -25,30 +25,6 @@ namespace Dashboard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Plant> Plants { get; set; }
-        public virtual DbSet<Update> Updates { get; set; }
-        public virtual DbSet<Goal> Goals { get; set; }
-        public virtual DbSet<OTMonthlyByCompany> OTMonthlyByCompanies { get; set; }
-        public virtual DbSet<SalesMonthlyByCompany> SalesMonthlyByCompanies { get; set; }
-        public virtual DbSet<SalesDailyByCompany> SalesDailyByCompanies { get; set; }
-        public virtual DbSet<SalesStage> SalesStages { get; set; }
-        public virtual DbSet<ScrapMonthlyByPlant> ScrapMonthlyByPlants { get; set; }
-        public virtual DbSet<CWODailyByPlant> CWODailyByPlants { get; set; }
-        public virtual DbSet<ScrapDailyByPlant> ScrapDailyByPlants { get; set; }
-        public virtual DbSet<ScrapStage> ScrapStages { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<UserGroup> UserGroups { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<DeliverableReview> DeliverableReviews { get; set; }
-        public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
-        public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
-        public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<DeliverableStatusByUserID> DeliverableStatusByUserIDs { get; set; }
-        public virtual DbSet<PastDueDeliverable> PastDueDeliverables { get; set; }
-        public virtual DbSet<DeliverablesDueInNextThirtyDay> DeliverablesDueInNextThirtyDays { get; set; }
-        public virtual DbSet<BugTag> BugTags { get; set; }
         public virtual DbSet<UCFCategory> UCFCategories { get; set; }
         public virtual DbSet<UCFChallenge> UCFChallenges { get; set; }
         public virtual DbSet<UCFAudit> UCFAudits { get; set; }
@@ -60,49 +36,103 @@ namespace Dashboard.Models
         public virtual DbSet<UCFGoal> UCFGoals { get; set; }
         public virtual DbSet<UCFAction> UCFActions { get; set; }
         public virtual DbSet<UCFPreviousScoresByChallenge> UCFPreviousScoresByChallenges { get; set; }
-        public virtual DbSet<Price> Prices { get; set; }
-        public virtual DbSet<IncentiveRollupByPlant> IncentiveRollupByPlants { get; set; }
-        public virtual DbSet<Bug> Bugs { get; set; }
-        public virtual DbSet<ProjectsTopLevel> ProjectsTopLevels { get; set; }
-        public virtual DbSet<BugsTopLevel> BugsTopLevels { get; set; }
-        public virtual DbSet<PrevMaint> PrevMaints { get; set; }
-        public virtual DbSet<Meetings> Meetings1 { get; set; }
         public virtual DbSet<UCFAuditHIstoryTopLevel> UCFAuditHIstoryTopLevels { get; set; }
-        public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<UCFAveragesByMonth> UCFAveragesByMonths { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; }
-        public virtual DbSet<CWOStage> CWOStages { get; set; }
         public virtual DbSet<UCFAuditDetailLevel> UCFAuditDetailLevels { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<OnTimeDeliveryTrend> OnTimeDeliveryTrends { get; set; }
-        public virtual DbSet<OnTimeDeliveryTrendInt> OnTimeDeliveryTrendInts { get; set; }
-        public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
-        public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
+        public virtual DbSet<ADInfo> ADInfoes { get; set; }
+        public virtual DbSet<Bug> Bugs { get; set; }
+        public virtual DbSet<BugTag> BugTags { get; set; }
+        public virtual DbSet<Calendar> Calendars { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CWODailyByPlant> CWODailyByPlants { get; set; }
+        public virtual DbSet<DeliverableComment> DeliverableComments { get; set; }
+        public virtual DbSet<DeliverableDetail> DeliverableDetails { get; set; }
+        public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
         public virtual DbSet<DeliverableReviewer> DeliverableReviewers { get; set; }
+        public virtual DbSet<DeliverableReview> DeliverableReviews { get; set; }
+        public virtual DbSet<Deliverable> Deliverables { get; set; }
+        public virtual DbSet<DeliverableView> DeliverableViews { get; set; }
+        public virtual DbSet<Goal> Goals { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Machine> Machines { get; set; }
+        public virtual DbSet<MachineStateChange> MachineStateChanges { get; set; }
+        public virtual DbSet<MachineStateCurrent> MachineStateCurrents { get; set; }
+        public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<PastDueSalesTrend> PastDueSalesTrends { get; set; }
+        public virtual DbSet<Plant> Plants { get; set; }
+        public virtual DbSet<PrevMaint> PrevMaints { get; set; }
+        public virtual DbSet<ProjectAssignee> ProjectAssignees { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
+        public virtual DbSet<SalesDailyByCompany> SalesDailyByCompanies { get; set; }
+        public virtual DbSet<SalesMonthlyByCompany> SalesMonthlyByCompanies { get; set; }
+        public virtual DbSet<SalesStage> SalesStages { get; set; }
+        public virtual DbSet<ScrapDailyByPlant> ScrapDailyByPlants { get; set; }
+        public virtual DbSet<ScrapMonthlyByCompany> ScrapMonthlyByCompanies { get; set; }
+        public virtual DbSet<ScrapMonthlyByPlant> ScrapMonthlyByPlants { get; set; }
+        public virtual DbSet<ScrapStage> ScrapStages { get; set; }
+        public virtual DbSet<ShippingPlanAdjShipDate> ShippingPlanAdjShipDates { get; set; }
+        public virtual DbSet<ShippingPlanStage> ShippingPlanStages { get; set; }
+        public virtual DbSet<Update> Updates { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ZipDownloadLog> ZipDownloadLogs { get; set; }
+        public virtual DbSet<ZipFile> ZipFiles { get; set; }
+        public virtual DbSet<BacklogPartsList> BacklogPartsLists { get; set; }
+        public virtual DbSet<Opportunity> Opportunities { get; set; }
+        public virtual DbSet<PartFamilyXRef> PartFamilyXRefs { get; set; }
+        public virtual DbSet<StagingAudit> StagingAudits { get; set; }
+        public virtual DbSet<StagingAuditDetail> StagingAuditDetails { get; set; }
         public virtual DbSet<StagingCriteria> StagingCriterias { get; set; }
         public virtual DbSet<StagingDetail> StagingDetails { get; set; }
-        public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
+        public virtual DbSet<StagingItem> StagingItems { get; set; }
+        public virtual DbSet<StagingSnapshotTrend> StagingSnapshotTrends { get; set; }
+        public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
+        public virtual DbSet<WorkCenter> WorkCenters { get; set; }
+        public virtual DbSet<BT_SPTransactions> BT_SPTransactions { get; set; }
+        public virtual DbSet<OnTimeDelivery> OnTimeDeliveries { get; set; }
+        public virtual DbSet<OrderLinesAll> OrderLinesAlls { get; set; }
+        public virtual DbSet<OTStage> OTStages { get; set; }
+        public virtual DbSet<OTStageFour> OTStageFours { get; set; }
+        public virtual DbSet<PrevMaintCost> PrevMaintCosts { get; set; }
+        public virtual DbSet<PrevMaintTemp> PrevMaintTemps { get; set; }
+        public virtual DbSet<Price> Prices { get; set; }
+        public virtual DbSet<ScrapStageTemp> ScrapStageTemps { get; set; }
+        public virtual DbSet<JobOperation> JobOperations { get; set; }
+        public virtual DbSet<BugsTopLevel> BugsTopLevels { get; set; }
+        public virtual DbSet<DelDetDocsByUser> DelDetDocsByUsers { get; set; }
+        public virtual DbSet<DeliverablesDueInNextThirtyDay> DeliverablesDueInNextThirtyDays { get; set; }
+        public virtual DbSet<DeliverableStatusByUserID> DeliverableStatusByUserIDs { get; set; }
         public virtual DbSet<FlashReportRollUp> FlashReportRollUps { get; set; }
         public virtual DbSet<FlashReportRollUpAll> FlashReportRollUpAlls { get; set; }
-        public virtual DbSet<StagingAudit> StagingAudits { get; set; }
-        public virtual DbSet<StagingItem> StagingItems { get; set; }
-        public virtual DbSet<StagingAuditDetail> StagingAuditDetails { get; set; }
+        public virtual DbSet<IncentiveRollupByPlant> IncentiveRollupByPlants { get; set; }
+        public virtual DbSet<OnTimeDeliveryTrend> OnTimeDeliveryTrends { get; set; }
+        public virtual DbSet<OnTimeDeliveryTrendInt> OnTimeDeliveryTrendInts { get; set; }
+        public virtual DbSet<PastDueDeliverable> PastDueDeliverables { get; set; }
+        public virtual DbSet<PastDueDeliverablesByReviewer> PastDueDeliverablesByReviewers { get; set; }
+        public virtual DbSet<ProjectsTopLevel> ProjectsTopLevels { get; set; }
+        public virtual DbSet<RevieablesByUserPastDue> RevieablesByUserPastDues { get; set; }
+        public virtual DbSet<ReviewablesByUser> ReviewablesByUsers { get; set; }
+        public virtual DbSet<ShipAdjDate> ShipAdjDates { get; set; }
+        public virtual DbSet<TimeInStateByMachine> TimeInStateByMachines { get; set; }
         public virtual DbSet<StagingCheckList> StagingCheckLists { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<StagingDetailAuditStatu> StagingDetailAuditStatus { get; set; }
-        public virtual DbSet<StagingTopLevelStatu> StagingTopLevelStatus { get; set; }
+        public virtual DbSet<StagingMonthlySnapShot> StagingMonthlySnapShots { get; set; }
         public virtual DbSet<StagingSnapshot> StagingSnapshots { get; set; }
-        public virtual DbSet<Opportunity> Opportunities { get; set; }
-        public virtual DbSet<Deliverable> Deliverables { get; set; }
-        public virtual DbSet<DeliverableDetail> DeliverableDetails { get; set; }
-        public virtual DbSet<StagingTopLevel> StagingTopLevels { get; set; }
-        public virtual DbSet<ADInfo> ADInfo { get; set; }
-        public virtual DbSet<ZipDownloadLog> ZipDownloadLog { get; set; }
-        public virtual DbSet<ZipFiles> ZipFiles { get; set; }
-        public virtual DbSet<StagingMonthlySnapShot> StagingMonthlySnapShot { get; set; }
-        public virtual DbSet<StagingSnapshotTrend> StagingSnapshotTrend { get; set; }
-        public virtual DbSet<Calendar> Calendar { get; set; }
-        public virtual DbSet<DeliverableDocument> DeliverableDocuments { get; set; }
-        public virtual DbSet<DelDetDocsByUser> DelDetDocsByUsers { get; set; }
+        public virtual DbSet<StagingTopLevelStatu> StagingTopLevelStatus { get; set; }
+        public virtual DbSet<OTMonthlyByCompany> OTMonthlyByCompanies { get; set; }
+        public virtual DbSet<EmployeeMaster> EmployeeMasters { get; set; }
+        public virtual DbSet<OpenSequence> OpenSequences { get; set; }
+        public virtual DbSet<DistinctJob> DistinctJobs { get; set; }
+        public virtual DbSet<DistinctSuffix> DistinctSuffixes { get; set; }
+        public virtual DbSet<DefectCategory> DefectCategories { get; set; }
+        public virtual DbSet<DefectSubCategory> DefectSubCategories { get; set; }
+        public virtual DbSet<InspectionDefect> InspectionDefects { get; set; }
+        public virtual DbSet<InspectionType> InspectionTypes { get; set; }
+        public virtual DbSet<Inspection> Inspections { get; set; }
     }
 }

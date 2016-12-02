@@ -12,22 +12,57 @@
     <Property Name="OnBoardPart" Type="bigint" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
-  <EntityType Name="Customer">
+  <EntityType Name="Calendar">
     <Key>
-      <PropertyRef Name="RecordNumber" />
+      <PropertyRef Name="DateKey" />
     </Key>
-    <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Company" Type="nvarchar" MaxLength="5" />
-    <Property Name="CustomerNumber" Type="nvarchar" MaxLength="20" />
-    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Address1" Type="nvarchar" MaxLength="50" />
-    <Property Name="Address2" Type="nvarchar" MaxLength="50" />
-    <Property Name="City" Type="nvarchar" MaxLength="50" />
-    <Property Name="State" Type="nvarchar" MaxLength="10" />
-    <Property Name="Zip" Type="nvarchar" MaxLength="10" />
-    <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
-    <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
-    <Property Name="ContactPhone" Type="varchar" MaxLength="50" />
+    <Property Name="DateKey" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Day" Type="tinyint" Nullable="false" />
+    <Property Name="DaySuffix" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Weekday" Type="tinyint" Nullable="false" />
+    <Property Name="WeekDayName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsWeekend" Type="bit" Nullable="false" />
+    <Property Name="IsHoliday" Type="bit" Nullable="false" />
+    <Property Name="HolidayText" Type="varchar" MaxLength="64" />
+    <Property Name="DOWInMonth" Type="tinyint" Nullable="false" />
+    <Property Name="DayOfYear" Type="smallint" Nullable="false" />
+    <Property Name="WeekOfMonth" Type="tinyint" Nullable="false" />
+    <Property Name="WeekOfYear" Type="tinyint" Nullable="false" />
+    <Property Name="ISOWeekOfYear" Type="tinyint" Nullable="false" />
+    <Property Name="Month" Type="tinyint" Nullable="false" />
+    <Property Name="MonthName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Quarter" Type="tinyint" Nullable="false" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="MonthYear" Type="char" MaxLength="7" Nullable="false" />
+    <Property Name="FirstDayOfMonth" Type="date" Nullable="false" />
+    <Property Name="LastDayOfMonth" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfQuarter" Type="date" Nullable="false" />
+    <Property Name="LastDayOfQuarter" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfYear" Type="date" Nullable="false" />
+    <Property Name="LastDayOfYear" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfNextMonth" Type="date" Nullable="false" />
+    <Property Name="FirstDayOfNextYear" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CalendarTemp">
+    <Key>
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="day" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="month" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="FirstOfMonth" Type="date" StoreGeneratedPattern="Computed" />
+    <Property Name="MonthName" Type="nvarchar" MaxLength="30" StoreGeneratedPattern="Computed" />
+    <Property Name="week" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="ISOweek" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="DayOfWeek" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="quarter" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="year" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="FirstOfYear" Type="date" StoreGeneratedPattern="Computed" />
+    <Property Name="Style112" Type="char" MaxLength="8" StoreGeneratedPattern="Computed" />
+    <Property Name="Style101" Type="char" MaxLength="10" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="OnBoardingPartsToAdd">
     <Key>
@@ -107,21 +142,6 @@
     <Property Name="CompletionStatus" Type="nvarchar" MaxLength="50" />
     <Property Name="RecoveryDate" Type="datetime" />
   </EntityType>
-  <EntityType Name="Parameters">
-    <Key>
-      <PropertyRef Name="RecordNumber" />
-    </Key>
-    <Property Name="RecordNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProgramID" Type="nvarchar" MaxLength="30" />
-    <Property Name="ParameterID" Type="nvarchar" MaxLength="30" />
-    <Property Name="ParameterSequence" Type="int" Nullable="false" />
-    <Property Name="ParamN1" Type="numeric" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="ParamN2" Type="numeric" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="ParamS1" Type="nvarchar" MaxLength="100" />
-    <Property Name="ParamS2" Type="nvarchar" MaxLength="200" />
-    <Property Name="ParamS3" Type="nvarchar" MaxLength="200" />
-    <Property Name="ParamS4" Type="nvarchar" MaxLength="50" />
-  </EntityType>
   <EntityType Name="PartMaster">
     <Key>
       <PropertyRef Name="RecordNumber" />
@@ -149,6 +169,16 @@
     <Property Name="DateScheduledRun" Type="datetime" />
     <Property Name="Complete" Type="nvarchar" MaxLength="50" />
     <Property Name="DateComplete" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.PartsByJobFound' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PartsByJobFound">
+    <Key>
+      <PropertyRef Name="JobFound" />
+    </Key>
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="JobFound" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="SourceInspDue" Type="datetime" />
   </EntityType>
   <EntityType Name="SystemLog">
     <Key>
@@ -202,6 +232,7 @@ warning 6002: The table/view 'OnBoarding.dbo.ActualCompCount' does not have a pr
     <Property Name="Month" Type="int" />
     <Property Name="Day" Type="int" />
     <Property Name="CompletedOn" Type="datetime" />
+    <Property Name="DueBy" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'OnBoarding.dbo.AuthorizedOnBoardParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -260,17 +291,34 @@ warning 6002: The table/view 'OnBoarding.dbo.ExpectedDueCount' does not have a p
     <Property Name="Day" Type="int" />
     <Property Name="DueBy" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OnBoarding.dbo.Packages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Packages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="5" />
+    <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityContainer Name="OnBoardingModelStoreContainer">
     <EntitySet Name="AvailPlanJobs" EntityType="Self.AvailPlanJobs" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CalendarTemp" EntityType="Self.CalendarTemp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnBoardingPartsToAdd" EntityType="Self.OnBoardingPartsToAdd" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnBoardParts" EntityType="Self.OnBoardParts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnBoardTasks" EntityType="Self.OnBoardTasks" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Parameters" EntityType="Self.Parameters" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartMaster" EntityType="Self.PartMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartJobs" EntityType="Self.Z-OnBoardPartJobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Z-OnBoardPartOSSPO" EntityType="Self.Z-OnBoardPartOSSPO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartsByJobFound" EntityType="Self.PartsByJobFound" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PartsByJobFound].[PartNumber] AS [PartNumber], 
+    [PartsByJobFound].[JobFound] AS [JobFound], 
+    [PartsByJobFound].[SourceInspDue] AS [SourceInspDue]
+    FROM [dbo].[PartsByJobFound] AS [PartsByJobFound]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="ActualCompCount" EntityType="Self.ActualCompCount" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [ActualCompCount].[ID] AS [ID], 
@@ -280,7 +328,8 @@ warning 6002: The table/view 'OnBoarding.dbo.ExpectedDueCount' does not have a p
     [ActualCompCount].[Year] AS [Year], 
     [ActualCompCount].[Month] AS [Month], 
     [ActualCompCount].[Day] AS [Day], 
-    [ActualCompCount].[CompletedOn] AS [CompletedOn]
+    [ActualCompCount].[CompletedOn] AS [CompletedOn], 
+    [ActualCompCount].[DueBy] AS [DueBy]
     FROM [dbo].[ActualCompCount] AS [ActualCompCount]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="AuthorizedOnBoardParts" EntityType="Self.AuthorizedOnBoardParts" store:Type="Views" store:Schema="dbo">
@@ -333,6 +382,13 @@ warning 6002: The table/view 'OnBoarding.dbo.ExpectedDueCount' does not have a p
     [ExpectedDueCount].[Day] AS [Day], 
     [ExpectedDueCount].[DueBy] AS [DueBy]
     FROM [dbo].[ExpectedDueCount] AS [ExpectedDueCount]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Packages" EntityType="Self.Packages" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Packages].[ID] AS [ID], 
+    [Packages].[Company] AS [Company], 
+    [Packages].[PackageName] AS [PackageName]
+    FROM [dbo].[Packages] AS [Packages]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

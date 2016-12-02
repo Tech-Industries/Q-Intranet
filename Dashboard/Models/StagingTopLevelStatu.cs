@@ -14,6 +14,7 @@ namespace Dashboard.Models
     
     public partial class StagingTopLevelStatu
     {
+        public Nullable<int> PlantID { get; set; }
         public string Job { get; set; }
         public string Suffix { get; set; }
         public Nullable<int> Steps { get; set; }
@@ -28,6 +29,5 @@ namespace Dashboard.Models
         public Nullable<int> Missing { get; set; }
         public Nullable<int> Complete { get; set; }
         public string Status { get; set; }
-        public Nullable<int> PlantID { get; set; }
     }
 }

@@ -22,6 +22,11 @@
           <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="int" />
           <Property Name="M_NUMBER" Type="varchar" MaxLength="10" />
           <Property Name="N_NUMBER" Type="varchar" MaxLength="25" />
+          <Property Name="TIME_CHANGED" Type="datetime" />
+          <Property Name="LENGTH_IN_STATUS" Type="int" />
+          <Property Name="SPEED" Type="int" />
+          <Property Name="FEED_RATE" Type="int" />
+          <Property Name="FEED_RATE_OVERRIDE" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NKCCONNECT.dbo.CurrentMachineState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -109,12 +114,26 @@ warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have
           <Property Name="SPINDLE_OVERRIDE_PERCENT" Type="Int32" />
           <Property Name="M_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="N_NUMBER" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TIME_CHANGED" Type="DateTime" Precision="3" />
+          <Property Name="LENGTH_IN_STATUS" Type="Int32" />
+          <Property Name="SPEED" Type="Int32" />
+          <Property Name="FEED_RATE" Type="Int32" />
+          <Property Name="FEED_RATE_OVERRIDE" Type="Int32" />
         </EntityType>
         <EntityContainer Name="NKCCONNECTEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CURRENT_MACHINE_INFORMATION" EntityType="Self.CURRENT_MACHINE_INFORMATION" />
-          <EntitySet Name="TimeInStateByMachines" EntityType="NKCCONNECTModel.TimeInStateByMachine" />
           <EntitySet Name="CurrentMachineStates" EntityType="NKCCONNECTModel.CurrentMachineState" />
+          <EntitySet Name="TimeInStateByMachines" EntityType="NKCCONNECTModel.TimeInStateByMachine" />
         </EntityContainer>
+        <EntityType Name="CurrentMachineState">
+          <Key>
+            <PropertyRef Name="RESOURCE_ID" />
+          </Key>
+          <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TimeInStateByMachine">
           <Key>
             <PropertyRef Name="ID" />
@@ -136,15 +155,6 @@ warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have
           <Property Name="Date3" Type="DateTime" Precision="0" />
           <Property Name="Date4" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="CurrentMachineState">
-          <Key>
-            <PropertyRef Name="RESOURCE_ID" />
-          </Key>
-          <Property Name="RESOURCE_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RESOURCE_STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -154,6 +164,11 @@ warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have
           <EntitySetMapping Name="CURRENT_MACHINE_INFORMATION">
             <EntityTypeMapping TypeName="NKCCONNECTModel.CURRENT_MACHINE_INFORMATION">
               <MappingFragment StoreEntitySet="CURRENT_MACHINE_INFORMATION">
+                <ScalarProperty Name="FEED_RATE_OVERRIDE" ColumnName="FEED_RATE_OVERRIDE" />
+                <ScalarProperty Name="FEED_RATE" ColumnName="FEED_RATE" />
+                <ScalarProperty Name="SPEED" ColumnName="SPEED" />
+                <ScalarProperty Name="LENGTH_IN_STATUS" ColumnName="LENGTH_IN_STATUS" />
+                <ScalarProperty Name="TIME_CHANGED" ColumnName="TIME_CHANGED" />
                 <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
                 <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
                 <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
@@ -167,6 +182,16 @@ warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have
                 <ScalarProperty Name="SPINDLE_OVERRIDE_PERCENT" ColumnName="SPINDLE_OVERRIDE_PERCENT" />
                 <ScalarProperty Name="M_NUMBER" ColumnName="M_NUMBER" />
                 <ScalarProperty Name="N_NUMBER" ColumnName="N_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrentMachineStates">
+            <EntityTypeMapping TypeName="NKCCONNECTModel.CurrentMachineState">
+              <MappingFragment StoreEntitySet="CurrentMachineState">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
+                <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -189,16 +214,6 @@ warning 6002: The table/view 'NKCCONNECT.dbo.TimeInStateByMachine' does not have
                 <ScalarProperty Name="Machine" ColumnName="Machine" />
                 <ScalarProperty Name="Mode" ColumnName="Mode" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CurrentMachineStates">
-            <EntityTypeMapping TypeName="NKCCONNECTModel.CurrentMachineState">
-              <MappingFragment StoreEntitySet="CurrentMachineState">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RESOURCE_STATE" ColumnName="RESOURCE_STATE" />
-                <ScalarProperty Name="RESOURCE_ID" ColumnName="RESOURCE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

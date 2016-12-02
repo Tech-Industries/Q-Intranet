@@ -123,6 +123,17 @@
         <center><h1 style="font-size: 70px; font-weight: bold;"><span style="color: #c0392b;">Where:</span> <span data-bind="text: MeetingInfo().Where"></span></h1></center>
     </div>
 </div>
+<div class="row slide" id="slide-7">
+    <div class="jumbotron jumbotron-fluid" style="padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px;">
+        <center><h1 style="font-weight: bold; color: #000">Announcements</h1></center>
+    </div>
+    <div class="col-md-12" style="height: 100vh;">
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <center><h1 style="font-weight: bold; font-size: 50px;"><span style="color: #c0392b;">11/18/16:</span> Open Enrollment Elections Due - Contact your Manager or Gini Darby with any questions.</h1></center>
+        <br />
+        <center><h1 style="font-weight: bold; font-size: 50px;"><span style="color: #c0392b;">11/22/16:</span> Employee Picture Day - Pictures will be used in various locations, so please come looking your best!</h1></center>
+    </div>
+</div>
 @*
 
         <div class="row slide" id="slide-6">
@@ -181,24 +192,41 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Year:</span>
-                                    <select class="form-control" id="yearSelect">
-                                        <option value="2016">2016</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Month:</span>
-                                    <select class="form-control" id="monthSelect">
-                                        <option value="10">10</option>
-                                    </select>
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Period</span>
+                                <select class="form-control  change-bind" id="periodSelect" data-bind="event: {change: $root.loadData()}">
+
+                                    @{
+                                        int currentYear = DateTime.Now.Year;
+                                        int currentMonth = DateTime.Now.Month;
+                                        int incr = 0;
+                                        string currentMonthStr = "";
+                                        while (incr <= 2)
+                                        {
+                                            while (currentMonth > 0)
+                                            {
+                                                if (currentMonth < 10)
+                                                {
+                                                    currentMonthStr = "0" + currentMonth.ToString();
+                                                    <option value="@(currentYear - incr)-@(currentMonthStr)">@(currentYear - incr)-@(currentMonthStr)</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@(currentYear - incr)-@(currentMonth)">@(currentYear - incr)-@(currentMonth)</option>
+                                                }
+
+                                                @(currentMonth -= 1)
+                                            }
+
+                                            @(incr += 1)
+                                            @(currentMonth = 12);
+                                        }
+
+                                    }
+
+
+                                </select>
+
                             </div>
                         </div>
                         <br />
@@ -213,10 +241,11 @@
 
     <script>
         var SalesChart;
+        var vm;
         $(function () {
 
             $(document).idleTimer(5000);
-            var vm = new SlideViewModel();
+            vm = new SlideViewModel();
             ko.applyBindings(vm);
             vm.loadData();
             var loadDataInterval = setInterval(function () {
@@ -347,8 +376,8 @@
                             events: {
                                 click: function (e) {
 
-                                    var month = $("#monthSelect").val();
-                                    var year = $("#yearSelect").val();
+                                    var month = $("#periodSelect").val().toString().split('-')[1];
+                                    var year = $("#periodSelect").val().toString().split('-')[0];
                                     var day = this.x + 1;
                                     vm.loadSelectDaySales(year, month, day);
                                 }
@@ -434,8 +463,8 @@
                         point: {
                             events: {
                                 click: function (e) {
-                                    var month = $("#monthSelect").val();
-                                    var year = $("#yearSelect").val();
+                                    var month = $("#periodSelect").val().toString().split('-')[1];
+                                    var year = $("#periodSelect").val().toString().split('-')[0];
                                     var day = this.x + 1;
                                     vm.loadSelectDayScrap(year, month, day);
 
@@ -564,7 +593,7 @@
 
 
         var current = 1;
-        var slides = 6;
+        var slides = 7;
 
         $('.slide').not('#slide-1').toggle('slide', { direction: 'up' }, '0');
         function nextSlide() {

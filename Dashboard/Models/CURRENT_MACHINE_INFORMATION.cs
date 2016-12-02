@@ -15,28 +15,22 @@ namespace Dashboard.Models
     public partial class CURRENT_MACHINE_INFORMATION
     {
         public Nullable<System.DateTime> CREATE_DATE { get; set; }
-        public string SHIFT { get; set; }
         public string RESOURCE_ID { get; set; }
         public string RESOURCE_STATE { get; set; }
         public string PROGRAM_NUMBER { get; set; }
         public string CYCLE_TIME { get; set; }
         public string SPINDLE_LOAD { get; set; }
-        public string TIME_ON_SHIFT { get; set; }
-        public Nullable<int> LABOR_TICKET_TRANS_ID { get; set; }
-        public string RUN_TIME { get; set; }
-        public string FEED_HOLD_TIME { get; set; }
-        public string OP_STOP_TIME { get; set; }
-        public string UNAVAILABLE_TIME { get; set; }
         public Nullable<int> PERCENT_RUNNING { get; set; }
         public Nullable<int> PERCENT_IDLE { get; set; }
         public Nullable<int> FEED_OVERRIDE_PERCENT { get; set; }
         public Nullable<int> RAPID_OVERRIDE_PERCENT { get; set; }
         public Nullable<int> SPINDLE_OVERRIDE_PERCENT { get; set; }
-        public Nullable<int> FEED_OVERRIDE_PERCENT_TIME { get; set; }
-        public Nullable<int> RAPID_OVERRIDE_PERCENT_TIME { get; set; }
-        public Nullable<int> SPINDLE_OVERRIDE_PERCENT_TIME { get; set; }
         public string M_NUMBER { get; set; }
         public string N_NUMBER { get; set; }
-        public string MACHINE_TYPE { get; set; }
+        public Nullable<System.DateTime> TIME_CHANGED { get; set; }
+        public Nullable<int> LENGTH_IN_STATUS { get; set; }
+        public Nullable<int> SPEED { get; set; }
+        public Nullable<int> FEED_RATE { get; set; }
+        public Nullable<int> FEED_RATE_OVERRIDE { get; set; }
     }
 }

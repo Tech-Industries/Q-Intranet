@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div class="hidden">
+    <input type="text" id="RelPer" name="RelPer" value="@ViewBag.RelPer" />
+
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/KO-Models/ko-model-quality.js"></script>
+
+
+    <script>
+
+        var vm = null;
+
+        $(function () {
+            var toggle = 0;
+            var AssignBtn = null;
+
+            vm = new QualityViewModel();
+            ko.applyBindings(vm);
+            vm.loadUsers();
+        });
+    </script>
+}

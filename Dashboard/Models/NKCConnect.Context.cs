@@ -26,7 +26,7 @@ namespace Dashboard.Models
         }
     
         public virtual DbSet<CURRENT_MACHINE_INFORMATION> CURRENT_MACHINE_INFORMATION { get; set; }
-        public virtual DbSet<TimeInStateByMachine> TimeInStateByMachines { get; set; }
         public virtual DbSet<CurrentMachineState> CurrentMachineStates { get; set; }
+        public virtual DbSet<TimeInStateByMachine> TimeInStateByMachines { get; set; }
     }
 }
